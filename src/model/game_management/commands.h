@@ -1,0 +1,3 @@
+/*
+	differents commande usable in a script
+*/

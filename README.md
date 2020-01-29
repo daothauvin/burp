@@ -31,6 +31,7 @@ Le projet est disponible [ici](docs/sujet_1.0.pdf).
 - degat_explosion_mid_range -> 5%
 - high_range -> 400 unités
 - degat_explosion_high_range -> 3%
+- temps_loop -> ?
 
 ### Départ
 
@@ -67,7 +68,7 @@ Le projet est disponible [ici](docs/sujet_1.0.pdf).
 
 ### GLib
 
-GLib doc : https://developer.gnome.org/glib/stable/ 
+GLib doc : https://developer.gnome.org/glib/stable/
 
 #### General
 
@@ -100,3 +101,15 @@ GLib doc : https://developer.gnome.org/glib/stable/
 ### Autre
 
 - creation fichier forme data=value : https://developer.gnome.org/glib/stable/glib-Key-value-file-parser.html
+
+# Exterior Needs
+# Modele
+## Parser
+
+## Game Management
+
+# Vue
+acces to missile/robot (**Do not impact robots**)
+update() -> mise a jour de la vue
+
+# Controlleur
