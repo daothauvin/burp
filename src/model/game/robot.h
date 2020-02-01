@@ -1,5 +1,8 @@
 /*
 	robot management
+
+	TODO: How to detect a missile close to a robot?
+		  
 */
 /* Robot's hitbox, the hitbox of a robot is represented
    by a moving square of size 10 by 10 centred on the 
