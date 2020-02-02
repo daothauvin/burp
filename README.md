@@ -98,18 +98,18 @@ GLib doc : https://developer.gnome.org/glib/stable/
 
 - Scanner : https://developer.gnome.org/glib/stable/glib-Lexical-Scanner.html#g-scanner-input-file
 
-### Autre
+#### Autre
 
 - creation fichier forme data=value : https://developer.gnome.org/glib/stable/glib-Key-value-file-parser.html
 
 # Exterior Needs
-# Modele
-## Parser
+## Modele
+### Parser
 
-## Game Management
+### Game Management
 
-# Vue
+## Vue
 acces to missile/robot (**Do not impact robots**)
 update() -> mise a jour de la vue
 
-# Controlleur
+## Controlleur
