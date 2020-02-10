@@ -1,11 +1,10 @@
-CC = gcc
-CFLAGS = -Wall -g -std=c11
-LDLIBS = -lm
-ALL =  ui test
+CC  = gcc
+CFLAGS =-Wall -g
+LDLIBS= -lncurses
+ALL = main
 
 all : $(ALL)
-ui : ui.c
-test : test.c
+main : ui.c
 
-clean:
+cleanall:
 	rm -rf *~ $(ALL)
