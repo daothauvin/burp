@@ -1,15 +1,17 @@
-CC = gcc `pkg-config --cflags --libs glib-2.0`
-CFLAGS = -g -Wall -std=c11 # -Wextra -pedantic
+CC = gcc 
+CFLAGS = -g -Wall -std=c11  -Wextra -pedantic `pkg-config --cflags glib-2.0`
 OBJS = interpreter.o test_interpreter.o 
-BIN = test_interpreteur
+BIN = interpreter
+LIBS = `pkg-config --libs glib-2.0`
 
 all: clear $(BIN) clean_objs
-	
+
 $(BIN): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(BIN) $(LIBS)
 
 clear: # Clear the terminal
 	clear
-	
+
 clean_objs: # Clean *.o files
 	$(RM) $(OBJS)
 
