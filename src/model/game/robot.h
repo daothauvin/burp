@@ -31,7 +31,7 @@ typedef struct
 	float y_pos;
 	float angle;
 	float speed;// Represented as a percentage
-	int missiles_limit;//Number of missile in the area currently
+	int missiles;//Number of missile in the area currently
 	hitbox *robot_hitbox;//robot hitbox size
 }robot;
 
@@ -48,5 +48,7 @@ void modify_angle(robot *rob,float angle);
 void modify_angle(robot rob,float goto_x,float goto_y);
 void inflict_damage_from_missile(robot rob,int explotion_damage);
 void inflict_damage_from_collision(robot rob1,robot rob2);
+short collision_robots(robot *rob,robot *rob);
+short collision_robots(robot *rob,missile *m);
 
 

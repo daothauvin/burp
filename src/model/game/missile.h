@@ -8,6 +8,7 @@ typedef struct
 	float pos_x;
 	float pos_y;
 	float speed;
+	robot* owner; //the robot that created the missile
 }missile;
 
 //prototypes
