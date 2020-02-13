@@ -63,7 +63,7 @@ Le projet est disponible [ici](docs/sujet_1.0.pdf).
 ### Roles
 
 - affichage [ ncurses, Actions, Launch ]
-- gestion cycles [ collisions, Depart,Implementation ]
+- gestion cycles [ mise à jour, collisions, Depart, Implementation ]
 - interpreteur [ Script, [traducteur] ]
 
 ### GLib
