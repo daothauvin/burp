@@ -8,5 +8,7 @@
 //arbre de syntaxe
 #include "syntax_tree.h"
 
+#include "string.h"
+
 
 #endif

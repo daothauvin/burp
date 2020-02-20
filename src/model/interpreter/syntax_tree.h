@@ -11,7 +11,7 @@
 typedef enum commands {WAIT, POKE, GOTO, IF_THEN, ENGINE, SHOOT} command_name; 
 
 //expressions name 
-typedef enum expressions {PEEK, RAND, CARDINAL, SELF, SPEED, STATE, GPSX, GPSY, ANGLE, TARGETX, TARGETY, DISTANCE} expression_name; 
+typedef enum expressions {PEEK, RAND, CARDINAL, SELF, SPEED, STATE, GPSX, GPSY, ANGLE, TARGETX, TARGETY, DISTANCE, OPERATOR } expression_name; 
 
 typedef enum operators {PLUS, MIN, TIME, DIV, MOD} operator_name;
 
