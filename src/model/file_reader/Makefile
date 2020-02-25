@@ -1,7 +1,7 @@
 CC = gcc 
 CFLAGS = -g -Wall -std=c11  -Wextra -pedantic `pkg-config --cflags glib-2.0`
-OBJS = interpreter.o test_interpreter.o 
-BIN = interpreter
+OBJS = syntax_analyse.o test_file_reader.c
+BIN = test_file_reader
 LIBS = `pkg-config --libs glib-2.0`
 
 all: clear $(BIN) clean_objs

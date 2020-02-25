@@ -1,4 +1,4 @@
-#include "interpreter.h"
+#include "syntax_analyse.h"
 
 static GScanner * sc;
 

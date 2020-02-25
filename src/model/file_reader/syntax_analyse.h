@@ -1,5 +1,5 @@
-#ifndef INTERPRETER_H
-#define INTERPRETER_H
+#ifndef SYNTAX_ANALYSE_H
+#define SYNTAX_ANALYSE_H
 //for the tree
 #include <gmodule.h>
 //for scanner
