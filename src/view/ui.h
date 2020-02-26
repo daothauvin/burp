@@ -20,9 +20,16 @@
  * +------------------------------------------------------------------------------------+
  * 
  * 
+ * ╭───╮  +---+
+ * │   │  |   |
+ * ╰───╯  +---+
+ * 
  */
 
 #include <ncurses.h>
+#include <unistd.h>
+#include <signal.h>
+
 // #include "../game/missile.h"
 // #include "../game/robot.h"
 
