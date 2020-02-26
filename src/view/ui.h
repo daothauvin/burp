@@ -28,6 +28,7 @@
 
 #include <ncurses.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 // #include "../game/missile.h"
 // #include "../game/robot.h"
