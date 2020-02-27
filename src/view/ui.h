@@ -1,15 +1,15 @@
 /** 
- *         - ui.c & ui.h vont fournir les fonctions à utiliser pour la gestion de l'affichage -
+ *         - ui.c & ui.h supply functions to use the textual interface -
  *
- *  Schéma de l'interface :
+ *  Interface :
  * 
  * +------------------------------------------------------------------------------------+
  * | +-----------------------------------+   Robot_1  |  Robot_2  |  Robot_3  | Robot_4 |
  * | |                       #           |            |           |           |         |
  * | |                     # + #         |            |           |           |         |
- * | |                    3  #           |          [Informations sur les robots]       |
+ * | |                    3  #           |            | [Information on robots]         |
  * | |                                   |            |           |           |         |
- * | |            [Arène]                |            |           |           |         |
+ * | |            [Arena]                |            |           |           |         |
  * | |                                   |                                              |
  * | |                 1                 |  +-----------------------------------------+ |
  * | |        4                          |  |  > #1 has inflicted 35 dmg to #3.       | |
@@ -29,13 +29,15 @@
 #include <ncurses.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <ctype.h>
 
 // #include "../game/missile.h"
 // #include "../game/robot.h"
 
 
-void init();                        // Construit l'affichage avec l'arène, les informations et le log vide
-void add_log(char* message);        // Ajoute une information à afficher dans le log
-void update();                      // Supprime puis reécrit les informations ainsi que les éléments dans l'arène, 
-                                    //  en les cherchant dans le modèle (robots, missiles, explosions.. etc)
+void init();                        // Init the interface and NCurses and build the arena
+void add_log(char* message);        // Add a message to the log
+void update();                      // Update the arena : delete the components and replace them by fetching info
+                                    // in the model
+                                   
 

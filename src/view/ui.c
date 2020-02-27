@@ -22,31 +22,55 @@ static void waitForInput() {
 		int c = getch();
 		switch (c) {
 			case 'q':
+			case 'Q':
 				return;
-			case '\n':
-				mvprintw(2, 2, "You typed [\\n]...", c);
-				break;
 			default:
-				mvprintw(2, 2, "You typed [%c]...", c);
+			// Test Input (will be removed)
+				if (isalpha(c)) {
+					mvprintw(2, 2, "You typed [%c]...      ", c);
+				} else {
+					mvprintw(2, 2, "You typed something... ");
+				}
 				break;
 		}
 	}
 }
 
+/**
+ *  Draw the arena
+ */
+
+static void drawArena() {
+	drawRectangle(0, 0, COLS, LINES);
+	mvprintw(1, 2, "COLS = %d, LINES = %d", COLS, LINES);	
+	refresh();
+}
+
+/**
+ * Is called when the signal SIGWINCH is called :
+ * Resize the terminal when the user try to resize it
+ */
+
+static void resizeHandler() {
+	clear();
+	system("printf '\e[3;10;10t\e[8;40;150t'");
+	drawArena();
+	sleep(1);
+}
+
 void init() {
 	// Setting the terminal window on top-left of the screen and maximizing the size of it
-	system("printf '\e[3;0;0t\e[9;1t'");
+	system("printf '\e[3;10;10t\e[8;40;150t'");
 	sleep(1);
 
 	// Initialisation of ncurses
 	initscr();
-	resize_term(47, 158);
+	resize_term(40, 150);
 	noecho();
+	signal(SIGWINCH, resizeHandler);
 
 	// Drawing the arena
-	drawRectangle(0, 0, COLS, LINES);
-	mvprintw(1, 2, "COLS = %d, LINES = %d", COLS, LINES);	
-	refresh();
+	drawArena();
 	
 	// Waiting user behaviour
 	waitForInput();
@@ -57,5 +81,3 @@ int main(int argc, char** argv) {
 	init();
 	return 0;
 }
-
-// gcc ui.c -Wall -g -o ui_test -lncurses
