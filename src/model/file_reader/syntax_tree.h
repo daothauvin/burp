@@ -18,5 +18,4 @@ typedef enum operators {PLUS, MIN, TIME, DIV, MOD} operator_name;
 //comparaisons 
 typedef enum comparaisons { INF, INF_EG, EG, DIFF,SUP_EG, SUP } comparaison_name;
 
-void init(char* pathname);
 #endif
