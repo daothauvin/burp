@@ -1,0 +1,1 @@
+short interprete(int line, void* tree);
