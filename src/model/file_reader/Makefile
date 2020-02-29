@@ -1,6 +1,6 @@
 CC = gcc 
 CFLAGS = -g -Wall -std=c11  -Wextra -pedantic `pkg-config --cflags glib-2.0`
-OBJS = syntax_analyse.o test_file_reader.c
+OBJS = syntax_analyse.o test_file_reader.o
 BIN = test_file_reader
 LIBS = `pkg-config --libs glib-2.0`
 
