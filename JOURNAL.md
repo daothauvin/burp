@@ -17,3 +17,5 @@ Starting to program sub module implementation
 Break for exams
 
 ## Week 24 - 1 March
+Starting the implementation of a robot 
+Correction of a typo in define.H
