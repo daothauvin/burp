@@ -167,7 +167,9 @@ static GNode* expression() {
 			
 		case G_TOKEN_IDENTIFIER:
 			if(strcmp(MINUS,value) == 0) {
-				return number();
+				arg0 = number();
+				*((int*) arg0 -> data) = - *((int*) arg0 -> data);
+				return arg0;
 			}
 			if(strcmp(PEEK,value) == 0 || strcmp(RAND,value) == 0 || strcmp(STATE,value) == 0 || strcmp(GPSX,value) == 0 || strcmp(GPSY,value) == 0) {
 				arg0 = expression();
