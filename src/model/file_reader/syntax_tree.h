@@ -1,21 +1,47 @@
 #ifndef SYNTAX_TREE_H
 #define SYNTAX_TREE_H
-#include <gmodule.h>
-#include <glib.h>
-#include <glib/gprintf.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 
-//names of the commands
-typedef enum commands {WAIT, POKE, GOTO, IF_THEN, ENGINE, SHOOT} command_name; 
+//line
+#define LINE "LINE"
+//condition
+#define COND "COND"
+//commands
+#define WAIT "WAIT"
+#define POKE "POKE"
+#define GOTO "GOTO"
+#define IF "IF"
+#define THEN "THEN"
+#define ENGINE "ENGINE"
+#define SHOOT "SHOOT"
 
-//expressions name 
-typedef enum expressions {PEEK, RAND, CARDINAL, SELF, SPEED, STATE, GPSX, GPSY, ANGLE, TARGETX, TARGETY, DISTANCE, OPERATOR } expression_name; 
+//operators
+#define PLUS "+"
+#define MINUS "-"
+#define TIME "*"
+#define DIV "/"
+#define MOD "%"
 
-typedef enum operators {PLUS, MIN, TIME, DIV, MOD} operator_name;
+//expressions
+#define PEEK "PEEK"
+#define RAND "RAND"
+#define CARDINAL "CARDINAL"
+#define SELF "SELF" 
+#define SPEED "SPEED"
+#define STATE "STATE"
+#define GPSX "GPSX"
+#define GPSY "GPSY"
+#define ANGLE "ANGLE"
+#define TARGETX "TARGETX"
+#define TARGETY "TARGETY"
+#define DISTANCE "DISTANCE" 
+#define OPERATOR "OP"
 
-//comparaisons 
-typedef enum comparaisons { INF, INF_EG, EG, DIFF,SUP_EG, SUP } comparaison_name;
+//comparisons 
+#define INF "<"
+#define INF_EG "<="
+#define EG "="
+#define DIFF "<>"
+#define SUP_EG ">="
+#define SUP ">"
 
 #endif
