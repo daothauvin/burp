@@ -39,7 +39,6 @@ static void init_config(GScannerConfig* gsc) {
 	gchar* c = gsc -> cset_identifier_first;
 	
 	int sizeone = strlen(c);
-
 	gchar* newc = malloc((sizeone+9)*sizeof(char));
 	memmove(newc, c,sizeone);
 	newc[sizeone] = '+';
@@ -50,19 +49,17 @@ static void init_config(GScannerConfig* gsc) {
 	newc[sizeone+5] = '=';
 	newc[sizeone+6] = '<';
 	newc[sizeone+7] = '>';
-	
-	gchar* c2 = gsc -> cset_identifier_nth;
-	int sizetwo = strlen(c2);
+
+	int sizetwo = strlen(c);
 	gchar* newc2 = malloc((sizetwo+3)*sizeof(char));
-	memmove(newc2, c2,sizetwo);
+	memmove(newc2, c,sizetwo);
 	newc2[sizetwo] = '=';
 	newc2[sizetwo+1] = '>';
-	
 	gsc -> cset_identifier_first = newc;
 	gsc -> cset_identifier_nth = newc2;
 	
-	printf("%s\n",gsc -> cset_identifier_first);
-	printf("%s\n",gsc -> cset_identifier_nth);
+	//printf("%s\n",gsc -> cset_identifier_first);
+	//printf("%s\n",gsc -> cset_identifier_nth);
 }
 
 //number
@@ -78,7 +75,7 @@ static GNode* number() {
 			break;
 	}
 	error_token = g_scanner_cur_value (gs).v_string;
-	excepted_token = "a positive number";
+	excepted_token = "a number";
 	errorposition = g_scanner_cur_position (gs);
 	errorline = g_scanner_cur_line (gs);
 	return NULL;
@@ -169,6 +166,9 @@ static GNode* expression() {
 			break;
 			
 		case G_TOKEN_IDENTIFIER:
+			if(strcmp(MINUS,value) == 0) {
+				return number();
+			}
 			if(strcmp(PEEK,value) == 0 || strcmp(RAND,value) == 0 || strcmp(STATE,value) == 0 || strcmp(GPSX,value) == 0 || strcmp(GPSY,value) == 0) {
 				arg0 = expression();
 				if(arg0 == NULL) return NULL;
