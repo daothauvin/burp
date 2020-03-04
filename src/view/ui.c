@@ -7,7 +7,6 @@
 static void drawRectangle(int x, int y, int length, int height) {
 	WINDOW* rect = subwin(stdscr, height, length, y, x);
     box(rect, ACS_VLINE, ACS_HLINE);
-	free(rect);
 }
 
 /**
