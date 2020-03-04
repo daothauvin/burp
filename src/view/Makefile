@@ -1,10 +1,10 @@
 CC  = gcc
 CFLAGS =-Wall -g
 LDLIBS= -lncurses
-ALL = main
+ALL = ui
 
-all : $(ALL)
-main : ui.c
+main : $(ALL)
+ui : ui.c
 
 cleanall:
 	rm -rf *~ $(ALL)
