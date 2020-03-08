@@ -33,12 +33,14 @@ typedef struct{
 
 typedef struct
 {
+	int id;
 	float health_points;// Represented as a percentage
 	Point pos; 
 	float angle;
 	float speed;// Represented as a percentage
 	int missiles;//Number of missile in the area currently
 	Hitbox robot_hitbox;//robot hitbox size
+	int waiting_time;//cycle delay
 }*Robot;
 
 //Functions prototypes

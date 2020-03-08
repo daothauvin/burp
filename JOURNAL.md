@@ -21,3 +21,7 @@ Starting the implementation of a robot
 Correction of a typo in define.h
 Finishing syntax analyser with error handling and negative number handling
 Starting interface window and handle user inputs
+
+## Week 2 - 8 March
+Added the commands functions declaration
+Started the implementation of commands' functions

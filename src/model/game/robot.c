@@ -46,6 +46,7 @@ Robot create_robot(){
     p->speed = 0.0;
     p->missiles = 0;
     p->robot_hitbox = malloc(sizeof(Hitbox));
+    p->waiting_time;
     return p;
 }
 Robot *create_robots(){
