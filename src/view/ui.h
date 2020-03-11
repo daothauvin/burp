@@ -31,6 +31,7 @@
 #include <unistd.h>
 #include <ctype.h>
 #include <signal.h>
+#include <string.h>
 
 // #include "../game/missile.h"
 // #include "../game/robot.h"
