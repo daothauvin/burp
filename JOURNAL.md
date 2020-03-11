@@ -25,3 +25,7 @@ Starting interface window and handle user inputs
 ## Week 2 - 8 March
 Added the commands functions declaration
 Started the implementation of commands' functions
+Test function for interpreter
+Debugging syntax analyser
+
+## Week 9 - 16 March
