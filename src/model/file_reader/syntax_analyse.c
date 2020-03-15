@@ -65,11 +65,13 @@ static void init_config(GScannerConfig* gsc) {
 //number
 static GNode* number() {
 	GTokenType t = g_scanner_get_next_token (gs);
-	int value = g_scanner_cur_value (gs).v_int;
+	int* value = malloc(sizeof(int));
+	int int_value = (int) g_scanner_cur_value (gs).v_int;
+	//printf("int_value : %d\n",int_value);
 	switch(t) {
 		case G_TOKEN_INT:
-			
-			return g_node_new (&value);
+			memmove(value,&int_value,sizeof(int));
+			return g_node_new (value);
 			break;
 		default:
 			break;
@@ -85,10 +87,13 @@ static GNode* number() {
 //operator
 static GNode* operator() {
 	GTokenType t = g_scanner_get_next_token (gs);
-	char* value = g_scanner_cur_value (gs).v_identifier;
-	
+	//char* value = g_scanner_cur_value (gs).v_identifier;
+	int valuesize = t == G_TOKEN_IDENTIFIER? strlen(g_scanner_cur_value (gs).v_identifier) * sizeof(char) : 0;
+	//malloc sans free si erreur
+	gchar *value = malloc(valuesize);
 	switch(t) {
 		case G_TOKEN_IDENTIFIER :
+			memcpy(value, g_scanner_cur_value (gs).v_identifier, valuesize);
 			if(strcmp(PLUS,value) == 0 || strcmp(MINUS,value) == 0 || strcmp(TIME,value) == 0 || strcmp(DIV,value) == 0 || strcmp(MOD,value) == 0) {
 				
 				return g_node_new (value);
@@ -107,11 +112,16 @@ static GNode* operator() {
 
 //comparison
 static GNode* comparison() { 
+
 	GTokenType t = g_scanner_get_next_token (gs);
-	char* value = g_scanner_cur_value (gs).v_identifier;
+	
+	int valuesize = t == G_TOKEN_IDENTIFIER? strlen(g_scanner_cur_value (gs).v_identifier) * sizeof(char) : 0;
+	//malloc sans free si erreur
+	gchar *value = malloc(valuesize);
 	
 	switch(t) {
 		case G_TOKEN_IDENTIFIER :
+			memcpy(value, g_scanner_cur_value (gs).v_identifier, valuesize);
 			if(strcmp(INF,value) == 0 || strcmp(INF_EG,value) == 0 || strcmp(EG,value) == 0 || strcmp(DIFF,value) == 0 || strcmp(SUP_EG,value) == 0 || strcmp(SUP,value) == 0) {
 				return g_node_new (value);
 			}
@@ -131,18 +141,23 @@ static GNode* comparison() {
 static GNode* expression() {
 
 	GTokenType t = g_scanner_get_next_token (gs);
-	gchar *value = g_scanner_cur_value (gs).v_identifier;
+
+	int valuesize = (t == G_TOKEN_IDENTIFIER)? strlen(g_scanner_cur_value (gs).v_identifier) * sizeof(char) : sizeof(int);
+	//malloc sans free si erreur
+	gchar *value = malloc(valuesize);
+	int int_value = g_scanner_cur_value (gs).v_int;
 	
 	GNode* arg0;
 	GNode* arg1;
 	GNode* arg2;
 	GNode* arg3;
 	GNode* myself;
-	int int_value = g_scanner_cur_value (gs).v_int;
+	
 	switch(t) {
 		
 		case G_TOKEN_INT:
-				myself = g_node_new (&int_value);
+				memcpy(value, &int_value, valuesize);
+				myself = g_node_new (value);
 			break;
 			
 		case G_TOKEN_LEFT_PAREN:
@@ -166,6 +181,7 @@ static GNode* expression() {
 			break;
 			
 		case G_TOKEN_IDENTIFIER:
+			memcpy(value, g_scanner_cur_value (gs).v_identifier, valuesize);
 			if(strcmp(MINUS,value) == 0) {
 				arg0 = number();
 				*((int*) arg0 -> data) = - *((int*) arg0 -> data);
@@ -237,10 +253,18 @@ static GNode* command() {
 	GNode* myself;
 	
 	GTokenType t = g_scanner_get_next_token (gs);
-	gchar *value = g_scanner_cur_value (gs).v_identifier;
+	
+	int valuesize = t == G_TOKEN_IDENTIFIER? strlen(g_scanner_cur_value (gs).v_identifier) * sizeof(char) : 0;
+	//malloc sans free si erreur
+	gchar *value = malloc(valuesize);
+	
 	switch(t) {
 		case G_TOKEN_IDENTIFIER:
+			memcpy(value, g_scanner_cur_value (gs).v_identifier, valuesize);
+			
 			if(strcmp(WAIT,value) == 0 || strcmp(SHOOT,value) == 0) {
+				
+				
 				arg0 = expression();
 				if(arg0 == NULL) return NULL;
 				myself = g_node_new (value);
