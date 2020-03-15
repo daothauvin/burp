@@ -17,38 +17,46 @@
    p3 * * * p4
    Where x is the robot
 */
+
+#include "missile.h"
+
 typedef struct{
-	float p1;
-	float p2;
-	float p3;
-	float p4;
-}hitbox;
+	float x;
+	float y;
+}*Point;
+typedef struct{
+	Point p1;
+	Point p2;
+	Point p3;
+	Point p4;
+}*Hitbox;
 
 typedef struct
 {
+	int id;
 	float health_points;// Represented as a percentage
-	float x_pos; 
-	float y_pos;
+	Point pos; 
 	float angle;
 	float speed;// Represented as a percentage
 	int missiles;//Number of missile in the area currently
-	hitbox *robot_hitbox;//robot hitbox size
-}robot;
+	Hitbox robot_hitbox;//robot hitbox size
+	int waiting_time;//cycle delay
+}*Robot;
 
 //Functions prototypes
 // Allocate a robot at a time
-robot create_robot();
+Robot create_robot();
 //Allocate multiple robots at the same time
-robot * create_robots();
+Robot *create_robots();
 //allocate a robot with the script's contents
-void initialize_robot(robot *rob,float x,float y,float angle,float speed);
-void update_pos(robot *rob); // Fixed depending on angle and speed every cycle
-void modify_speed(robot *rob,float speed);
-void modify_angle(robot *rob,float angle);
-void modify_angle(robot rob,float goto_x,float goto_y);
-void inflict_damage_from_missile(robot rob,int explotion_damage);
-void inflict_damage_from_collision(robot rob1,robot rob2);
-short collision_robots(robot *rob,robot *rob);
-short collision_robots(robot *rob,missile *m);
+void initialize_robot(Robot rob,float x_1,float y_1,float angle,float speed);
+void update_hitbox(Robot rob);
+void update_pos_robot(Robot rob); // Fixed depending on angle and speed every cycle
+void modify_speed(Robot rob,float speed);
+void modify_angle(Robot rob,float angle);
+void inflict_damage_from_missile(Robot rob,int explotion_damage);
+void inflict_damage_from_collision(Robot rob1,Robot rob2);
+short collision_robots(Robot rob1,Robot rob2);
+short collision_with_missiles(Robot rob,Missile m);
 
 
