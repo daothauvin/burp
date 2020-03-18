@@ -13,7 +13,6 @@
 #define size_robot_y 10
 
 #define robot_memory 256
-#define 
 /*
 	Speeds
 */
