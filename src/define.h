@@ -36,7 +36,7 @@
 //first range to be touched by an explosion (in unities)
 #define low_range 50
 //pourcent of damage from an explosion on low range
-#define damage_explosion_high_range 10
+#define damage_explosion_low_range 10
 
 /*
 	Time
