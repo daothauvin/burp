@@ -1,8 +1,4 @@
 #include "robot.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include "../../define.h"
-
 void update_hitbox(Robot rob){
     double p1_x = rob->pos->x - (double)size_robot_x;
     double p1_y = rob->pos->y + (double)size_robot_y;
@@ -46,14 +42,9 @@ Robot create_robot(){
     p->speed = 0.0;
     p->missiles = 0;
     p->robot_hitbox = malloc(sizeof(Hitbox));
-    p->waiting_time;
+    p->waiting_time = 0;
     p->memory = malloc(robot_memory*(sizeof(int)));
     return p;
-}
-Robot *create_robots(){
-    Robot* list_of_robots = malloc(sizeof(Robot)*4);
-    //TO-DO
-    return list_of_robots;
 }
 
 void initialize_robot(Robot rob,double x_1,double y_1,double angle,double speed){
@@ -63,4 +54,26 @@ void initialize_robot(Robot rob,double x_1,double y_1,double angle,double speed)
     rb->angle = angle;
     rb->speed = speed;
     update_hitbox(rb);
+}
+
+void update_pos_robot(Robot rob){
+    float x2 =  rob->pos->x + (rob->speed * cos(rob->angle));
+    float y2 =  rob->pos->y + (rob->speed * sin(rob->angle));
+    rob->pos->x = x2;
+    rob->pos->y = y2;
+}
+void modify_speed(Robot rob,double speed){
+    rob->speed = speed;
+}
+void modify_angle(Robot rob,double angle){
+    rob->angle = angle;
+}
+void inflict_damage_from_missile(Robot rob,int explotion_damage){
+    rob->health_points -= explotion_damage;
+}
+void inflict_damage_from_collision(Robot rob1,Robot rob2){
+    rob1->health_points-=collision_damage;
+    rob2->health_points-=collision_damage;
+    rob1->speed = 0;
+    rob2->speed = 0;
 }

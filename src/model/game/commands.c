@@ -1,6 +1,5 @@
 #include "commands.h"
-#include "math.h"
-#include "../../define.h"
+#include <math.h>
 int wait(Robot rob,int delay) {
     rob->waiting_time = delay;
     return delay;
@@ -8,13 +7,13 @@ int wait(Robot rob,int delay) {
 void poke(Robot rob,int addr,int value){
     rob->memory[addr] = value;
 }
-void peek(Robot rob,int addr){
+int peek(Robot rob,int addr){
     return rob->memory[addr];
 }
 int go_to(int num){
     return num;
 }
-int random(int num){
+int randoms(int num){
     //Definir la ssrand(TIme(NULL));
     return rand() % num;
 }
@@ -25,7 +24,7 @@ int self(Robot rob){
     return rob->id;
 }
 double speed(Robot rob){
-    rob->speed;
+    return rob->speed;
 }
 double state(Arene arene,int num){
     for(int i = 0 ; i < cardinal(arene);++i){
@@ -49,10 +48,10 @@ void engine(Robot rob,double angle,double speed){
         rob->angle = angle;
         rob->speed = speed;
 }
-int shoot(Robot rob,Arene arene,double angle){
+int shoot(Robot rob,Arene arene,double angle,double explo_dist){
     if(rob->missiles!=missile_by_robot){
-        Missile m = create(rob->pos->x,rob->pos->y,missile_speed,angle,rob);
-        add_missiles(arene,m);
+        Missile m = create(rob->pos->x,rob->pos->y,missile_speed,angle,rob,explo_dist);
+        add_missile(arene,m);
         rob->missiles +=1;
         return 0;
     } else return -1;
@@ -60,7 +59,7 @@ int shoot(Robot rob,Arene arene,double angle){
 double angle(double x1,double y1,double x2,double y2){
     double x = (x1 - x2);
     double y = (y1 - y2);
-    double result = toDegrees(atan2(y, x));
+    double result = (atan2(y, x)*(180/M_PI));
     return result;//A verifier
     }
 double targetx(double x1,double angle,double length){

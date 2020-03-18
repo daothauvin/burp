@@ -1,5 +1,4 @@
 #include "arene.h"
-#include "../../define.h"
 
 Arene create_arene(){
     Arene a = malloc(sizeof(Arene));
