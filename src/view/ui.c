@@ -37,6 +37,63 @@ static void eraseArea(int x, int y, int length, int height) {
 }
 
 /**
+ *  Launch the begin animation
+ */
+
+static void anim_begin() {
+	mvprintw(15, 36, " .d8888b. ");
+	mvprintw(16, 36, "d88P  Y88b");
+	mvprintw(17, 36, "     .d88P");
+	mvprintw(18, 36, "     8888\"");
+	mvprintw(19, 36, "     \"Y8b.");
+	mvprintw(20, 36, "888    888");
+	mvprintw(21, 36, "Y88b  d88P");
+	mvprintw(22, 36, " \"Y8888P\" ");
+	
+	refresh();
+	sleep(1);
+	eraseArea(36, 15, 11, 8);
+	mvprintw(15, 36, " .d8888b. ");
+	mvprintw(16, 36, "d88P  Y88b");
+	mvprintw(17, 36, "       888");
+	mvprintw(18, 36, "     .d88P");
+	mvprintw(19, 36, " .od888P\" ");
+	mvprintw(20, 36, "d88P\"     ");
+	mvprintw(21, 36, "888\"      ");
+	mvprintw(22, 36, "8888888888");
+	refresh();
+	sleep(1);
+	eraseArea(36, 15, 11, 8);
+
+	mvprintw(15, 36, "   d888   ");
+	mvprintw(16, 36, "  d8888   ");
+	mvprintw(17, 36, "    888   ");
+	mvprintw(18, 36, "    888   ");
+	mvprintw(19, 36, "    888   ");
+	mvprintw(20, 36, "    888   ");
+	mvprintw(21, 36, "    888   ");
+	mvprintw(22, 36, "  8888888 ");
+	refresh();
+	sleep(1);
+	eraseArea(36, 15, 11, 8);
+
+	mvprintw(15, 19, "8888888888 d8b          888      888         888");
+	mvprintw(16, 19, "888        Y8P          888      888         888");
+	mvprintw(17, 19, "888                     888      888         888");
+	mvprintw(18, 19, "8888888    888  .d88b.  88888b.  888888      888");
+	mvprintw(19, 19, "888        888 d88P\"88b 888 \"88b 888         888");
+	mvprintw(20, 19, "888        888 d88P\"88b 888 \"88b 888         888");
+	mvprintw(21, 19, "888        888 Y88b 888 888  888 Y88b.        \"");
+	mvprintw(22, 19, "888        888  \"Y88888 888  888  \"Y888      888");
+	mvprintw(23, 39, "888 ");
+	mvprintw(24, 34, "Y8b d88P");
+	mvprintw(25, 35, "\"Y88P\"");
+	refresh();
+	sleep(1);
+	eraseArea(19, 15, 49, 12);
+} 
+
+/**
  *  Blur the info of a robot when he's dead.
  */
 
@@ -157,7 +214,6 @@ static void drawArena() {
  * 	The different beheviours are :
  * 		Q - Quit
  * 		More to be added...
- * 		The test input will obviously be removed at the end...
  */
 
 static void waitForInput() {
@@ -168,22 +224,20 @@ static void waitForInput() {
 			case 'q':
 			case 'Q':
 				return;
-			case 't':
-				drawRectangle(0, 0, COLS, LINES, "BURP");
-				break;
+			// Tests
 			case '0':
 			case '1':
 			case '2':
 			case '3':
 				killRobotNb(c - '0');
 				break;
-			case 'd':
-				eraseArea(2, 1, 80, 40);
-				break;
 			case 'p':
 				sprintf(msg, "Message log #%d", cmpt);
 				cmpt++;
 				add_log(msg);
+				break;
+			case 'a':
+				anim_begin();
 				break;
 			default:
 				break;
@@ -214,6 +268,7 @@ void init() {
 
 	// Initialisation of ncurses
 	initscr();
+	curs_set(0);
 	resize_term(42, 150);
 	noecho();
 	signal(SIGWINCH, resizeHandler);
@@ -233,4 +288,3 @@ int main(int argc, char** argv) {
 	init();
 	return 0;
 }
-
