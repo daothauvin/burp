@@ -46,6 +46,30 @@ static void eraseArena() {
 }
 
 /**
+ *	Print a char using coordonates from arena (not screen)
+ */
+
+static void printCharArena(int x, int y, char c) {
+	x = x / 80 + 3; // TODO: Refaire les maths
+	y = y / 40 + 2;
+	char cc[2];
+	cc[0] = c;
+	cc[1] = '\0';
+	mvprintw(y, x, cc);
+	char pos[20];
+	sprintf(pos, " x=%d, y=%d", x, y); // Debug
+	mvprintw(1, 9, pos);
+}
+
+/**
+ *	Affiche un robot
+ */
+
+static void printRobot(Robot robot) {
+	printCharArena(robot->pos->x, robot->pos->y, '#');
+}
+
+/**
  *  Launch the begin animation
  */
 
@@ -223,6 +247,7 @@ static void drawArena() {
 
 static void waitForInput() {
 	char msg[40];
+
 	while (1) {
 		int c = getch();
 		switch (c) {
@@ -246,6 +271,8 @@ static void waitForInput() {
 				break;
 			case 'e':
 				eraseArena();
+			case 'r':
+				printCharArena(1000, 1000, '#');
 				break;
 			default:
 				break;
