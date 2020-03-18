@@ -16,7 +16,7 @@ typedef struct
 }*Missile;
 
 //prototypes
-Missile create(double pos_x,double pos_y,double speed,double angle);//Angle will be calculated
+Missile create(double pos_x,double pos_y,double speed,double angle,Robot rob);//Angle will be calculated
 Missile update_pos_missile(Missile m);
 void explode(Missile mis); // Might trigger an event in the view
 

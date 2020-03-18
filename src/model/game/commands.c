@@ -1,5 +1,6 @@
 #include "commands.h"
 #include "math.h"
+#include "../../define.h"
 int wait(Robot rob,int delay) {
     rob->waiting_time = delay;
     return delay;
@@ -49,7 +50,12 @@ void engine(Robot rob,double angle,double speed){
         rob->speed = speed;
 }
 int shoot(Robot rob,Arene arene,double angle){
-    return 0;
+    if(rob->missiles!=missile_by_robot){
+        Missile m = create(rob->pos->x,rob->pos->y,missile_speed,angle,rob);
+        add_missiles(arene,m);
+        rob->missiles +=1;
+        return 0;
+    } else return -1;
 }
 double angle(double x1,double y1,double x2,double y2){
     double x = (x1 - x2);
