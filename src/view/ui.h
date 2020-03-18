@@ -31,6 +31,7 @@
 #include <unistd.h>
 #include <signal.h>
 #include <string.h>
+#include "../model/game/robot.h"
 
 void init();                        // Init the interface and NCurses and build the arena
 void add_log(char* message);        // Add a message to the log

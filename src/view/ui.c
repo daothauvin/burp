@@ -8,6 +8,7 @@
 char logs[5][60];
 int full_log;
 int cursor;
+
 // Test
 int cmpt = 0;
 
@@ -28,12 +29,20 @@ static void drawRectangle(int x, int y, int length, int height, char* title) {
  */
 
 static void eraseArea(int x, int y, int length, int height) {
-	char spaces[length]; 
-	memset(spaces, ' ', length);
-	spaces[length - 1] = '\0';
+	char spaces[length + 1]; 
+	memset(spaces, ' ', length + 1);
+	spaces[length] = '\0';
 	for (int i = 0; i < height; i++) {
 		mvprintw(y + i, x, spaces);
 	}
+}
+
+/**
+ *  Erase the arena
+ */
+
+static void eraseArena() {
+	eraseArea(3, 2, 80, 40);
 }
 
 /**
@@ -41,56 +50,53 @@ static void eraseArea(int x, int y, int length, int height) {
  */
 
 static void anim_begin() {
-	mvprintw(15, 36, " .d8888b. ");
-	mvprintw(16, 36, "d88P  Y88b");
-	mvprintw(17, 36, "     .d88P");
-	mvprintw(18, 36, "     8888\"");
-	mvprintw(19, 36, "     \"Y8b.");
-	mvprintw(20, 36, "888    888");
-	mvprintw(21, 36, "Y88b  d88P");
-	mvprintw(22, 36, " \"Y8888P\" ");
+	mvprintw(16, 36, " .d8888b. ");
+	mvprintw(17, 36, "d88P  Y88b");
+	mvprintw(18, 36, "     .d88P");
+	mvprintw(19, 36, "     8888\"");
+	mvprintw(20, 36, "     \"Y8b.");
+	mvprintw(21, 36, "888    888");
+	mvprintw(22, 36, "Y88b  d88P");
+	mvprintw(23, 36, " \"Y8888P\" ");
 	
 	refresh();
 	sleep(1);
-	eraseArea(36, 15, 11, 8);
-	mvprintw(15, 36, " .d8888b. ");
-	mvprintw(16, 36, "d88P  Y88b");
-	mvprintw(17, 36, "       888");
-	mvprintw(18, 36, "     .d88P");
-	mvprintw(19, 36, " .od888P\" ");
-	mvprintw(20, 36, "d88P\"     ");
-	mvprintw(21, 36, "888\"      ");
-	mvprintw(22, 36, "8888888888");
+	mvprintw(16, 36, " .d8888b. ");
+	mvprintw(17, 36, "d88P  Y88b");
+	mvprintw(18, 36, "       888");
+	mvprintw(19, 36, "     .d88P");
+	mvprintw(20, 36, " .od888P\" ");
+	mvprintw(21, 36, "d88P\"     ");
+	mvprintw(22, 36, "888\"      ");
+	mvprintw(23, 36, "8888888888");
 	refresh();
 	sleep(1);
-	eraseArea(36, 15, 11, 8);
 
-	mvprintw(15, 36, "   d888   ");
-	mvprintw(16, 36, "  d8888   ");
-	mvprintw(17, 36, "    888   ");
+	mvprintw(16, 36, "   d888   ");
+	mvprintw(17, 36, "  d8888   ");
 	mvprintw(18, 36, "    888   ");
 	mvprintw(19, 36, "    888   ");
 	mvprintw(20, 36, "    888   ");
 	mvprintw(21, 36, "    888   ");
-	mvprintw(22, 36, "  8888888 ");
+	mvprintw(22, 36, "    888   ");
+	mvprintw(23, 36, "  8888888 ");
 	refresh();
 	sleep(1);
-	eraseArea(36, 15, 11, 8);
 
-	mvprintw(15, 19, "8888888888 d8b          888      888         888");
-	mvprintw(16, 19, "888        Y8P          888      888         888");
-	mvprintw(17, 19, "888                     888      888         888");
-	mvprintw(18, 19, "8888888    888  .d88b.  88888b.  888888      888");
-	mvprintw(19, 19, "888        888 d88P\"88b 888 \"88b 888         888");
+	mvprintw(16, 19, "8888888888 d8b          888      888         888");
+	mvprintw(17, 19, "888        Y8P          888      888         888");
+	mvprintw(18, 19, "888                     888      888         888");
+	mvprintw(19, 19, "8888888    888  .d88b.  88888b.  888888      888");
 	mvprintw(20, 19, "888        888 d88P\"88b 888 \"88b 888         888");
-	mvprintw(21, 19, "888        888 Y88b 888 888  888 Y88b.        \"");
-	mvprintw(22, 19, "888        888  \"Y88888 888  888  \"Y888      888");
-	mvprintw(23, 39, "888 ");
-	mvprintw(24, 34, "Y8b d88P");
-	mvprintw(25, 35, "\"Y88P\"");
+	mvprintw(21, 19, "888        888 d88P\"88b 888 \"88b 888         888");
+	mvprintw(22, 19, "888        888 Y88b 888 888  888 Y88b.        \"");
+	mvprintw(23, 19, "888        888  \"Y88888 888  888  \"Y888      888");
+	mvprintw(24, 39, "888 ");
+	mvprintw(25, 34, "Y8b d88P");
+	mvprintw(26, 35, "\"Y88P\"");
 	refresh();
 	sleep(1);
-	eraseArea(19, 15, 49, 12);
+	eraseArea(19, 16, 48, 11);
 } 
 
 /**
@@ -99,20 +105,20 @@ static void anim_begin() {
 
 static void killRobotNb(int nbBot) {
 	int x;
-	int y = 14;
+	int y = 16;
 
 	switch(nbBot) {
 		case 0:
-			x = 85;
+			x = 87;
 			break;
 		case 1:
-			x = 101;
+			x = 103;
 			break;
 		case 2:
-			x = 117;
+			x = 119;
 			break;
 		case 3:
-			x = 133;
+			x = 135;
 			break;
 		default:
 			return;
@@ -132,28 +138,27 @@ static void killRobotNb(int nbBot) {
  */
 
 static void drawTitle() {
-	mvprintw(2, 89, "oooooooooo.        Basic Used for Robots Programming");
-	mvprintw(3, 89, "`888'   `Y8b");
-	mvprintw(4, 90, "888     888 oooo  oooo  oooo d8b oo.ooooo.       ;");
-	mvprintw(5, 90, "888oooo888' `888  `888  `888""8P    888' `88b     [\"]/");
-	mvprintw(6, 90, "888    `88b  888   888   888      888   888    /[_]");
-	mvprintw(7, 90, "888    .88P  888   888   888      888   888     ] [");
-	mvprintw(8, 89, "o888bood8P'   `V88V\"V8P' d888b     888bod8P'");
-	mvprintw(9, 124, "888");
-	mvprintw(10, 123, "o888o");
+	mvprintw(3, 93, "oooooooooo.        Basic Used for Robots Programming");
+	mvprintw(4, 93, "`888'   `Y8b");
+	mvprintw(5, 94, "888     888 oooo  oooo  oooo d8b oo.ooooo.");
+	mvprintw(6, 94, "888oooo888' `888  `888  `888""8P    888' `88b      ;");
+	mvprintw(7, 94, "888    `88b  888   888   888      888   888     [\"]/");
+	mvprintw(8, 94, "888    .88P  888   888   888      888   888    /[_]");
+	mvprintw(9, 93, "o888bood8P'   `V88V\"V8P' d888b     888bod8P'     ] [");
+	mvprintw(10, 127, "888");
+	mvprintw(11, 126, "o888o");
 }
-
 /**
  *  Print the log
  */
 
 static void print_log() {
-	eraseArea(84, 33, 60, 7);
-	mvprintw(34, 85, logs[0]);
-	mvprintw(35, 85, logs[1]);
-	mvprintw(36, 85, logs[2]);
-	mvprintw(37, 85, logs[3]); 
-	mvprintw(38, 85, logs[4]);
+	eraseArea(87, 36, 60, 5);
+	mvprintw(36, 87, logs[0]);
+	mvprintw(37, 87, logs[1]);
+	mvprintw(38, 87, logs[2]);
+	mvprintw(39, 87, logs[3]); 
+	mvprintw(40, 87, logs[4]);
 }
 
 /**
@@ -197,13 +202,13 @@ void add_log(char* message) {
  */
 
 static void drawArena() {
-	drawRectangle(2, 1, 80, 40, "Arena");
-	drawRectangle(82, 12, 67, 20, "Robot Info");
-	drawRectangle(84, 13, 15, 18, "0");
-	drawRectangle(100, 13, 15, 18, "1");
-	drawRectangle(116, 13, 15, 18, "2");
-	drawRectangle(132, 13, 15, 18, "3");
-	drawRectangle(82, 32, 67, 9, "Log");
+	drawRectangle(2, 1, 82, 42, "Arena");
+	drawRectangle(84, 14, 67, 20, "Robot Info");
+	drawRectangle(86, 15, 15, 18, "0");
+	drawRectangle(102, 15, 15, 18, "1");
+	drawRectangle(118, 15, 15, 18, "2");
+	drawRectangle(134, 15, 15, 18, "3");
+	drawRectangle(84, 34, 67, 9, "Log");
 	print_log();
 	drawTitle();
 	refresh();
@@ -239,6 +244,9 @@ static void waitForInput() {
 			case 'a':
 				anim_begin();
 				break;
+			case 'e':
+				eraseArena();
+				break;
 			default:
 				break;
 		}
@@ -252,7 +260,7 @@ static void waitForInput() {
 
 static void resizeHandler() {
 	clear();
-	system("printf '\e[3;10;10t\e[8;42;150t'");
+	system("printf '\e[3;10;10t\e[8;44;152t'");
 	drawArena();
 	sleep(1);
 }
@@ -263,13 +271,13 @@ static void resizeHandler() {
 
 void init() {
 	// Setting the terminal window on top-left of the screen and maximizing the size of it
-	system("printf '\e[3;10;10t\e[8;42;150t'");
+	system("printf '\e[3;10;10t\e[8;44;152t'");
 	sleep(1);
 
 	// Initialisation of ncurses
 	initscr();
 	curs_set(0);
-	resize_term(42, 150);
+	resize_term(44, 152);
 	noecho();
 	signal(SIGWINCH, resizeHandler);
 	start_color();
