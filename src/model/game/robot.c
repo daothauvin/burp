@@ -50,11 +50,6 @@ Robot create_robot(){
     p->memory = malloc(robot_memory*(sizeof(int)));
     return p;
 }
-Robot *create_robots(){
-    Robot* list_of_robots = malloc(sizeof(Robot)*4);
-    //TO-DO
-    return list_of_robots;
-}
 
 void initialize_robot(Robot rob,double x_1,double y_1,double angle,double speed){
     Robot rb = rob;
@@ -63,4 +58,32 @@ void initialize_robot(Robot rob,double x_1,double y_1,double angle,double speed)
     rb->angle = angle;
     rb->speed = speed;
     update_hitbox(rb);
+}
+
+void update_pos_robot(Robot rob){
+    float x2 =  rob->pos->x + (rob->speed * cos(rob->angle));
+    float y2 =  rob->pos->y + (rob->speed * sin(rob->angle));
+    rob->pos->x = x2;
+    rob->pos->y = y2;
+}
+void modify_speed(Robot rob,double speed){
+    rob->speed = speed;
+}
+void modify_angle(Robot rob,double angle){
+    rob->angle = angle;
+}
+void inflict_damage_from_missile(Robot rob,int explotion_damage){
+    rob->health_points -= explotion_damage;
+}
+void inflict_damage_from_collision(Robot rob1,Robot rob2){
+    rob1->health_points-=collision_damage;
+    rob2->health_points-=collision_damage;
+    rob1->speed = 0;
+    rob2->speed = 0;
+}
+short collision_robots(Robot rob1,Robot rob2){
+
+}
+short collision_with_missiles(Robot rob,Missile m){
+    
 }

@@ -47,8 +47,6 @@ typedef struct
 //Functions prototypes
 // Allocate a robot at a time
 Robot create_robot();
-//Allocate multiple robots at the same time
-Robot *create_robots();
 //allocate a robot with the script's contents
 void initialize_robot(Robot rob,double x_1,double y_1,double angle,double speed);
 void update_hitbox(Robot rob);

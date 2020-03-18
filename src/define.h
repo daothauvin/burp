@@ -43,7 +43,7 @@
 */
 //time between two loops in seconds [can change]
 #define time_loop 5
-
+#define collision_damage 2
 
 /*
 	Limits
