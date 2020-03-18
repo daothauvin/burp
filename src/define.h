@@ -3,7 +3,6 @@
 	global variables' definitions
 	
 */
-#define robot_memory 256
 /*
 	Sizes
 */
@@ -13,6 +12,8 @@
 #define size_robot_x 10
 #define size_robot_y 10
 
+#define robot_memory 256
+#define 
 /*
 	Speeds
 */
@@ -51,5 +52,7 @@
 //maximum for the number of missile present in the arena for each robot
 #define missile_by_robot 2
 
+//maximum number of robots in the arena
+#define number_of_robots 4
 //maximum range a missile can go in unities
 #define max_range_explosion 7000
