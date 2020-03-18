@@ -17,8 +17,12 @@
    p3 * * * p4
    Where x is the robot
 */
-
-#include "missile.h"
+#ifndef ROBOT_H
+#define ROBOT_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include "../../define.h"
 
 typedef struct{
 	double x;
@@ -56,6 +60,5 @@ void modify_angle(Robot rob,double angle);
 void inflict_damage_from_missile(Robot rob,int explotion_damage);
 void inflict_damage_from_collision(Robot rob1,Robot rob2);
 short collision_robots(Robot rob1,Robot rob2);
-short collision_with_missiles(Robot rob,Missile m);
 
-
+#endif

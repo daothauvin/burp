@@ -3,6 +3,7 @@
 
 #include "robot.h"
 #include "missile.h"
+#include "../../define.h"
 
 typedef struct{
 	Robot* list_robots;

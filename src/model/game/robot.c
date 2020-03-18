@@ -1,8 +1,4 @@
 #include "robot.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include "../../define.h"
-
 void update_hitbox(Robot rob){
     double p1_x = rob->pos->x - (double)size_robot_x;
     double p1_y = rob->pos->y + (double)size_robot_y;
@@ -46,7 +42,7 @@ Robot create_robot(){
     p->speed = 0.0;
     p->missiles = 0;
     p->robot_hitbox = malloc(sizeof(Hitbox));
-    p->waiting_time;
+    p->waiting_time = 0;
     p->memory = malloc(robot_memory*(sizeof(int)));
     return p;
 }
@@ -80,10 +76,4 @@ void inflict_damage_from_collision(Robot rob1,Robot rob2){
     rob2->health_points-=collision_damage;
     rob1->speed = 0;
     rob2->speed = 0;
-}
-short collision_robots(Robot rob1,Robot rob2){
-
-}
-short collision_with_missiles(Robot rob,Missile m){
-    
 }
