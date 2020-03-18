@@ -3,7 +3,7 @@
 	global variables' definitions
 	
 */
-
+#define robot_memory 256
 /*
 	Sizes
 */

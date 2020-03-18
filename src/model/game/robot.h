@@ -21,8 +21,8 @@
 #include "missile.h"
 
 typedef struct{
-	float x;
-	float y;
+	double x;
+	double y;
 }*Point;
 typedef struct{
 	Point p1;
@@ -34,13 +34,14 @@ typedef struct{
 typedef struct
 {
 	int id;
-	float health_points;// Represented as a percentage
+	double health_points;// Represented as a percentage
 	Point pos; 
-	float angle;
-	float speed;// Represented as a percentage
+	double angle;
+	double speed;// Represented as a percentage
 	int missiles;//Number of missile in the area currently
 	Hitbox robot_hitbox;//robot hitbox size
 	int waiting_time;//cycle delay
+	int* memory;
 }*Robot;
 
 //Functions prototypes
@@ -49,11 +50,11 @@ Robot create_robot();
 //Allocate multiple robots at the same time
 Robot *create_robots();
 //allocate a robot with the script's contents
-void initialize_robot(Robot rob,float x_1,float y_1,float angle,float speed);
+void initialize_robot(Robot rob,double x_1,double y_1,double angle,double speed);
 void update_hitbox(Robot rob);
 void update_pos_robot(Robot rob); // Fixed depending on angle and speed every cycle
-void modify_speed(Robot rob,float speed);
-void modify_angle(Robot rob,float angle);
+void modify_speed(Robot rob,double speed);
+void modify_angle(Robot rob,double angle);
 void inflict_damage_from_missile(Robot rob,int explotion_damage);
 void inflict_damage_from_collision(Robot rob1,Robot rob2);
 short collision_robots(Robot rob1,Robot rob2);
