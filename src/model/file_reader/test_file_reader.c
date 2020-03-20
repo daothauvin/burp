@@ -21,7 +21,7 @@ int main() {
 	else {
 		printf("the tree p2 : \n");
 		print(p2);
-		interprete(3, p2);
+		interprete(3, p2,NULL,NULL);
 	}
 	
 	

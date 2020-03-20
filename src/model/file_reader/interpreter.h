@@ -5,8 +5,9 @@
 #include <string.h>
 #include <stdio.h>
 #include "syntax_tree.h"
+#include "../game/commands.h"
 
-int interprete(int line, void* tree, void* arena);
+int interprete(int line, void* tree, void* arena,void* robot);
 
 //for test
 void print(void* tree);
