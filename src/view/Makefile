@@ -1,10 +1,10 @@
 CC  = gcc
 CFLAGS =-Wall -g
-LDLIBS= -lncurses
+LDLIBS = -lncurses
 ALL = ui
 
 main : $(ALL)
-ui : ui.c
+ui : ui.c ../model/game/robot.c
 
-cleanall:
+r:
 	rm -rf *~ $(ALL)

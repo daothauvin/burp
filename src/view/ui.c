@@ -50,23 +50,65 @@ static void eraseArena() {
  */
 
 static void printCharArena(int x, int y, char c) {
-	x = x / 80 + 3; // TODO: Refaire les maths
-	y = y / 40 + 2;
-	char cc[2];
+	if (x >= 10000 || y >= 10000) return;
+	
+	int fx = x * 80 / 10000 + 3;
+	int fy = y * 40 / 10000 + 2;
+
+	char* cc = malloc(sizeof(char) * 2);
 	cc[0] = c;
 	cc[1] = '\0';
-	mvprintw(y, x, cc);
-	char pos[20];
-	sprintf(pos, " x=%d, y=%d", x, y); // Debug
-	mvprintw(1, 9, pos);
+
+	mvprintw((int)fy, (int)fx, cc);
+	free(cc);
 }
 
 /**
- *	Affiche un robot
+ *  Test if a coordonate is empty or not on the screen
+ * 	Use the arena coordonates, and read on the position coresponding in the term
  */
 
-static void printRobot(Robot robot) {
-	printCharArena(robot->pos->x, robot->pos->y, '#');
+static int isEmpty(int x, int y) {
+	int fx = x * 80 / 10000 + 3;
+	int fy = y * 40 / 10000 + 2;
+	return ((mvinch(fy, fx) & A_CHARTEXT) == ' ');
+}
+
+/**
+ *	Print a robot in the arena
+ *  If the case is already used, then write on another case following this order :
+ *  	5
+ *     4#2
+ * 		3
+ */
+
+static void printRobot(Robot robot) { 
+	int x = robot->pos->x;
+	int y = robot->pos->y;
+	int ux = 10000/80;
+	int uy = 10000/40;
+    char c = '#';
+
+	if (isEmpty(x, y)) {
+		printCharArena(x, y, '0');
+		return;
+	}
+	if (isEmpty(x + ux, y)) {
+		printCharArena(x + ux, y, c);
+		return;
+	}
+	if (isEmpty(x, y + uy)) {
+		printCharArena(x, y + uy, c);
+		return;
+	}
+	if (isEmpty(x - ux, y)) {
+		printCharArena(x - ux, y, c);
+		return;
+	}
+	if (isEmpty(x, y - uy)) {
+		printCharArena(x, y - uy, c);
+		return;
+	}
 }
 
 /**
@@ -247,6 +289,9 @@ static void drawArena() {
 
 static void waitForInput() {
 	char msg[40];
+	Robot bob = create_robot();
+	bob->pos->x = 3000;
+	bob->pos->y = 4000;
 
 	while (1) {
 		int c = getch();
@@ -269,10 +314,11 @@ static void waitForInput() {
 			case 'a':
 				anim_begin();
 				break;
+			case 'r':
+				printRobot(bob);
+				break;
 			case 'e':
 				eraseArena();
-			case 'r':
-				printCharArena(1000, 1000, '#');
 				break;
 			default:
 				break;
