@@ -47,12 +47,13 @@ Robot create_robot(){
     return p;
 }
 
-void initialize_robot(Robot rob,double x_1,double y_1,double angle,double speed){
+void initialize_robot(Robot rob,double x_1,double y_1,double angle,double speed,int id){
     Robot rb = rob;
     rb->pos->x = x_1;
     rb->pos->y = y_1;
     rb->angle = angle;
     rb->speed = speed;
+    rb->id = id;
     update_hitbox(rb);
 }
 
