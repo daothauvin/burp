@@ -149,9 +149,9 @@ static int commands(void* line,void* arene,void* robot) {
 	}
 	else if(memcmp(SHOOT,data,sizeof(SHOOT)) == 0) {
 		double angle = expression(g_node_nth_child(node, 0),arene,robot);
-		//double distance = expression(g_node_nth_child(node, 1),arene,robot);
-		//shoot(robot,arene,angle,distance);
-		shoot(robot,arene,angle);
+		double distance = expression(g_node_nth_child(node, 1),arene,robot);
+		shoot(robot,arene,angle,distance);
+		//shoot(robot,arene,angle);
 	}
 	else if(memcmp(ENGINE,data,sizeof(ENGINE)) == 0) {
 		double angle = expression(g_node_nth_child(node, 0),arene,robot);
@@ -183,12 +183,12 @@ static int expression(void* tree, void* arene,void* robot) {
 	}
 	else if(memcmp(RAND,data,sizeof(RAND)) == 0) {
 		int max = expression(g_node_nth_child(node, 0),arene,robot);
-		return random(max);
+		return randoms(max);
 	}
 	else if(memcmp(PEEK,data,sizeof(PEEK)) == 0) {
 		int addr = expression(g_node_nth_child(node, 0),arene,robot);
-		//return peek(robot,addr);
-		peek(robot,addr);
+		return peek(robot,addr);
+		//peek(robot,addr);
 	}
 	else if(memcmp(STATE,data,sizeof(STATE)) == 0) {
 		int num = expression(g_node_nth_child(node, 0),arene,robot);
