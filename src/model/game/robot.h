@@ -24,18 +24,19 @@
 #include <math.h>
 #include "../../define.h"
 
-typedef struct{
+typedef struct point{
 	double x;
 	double y;
 }*Point;
-typedef struct{
+
+typedef struct hitbox{
 	Point p1;
 	Point p2;
 	Point p3;
 	Point p4;
 }*Hitbox;
 
-typedef struct
+typedef struct robot
 {
 	int id;
 	double health_points;// Represented as a percentage
