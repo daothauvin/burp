@@ -50,16 +50,16 @@ static void eraseArena() {
  */
 
 static void printCharArena(int x, int y, char c) {
-	if (x >= 10000 || y >= 10000) return;
+	if (x >= size_arena_x || y >= size_arena_y) return;
 	
-	int fx = x * 80 / 10000 + 3;
-	int fy = y * 40 / 10000 + 2;
+	int fx = x * 80 / size_arena_x + 3;
+	int fy = y * 40 / size_arena_y + 2;
 
 	char* cc = malloc(sizeof(char) * 2);
 	cc[0] = c;
 	cc[1] = '\0';
 
-	mvprintw((int)fy, (int)fx, cc);
+	mvprintw(fy, fx, cc);
 	free(cc);
 }
 
@@ -69,8 +69,8 @@ static void printCharArena(int x, int y, char c) {
  */
 
 static int isEmpty(int x, int y) {
-	int fx = x * 80 / 10000 + 3;
-	int fy = y * 40 / 10000 + 2;
+	int fx = x * 80 / size_arena_x + 3;
+	int fy = y * 40 / size_arena_y + 2;
 	return ((mvinch(fy, fx) & A_CHARTEXT) == ' ');
 }
 
@@ -85,8 +85,8 @@ static int isEmpty(int x, int y) {
 static void printRobot(Robot robot) { 
 	int x = robot->pos->x;
 	int y = robot->pos->y;
-	int ux = 10000/80;
-	int uy = 10000/40;
+	int ux = size_arena_x / 80;
+	int uy = size_arena_y / 40;
     char c = '#';
 
 	if (isEmpty(x, y)) {
@@ -109,6 +109,44 @@ static void printRobot(Robot robot) {
 		printCharArena(x, y - uy, c);
 		return;
 	}
+}
+
+/**
+ *  id_[first 3 letters]
+ * 	HP = [health] %
+ * 
+ * 		 #  [with the right color]
+ * 
+ * 	Colors : BLUE, GREEN, YELLOW, RED
+ */
+
+static void printInfoRobot(Robot robot) {
+	int x;
+	int y = 19;
+
+	switch(robot->id) {
+		case 0:
+			x = 90;
+			break;
+		case 1:
+			x = 106;
+			break;
+		case 2:
+			x = 122;
+			break;
+		case 3:
+			x = 138;
+			break;
+		default:
+			return;
+	}
+	attron(COLOR_PAIR(2 + robot->id));
+	char* s = malloc(100);
+	memset(s, '\0', 100);
+	snprintf(s, 100, "%d", robot->id);
+	mvprintw(y, x, s);
+	free(s);
+	attroff(COLOR_PAIR(2 + robot->id));
 }
 
 /**
@@ -211,9 +249,10 @@ static void drawTitle() {
 	mvprintw(7, 94, "888    `88b  888   888   888      888   888     [\"]/");
 	mvprintw(8, 94, "888    .88P  888   888   888      888   888    /[_]");
 	mvprintw(9, 93, "o888bood8P'   `V88V\"V8P' d888b     888bod8P'     ] [");
-	mvprintw(10, 127, "888");
-	mvprintw(11, 126, "o888o");
+	mvprintw(10, 128, "888");
+	mvprintw(11, 127, "o888o");
 }
+
 /**
  *  Print the log
  */
@@ -289,9 +328,19 @@ static void drawArena() {
 
 static void waitForInput() {
 	char msg[40];
+	/*
 	Robot bob = create_robot();
 	bob->pos->x = 3000;
 	bob->pos->y = 4000;
+	bob->id = 0;
+	Robot rob = create_robot();
+	rob->id = 1;
+	Robot tob = create_robot();
+	tob->id = 2;
+	Robot zob = create_robot();
+	zob->id = 3;
+	*/
+	
 
 	while (1) {
 		int c = getch();
@@ -315,10 +364,18 @@ static void waitForInput() {
 				anim_begin();
 				break;
 			case 'r':
-				printRobot(bob);
+				//printRobot(bob);
 				break;
 			case 'e':
 				eraseArena();
+				break;
+			case 'y':
+				/*
+				printInfoRobot(bob);
+				printInfoRobot(rob);
+				printInfoRobot(tob);
+				printInfoRobot(zob);
+				*/
 				break;
 			default:
 				break;
@@ -355,6 +412,10 @@ void init() {
 	signal(SIGWINCH, resizeHandler);
 	start_color();
 	init_pair(1, COLOR_BLACK, COLOR_WHITE);
+	init_pair(2, COLOR_YELLOW, COLOR_BLACK);
+	init_pair(3, COLOR_RED, COLOR_BLACK);
+	init_pair(4, COLOR_GREEN, COLOR_BLACK);
+	init_pair(5, COLOR_BLUE, COLOR_BLACK);
 
 	// Drawing the arena
 	initLog();
@@ -362,6 +423,7 @@ void init() {
 
 	// Waiting user behaviour
 	waitForInput();
+	getch();
 	endwin();
 }
 
