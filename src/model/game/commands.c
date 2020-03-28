@@ -50,8 +50,26 @@ void engine(Robot rob,float angle,float speed){
         rob->angle = angle;
         rob->speed = speed;
 }
-Missile shoot(Robot rob,float angle);
-float angle(float x1,float y1,float x2,float y2);
-float targetx(float x1,float angle,float length);
-float targety(float y1,float angle,float length);
-float distance(float x1,float y1,float x2,float y2);
+int shoot(Robot rob,Arene arene,double angle,double explo_dist){
+    if(rob->missiles!=missile_by_robot){
+        Missile m = create(rob->pos->x,rob->pos->y,missile_speed,angle,rob,explo_dist);
+        add_missile(arene,m);
+        rob->missiles +=1;
+        return 0;
+    } else return -1;
+}
+double angle(double x1,double y1,double x2,double y2){
+    double x = (x1 - x2);
+    double y = (y1 - y2);
+    double result = (atan2(y, x)*(180/M_PI)); 
+    return result;//A verifier
+    }
+double targetx(double x1,double angle,double length){
+    return x1 + (length * cos(angle));
+}
+double targety(double y1,double angle,double length){
+    return y1 + (length * sin(angle));
+}
+double distance(double x1,double y1,double x2,double y2){
+    return sqrt(pow(x1-x2,2) + pow(y1-y2,2));
+}
