@@ -121,32 +121,65 @@ static void printRobot(Robot robot) {
  */
 
 static void printInfoRobot(Robot robot) {
+
 	int x;
-	int y = 19;
+	int y = 16;
 
 	switch(robot->id) {
 		case 0:
-			x = 90;
+			x = 87;
 			break;
 		case 1:
-			x = 106;
+			x = 103;
 			break;
 		case 2:
-			x = 122;
+			x = 119;
 			break;
 		case 3:
-			x = 138;
+			x = 135;
 			break;
 		default:
 			return;
 	}
-	attron(COLOR_PAIR(2 + robot->id));
-	char* s = malloc(100);
-	memset(s, '\0', 100);
-	snprintf(s, 100, "%d", robot->id);
-	mvprintw(y, x, s);
-	free(s);
-	attroff(COLOR_PAIR(2 + robot->id));
+
+	char buff[11];
+	memset(buff, '\0', 11);
+
+	attron(COLOR_PAIR(12 + robot->id));
+	mvprintw(y + 1, x + 2, " ");
+	attroff(COLOR_PAIR(12 + robot->id));
+
+	snprintf(buff, 11, "RBT_%d", robot->id);
+	mvprintw(y + 1, x + 4, buff);
+	memset(buff, '\0', 11);
+
+	attron(COLOR_PAIR(12 + robot->id));
+	mvprintw(y + 1, x + 10, " ");
+	attroff(COLOR_PAIR(12 + robot->id));
+
+	drawRectangle(x + 1, y + 3, 11, 3, "Hp");
+	if ((int)robot->health_points == 100) {
+		snprintf(buff, 11, "%d %s", (int)robot->health_points, "%%");
+	} else if ((int)robot->health_points > 9) {
+		snprintf(buff, 11, " %d %s", (int)robot->health_points, "%%");
+	} else {
+		snprintf(buff, 11, "  %d %s", (int)robot->health_points, "%%");
+	}
+	
+	mvprintw(y + 4, x + 4, buff);
+	memset(buff, '\0', 11);
+
+	drawRectangle(x + 1, y + 7, 11, 3, "Spd");
+	if ((int)robot->speed == 100) {
+		snprintf(buff, 11, "%d %s", (int)robot->speed, "%%");
+	} else if ((int)robot->speed > 9) {
+		snprintf(buff, 11, " %d %s", (int)robot->speed, "%%");
+	} else {
+		snprintf(buff, 11, "  %d %s", (int)robot->speed, "%%");
+	}
+	mvprintw(y + 8, x + 4, buff);
+	
+	           
 }
 
 /**
@@ -228,6 +261,7 @@ static void killRobotNb(int nbBot) {
 			return;
 	}
 	attron(COLOR_PAIR(1));
+
 	for (int i = 0; i < 16; i++) {
 		for (int j = 0; j < 13; j++) {
 			mvprintw(i + y, j + x, " ");
@@ -329,15 +363,23 @@ static void drawArena() {
 static void waitForInput() {
 	char msg[40];
 	Robot bob = create_robot();
-	bob->pos->x = 3000;
-	bob->pos->y = 4000;
-	bob->id = 0;
+	initialize_robot(bob, 0.0, 0.0, 0.0, 0.0);
+	bob->health_points = 42.0;
+
 	Robot rob = create_robot();
+	initialize_robot(rob, 0.0, 9999.0, 0.0, 0.0);
 	rob->id = 1;
+	rob->health_points = 100.0;
+
 	Robot tob = create_robot();
+	initialize_robot(tob, 9999.0, 0.0, 0.0, 0.0);
 	tob->id = 2;
+	tob->health_points = 1.0;
+
 	Robot zob = create_robot();
+	initialize_robot(zob, 9999.0, 9999.0, 0.0, 0.0);
 	zob->id = 3;
+	zob->health_points = 69.0;
 	
 	while (1) {
 		int c = getch();
@@ -406,11 +448,17 @@ void init() {
 	noecho();
 	signal(SIGWINCH, resizeHandler);
 	start_color();
+
+	// Creation of color pairs
 	init_pair(1, COLOR_BLACK, COLOR_WHITE);
 	init_pair(2, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(3, COLOR_RED, COLOR_BLACK);
 	init_pair(4, COLOR_GREEN, COLOR_BLACK);
 	init_pair(5, COLOR_BLUE, COLOR_BLACK);
+	init_pair(12, COLOR_BLACK, COLOR_YELLOW);
+	init_pair(13, COLOR_BLACK, COLOR_RED);
+	init_pair(14, COLOR_BLACK, COLOR_GREEN);
+	init_pair(15, COLOR_BLACK, COLOR_BLUE);
 
 	// Drawing the arena
 	initLog();
