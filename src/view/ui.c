@@ -328,7 +328,6 @@ static void drawArena() {
 
 static void waitForInput() {
 	char msg[40];
-	/*
 	Robot bob = create_robot();
 	bob->pos->x = 3000;
 	bob->pos->y = 4000;
@@ -339,9 +338,7 @@ static void waitForInput() {
 	tob->id = 2;
 	Robot zob = create_robot();
 	zob->id = 3;
-	*/
 	
-
 	while (1) {
 		int c = getch();
 		switch (c) {
@@ -370,12 +367,10 @@ static void waitForInput() {
 				eraseArena();
 				break;
 			case 'y':
-				/*
 				printInfoRobot(bob);
 				printInfoRobot(rob);
 				printInfoRobot(tob);
 				printInfoRobot(zob);
-				*/
 				break;
 			default:
 				break;
