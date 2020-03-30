@@ -363,22 +363,20 @@ static void drawArena() {
 static void waitForInput() {
 	char msg[40];
 	Robot bob = create_robot();
-	initialize_robot(bob, 0.0, 0.0, 0.0, 0.0);
+	initialize_robot(bob, 0.0, 0.0, 0.0, 0.0, 0);
+	
 	bob->health_points = 42.0;
 
 	Robot rob = create_robot();
-	initialize_robot(rob, 0.0, 9999.0, 0.0, 0.0);
-	rob->id = 1;
+	initialize_robot(rob, 0.0, 9999.0, 0.0, 0.0, 1);
 	rob->health_points = 100.0;
 
 	Robot tob = create_robot();
-	initialize_robot(tob, 9999.0, 0.0, 0.0, 0.0);
-	tob->id = 2;
+	initialize_robot(tob, 9999.0, 0.0, 0.0, 0.0, 2);
 	tob->health_points = 1.0;
 
 	Robot zob = create_robot();
-	initialize_robot(zob, 9999.0, 9999.0, 0.0, 0.0);
-	zob->id = 3;
+	initialize_robot(zob, 9999.0, 9999.0, 0.0, 0.0, 3);
 	zob->health_points = 69.0;
 	
 	while (1) {
