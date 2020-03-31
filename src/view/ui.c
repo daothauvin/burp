@@ -1,4 +1,5 @@
 #include "ui.h"
+#include <ctype.h>
 
 /**
  *  Global variable
@@ -90,23 +91,33 @@ static void printRobot(Robot robot) {
     char c = '#';
 
 	if (isEmpty(x, y)) {
-		printCharArena(x, y, '0');
+		attron(COLOR_PAIR(2 + robot->id));
+		printCharArena(x, y, c);
+		attroff(COLOR_PAIR(2 + robot->id));
 		return;
 	}
 	if (isEmpty(x + ux, y)) {
+		attron(COLOR_PAIR(2 + robot->id));
 		printCharArena(x + ux, y, c);
+		attroff(COLOR_PAIR(2 + robot->id));
 		return;
 	}
 	if (isEmpty(x, y + uy)) {
+		attron(COLOR_PAIR(2 + robot->id));
 		printCharArena(x, y + uy, c);
+		attroff(COLOR_PAIR(2 + robot->id));
 		return;
 	}
 	if (isEmpty(x - ux, y)) {
+		attron(COLOR_PAIR(2 + robot->id));
 		printCharArena(x - ux, y, c);
+		attroff(COLOR_PAIR(2 + robot->id));
 		return;
 	}
 	if (isEmpty(x, y - uy)) {
+		attron(COLOR_PAIR(2 + robot->id));
 		printCharArena(x, y - uy, c);
+		attroff(COLOR_PAIR(2 + robot->id));
 		return;
 	}
 }
@@ -178,8 +189,14 @@ static void printInfoRobot(Robot robot) {
 		snprintf(buff, 11, "  %d %s", (int)robot->speed, "%%");
 	}
 	mvprintw(y + 8, x + 4, buff);
-	
-	           
+
+	drawRectangle(x + 1, y + 11, 11, 5, "Ammo");
+	mvprintw(y + 12, x + 3, "[prev]");
+	attron(COLOR_PAIR(1));
+	mvprintw(y + 13, x + 3, "[curr]");
+	attroff(COLOR_PAIR(1));
+	mvprintw(y + 14, x + 3, "[next]");
+     
 }
 
 /**
@@ -260,8 +277,8 @@ static void killRobotNb(int nbBot) {
 		default:
 			return;
 	}
-	attron(COLOR_PAIR(1));
 
+	attron(COLOR_PAIR(1));
 	for (int i = 0; i < 16; i++) {
 		for (int j = 0; j < 13; j++) {
 			mvprintw(i + y, j + x, " ");
@@ -364,7 +381,6 @@ static void waitForInput() {
 	char msg[40];
 	Robot bob = create_robot();
 	initialize_robot(bob, 0.0, 0.0, 0.0, 0.0, 0);
-	
 	bob->health_points = 42.0;
 
 	Robot rob = create_robot();
@@ -401,7 +417,10 @@ static void waitForInput() {
 				anim_begin();
 				break;
 			case 'r':
-				//printRobot(bob);
+				printRobot(bob);
+				printRobot(rob);
+				printRobot(tob);
+				printRobot(zob);
 				break;
 			case 'e':
 				eraseArena();
@@ -464,7 +483,6 @@ void init() {
 
 	// Waiting user behaviour
 	waitForInput();
-	getch();
 	endwin();
 }
 
