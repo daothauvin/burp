@@ -9,6 +9,8 @@
 
 int interprete(int line, void* tree, void* arena,void* robot);
 
+char* getLine(void* tree,int line);
+
 //for test
 void print(void* tree);
 

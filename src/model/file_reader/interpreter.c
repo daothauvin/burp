@@ -71,6 +71,19 @@ static void searchline(GNode* node, gpointer data) {
 	}
 }
 
+char* getLine(void* tree,int line) {
+	GNode* node = g_node_new (&line);
+	g_node_children_foreach (tree, G_TRAVERSE_ALL,searchline,node);
+	if(memcmp(LINE,node -> data,sizeof(LINE)) == 0) {
+		return g_node_nth_child (node,1) -> data;
+	}
+	else {
+		return "NONE";
+		
+	}
+
+}
+
 static short condition(void* tree, void* arene, void* robot) {
 	GNode* node = tree;
 	int x = expression(g_node_nth_child(node, 0),arene,robot);
@@ -235,17 +248,16 @@ static int expression(void* tree, void* arene,void* robot) {
 }
 
 int interprete(int line, void* tree, void* arena,void* robot) {
-	while(1) {
-		GNode* node = g_node_new (&line);
-		g_node_children_foreach (tree, G_TRAVERSE_ALL,searchline,node);
-		if(memcmp(LINE,node -> data,sizeof(LINE)) == 0) {
-			int res = commands(node,arena,robot);
-			if(res != -1) return res;
-		}
-		else {
-			printf("not found\n");
-			
-		}
+	GNode* node = g_node_new (&line);
+	g_node_children_foreach (tree, G_TRAVERSE_ALL,searchline,node);
+	if(strcmp(LINE,node -> data) == 0) {
+		int res = commands(g_node_nth_child (node,1),arena,robot);
+		if(res != -1) return res;
+	}
+	else {
+		printf("not found\n");
+		
 	}
 	return line+1;
 }
+
