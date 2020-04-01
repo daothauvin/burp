@@ -12,4 +12,15 @@
 #include "../define.h"
 
 void init();
+void anim_begin();
+
 void add_log(char* message);
+void add_action(char* action, int id);
+void killRobotNb(int id);
+
+void drawArena();
+void eraseArena();
+
+void printRobot(Robot robot);
+void printInfoRobot(Robot robot);
+void printRocket(Missile rocket);

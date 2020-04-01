@@ -46,7 +46,7 @@ static void eraseArea(int x, int y, int length, int height) {
  *  Erase the arena
  */
 
-static void eraseArena() {
+void eraseArena() {
 	eraseArea(3, 2, 80, 40);
 }
 
@@ -87,7 +87,7 @@ static int isEmpty(int x, int y) {
  * 		3
  */
 
-static void printRobot(Robot robot) { 
+void printRobot(Robot robot) { 
 	int x = robot->pos->x;
 	int y = robot->pos->y;
 	int ux = size_arena_x / 80;
@@ -131,7 +131,7 @@ static void printRobot(Robot robot) {
  *  Works the same as printRobot()
  */
 
-static void printRocket(Missile rocket) { 
+void printRocket(Missile rocket) { 
 	int x = rocket->pos_x;
 	int y = rocket->pos_y;
 	int ux = size_arena_x / 80;
@@ -165,8 +165,7 @@ static void printRocket(Missile rocket) {
  *  Print a robot information
  */
 
-static void printInfoRobot(Robot robot) {
-
+void printInfoRobot(Robot robot) {
 	int x;
 	int y = 16;
 
@@ -248,7 +247,7 @@ static void init_info() {
  * 	Add an action
  */
 
-static void add_action(char* action, int id) {
+void add_action(char* action, int id) {
 	sprintf(actions[id * 3 + 2], "%s", actions[id * 3 + 1]);
 	sprintf(actions[id * 3 + 1], "%s", actions[id * 3]);
 	sprintf(actions[id * 3], "%s", action);
@@ -258,7 +257,7 @@ static void add_action(char* action, int id) {
  *  Launch the begin animation
  */
 
-static void anim_begin() {
+void anim_begin() {
 	mvprintw(16, 36, " .d8888b. ");
 	mvprintw(17, 36, "d88P  Y88b");
 	mvprintw(18, 36, "     .d88P");
@@ -312,11 +311,11 @@ static void anim_begin() {
  *  Blur the info of a robot when he's dead.
  */
 
-static void killRobotNb(int nbBot) {
+void killRobotNb(int id) {
 	int x;
 	int y = 16;
 
-	switch(nbBot) {
+	switch(id) {
 		case 0:
 			x = 87;
 			break;
@@ -412,7 +411,7 @@ void add_log(char* message) {
  *  Draw the arena
  */
 
-static void drawArena() {
+void drawArena() {
 	drawRectangle(2, 1, 82, 42, "Arena");
 	drawRectangle(84, 14, 67, 20, "Robot Info");
 	drawRectangle(86, 15, 15, 18, "0");
