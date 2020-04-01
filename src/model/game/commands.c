@@ -1,5 +1,5 @@
 #include "commands.h"
-#include <math.h>
+
 int wait(Robot rob,int delay) {
     rob->waiting_time = delay;
     return delay;
