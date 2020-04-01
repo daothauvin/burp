@@ -99,9 +99,12 @@ void inflict_damage_from_collision(Robot rob1,Robot rob2){
     rob1->speed = 0;
     rob2->speed = 0;
 }
+/*
+
 int main(){
     Robot rob = create_robot();
     initialize_robot(rob,12.0,12.0,32.1,33.4,0);
     printf("%d %f %f %f %f\n",rob->id,rob->pos->x,rob->pos->y,rob->angle,rob->speed);
     printf("%ld",sizeof(rob));
 }
+*/

@@ -1,0 +1,30 @@
+digit ::= [0-9]
+integer ::= '-'? digit+
+number ::= digit+
+operator ::= ( '+' | '-' | '*' | '/' | '%' )
+expression ::=
+integer
+| (expression operator expression)
+| PEEK expression
+| RAND expression
+| CARDINAL
+| SELF
+| SPEED
+| STATE expression
+| GPSX expression
+| GPSY expression
+| ANGLE expression expression expression expression
+| TARGETX expression expression expression
+| TARGETY expression expression expression
+| DISTANCE expression expression expression expression
+comparison ::= ( '<' | '<=' | '=' | '<>' | '>=' | '>' )
+condition ::= expression comparison expression
+command ::=
+WAIT expression
+| POKE expression expression
+| GOTO number
+| IF condition THEN number
+| ENGINE expression expression
+| SHOOT expression
+line ::= number command
+program ::= line+

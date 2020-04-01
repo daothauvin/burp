@@ -10,6 +10,9 @@
 #include "../../define.h"
 #include <stdio.h>
 #include <stdlib.h>
+#ifndef M_PI
+    #define M_PI 3.14159265358979323846
+#endif
 int wait(Robot rob,int delay);
 void poke(Robot rob,int addr,int value);
 int peek(Robot rob,int addr);
