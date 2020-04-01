@@ -8,9 +8,8 @@
 #include <signal.h>
 #include <string.h>
 #include "../model/game/robot.h"
+#include "../model/game/missile.h"
 #include "../define.h"
 
-void init();                        // Init the interface and NCurses and build the arena
-void add_log(char* message);        // Add a message to the log
-
-    // More to come
+void init();
+void add_log(char* message);

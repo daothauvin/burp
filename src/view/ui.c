@@ -10,8 +10,12 @@ char logs[5][60];
 int full_log;
 int cursor;
 
+// Info robot
+char actions[12][7];
+
 // Test
 int cmpt = 0;
+int cmpt_1 = 0;
 
 /**
  *  Draw a rectangle.
@@ -123,12 +127,42 @@ static void printRobot(Robot robot) {
 }
 
 /**
- *  id_[first 3 letters]
- * 	HP = [health] %
- * 
- * 		 #  [with the right color]
- * 
- * 	Colors : BLUE, GREEN, YELLOW, RED
+ *	Print a rocket in the arena
+ *  Works the same as printRobot()
+ */
+
+static void printRocket(Missile rocket) { 
+	int x = rocket->pos_x;
+	int y = rocket->pos_y;
+	int ux = size_arena_x / 80;
+	int uy = size_arena_y / 40;
+    char c = '+';
+
+	if (isEmpty(x, y)) {
+		printCharArena(x, y, c);
+		return;
+	}
+	if (isEmpty(x + ux, y)) {
+		printCharArena(x + ux, y, c);
+		return;
+	}
+	if (isEmpty(x, y + uy)) {
+		printCharArena(x, y + uy, c);
+		return;
+	}
+	if (isEmpty(x - ux, y)) {
+		printCharArena(x - ux, y, c);
+		return;
+	}
+	if (isEmpty(x, y - uy)) {
+		printCharArena(x, y - uy, c);
+		return;
+	}
+}
+
+
+/**
+ *  Print a robot information
  */
 
 static void printInfoRobot(Robot robot) {
@@ -190,13 +224,34 @@ static void printInfoRobot(Robot robot) {
 	}
 	mvprintw(y + 8, x + 4, buff);
 
-	drawRectangle(x + 1, y + 11, 11, 5, "Ammo");
-	mvprintw(y + 12, x + 3, "[prev]");
+	drawRectangle(x + 1, y + 11, 11, 5, "Action");
+	mvprintw(y + 12, x + 3, actions[3 * robot->id]);
 	attron(COLOR_PAIR(1));
-	mvprintw(y + 13, x + 3, "[curr]");
+	mvprintw(y + 13, x + 3, actions[3 * robot->id + 1]);
 	attroff(COLOR_PAIR(1));
-	mvprintw(y + 14, x + 3, "[next]");
+	mvprintw(y + 14, x + 3, actions[3 * robot->id + 2]);
      
+}
+
+/**
+ * 	Init the print of robot info
+ */
+
+static void init_info() {
+	for (size_t i = 0; i < 12; i++) {
+		sprintf(actions[i], "%s", "");
+	}
+}
+
+
+/**
+ * 	Add an action
+ */
+
+static void add_action(char* action, int id) {
+	sprintf(actions[id * 3 + 2], "%s", actions[id * 3 + 1]);
+	sprintf(actions[id * 3 + 1], "%s", actions[id * 3]);
+	sprintf(actions[id * 3], "%s", action);
 }
 
 /**
@@ -318,10 +373,10 @@ static void print_log() {
 }
 
 /**
- *  Draw the log
+ *  Init the log
  */
 
-static void initLog() {
+static void init_log() {
 	sprintf(logs[0], "%s", "");
 	sprintf(logs[1], "%s", "");
 	sprintf(logs[2], "%s", "");
@@ -394,6 +449,8 @@ static void waitForInput() {
 	Robot zob = create_robot();
 	initialize_robot(zob, 9999.0, 9999.0, 0.0, 0.0, 3);
 	zob->health_points = 69.0;
+
+	char act[7];
 	
 	while (1) {
 		int c = getch();
@@ -430,6 +487,25 @@ static void waitForInput() {
 				printInfoRobot(rob);
 				printInfoRobot(tob);
 				printInfoRobot(zob);
+				break;
+			case 'x':
+				memset(act, '\0', 7);
+				snprintf(act, 7, "A_%d_%d", cmpt_1, 0);
+				add_action(act, 0);
+
+				memset(act, '\0', 7);
+				snprintf(act, 7, "A_%d_%d", cmpt_1, 1);
+				add_action(act, 1);
+
+				memset(act, '\0', 7);
+				snprintf(act, 7, "A_%d_%d", cmpt_1, 2);
+				add_action(act, 2);
+
+				memset(act, '\0', 7);
+				snprintf(act, 7, "A_%d_%d", cmpt_1, 3);
+				add_action(act, 3);
+				
+				cmpt_1++;
 				break;
 			default:
 				break;
@@ -478,7 +554,8 @@ void init() {
 	init_pair(15, COLOR_BLACK, COLOR_BLUE);
 
 	// Drawing the arena
-	initLog();
+	init_log();
+	init_info();
 	drawArena();
 
 	// Waiting user behaviour
