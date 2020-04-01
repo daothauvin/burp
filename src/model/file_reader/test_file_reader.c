@@ -2,6 +2,9 @@
 #include "interpreter.h"
 
 int main() {
+	Arene a = create_arene();
+	Robot jean_paul = create_robot();
+	add_robot(a,jean_paul);
 	void* p1 = init("failure_test.txt");
 	if(p1==NULL) {
 		printf("file one error\n");
@@ -21,7 +24,9 @@ int main() {
 	else {
 		printf("the tree p2 : \n");
 		print(p2);
-		interprete(3, p2,NULL,NULL);
+		interprete(6, p2,a,jean_paul);
+		interprete(8, p2,a,jean_paul);
+		printf("waiting time %d\n",jean_paul -> waiting_time);
 	}
 	
 	
