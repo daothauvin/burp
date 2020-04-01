@@ -24,18 +24,19 @@
 #include <math.h>
 #include "../../define.h"
 
-typedef struct{
+typedef struct point{
 	double x;
 	double y;
 }*Point;
-typedef struct{
+
+typedef struct hitbox{
 	Point p1;
 	Point p2;
 	Point p3;
 	Point p4;
 }*Hitbox;
 
-typedef struct
+typedef struct robot
 {
 	int id;
 	double health_points;// Represented as a percentage
@@ -52,7 +53,7 @@ typedef struct
 // Allocate a robot at a time
 Robot create_robot();
 //allocate a robot with the script's contents
-void initialize_robot(Robot rob,double x_1,double y_1,double angle,double speed);
+void initialize_robot(Robot rob,double x_1,double y_1,double angle,double speed,int id);
 void update_hitbox(Robot rob);
 void update_pos_robot(Robot rob); // Fixed depending on angle and speed every cycle
 void modify_speed(Robot rob,double speed);

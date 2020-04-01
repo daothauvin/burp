@@ -1,3 +1,0 @@
-/*
-	cycle management
-*/

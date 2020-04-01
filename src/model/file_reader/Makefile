@@ -1,8 +1,8 @@
 CC = gcc 
 CFLAGS = -g -Wall -std=c11  -Wextra -pedantic `pkg-config --cflags glib-2.0`
-OBJS = syntax_analyse.o interpreter.o test_file_reader.o ../game/commands.o
+OBJS = syntax_analyse.o interpreter.o test_file_reader.o ../game/commands.o ../game/arene.o ../game/robot.o ../game/missile.o
 BIN = test_file_reader
-LIBS = `pkg-config --libs glib-2.0`
+LIBS = `pkg-config --libs glib-2.0` -lm
 
 all: clear $(BIN) clean_objs
 
