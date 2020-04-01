@@ -1,2 +1,2 @@
 test/
-../../../.vscode/
+src/model/file_reader/test_file_reader

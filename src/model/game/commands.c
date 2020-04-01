@@ -1,50 +1,52 @@
 #include "commands.h"
-#include <math.h>
+
 int wait(Robot rob,int delay) {
     rob->waiting_time = delay;
     return delay;
 }
-void poke(Robot rob,int addr,int value){
-    rob->memory[addr] = value;
+void poke(Robot rob,void* addr,int value){
+    //To-do
 }
-int peek(Robot rob,int addr){
-    return rob->memory[addr];
+void peek(Robot rob,void* addr){
+    //To-do
 }
 int go_to(int num){
+    //To-do
     return num;
 }
-int randoms(int num){
-    //Definir la ssrand(TIme(NULL));
+int random(int num){
+    //To-do
+    //On déclare la seed ou ?
     return rand() % num;
 }
-int cardinal(Arene arene){
-    return sizeof(arene->list_robots) / sizeof(Robot);
+int cardinal(Robot robots){
+    return sizeof robots / sizeof(Robot);
 }
 int self(Robot rob){
     return rob->id;
 }
-double speed(Robot rob){
-    return rob->speed;
+float speed(Robot rob){
+    rob->speed;
 }
-double state(Arene arene,int num){
-    for(int i = 0 ; i < cardinal(arene);++i){
-        if(arene->list_robots[i]->id == num) return arene->list_robots[i]->health_points;
+float state(Robot* rob,int num){
+    for(int i = 0 ; i < cardinal(rob);++i){
+        if(rob[i]->id == num) return rob[i]->health_points;
     }
     return -1;
 }
-double gpsx(Arene arene,int num){
-    for(int i = 0 ; i < cardinal(arene);++i){
-        if(arene->list_robots[i]->id == num) return arene->list_robots[i]->pos->x;
+float gpsx(Robot* rob,int num){
+    for(int i = 0 ; i < cardinal(rob);++i){
+        if(rob[i]->id == num) return rob[i]->pos->x;
     }
     return -1;
 }
-double gpsy(Arene arene,int num){
-    for(int i = 0 ; i < cardinal(arene);++i){
-        if(arene->list_robots[i]->id == num) return arene->list_robots[i]->pos->y;
+float gpsy(Robot* rob,int num){
+    for(int i = 0 ; i < cardinal(rob);++i){
+        if(rob[i]->id == num) return rob[i]->pos->y;
     }
     return -1;
 }
-void engine(Robot rob,double angle,double speed){
+void engine(Robot rob,float angle,float speed){
         rob->angle = angle;
         rob->speed = speed;
 }
