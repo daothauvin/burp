@@ -99,6 +99,15 @@ void inflict_damage_from_collision(Robot rob1,Robot rob2){
     rob1->speed = 0;
     rob2->speed = 0;
 }
+short collision_robots(Robot rob1,Robot rob2){
+    if(!rob1 || !rob2) return -1;
+    rob1->health_points -= collision_damage;
+    rob2->health_points -= collision_damage;
+    return 1;
+}
+short check_collision_robots(Robot rob1,Robot rob2){
+    return 1;
+}
 /*
 
 int main(){

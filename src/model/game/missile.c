@@ -9,23 +9,42 @@ Missile create(double pos_x,double pos_y,double speed,double angle,Robot rob,dou
     m->owner = rob;
     m->parcouru_distant = 0;
     m->explosion_distant = explo_dist;
+    m->will_explode = 0;    
     return m;
 }
 void update_pos_missile(Missile m){
-    double x = m->pos_x + (m->speed * cos(m->angle));
-    double y = m->pos_y + (m->speed * sin(m->angle));
-    m->parcouru_distant += m->speed;
+    double speed = (m->parcouru_distant + m->speed >= m->explosion_distant)?
+    m->explosion_distant - (m->speed + m->parcouru_distant):m->speed;
+    double x = m->pos_x + (speed/2 * cos(m->angle));
+    double y = m->pos_y + (speed/2 * sin(m->angle));
+    if(x>=size_arena_x){
+        x = size_arena_x;
+        m->will_explode = 1;
+    }
+    if(y>=size_arena_y){
+        x = size_arena_y;
+        m->will_explode = 1;
+    }
+    m->parcouru_distant += speed;
     m->pos_x = x;
     m->pos_y = y;
+
 }
-short check_distant(Missile m){
-    if(m->parcouru_distant<m->explosion_distant){
-        return 0;
-    } else return -1;
+void check_distant(Missile m){
+    if(m->parcouru_distant>=m->explosion_distant) m->will_explode = 1;
+}
+short will_explode(Missile m){
+    return m->will_explode;
 }
 Point explode(Missile mis){
     Point p = malloc(sizeof(Point));
     p->x = mis->pos_x;
     p->y = mis->pos_y;
     return p;
+}
+short collision_with_missiles(Robot rob,Missile m){
+    return 1;
+}
+short collision_with_walls_missiles(Missile m){
+    return 1;
 }
