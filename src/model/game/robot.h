@@ -12,7 +12,7 @@ typedef struct point{
 
 typedef struct robot
 {
-	char robot_id[robot_name_length];
+	char *robot_id;
 	int id;
 	double health_points;// Represented as a percentage
 	Point pos; 
