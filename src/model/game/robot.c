@@ -108,6 +108,9 @@ short collision_robots(Robot rob1,Robot rob2){
 short check_collision_robots(Robot rob1,Robot rob2){
     return 1;
 }
+short collision_robots_with_walls(Robot rob){
+    return 1;
+}
 /*
 
 int main(){
