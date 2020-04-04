@@ -32,9 +32,8 @@ void initialize_robot(Robot rob,double x_1,double y_1,double angle,double speed,
 void update_pos_robot(Robot rob); // Fixed depending on angle and speed every cycle
 void modify_speed(Robot rob,double speed);
 void modify_angle(Robot rob,double angle);
-void inflict_damage_from_missile(Robot rob,int explotion_damage);
+void inflict_damage_from_missile(Robot rob,Point p);
 void inflict_damage_from_collision(Robot rob1,Robot rob2);
 short collision_robots(Robot rob1,Robot rob2);
 short check_collision_robots(Robot rob1,Robot rob2);
-short collision_robots_with_walls(Robot rob);
 #endif

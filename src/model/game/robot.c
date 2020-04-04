@@ -49,8 +49,13 @@ void modify_speed(Robot rob,double speed){
 void modify_angle(Robot rob,double angle){
     rob->angle = angle;
 }
-void inflict_damage_from_missile(Robot rob,int explotion_damage){
-    rob->health_points -= explotion_damage;
+void inflict_damage_from_missile(Robot rob,Point p){
+    double dx = rob->pos->x - p->x;
+    double dy = rob->pos->y - p->y;
+    double d = sqrt((dx*dx) + (dy*dy));
+    if(d<low_range) rob->health_points-=damage_explosion_low_range;
+    else if (d<middle_range) rob->health_points-=damage_explosion_middle_range;
+    else if (d<high_range) rob->health_points-=damage_explosion_high_range;
 }
 void inflict_damage_from_collision(Robot rob1,Robot rob2){
     rob1->health_points-=collision_damage;
@@ -58,24 +63,9 @@ void inflict_damage_from_collision(Robot rob1,Robot rob2){
     rob1->speed = 0;
     rob2->speed = 0;
 }
-short collision_robots(Robot rob1,Robot rob2){
-    if(!rob1 || !rob2) return -1;
-    rob1->health_points -= collision_damage;
-    rob2->health_points -= collision_damage;
-    return 1;
-}
 short check_collision_robots(Robot rob1,Robot rob2){
-    return 1;
+    double dx = rob1->pos->x - rob2->pos->x;
+    double dy = rob1->pos->y - rob2->pos->x;
+    double d = sqrt((dx*dx) + (dy*dy));
+    return rob1->robot_hitbox + rob2->robot_hitbox > d ? 1 : 0;
 }
-short collision_robots_with_walls(Robot rob){
-    return 1;
-}
-/*
-
-int main(){
-    Robot rob = create_robot();
-    initialize_robot(rob,12.0,12.0,32.1,33.4,0);
-    printf("%d %f %f %f %f\n",rob->id,rob->pos->x,rob->pos->y,rob->angle,rob->speed);
-    printf("%ld",sizeof(rob));
-}
-*/
