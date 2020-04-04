@@ -42,9 +42,9 @@ Point explode(Missile mis){
     p->y = mis->pos_y;
     return p;
 }
-short collision_with_missiles(Robot rob,Missile m){
-    return 1;
-}
-short collision_with_walls_missiles(Missile m){
-    return 1;
+void collision_with_missiles(Robot rob,Missile m){
+    double dx = rob->pos->x - m->pos_x;
+    double dy = rob->pos->y - m->pos_y;
+    double d = sqrt((dx*dx) + (dy*dy));
+    if(rob->robot_hitbox > d) m->will_explode = 1;
 }

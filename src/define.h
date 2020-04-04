@@ -9,8 +9,7 @@
 #define size_arena_x 10000 
 #define size_arena_y 10000
 
-#define size_robot_x 10
-#define size_robot_y 10
+#define robot_radius 10
 
 #define robot_memory 256
 /*
@@ -55,3 +54,5 @@
 #define number_of_robots 4
 //maximum range a missile can go in unities
 #define max_range_explosion 7000
+
+#define robot_name_length 3 
