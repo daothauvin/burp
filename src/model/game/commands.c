@@ -1,7 +1,7 @@
 #include "commands.h"
 
 int wait(Robot rob,int delay) {
-    rob->waiting_time = delay;
+    rob->waiting_time = delay<0 ? 0 : delay;
     return delay;
 }
 void poke(Robot rob,int addr,int value){
