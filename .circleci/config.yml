@@ -8,7 +8,8 @@ jobs:
        - run: mkdir build 
        - run: cd build
        - run: cmake ..
- workflows:
+
+workflows:
    version: 2
    all:
      jobs:
