@@ -5,14 +5,14 @@ jobs:
        - image: ubuntu-1604:201903-01
      steps:
        - run:
-         name: Installing SUDO
-         command: 'apt-get update && apt-get install -y sudo && rm -rf /var/lib/apt/lists/*'
+           name: Installing SUDO
+           command: 'apt-get update && apt-get install -y sudo && rm -rf /var/lib/apt/lists/*'
        - run:
-         name: Installing GCC
-         command: 'apt-get update && apt-get install -y gcc g++'
+           name: Installing GCC
+           command: 'apt-get update && apt-get install -y gcc g++'
        - run:
-         name: Install CMAKE
-         command: 'apt-get update && sudo apt-get install -y cmake'
+           name: Install CMAKE
+           command: 'apt-get update && sudo apt-get install -y cmake'
        - checkout 
        - run: mkdir build 
        - run: cd build
