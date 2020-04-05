@@ -10,6 +10,6 @@ version: 2
        - run: cmake ..
  workflows:
    version: 2
-   all: # this is the name of our workflow
-     jobs: # and here we list the jobs we are going to run.
+   all:
+     jobs:
        - compile_test
