@@ -1,22 +1,13 @@
 version: 2
- jobs: # we now have TWO jobs, so that a workflow can coordinate them!
-   compile_test: # This is our first job.
-     docker: # it uses the docker executor
-       - image: circleci/ruby:2.4.1 # specifically, a docker image with ruby 2.4.1
-     # Steps are a list of commands to run inside the docker container above.
+ jobs:
+   compile_test: 
+     docker: 
+       - image: circleci/ruby:2.4.1 
      steps:
-       - checkout # this pulls pulls code down from GitHub
+       - checkout 
        - run: mkdir build 
        - run: cd build
        - run: cmake ..
-   two: # This is our second job.
-     docker: # it runs inside a docker image, the same as above.
-       - image: circleci/ruby:2.4.1
-     steps:
-       - checkout
-       - run: echo "A more familiar hi" # We run a similar echo command to above.
-       - run: sleep 15 # and then sleep for 15 seconds.
- # Under the workflows: map, we can coordinate our two jobs, defined above.
  workflows:
    version: 2
    all: # this is the name of our workflow
