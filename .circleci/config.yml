@@ -2,7 +2,7 @@ version: 2
 jobs:
    compile_test: 
      docker: 
-       - image: "debian:stretch"
+       - image: circleci/ruby:2.4.1
      steps:
        - run:
            name: Installing SUDO
