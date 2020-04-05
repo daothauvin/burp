@@ -4,19 +4,19 @@ jobs:
      docker: 
        - image: circleci/ruby:2.4.1 
      steps:
-        - run:
-          name: Installing SUDO
-          command: 'apt-get update && apt-get install -y sudo && rm -rf /var/lib/apt/lists/*'
-        - run:
-          name: Installing GCC
-          command: 'apt-get update && apt-get install -y gcc g++'
-       - run:
-          name: Install CMAKE
-          command: 'apt-get update && sudo apt-get install -y cmake'
-       - checkout 
-       - run: mkdir build 
-       - run: cd build
-       - run: cmake ..
+         - run:
+            name: Installing SUDO
+            command: 'apt-get update && apt-get install -y sudo && rm -rf /var/lib/apt/lists/*'
+         - run:
+            name: Installing GCC
+            command: 'apt-get update && apt-get install -y gcc g++'
+         - run:
+            name: Install CMAKE
+            command: 'apt-get update && sudo apt-get install -y cmake'
+         - checkout 
+         - run: mkdir build 
+         - run: cd build
+         - run: cmake ..
 
 workflows:
    version: 2
