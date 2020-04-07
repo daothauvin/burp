@@ -2,7 +2,7 @@ version: 2
 jobs:
    compile_test: 
      docker: 
-       - image: cimg/base:2020.01
+       - image: ubuntu-1604:201903-01
      steps:
        - run:
            name: Installing SUDO
