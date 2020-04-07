@@ -25,6 +25,9 @@ jobs:
        - run:
            name: Install GLIB
            command: 'apt-get update && sudo apt-get install -y libgtk2.0-dev'
+       - run:
+           name: Install ncurses
+           command: 'apt-get update && sudo apt-get install -y libncurses5-dev libncursesw5-dev'
        - checkout 
        - run: mkdir build 
        - run: ls -a
