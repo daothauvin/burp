@@ -24,7 +24,5 @@ void update_pos_missile(Missile m);
 Point explode(Missile mis); // Might trigger an event in the view
 void check_distant(Missile m);
 short will_explode(Missile m);
-short collision_with_missiles(Robot rob,Missile m);
-short collision_with_walls_missiles(Missile m);
-
+void collision_with_missiles(Robot rob,Missile m);
 #endif
