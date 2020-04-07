@@ -14,6 +14,7 @@ typedef struct
 	double speed;
 	double parcouru_distant;
 	double explosion_distant;
+	short will_explode;	
 	Robot owner;
 }*Missile;
 
@@ -21,6 +22,7 @@ typedef struct
 Missile create(double pos_x,double pos_y,double speed,double angle,Robot rob,double explo_dist);//Angle will be calculated
 void update_pos_missile(Missile m);
 Point explode(Missile mis); // Might trigger an event in the view
-short collision_with_missiles(Robot rob,Missile m);
-
+void check_distant(Missile m);
+short will_explode(Missile m);
+void collision_with_missiles(Robot rob,Missile m);
 #endif

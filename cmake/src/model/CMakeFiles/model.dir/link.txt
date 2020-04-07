@@ -1,0 +1,2 @@
+/usr/bin/ar qc libmodel.a  CMakeFiles/model.dir/cycle.c.o
+/usr/bin/ranlib libmodel.a
