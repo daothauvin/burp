@@ -53,13 +53,13 @@ workflows:
    all:
      jobs:
        - build
-       - cmake
+       - cmake:
          requires:
            - build
-       - cmake_test
+       - cmake_test:
          requires:
            - build
-       - execute_test
+       - execute_test:
          requires:
            - build
            - cmake_test
