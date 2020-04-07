@@ -22,8 +22,7 @@ jobs:
        - checkout 
        - run: mkdir build 
        - run: ls -a
-       - run: cd build
-       - run: cmake ..
+       - run: cd build && cmake ..
 
 workflows:
    version: 2
