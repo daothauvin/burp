@@ -1,0 +1,2 @@
+/usr/bin/ar qc libfile_reader.a  CMakeFiles/file_reader.dir/interpreter.c.o CMakeFiles/file_reader.dir/syntax_analyse.c.o
+/usr/bin/ranlib libfile_reader.a

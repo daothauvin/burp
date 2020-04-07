@@ -1,0 +1,2 @@
+/usr/bin/ar qc libview.a  CMakeFiles/view.dir/ui.c.o
+/usr/bin/ranlib libview.a

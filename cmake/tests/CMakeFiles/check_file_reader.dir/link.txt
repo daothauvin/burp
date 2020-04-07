@@ -1,0 +1,1 @@
+/usr/bin/cc  -Werror -Wall -g  -rdynamic CMakeFiles/check_file_reader.dir/check_file_reader.c.o  -o check_file_reader  -L/usr/local/lib/x86_64-linux-gnu -Wl,-rpath,/usr/local/lib/x86_64-linux-gnu ../src/model/libmodel.a ../src/model/file_reader/libfile_reader.a ../src/model/game/libgame.a -lm -lglib-2.0 

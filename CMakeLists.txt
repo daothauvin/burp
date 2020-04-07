@@ -85,5 +85,5 @@ if(BuildTests)
     enable_testing()
 
     add_subdirectory (tests)
-    add_test(NAME check_file_reader COMMAND check_file_reader)
+    add_test(NAME check_main COMMAND check_main)
 endif()
