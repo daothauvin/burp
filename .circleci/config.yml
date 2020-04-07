@@ -63,6 +63,8 @@ jobs:
        - run: cd build && cmake .. -DBuildTests=ON
        - attach_workspace:
             at: build
+            paths:
+                - build
     execute_test:
      docker: 
        - image: "debian:stretch"
