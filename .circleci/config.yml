@@ -29,19 +29,19 @@ jobs:
            name: Install ncurses
            command: 'apt-get update && sudo apt-get install -y libncurses5-dev libncursesw5-dev'
        - checkout 
-   cmake: 
+    cmake: 
      docker: 
        - image: "debian:stretch"
-     steps:
+    steps:
        - run: mkdir build 
        - run: cd build && cmake ..
-   cmake_test:
+    cmake_test:
      docker: 
        - image: "debian:stretch"
      steps:
        - run: make 
        - run: cd build && cmake .. -DBuildTests=ON
-   execute_test:
+    execute_test:
      docker: 
        - image: "debian:stretch"
      steps:
