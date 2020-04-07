@@ -1,6 +1,6 @@
 version: 2
 jobs:
-   compile_test: 
+    build: 
      docker: 
        - image: "debian:stretch"
      steps:
@@ -29,12 +29,38 @@ jobs:
            name: Install ncurses
            command: 'apt-get update && sudo apt-get install -y libncurses5-dev libncursesw5-dev'
        - checkout 
+   cmake: 
+     docker: 
+       - image: "debian:stretch"
+     steps:
        - run: mkdir build 
-       - run: ls -a
        - run: cd build && cmake ..
+   cmake_test:
+     docker: 
+       - image: "debian:stretch"
+     steps:
+       - run: make 
+       - run: cd build && cmake .. -DBuildTests=ON
+   execute_test:
+     docker: 
+       - image: "debian:stretch"
+     steps:
+       - run: make check_main
+       - run: ./build/tests/check_main
 
 workflows:
    version: 2
    all:
      jobs:
-       - compile_test
+       - build
+       - cmake
+           requires:
+             - build
+       - cmake_test
+           requires:
+             - build
+       - execute_test
+           requires:
+             - build
+             - cmake_test
+       
