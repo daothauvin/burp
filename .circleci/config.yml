@@ -32,7 +32,7 @@ jobs:
     cmake: 
      docker: 
        - image: "debian:stretch"
-    steps:
+     steps:
        - run: mkdir build 
        - run: cd build && cmake ..
     cmake_test:
