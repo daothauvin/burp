@@ -37,7 +37,7 @@ jobs:
      steps:
        - run:
            name: update
-           command: 'apt-get install -y ssh'
+           command: 'apt-get update'
        - run:
            name: Installing SSH
            command: 'apt-get install -y ssh'
@@ -70,7 +70,7 @@ jobs:
      steps:
        - run:
            name: update
-           command: 'apt-get install -y ssh'
+           command: 'apt-get update'
        - run:
            name: Installing SSH
            command: 'apt-get install -y ssh'
