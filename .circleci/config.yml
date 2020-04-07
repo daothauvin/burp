@@ -55,7 +55,7 @@ workflows:
        - build
        - cmake:
            requires:
-             build
+             - build
        - cmake_test:
            requires:
              - build
