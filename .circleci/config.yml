@@ -54,13 +54,13 @@ workflows:
      jobs:
        - build
        - cmake:
-         requires:
-           - build
+           requires:
+             build
        - cmake_test:
-         requires:
-           - build
+           requires:
+             build
        - execute_test:
-         requires:
-           - build
-           - cmake_test
+           requires:
+             build
+             cmake_test
        
