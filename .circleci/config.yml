@@ -10,7 +10,7 @@ jobs:
        - run:
            name: Installing SSH
            command: 'apt-get update && apt-get install -y ssh'
-        - run:
+       - run:
            name: Installing GIT
            command: 'apt-get update && apt-get install -y git'
        - run:
