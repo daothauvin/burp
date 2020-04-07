@@ -1,1 +1,0 @@
-/usr/bin/cc  -Werror -Wall -g  -rdynamic CMakeFiles/burp.dir/main.c.o  -o burp  -L/usr/local/lib/x86_64-linux-gnu -Wl,-rpath,/usr/local/lib/x86_64-linux-gnu model/libmodel.a view/libview.a model/file_reader/libfile_reader.a -lglib-2.0 model/game/libgame.a -lm -lcurses -lform 
