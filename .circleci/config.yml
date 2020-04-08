@@ -74,7 +74,7 @@ jobs:
        - image: "debian:stretch"
      steps:
        - attach_workspace:
-            at: .
+            at: build
        - run:
            name: update
            command: 'apt-get update'
