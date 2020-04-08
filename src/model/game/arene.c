@@ -7,8 +7,6 @@ Arene create_arene(){
     a->nb_missiles = 0;
     return a;
 }
-//Robot 3 
-// -> List_missile[4] et [5]
 int add_missile(Arene arene,Missile missile){
     arene->list_missile[arene->nb_missiles] = missile;
     arene->nb_missiles +=1;
@@ -18,6 +16,8 @@ int remove_missile(Arene arene,Missile missile){
     for(int i = 0; i  < arene->nb_missiles;++i){
         if(arene->list_missile[i]==missile){
             arene->list_missile[i] = arene->list_missile[arene->nb_missiles];
+            free(missile);
+            missile = NULL;            
             arene->nb_missiles -= 1;
             return 0;
         }
