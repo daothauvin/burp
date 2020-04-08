@@ -147,7 +147,7 @@ static int commands(void* line,void* arene,void* robot) {
 	else if(memcmp(WAIT,data,sizeof(WAIT)) == 0) {
 		
 		int delay = expression(g_node_nth_child(node, 0),arene,robot);
-		wait(robot,delay);
+		wait_robot(robot,delay);
 		
 	}
 	else if(memcmp(GOTO,data,sizeof(GOTO)) == 0) {
