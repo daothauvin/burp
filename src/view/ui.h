@@ -9,18 +9,19 @@
 #include <string.h>
 #include "../model/game/robot.h"
 #include "../model/game/missile.h"
+#include "../model/game/arene.h"
 #include "../define.h"
+
 
 void init();
 void anim_begin();
 
 void add_log(char* message);
 void add_action(char* action, int id);
-void killRobotNb(int id);
-
-void drawArena();
-void eraseArena();
 
 void printRobot(Robot robot);
 void printInfoRobot(Robot robot);
 void printRocket(Missile rocket);
+
+// TO DO: -> Efface l'arène puis affiche tout les robots et missiles dans l'arène
+void updateArena(Arene arena); // Non implémenté

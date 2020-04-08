@@ -87,7 +87,12 @@ static int isEmpty(int x, int y) {
  * 		3
  */
 
-void printRobot(Robot robot) { 
+void printRobot(Robot robot) {
+	if (robot->health_points == 0) {
+		killRobotNb(robot->id);
+		return;
+	}
+
 	int x = robot->pos->x;
 	int y = robot->pos->y;
 	int ux = size_arena_x / 80;
@@ -166,6 +171,12 @@ void printRocket(Missile rocket) {
  */
 
 void printInfoRobot(Robot robot) {
+
+	if (robot->health_points == 0) {
+		killRobotNb(robot->id);
+		return;
+	}
+
 	int x;
 	int y = 16;
 
@@ -311,7 +322,7 @@ void anim_begin() {
  *  Blur the info of a robot when he's dead.
  */
 
-void killRobotNb(int id) {
+static void killRobotNb(int id) {
 	int x;
 	int y = 16;
 
@@ -411,7 +422,7 @@ void add_log(char* message) {
  *  Draw the arena
  */
 
-void drawArena() {
+static void drawArena() {
 	drawRectangle(2, 1, 82, 42, "Arena");
 	drawRectangle(84, 14, 67, 20, "Robot Info");
 	drawRectangle(86, 15, 15, 18, "0");
@@ -443,7 +454,7 @@ static void waitForInput() {
 
 	Robot tob = create_robot();
 	initialize_robot(tob, 9999.0, 0.0, 0.0, 0.0, 2);
-	tob->health_points = 1.0;
+	tob->health_points = 0.0;
 
 	Robot zob = create_robot();
 	initialize_robot(zob, 9999.0, 9999.0, 0.0, 0.0, 3);
