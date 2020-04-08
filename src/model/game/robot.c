@@ -2,10 +2,6 @@
 Robot create_robot(){
     Robot p = malloc(sizeof(struct robot));
     Point p0 = malloc(sizeof(struct point));
-    Point p1 = malloc(sizeof(struct point));
-    Point p2 = malloc(sizeof(struct point));
-    Point p3 = malloc(sizeof(struct point));
-    Point p4 = malloc(sizeof(struct point));
     p->robot_id = malloc(sizeof(char)*robot_name_length);
     p->health_points = 100;
     p->pos = p0;
