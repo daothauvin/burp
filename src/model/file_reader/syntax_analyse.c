@@ -366,7 +366,7 @@ static GNode* program() {
 	GNode* currentline;
 	GNode* program = g_node_new("PROGRAM");
 	int n = 0;
-	currentline = line(gs);
+	currentline = line();
 	if(currentline == NULL) return NULL;
 	g_node_insert (program, n, currentline);
 	while(g_scanner_peek_next_token(gs) != G_TOKEN_EOF) {
