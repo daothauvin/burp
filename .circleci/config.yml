@@ -65,14 +65,16 @@ jobs:
        - checkout 
        - run: mkdir build 
        - run: cd build && cmake .. -DBuildTests=ON
-       - attach_workspace:
-            at: build
+       - persist_to_workspace:
+            root: .
             paths:
                 - build
     execute_test:
      docker: 
        - image: "debian:stretch"
      steps:
+       - attach_workspace:
+            at: .
        - run:
            name: update
            command: 'apt-get update'
