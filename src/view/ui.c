@@ -80,6 +80,41 @@ static int isEmpty(int x, int y) {
 }
 
 /**
+ *  Blur the info of a robot when he's dead.
+ */
+
+static void killRobotNb(int id) {
+	int x;
+	int y = 16;
+
+	switch(id) {
+		case 0:
+			x = 87;
+			break;
+		case 1:
+			x = 103;
+			break;
+		case 2:
+			x = 119;
+			break;
+		case 3:
+			x = 135;
+			break;
+		default:
+			return;
+	}
+
+	attron(COLOR_PAIR(1));
+	for (int i = 0; i < 16; i++) {
+		for (int j = 0; j < 13; j++) {
+			mvprintw(i + y, j + x, " ");
+		}
+	}
+	mvprintw(y + 7, x + 3, "[DEAD]");
+	attroff(COLOR_PAIR(1));
+}
+
+/**
  *	Print a robot in the arena
  *  If the case is already used, then write on another case following this order :
  *  	5
@@ -318,40 +353,6 @@ void anim_begin() {
 	eraseArea(19, 16, 48, 11);
 } 
 
-/**
- *  Blur the info of a robot when he's dead.
- */
-
-static void killRobotNb(int id) {
-	int x;
-	int y = 16;
-
-	switch(id) {
-		case 0:
-			x = 87;
-			break;
-		case 1:
-			x = 103;
-			break;
-		case 2:
-			x = 119;
-			break;
-		case 3:
-			x = 135;
-			break;
-		default:
-			return;
-	}
-
-	attron(COLOR_PAIR(1));
-	for (int i = 0; i < 16; i++) {
-		for (int j = 0; j < 13; j++) {
-			mvprintw(i + y, j + x, " ");
-		}
-	}
-	mvprintw(y + 7, x + 3, "[DEAD]");
-	attroff(COLOR_PAIR(1));
-}
 
 /**
  *  Draw the Title
