@@ -1,6 +1,6 @@
 #include "commands.h"
 
-int wait(Robot rob,int delay) {
+int wait_robot(Robot rob,int delay) {
     rob->waiting_time = delay<0 ? 0 : delay;
     return delay;
 }
