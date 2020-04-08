@@ -15,8 +15,8 @@ Missile create(double pos_x,double pos_y,double speed,double angle,Robot rob,dou
 void update_pos_missile(Missile m){
     double speed = (m->parcouru_distant + m->speed >= m->explosion_distant)?
     m->explosion_distant - (m->speed + m->parcouru_distant):m->speed;
-    double x = m->pos_x + (speed/2 * cos(m->angle));
-    double y = m->pos_y + (speed/2 * sin(m->angle));
+    double x = m->pos_x + (speed * cos(m->angle));
+    double y = m->pos_y + (speed * sin(m->angle));
     if(x>=size_arena_x){
         x = size_arena_x;
         m->will_explode = 1;
