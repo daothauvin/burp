@@ -23,5 +23,4 @@ void printRobot(Robot robot);
 void printInfoRobot(Robot robot);
 void printRocket(Missile rocket);
 
-// TO DO: -> Efface l'arène puis affiche tout les robots et missiles dans l'arène
-void updateArena(Arene arena); // Non implémenté
+void updateArena(Arene arena);

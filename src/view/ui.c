@@ -420,6 +420,20 @@ void add_log(char* message) {
 }
 
 /**
+ *  Update the arena, and the info with data in the arena
+ */
+
+void updateArena(Arene arena) {
+	for (int i = 0; i < number_of_robots; i++) {
+		printRobot(arena->list_robots[i]);
+		printInfoRobot(arena->list_robots[i]);
+	}
+	for (int i = 0; i < number_of_robots * missile_by_robot; i++) {
+		printRocket(arena->list_missile[i]);
+	}
+}
+
+/**
  *  Draw the arena
  */
 
