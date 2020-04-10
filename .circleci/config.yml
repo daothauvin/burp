@@ -2,7 +2,7 @@ version: 2
 jobs:
     cmake: 
      docker: 
-       - image: "debian:stretch"
+       - image: ubuntu-1604:201903-01
      steps:
        - run:
            name: update
@@ -33,7 +33,7 @@ jobs:
        - run: cd build && cmake ..
     cmake_test:
      docker: 
-       - image: "debian:stretch"
+       - image: ubuntu-1604:201903-01
      steps:
        - run:
            name: update
@@ -71,7 +71,7 @@ jobs:
                 - build
     execute_test:
      docker: 
-       - image: "debian:stretch"
+       - image: ubuntu-1604:201903-01
      steps:
        - attach_workspace:
             at: build
