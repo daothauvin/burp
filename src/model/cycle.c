@@ -40,19 +40,10 @@ short cycle(Arene a,int line[4],void* syntax_tree[4]) {
 		update_pos_missile(a -> list_missile[i]);
 	}
 
-	for(int i = 0; i < a -> nb_missiles; i++) {
-		//if(check_distant(a -> list_missile[i]) < 0) {
-			//Point p = 
-			explode(a -> list_missile[i]);
-			//fonction d'explosion autour
-			remove_missile(a,a -> list_missile[i]);
-		//}
-	}
-
 	//test collision
 	for(int i = 0; i < a -> nb_robots; i++) {
 		for(int j = i+1; j < a -> nb_robots; j++) {
-			if(collision_robots(a -> list_robots[i],a -> list_robots[j])) {
+			if(check_collision_robots(a -> list_robots[i],a -> list_robots[j])) {
 				inflict_damage_from_collision(a -> list_robots[i],a -> list_robots[j]);
 			}
 		}
@@ -60,13 +51,7 @@ short cycle(Arene a,int line[4],void* syntax_tree[4]) {
 
 	for(int i = 0; i < a -> nb_robots; i++) {
 		for(int j = 0; j < a -> nb_missiles; j++) {
-			//if(collision_with_missiles(a -> list_missile[i],a -> list_missile[j])) {
-				//Point p = 
-				explode(a -> list_missile[j]);
-				//fonction d'explosion autour
-			//}
-
-
+			collision_with_missiles(a -> list_robots[i],a -> list_missile[j]);
 		}
 	}
 
@@ -74,6 +59,16 @@ short cycle(Arene a,int line[4],void* syntax_tree[4]) {
 	for(int i = 0; i < a -> nb_robots ;i++) {
 		if(a -> list_robots [i] -> health_points <= 0) {
 			remove_robot(a,a -> list_robots[i]);
+		}
+	}
+	
+	for(int i = 0; i < a -> nb_missiles; i++) {
+		if(will_explode(a -> list_missile[i]) < 0) {
+			Point p = explode(a -> list_missile[i]);
+			for(int i = 0; i < a -> nb_robots ;i++) {
+				inflict_damage_from_missile(a -> list_robots[i],p);
+			}
+			remove_missile(a,a -> list_missile[i]);
 		}
 	}
 	

@@ -17,7 +17,7 @@
 #include <fcntl.h>
 
 //do the syntax analyse of pathname and return it ( return NULL if error -> if message_error also at NULL then bug in the file opening )
-void* init(char* pathname);
+void* init_file_tree(char* pathname);
 
 //NULL if no error else a message of error
 char* message_error();

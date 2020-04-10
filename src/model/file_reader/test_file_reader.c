@@ -5,7 +5,7 @@ int main() {
 	Arene a = create_arene();
 	Robot jean_paul = create_robot();
 	add_robot(a,jean_paul);
-	void* p1 = init("failure_test.txt");
+	void* p1 = init_file_tree("failure_test.txt");
 	if(p1==NULL) {
 		printf("file one error\n");
 		printf(message_error());
@@ -15,7 +15,7 @@ int main() {
 		printf("the tree p1 : \n");
 		print(p1);
 	}
-	void* p2 = init("achieve_test.txt");
+	void* p2 = init_file_tree("achieve_test.txt");
 	if(p2==NULL) {
 		printf("file two error\n");
 		printf(message_error());

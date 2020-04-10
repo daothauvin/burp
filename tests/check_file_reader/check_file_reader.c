@@ -12,13 +12,13 @@ void setup(void) {
 }
 
 void teardown(void) {
-	free(a);
 	free(jean_paul);
+	free(a);
 }
 
 START_TEST(test_failure)
 {
-    void* p = init(PATH_TO_DIR "/failure_test.txt");
+    void* p = init_file_tree(PATH_TO_DIR "/failure_test.txt");
 	ck_assert_msg(p == NULL, "Init should fail");
 	if(p==NULL) {
 		printf("file one error\n");
@@ -30,7 +30,7 @@ END_TEST
 
 START_TEST(test_success)
 {
-    void* p = init(PATH_TO_DIR "/achieve_test.txt");
+    void* p = init_file_tree(PATH_TO_DIR "/achieve_test.txt");
 	ck_assert_msg(p != NULL, "Init should success");
 	printf("the tree p : \n");
 	print(p);

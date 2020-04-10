@@ -378,7 +378,7 @@ static GNode* program() {
 	return program;
 }
 
-void* init(char* pathname) {
+void* init_file_tree(char* pathname) {
 	
 	gs = g_scanner_new (NULL);
 	
