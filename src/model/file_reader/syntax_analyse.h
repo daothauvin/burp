@@ -15,6 +15,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <stdlib.h>
 
 //do the syntax analyse of pathname and return it ( return NULL if error -> if message_error also at NULL then bug in the file opening )
 void* init_file_tree(char* pathname);
