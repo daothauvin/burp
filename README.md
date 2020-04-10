@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/daothauvin/BURP.svg?style=svg&circle-token=f74b04aaa5d2902abc5866058190ef1484703670)](https://app.circleci.com/pipelines/github/daothauvin/burp?branch=master)
+[![CircleCI](https://circleci.com/gh/daothauvin/burp.svg?style=svg&circle-token=f74b04aaa5d2902abc5866058190ef1484703670)](https://app.circleci.com/pipelines/github/daothauvin/burp?branch=master)
 # BURP
 
 > B.U.R.P - Basic Used for Robots Programming
