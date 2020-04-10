@@ -62,7 +62,6 @@ jobs:
        - run:
            name: Install check
            command: 'apt-get install -y check'
-       - checkout 
        - run: mkdir build 
        - run: cd build && cmake .. -DBuildTests=ON
        - persist_to_workspace:
