@@ -2,7 +2,7 @@ version: 2
 jobs:
     cmake: 
      docker: 
-       - image: cimg/base:2020.01
+       - image: gcc:8.2
      steps:
        - run:
            name: update
@@ -33,7 +33,7 @@ jobs:
        - run: cd build && cmake ..
     cmake_test:
      docker: 
-       - image: cimg/base:2020.01
+       - image: gcc:8.2
      steps:
        - run:
            name: update
@@ -71,7 +71,7 @@ jobs:
                 - build
     execute_test:
      docker: 
-       - image: cimg/base:2020.01
+       - image: gcc:8.2
      steps:
        - attach_workspace:
             at: build
