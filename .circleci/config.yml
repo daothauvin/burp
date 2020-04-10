@@ -102,6 +102,7 @@ jobs:
        - run:
            name: Install check
            command: 'apt-get install -y check'
+       - run: checkout
        - run: ls
        - run: cd build && make check_main
        - run: ./build/tests/check_main
