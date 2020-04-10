@@ -18,7 +18,7 @@ int randoms(int num){
     return rand() % num;
 }
 int cardinal(Arene arene){
-    return sizeof(arene->list_robots) / sizeof(Robot);
+    return number_of_robots;
 }
 int self(Robot rob){
     return rob->id;
