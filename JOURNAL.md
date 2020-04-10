@@ -23,10 +23,32 @@ Finishing syntax analyser with error handling and negative number handling
 Starting interface window and handle user inputs
 
 ## Week 2 - 8 March
-Added the commands functions declaration
+Added the commands functions declaration ( commands of Burp langage )
 Started the implementation of commands' functions
 Test function for interpreter ( print the interpreter tree )
 Debugging syntax analyser
 Layout interface, animations, logs printing
 
-## Week 9 - 16 March
+## Week 9 - 15 March
+Beginning Animation
+Debug syntax tree
+research line in syntax tree with a line number
+Arena implementation, continuation of commands
+
+## Week 16 - 22 March
+Print robots
+Finish commands imlementation
+Finish interpreter ( call different commands when comparing the syntax tree )
+
+## Week 23 - 29 March
+
+Print robots statistics
+Starting implementation of game loop
+
+## Week 29 March - 5 April
+
+Implementation of collisions
+Continue implementation of game loop
+
+## Week 6 April - 12 April
+Use of cmake and check for tests
