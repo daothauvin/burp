@@ -6,29 +6,63 @@
 #include "interpreter.h"
 
 
-static void printnode(GNode* node, gpointer data);
-static int expression(void* tree, void* arene,void* robot);
 /*
-
-	Test
-
+	Print the node [node], 
+	this function is given to g_node_children_foreach to print every nodes with print
 */
-//return 0 if a number, or 1 if a tag given in syntax_analyse and can have no child in the syntax tree 
-//( INF, INF_EG, EG, DIFF, SUP_EG, EG, CARDINAL, SELF, SPEED, PLUS, MINUS, TIME, DIV, MOD for now ) 
-static short isTag(void* data) {
+static void printnode(Tree node, gpointer data);
+
+/*
+return 1 if the [ data ] given is a data that can be a leaf of the syntax tree
+( INF, INF_EG, EG, DIFF, SUP_EG, CARDINAL, SELF, SPEED, PLUS, MINUS, TIME, DIV, MOD for now ) 
+Allow to find numbers
+*/
+static short isTag(gpointer data);
+
+/*
+	print the number of the line [ line ]
+*/
+static int numberline(Tree line);
+
+/*
+	Put in [ data ] the [ node ] if he corresponds to the line given in [ data ], 
+	this function is given to g_node_children_foreach to find a given line in  getLine and interprete
+*/
+static void searchline(Tree node, gpointer data);
+
+static int expression(Tree tree, Arene arene,Robot robot);
+
+static short isTag(gpointer data) {
 	return 
-		memcmp(INF,data,sizeof(INF)) == 0 || memcmp(INF_EG,data,sizeof(INF_EG)) == 0 || memcmp(EG,data,sizeof(EG)) == 0 || memcmp(DIFF,data,sizeof(DIFF)) == 0 || memcmp(SUP_EG,data,sizeof(SUP_EG)) == 0 || memcmp(EG,data,sizeof(EG)) == 0
-		|| memcmp(PLUS,data,sizeof(PLUS)) == 0 || memcmp(MINUS,data,sizeof(MINUS)) == 0 || memcmp(TIME,data,sizeof(TIME)) == 0 || memcmp(DIV,data,sizeof(DIV)) == 0 || memcmp(MOD,data,sizeof(MOD)) == 0
-		|| memcmp(CARDINAL,data,sizeof(CARDINAL)) == 0 || memcmp(SELF,data,sizeof(SELF)) == 0 || memcmp(SPEED,data,sizeof(SPEED)) == 0;
+		//size one bytes
+		memcmp(INF,data,sizeof(INF)) == 0 
+		|| memcmp(PLUS,data,sizeof(PLUS)) == 0 
+		|| memcmp(EG,data,sizeof(EG)) == 0
+		|| memcmp(MINUS,data,sizeof(MINUS)) == 0 
+		|| memcmp(TIME,data,sizeof(TIME)) == 0 
+		|| memcmp(DIV,data,sizeof(DIV)) == 0 
+		|| memcmp(MOD,data,sizeof(MOD)) == 0
+		//size two bytes
+		|| (sizeof(data) > 1
+		&& ( memcmp(INF_EG,data,sizeof(INF_EG)) == 0
+		|| memcmp(DIFF,data,sizeof(DIFF)) == 0 
+		|| memcmp(SUP_EG,data,sizeof(SUP_EG)) == 0
+		//size four bytes 
+		|| (sizeof(data) > 3 
+		&& ( memcmp(SELF,data,sizeof(SELF)) == 0 
+		|| memcmp(SPEED,data,sizeof(SPEED)) == 0
+		//size height bytes
+		|| (sizeof(data) > 7 
+		&& memcmp(CARDINAL,data,sizeof(CARDINAL)) == 0) ))));
 }
 
-void print(void* tree) {
+void printTree(Tree tree) {
 	int i = 0;
 	g_node_children_foreach (tree,G_TRAVERSE_ALL,&printnode,&i);
 	printf("number of node : %d\n",i);
 }
 
-static void printnode(GNode* node, gpointer data) {
+static void printnode(Tree node, gpointer data) {
 	int* number = data;
 	*number += 1;
 	char* nodedata = node -> data;
@@ -42,22 +76,14 @@ static void printnode(GNode* node, gpointer data) {
 	}
 	char* fatherdata = (node -> parent) -> data;
 	printf("  father:tag = %s\n",fatherdata);
-
-	//printf("father: %s\n",);
 	g_node_children_foreach (node,G_TRAVERSE_ALL,&printnode,data);
 }
 
-/*
-
-	Interpretation
-
-*/
-
-static int numberline(void* line) {
+static int numberline(Tree line) {
 	return *((int*) g_node_first_child(line) -> data);
 }
 
-static void searchline(GNode* node, gpointer data) {
+static void searchline(Tree node, gpointer data) {
 	GNode *search = data;
 	if(memcmp(LINE,search -> data,sizeof(LINE)) == 0) {
 		return;
@@ -71,8 +97,8 @@ static void searchline(GNode* node, gpointer data) {
 	}
 }
 
-char* getLine(void* tree,int line) {
-	GNode* node = g_node_new (&line);
+char* getLine(Tree tree,int line) {
+	Tree node = g_node_new (&line);
 	g_node_children_foreach (tree, G_TRAVERSE_ALL,searchline,node);
 	if(memcmp(LINE,node -> data,sizeof(LINE)) == 0) {
 		return g_node_nth_child (node,1) -> data;
@@ -84,8 +110,14 @@ char* getLine(void* tree,int line) {
 
 }
 
-static short condition(void* tree, void* arene, void* robot) {
-	GNode* node = tree;
+/*
+
+	The following functions execute the burp language interpretation for the diverse symbol categories,
+	each return the result of the execution
+
+*/
+static short condition(Tree tree, Arene arene, Robot robot) {
+	Tree node = tree;
 	int x = expression(g_node_nth_child(node, 0),arene,robot);
 	int y = expression(g_node_nth_child(node, 2),arene,robot);
 	char* cond = g_node_nth_child(node, 1) -> data;
@@ -101,7 +133,7 @@ static short condition(void* tree, void* arene, void* robot) {
 	else if(memcmp(cond,DIFF,sizeof(DIFF)) == 0) {
 		return x != y;
 	}
-	else if(memcmp(cond,SUP_EG ,sizeof(SUP_EG )) == 0) {
+	else if(memcmp(cond,SUP_EG ,sizeof(SUP_EG)) == 0) {
 		return x >= y;
 	}
 	else if(memcmp(cond,INF_EG,sizeof(INF_EG)) == 0) {
@@ -110,8 +142,7 @@ static short condition(void* tree, void* arene, void* robot) {
 	return -1;
 }
 
-static int operator(void* tree, void* arene, void* robot) {
-	GNode* node = tree;
+static int operator(Tree node, Arene arene, Robot robot) {
 	int x = expression(g_node_nth_child(node, 0),arene,robot);
 	int y = expression(g_node_nth_child(node, 2),arene,robot);
 	char* op = g_node_nth_child(node, 1) -> data;
@@ -137,8 +168,7 @@ static int operator(void* tree, void* arene, void* robot) {
 	
 }
 
-static int commands(void* line,void* arene,void* robot) {
-	GNode* node = line;
+static int commands(Tree node,Arene arene,Robot robot) {
 	char* data = node -> data;
 	if(memcmp(IF,data,sizeof(IF)) == 0) {
 		if(condition(g_node_nth_child(node, 0),arene,robot))
@@ -164,7 +194,6 @@ static int commands(void* line,void* arene,void* robot) {
 		double angle = expression(g_node_nth_child(node, 0),arene,robot);
 		double distance = expression(g_node_nth_child(node, 1),arene,robot);
 		shoot(robot,arene,angle,distance);
-		//shoot(robot,arene,angle);
 	}
 	else if(memcmp(ENGINE,data,sizeof(ENGINE)) == 0) {
 		double angle = expression(g_node_nth_child(node, 0),arene,robot);
@@ -177,8 +206,8 @@ static int commands(void* line,void* arene,void* robot) {
 
 
 
-static int expression(void* tree, void* arene,void* robot) {
-	GNode* node = tree;
+static int expression(Tree tree, Arene arene,Robot robot) {
+	Tree node = tree;
 	char* data = node -> data;
 	if(memcmp(OPERATOR,data,sizeof(OPERATOR)) == 0) {
 		return operator(tree,arene,robot);
@@ -247,17 +276,13 @@ static int expression(void* tree, void* arene,void* robot) {
 	return -1;
 }
 
-int interprete(int line, void* tree, void* arena,void* robot) {
-	GNode* node = g_node_new (&line);
+int interprete(int line, Tree tree, Arene arena,Robot robot) {
+	Tree node = g_node_new (&line);
 	g_node_children_foreach (tree, G_TRAVERSE_ALL,searchline,node);
 	if(strcmp(LINE,node -> data) == 0) {
 		int res = commands(g_node_nth_child (node,1),arena,robot);
 		if(res != -1) return res;
 	}
-	else {
-		printf("not found\n");
-		
-	}
-	return line+1;
+	return line + 1;
 }
 
