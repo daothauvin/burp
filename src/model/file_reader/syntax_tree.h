@@ -1,6 +1,11 @@
 #ifndef SYNTAX_TREE_H
 #define SYNTAX_TREE_H
 
+#include <gmodule.h>
+
+/* type corresponding to a syntax analyse tree */
+typedef GNode* Tree;
+
 //line
 #define LINE "LINE"
 //condition
