@@ -1,2 +1,0 @@
-3 WAIT 3
-5 WAIT SALUT
