@@ -27,7 +27,6 @@ error_token_tmp is the buffer to stock the result temporarily
 	case G_TOKEN_INT :\
 		error_token_tmp = malloc(size_cur_token + 1);\
 		int number = (int) g_scanner_cur_value (gs).v_int;\
-		printf("the number : %d of size %d\n",number,size_cur_token + 1);\
 		snprintf(error_token_tmp,size_cur_token + 1,"%d",number);\
 		updateErrorMessage(error_token_tmp, token);\
 		free(error_token_tmp);\
@@ -178,7 +177,7 @@ static Tree number() {
 				size_of_message = snprintf(NULL,0,"a number <= %d",INT_MAX);
 				message = malloc(size_of_message + 1);
 				snprintf(message,size_of_message + 1,"a number <= %d",INT_MAX);
-				updateErrorMessage(g_scanner_cur_value (gs).v_string, message);
+				updateErrorMessage("a very high number", message);
 				free(message);
     			g_scanner_destroy (gs);
    				return NULL;
@@ -320,14 +319,14 @@ static Tree expression() {
 			
 			else if(strcmp(CARDINAL,char_value) == 0 
 			|| strcmp(SELF,char_value) == 0 
-			|| strcmp(SPEED,char_value) == 0 
-			|| strcmp(DISTANCE,char_value) == 0) {
+			|| strcmp(SPEED,char_value) == 0 ) {
 				value = malloc(size_cur_token);
 				memcpy(value,char_value, size_cur_token);
 				myself = g_node_new (value);
 			}
 			
-			else if(strcmp(ANGLE,char_value) == 0) {
+			else if(strcmp(DISTANCE,char_value) == 0
+			|| strcmp(ANGLE,char_value) == 0 ) {
 				value = malloc(size_cur_token);
 				memcpy(value,char_value, size_cur_token);
 				arg0 = expression();
@@ -387,7 +386,7 @@ static Tree command() {
 	switch(t) {
 		case G_TOKEN_IDENTIFIER:
 			
-			if(strcmp(WAIT,char_value) == 0 || strcmp(SHOOT,char_value) == 0) {
+			if(strcmp(WAIT,char_value) == 0) {
 				value = malloc(size_cur_token);
 				memcpy(value, char_value, size_cur_token);
 				
@@ -396,7 +395,7 @@ static Tree command() {
 				myself = g_node_new (value);
 				g_node_insert(myself,0,arg0); 
 			}
-			else if(strcmp(ENGINE,char_value) == 0 || strcmp(POKE,char_value) == 0) {
+			else if(strcmp(ENGINE,char_value) == 0 || strcmp(SHOOT,char_value) == 0 || strcmp(POKE,char_value) == 0) {
 				value = malloc(size_cur_token);
 				memcpy(value, char_value, size_cur_token);
 				
@@ -479,7 +478,6 @@ static Tree line(int num) {
 
 		
 		int error_size_message = snprintf(NULL, 0, "line %d", value) + 1;
-		printf("number %d of size %d\n",value,error_size_message - 5);
 		char* error_token_tmp = malloc(error_size_message);
 		snprintf(error_token_tmp,error_size_message,"line %d",value);
 
