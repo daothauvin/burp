@@ -5,7 +5,7 @@ void setup(void) {}
 
 void teardown(void) {}
 
-START_TEST(create_robot)
+START_TEST(test_create_robot)
 {
   ;   
 }
@@ -15,7 +15,7 @@ Suite * check_robot (void) {
     Suite *s;
     TCase *tc_core, *tc_limits;
 
-    s = suite_create("Create missile");
+    s = suite_create("Create robot");
 
     /* Core test case */
     tc_core = tcase_create("Core");

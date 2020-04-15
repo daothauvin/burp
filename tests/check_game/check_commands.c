@@ -5,17 +5,17 @@ void setup(void) {}
 
 void teardown(void) {}
 
-START_TEST(test_create_missile)
+START_TEST(create_arena)
 {
-  ;   
+  ;     
 }
 END_TEST
 
-Suite * check_missile (void) {
+Suite * check_commands (void) {
     Suite *s;
     TCase *tc_core, *tc_limits;
 
-    s = suite_create("Create missile");
+    s = suite_create("Create commands");
 
     /* Core test case */
     tc_core = tcase_create("Core");
