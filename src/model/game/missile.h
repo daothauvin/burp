@@ -6,7 +6,7 @@
 
 #include "robot.h"
 #include "math.h"
-typedef struct
+typedef struct missile_impl
 {
 	double angle;
 	double pos_x;
@@ -14,15 +14,15 @@ typedef struct
 	double speed;
 	double parcouru_distant;
 	double explosion_distant;
-	short will_explode;	
+	short will_explode;
 	Robot owner;
-}*Missile;
+} * Missile;
 
 //prototypes
-Missile create(double pos_x,double pos_y,double speed,double angle,Robot rob,double explo_dist);//Angle will be calculated
+Missile create(double pos_x, double pos_y, double speed, double angle, Robot rob, double explo_dist); //Angle will be calculated
 void update_pos_missile(Missile m);
 Point explode(Missile mis); // Might trigger an event in the view
 void check_distant(Missile m);
 short will_explode(Missile m);
-void collision_with_missiles(Robot rob,Missile m);
+void collision_with_missiles(Robot rob, Missile m);
 #endif

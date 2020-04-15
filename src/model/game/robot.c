@@ -1,6 +1,6 @@
 #include "robot.h"
 Robot create_robot(){
-    Robot p = malloc(sizeof(struct robot));
+    Robot p = malloc(sizeof(struct robot_impl));
     Point p0 = malloc(sizeof(struct point));
     p->robot_id = malloc(sizeof(char)*robot_name_length);
     p->health_points = 100;

@@ -1,10 +1,11 @@
 #include "arene.h"
 
 Arene create_arene(){
-    Arene a = malloc(sizeof(Arene));
-    a->list_missile = malloc(sizeof(Missile)*missile_by_robot*number_of_robots);
-    a->list_robots = malloc(sizeof(Robot)*number_of_robots);
+    Arene a = malloc(sizeof(struct arene_impl));
+    a->list_missile = malloc(sizeof(struct missile_impl)*missile_by_robot*number_of_robots);
+    a->list_robots = malloc(sizeof(struct robot_impl)*number_of_robots);
     a->nb_missiles = 0;
+    a->nb_robots = 0;
     return a;
 }
 int add_missile(Arene arene,Missile missile){
@@ -38,4 +39,8 @@ int remove_robot(Arene arene,Robot rob){
         }
     }
     return -1;
+}
+
+void free_arena(Arene arene){
+    
 }

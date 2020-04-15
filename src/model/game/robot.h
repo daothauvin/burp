@@ -10,7 +10,7 @@ typedef struct point{
 	double y;
 }*Point;
 
-typedef struct robot
+typedef struct robot_impl
 {
 	char *robot_id;
 	int id;

@@ -5,7 +5,7 @@
 #include "missile.h"
 #include "../../define.h"
 
-typedef struct{
+typedef struct arene_impl {
 	Robot* list_robots;
 	Missile* list_missile;
 	int nb_missiles;
