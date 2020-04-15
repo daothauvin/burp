@@ -57,10 +57,9 @@ int shoot(Robot rob,Arene arene,double angle,double explo_dist){
     } else return -1;
 }
 double angle(double x1,double y1,double x2,double y2){
-    double x = (x1 - x2);
-    double y = (y1 - y2);
-    double result = (atan2(y, x)*(180/M_PI)); 
-    return result;//A verifier
+    double result = acos(abs(x1 - x2)/distance(x1,x2,y1,y2)); 
+    double result_degree = result * (180/M_PI);
+    return result_degree;//A verifier
     }
 double targetx(double x1,double angle,double length){
     return x1 + (length * cos(angle));
