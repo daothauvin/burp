@@ -9,8 +9,9 @@ void game(void* syntax_tree[4]){
 	init();
 	int line[4] = {0};
 
-	while(cycle(a,line,syntax_tree)){
-		for(int i = 0; i < a -> nb_robots; i++) 
-			updateArena(a);
+	while (cycle(a, line, syntax_tree)){
+		updateArena(a);
+		waitForInput();
 	}
+	quit();
 }

@@ -15,12 +15,10 @@
 
 void init();
 void anim_begin();
+void waitForInput();
+int  quit();
 
 void add_log(char* message);
 void add_action(char* action, int id);
-
-void printRobot(Robot robot);
-void printInfoRobot(Robot robot);
-void printRocket(Missile rocket);
 
 void updateArena(Arene arena);
