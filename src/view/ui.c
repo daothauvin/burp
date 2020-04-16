@@ -122,7 +122,7 @@ static void killRobotNb(int id) {
  * 		3
  */
 
-void printRobot(Robot robot) {
+static void printRobot(Robot robot) {
 	if (robot->health_points == 0) {
 		killRobotNb(robot->id);
 		return;
@@ -171,7 +171,7 @@ void printRobot(Robot robot) {
  *  Works the same as printRobot()
  */
 
-void printRocket(Missile rocket) { 
+static void printRocket(Missile rocket) { 
 	int x = rocket->pos_x;
 	int y = rocket->pos_y;
 	int ux = size_arena_x / 80;
@@ -205,7 +205,7 @@ void printRocket(Missile rocket) {
  *  Print a robot information
  */
 
-void printInfoRobot(Robot robot) {
+static void printInfoRobot(Robot robot) {
 
 	if (robot->health_points == 0) {
 		killRobotNb(robot->id);
@@ -451,13 +451,13 @@ static void drawArena() {
 }
 
 /**
- *  Blocking functions that wait for user input to interact.
+ *  -Normally not- blocking functions that wait for user input to interact.
  * 	The different beheviours are :
  * 		Q - Quit
- * 		More to be added...
  */
 
-static void waitForInput() {
+void waitForInput() {
+	/*
 	char msg[40];
 	Robot bob = create_robot();
 	initialize_robot(bob, 0.0, 0.0, 0.0, 0.0, 0);
@@ -476,13 +476,18 @@ static void waitForInput() {
 	zob->health_points = 69.0;
 
 	char act[7];
-	
-	while (1) {
+	*/
+
+	cbreak();
+	nodelay(stdscr, TRUE);
+	time_t cur_time = time(NULL);
+    while (time(NULL) - cur_time < 1) {
 		int c = getch();
 		switch (c) {
 			case 'q':
 			case 'Q':
 				return;
+			/*
 			// Tests
 			case '0':
 			case '1':
@@ -532,6 +537,7 @@ static void waitForInput() {
 				
 				cmpt_1++;
 				break;
+				*/
 			default:
 				break;
 		}
@@ -582,15 +588,22 @@ void init() {
 	init_log();
 	init_info();
 	drawArena();
+}
 
-	// Waiting user behaviour
-	waitForInput();
-	endwin();
+/**
+ * 	Quit Ncurses
+ */
+
+int quit() {
+	return endwin();
 }
 
 /*
+
 int main(int argc, char** argv) {
 	init();
 	return 0;
 }
+
 */
+
