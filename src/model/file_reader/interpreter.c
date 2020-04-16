@@ -283,11 +283,9 @@ int interprete(int line, Tree tree, Arene arena,Robot robot) {
 		int res = commands(g_node_nth_child (node,1),arena,robot);
 		
 		if(res != -1) {
-			free(node);
 			return res;
 		}
 	}
-	free(node);
 	return line + 1;
 }
 
