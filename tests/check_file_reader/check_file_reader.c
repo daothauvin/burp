@@ -115,7 +115,14 @@ START_TEST(test_empty)
 	p = init_file_tree(PATH_TO_DIR "/f_empty.txt");
 	//write(1,message_error(),strlen(message_error()));
 	//printf("\n");
+	
 	ck_assert_msg(p == NULL, "Empty Script should not success");
+
+	int sizemessage = strlen(message_error());
+	char* exceptedmessage = "found UNKNOWN when searching a number at position 1 line 1";
+	ck_assert_msg(
+		sizemessage == strlen(exceptedmessage) && memcmp(message_error(),exceptedmessage,sizemessage) == 0
+		,"Unexcepted Error Message");
 }
 END_TEST
 
