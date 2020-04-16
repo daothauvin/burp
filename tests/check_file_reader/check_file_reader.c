@@ -6,7 +6,6 @@ Tree p;
 void setup(void) {
 	a = create_arene();
 	jean_paul = create_robot();
-	add_robot(a,jean_paul);
 	Robot robot1 = create_robot();
 	Robot robot2 = create_robot();
 	Robot robot3 = create_robot();
@@ -14,6 +13,10 @@ void setup(void) {
 	initialize_robot(jean_paul,0,0,0,0,1);
 	initialize_robot(robot2,0,0,0,0,2);
 	initialize_robot(robot3,0,0,0,0,3);
+	add_robot(a,jean_paul);
+	add_robot(a,robot1);
+	add_robot(a,robot2);
+	add_robot(a,robot3);
     assert(a != NULL);
 	assert(jean_paul != NULL);
 }
