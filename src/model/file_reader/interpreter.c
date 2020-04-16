@@ -85,28 +85,24 @@ static int numberline(Tree line) {
 
 static void searchline(Tree node, gpointer data) {
 	GNode *search = data;
-	if(memcmp(LINE,search -> data,sizeof(LINE)) == 0) {
+	if(search -> next != NULL) {
 		return;
 	}
 	if(numberline(node) == *((int*) search -> data)) {
-		search -> data = node -> data;
-		search -> next = node -> next;
-		search -> prev = node -> prev;
-		search -> parent = node -> parent;
-		search -> children = node -> children;
+		search -> next = node;
 	}
 }
 
 char* getLine(Tree tree,int line) {
+	char* message = "NONE";
 	Tree node = g_node_new (&line);
 	g_node_children_foreach (tree, G_TRAVERSE_ALL,searchline,node);
-	if(memcmp(LINE,node -> data,sizeof(LINE)) == 0) {
-		return g_node_nth_child (node,1) -> data;
+	if(node -> next != NULL) {
+		message = g_node_nth_child (node -> next,1) -> data;
+		node -> next = NULL;
 	}
-	else {
-		return "NONE";
-		
-	}
+	g_node_destroy(node);
+	return message;
 
 }
 
@@ -279,13 +275,16 @@ static int expression(Tree tree, Arene arene,Robot robot) {
 int interprete(int line, Tree tree, Arene arena,Robot robot) {
 	Tree node = g_node_new (&line);
 	g_node_children_foreach (tree, G_TRAVERSE_ALL,searchline,node);
-	if(strcmp(LINE,node -> data) == 0) {
-		int res = commands(g_node_nth_child (node,1),arena,robot);
+	if(node -> next != NULL) {
+		int res = commands(g_node_nth_child (node -> next,1),arena,robot);
+		node -> next = NULL;
 		
 		if(res != -1) {
+			g_node_destroy(node);
 			return res;
 		}
 	}
+	g_node_destroy(node);
 	return line + 1;
 }
 
