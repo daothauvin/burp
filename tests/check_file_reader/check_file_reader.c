@@ -114,8 +114,20 @@ START_TEST(test_cardinal_if)
 {
 	p = init_file_tree(PATH_TO_DIR "/s_cardinal_if.txt");
 	ck_assert_msg(p != NULL, "Init should success");
+	//printTree(p);
 	int next_line = interprete(0, p,a,jean_paul);
 	int excepted_line = 6;
+	ck_assert_int_eq(next_line,excepted_line);
+}
+END_TEST
+
+
+START_TEST(test_cardinal_if_fail)
+{
+	p = init_file_tree(PATH_TO_DIR "/s_cardinal_if_2.txt");
+	ck_assert_msg(p != NULL, "Init should success");
+	int next_line = interprete(0, p,a,jean_paul);
+	int excepted_line = 1;
 	ck_assert_int_eq(next_line,excepted_line);
 }
 END_TEST
@@ -216,11 +228,13 @@ Suite * make_file_reader(void) {
 
     tcase_add_checked_fixture(tc_core, setup, teardown);
 	tcase_add_test(tc_core, test_cardinal_if);
+	tcase_add_test(tc_core, test_cardinal_if_fail);
 	tcase_add_test(tc_core, test_poke_peek_wait);
 	tcase_add_test(tc_core, test_state_target);
 	tcase_add_test(tc_core, test_shoot_distance_angle);
 	tcase_add_test(tc_core, test_gps_self);
 	tcase_add_test(tc_core, test_rand_speed_engine);
+	
 	suite_add_tcase(s, tc_core);
 
     /* Limits test case */
