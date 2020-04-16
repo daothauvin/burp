@@ -7,7 +7,13 @@ void setup(void) {
 	a = create_arene();
 	jean_paul = create_robot();
 	add_robot(a,jean_paul);
+	Robot robot1 = create_robot();
+	Robot robot2 = create_robot();
+	Robot robot3 = create_robot();
+	initialize_robot(robot1,0,0,0,0,0);
 	initialize_robot(jean_paul,0,0,0,0,1);
+	initialize_robot(robot2,0,0,0,0,2);
+	initialize_robot(robot3,0,0,0,0,3);
     assert(a != NULL);
 	assert(jean_paul != NULL);
 }
