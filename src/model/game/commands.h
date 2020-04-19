@@ -13,6 +13,7 @@
 #ifndef M_PI
     #define M_PI 3.14159265358979323846
 #endif
+
 int wait_robot(Robot rob,int delay);
 void poke(Robot rob,int addr,int value);
 int peek(Robot rob,int addr);

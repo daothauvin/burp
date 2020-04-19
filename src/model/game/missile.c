@@ -1,7 +1,20 @@
 #include "missile.h"
 #include "../../define.h"
+
+typedef struct missile_impl
+{
+	double angle;
+	double pos_x;
+	double pos_y;
+	double speed;
+	double parcouru_distant;
+	double explosion_distant;
+	short will_explode;
+	Robot owner;
+};
+
 Missile create(double pos_x,double pos_y,double speed,double angle,Robot rob,double explo_dist){
-    Missile m = malloc(sizeof(struct missile_impl));
+    missile *m = malloc(sizeof(missile));
     m->pos_x = pos_x;
     m->pos_y = pos_y;
     m->speed = speed;
