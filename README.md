@@ -58,8 +58,13 @@ Le projet est disponible [ici](docs/sujet_1.0.pdf).
 
 ### Launch
 
-	./burp prog1.burp ... prog4.burp
+En premier temps, on peut utiliser les scripts `./build_main.sh` pour le programme principal
+et `./build_test.sh` pour effectuer les tests
 
+`./build_main.sh` se chargera de lancer le programme avec les fichiers prog[x].burp défini dans leur 
+repertoire associé.
+
+Par la suite, il suffit de faire :  `./burp prog1.burp ... prog4.burp` pour lancer le programme
 ### Roles
 
 - affichage [ ncurses, Actions, Launch ]

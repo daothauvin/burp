@@ -85,28 +85,24 @@ static int numberline(Tree line) {
 
 static void searchline(Tree node, gpointer data) {
 	GNode *search = data;
-	if(memcmp(LINE,search -> data,sizeof(LINE)) == 0) {
+	if(search -> next != NULL) {
 		return;
 	}
 	if(numberline(node) == *((int*) search -> data)) {
-		search -> data = node -> data;
-		search -> next = node -> next;
-		search -> prev = node -> prev;
-		search -> parent = node -> parent;
-		search -> children = node -> children;
+		search -> next = node;
 	}
 }
 
 char* getLine(Tree tree,int line) {
+	char* message = "NONE";
 	Tree node = g_node_new (&line);
 	g_node_children_foreach (tree, G_TRAVERSE_ALL,searchline,node);
-	if(memcmp(LINE,node -> data,sizeof(LINE)) == 0) {
-		return g_node_nth_child (node,1) -> data;
+	if(node -> next != NULL) {
+		message = g_node_nth_child (node -> next,1) -> data;
+		node -> next = NULL;
 	}
-	else {
-		return "NONE";
-		
-	}
+	g_node_destroy(node);
+	return message;
 
 }
 
@@ -116,8 +112,8 @@ char* getLine(Tree tree,int line) {
 	each return the result of the execution
 
 */
-static short condition(Tree tree, Arene arene, Robot robot) {
-	Tree node = tree;
+static short condition(Tree node, Arene arene, Robot robot) {
+	//printf("%p %p %p\n",node,arene,robot);
 	int x = expression(g_node_nth_child(node, 0),arene,robot);
 	int y = expression(g_node_nth_child(node, 2),arene,robot);
 	char* cond = g_node_nth_child(node, 1) -> data;
@@ -139,7 +135,7 @@ static short condition(Tree tree, Arene arene, Robot robot) {
 	else if(memcmp(cond,INF_EG,sizeof(INF_EG)) == 0) {
 		return x <= y;
 	}
-	return -1;
+	abort();
 }
 
 static int operator(Tree node, Arene arene, Robot robot) {
@@ -170,8 +166,8 @@ static int operator(Tree node, Arene arene, Robot robot) {
 
 static int commands(Tree node,Arene arene,Robot robot) {
 	char* data = node -> data;
-	if(memcmp(IF,data,sizeof(IF)) == 0) {
-		if(condition(g_node_nth_child(node, 0),arene,robot))
+	//printf("data : %ld %s\n",strlen(data),data);
+	if(memcmp(IF,data,sizeof(IF)) == 0 && condition(g_node_nth_child(node, 0),arene,robot)) {
 			return expression(g_node_nth_child(node, 1),arene,robot);
 	}
 	else if(memcmp(WAIT,data,sizeof(WAIT)) == 0) {
@@ -279,10 +275,16 @@ static int expression(Tree tree, Arene arene,Robot robot) {
 int interprete(int line, Tree tree, Arene arena,Robot robot) {
 	Tree node = g_node_new (&line);
 	g_node_children_foreach (tree, G_TRAVERSE_ALL,searchline,node);
-	if(strcmp(LINE,node -> data) == 0) {
-		int res = commands(g_node_nth_child (node,1),arena,robot);
-		if(res != -1) return res;
+	if(node -> next != NULL) {
+		int res = commands(g_node_nth_child (node -> next,1),arena,robot);
+		node -> next = NULL;
+		
+		if(res != -1) {
+			g_node_destroy(node);
+			return res;
+		}
 	}
+	g_node_destroy(node);
 	return line + 1;
 }
 

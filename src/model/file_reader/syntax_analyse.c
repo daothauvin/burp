@@ -24,14 +24,14 @@ from for a case if a G_TOKEN_INT IS NOT EXCEPTED ( need to declare int size_cur_
 error_token_tmp is the buffer to stock the result temporarily
 */
 #define ERROR_INT_UNEXCEPTED(token,error_token_tmp) \
-	case G_TOKEN_INT :\
-		error_token_tmp = malloc(size_cur_token + 1);\
-		int number = (int) g_scanner_cur_value (gs).v_int;\
-		snprintf(error_token_tmp,size_cur_token + 1,"%d",number);\
-		updateErrorMessage(error_token_tmp, token);\
-		free(error_token_tmp);\
-    	g_scanner_destroy (gs);\
-    	return NULL;
+	error_token_tmp = malloc(size_cur_token + 1);\
+	if(error_token_tmp == NULL) return NULL;\
+	int number = (int) g_scanner_cur_value (gs).v_int;\
+	snprintf(error_token_tmp,size_cur_token + 1,"%d",number);\
+	updateErrorMessage(error_token_tmp, token);\
+	free(error_token_tmp);\
+    g_scanner_destroy (gs);\
+    return NULL;
 		
 /*
 	TODO : 
@@ -44,9 +44,12 @@ error_token_tmp is the buffer to stock the result temporarily
 */
 static void init_config(GScannerConfig* gsc);
 
-void freeTree(Tree t) {
-	g_node_destroy(t);
-}
+/*
+	Free the data of [ node ], 
+	this function is given to g_node_children_foreach to free values of nodes in freeTree
+*/
+//static void freeNodeData(GNode *node, gpointer data);
+
 
 
 /*
@@ -63,6 +66,22 @@ static int sizeofToken(GTokenType t);
 //the scanner currently running
 static GScanner * gs;
 
+
+static gboolean freeNodeData(GNode *node, gpointer data) {
+	//printf("%p\n",node -> data);	
+	if(node -> data != NULL) {
+		free(node -> data);
+	}
+	node -> data = NULL;
+	return 0;
+}
+
+
+void freeTree(Tree t) {
+	g_node_traverse (t,G_POST_ORDER,G_TRAVERSE_ALL,-1, freeNodeData, NULL);
+	//g_node_children_foreach (t,G_TRAVERSE_ALL,freeNodeData,NULL);
+	g_node_destroy(t);
+}
 
 /*
 	Information about the last error
@@ -84,9 +103,11 @@ static void updateErrorMessage(char* error_token_tmp,char* excepted_token_tmp) {
 	free(excepted_token);
 	
 	error_token = malloc(strlen(error_token_tmp) + 1);
+	if(error_token == NULL) return;
 	strcpy(error_token,error_token_tmp);
 
 	excepted_token = malloc(strlen(excepted_token_tmp) + 1);
+	if(excepted_token == NULL) return;
 	strcpy(excepted_token,excepted_token_tmp);
 	
 	errorposition = g_scanner_cur_position (gs);
@@ -117,25 +138,11 @@ static void init_config(GScannerConfig* gsc) {
 	gsc -> scan_identifier_1char = 1;
 
 	//add excepted token as identifier
+	gchar* newcset_identifier_first = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-*/%=<>";
 
-	gchar* cset_identifier = gsc -> cset_identifier_first;
-	int sizeone = strlen(cset_identifier);
-	gchar* newcset_identifier_first = malloc((sizeone+9)*sizeof(char));
-	memmove(newcset_identifier_first, cset_identifier,sizeone);
-	newcset_identifier_first[sizeone] = '+';
-	newcset_identifier_first[sizeone+1] = '-';
-	newcset_identifier_first[sizeone+2] = '*';
-	newcset_identifier_first[sizeone+3] = '/';
-	newcset_identifier_first[sizeone+4] = '%';
-	newcset_identifier_first[sizeone+5] = '=';
-	newcset_identifier_first[sizeone+6] = '<';
-	newcset_identifier_first[sizeone+7] = '>';
-
-	int sizetwo = strlen(cset_identifier);
-	gchar* newcset_identifier_nth = malloc((sizetwo+3)*sizeof(char));
-	memmove(newcset_identifier_nth, cset_identifier,sizetwo);
-	newcset_identifier_nth[sizetwo] = '=';
-	newcset_identifier_nth[sizetwo+1] = '>';
+	
+	gchar* newcset_identifier_nth = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ=>";
+	
 	gsc -> cset_identifier_first = newcset_identifier_first;
 	gsc -> cset_identifier_nth = newcset_identifier_nth;
 }
@@ -176,6 +183,7 @@ static Tree number() {
 			if(value > INT_MAX) { //too big int
 				size_of_message = snprintf(NULL,0,"a number <= %d",INT_MAX);
 				message = malloc(size_of_message + 1);
+				if(message == NULL) return NULL;
 				snprintf(message,size_of_message + 1,"a number <= %d",INT_MAX);
 				updateErrorMessage("a very high number", message);
 				free(message);
@@ -183,6 +191,7 @@ static Tree number() {
    				return NULL;
 			}
 			stocked_value = malloc(sizeof(int));
+			if(stocked_value == NULL) return NULL;
 			memmove(stocked_value,&int_value,sizeof(int));
 			return g_node_new (stocked_value);
 			break;
@@ -208,13 +217,15 @@ static Tree operator() {
 			|| strcmp(TIME,curValue.v_identifier) == 0 
 			|| strcmp(DIV,curValue.v_identifier) == 0 
 			|| strcmp(MOD,curValue.v_identifier) == 0) {
-				value = malloc(size_cur_token);
-				memcpy(value,curValue.v_identifier, size_cur_token);
+				value = malloc(size_cur_token + 1);
+				if(value == NULL) return NULL;
+				strcpy(value,curValue.v_identifier);
 				return g_node_new (value);	
 			}
 			ERROR_OCCURED("an operator")
 			break;
-		ERROR_INT_UNEXCEPTED("an operator",buf)
+		case G_TOKEN_INT :
+			ERROR_INT_UNEXCEPTED("an operator",buf)
 		default:
 			break;
 	}
@@ -233,20 +244,21 @@ static Tree comparison() {
 	char* buf;
 	switch(t) {
 		case G_TOKEN_IDENTIFIER :
-			
 			if(strcmp(INF,char_value) == 0 
 			|| strcmp(INF_EG,char_value) == 0 
 			|| strcmp(EG,char_value) == 0 
 			|| strcmp(DIFF,char_value) == 0 
 			|| strcmp(SUP_EG,char_value) == 0 
 			|| strcmp(SUP,char_value) == 0) {
-				value = malloc(size_cur_token);
-				memcpy(value, char_value, size_cur_token);
+				value = malloc(size_cur_token + 1);
+				if(value == NULL) return NULL;
+				strcpy(value, char_value);
 				return g_node_new (value);
 			}
 			ERROR_OCCURED("a comparison operator")
 			break;
-		ERROR_INT_UNEXCEPTED("a comparison operator",buf)
+		case G_TOKEN_INT :
+			ERROR_INT_UNEXCEPTED("a comparison operator",buf)
 		default :
 			break;
 	}
@@ -257,6 +269,7 @@ static Tree comparison() {
 //expression
 static Tree expression() {
 
+	char* buf;
 	GTokenType t = g_scanner_get_next_token (gs);
 
 	int size_cur_token = sizeofToken(t);
@@ -275,20 +288,52 @@ static Tree expression() {
 	switch(t) {
 		
 		case G_TOKEN_INT:
-				value = malloc(size_cur_token);
-				memcpy(value, &int_value, size_cur_token);
+				value = malloc(sizeof(int));
+				if(value == NULL) return NULL;
+				memcpy(value, &int_value, sizeof(int));
 				myself = g_node_new (value);
 			break;
 		case G_TOKEN_LEFT_PAREN:
 			arg0 = expression();
 			if(arg0 == NULL) return NULL;
 			arg1 = operator();
-			if(arg1 == NULL) return NULL;
+			if(arg1 == NULL) {
+				freeTree(arg0);
+				return NULL;
+			}
 			arg2 = expression();
-			if(arg2 == NULL) return NULL;
-			myself = g_node_new (OPERATOR);
-			if(g_scanner_get_next_token (gs) != G_TOKEN_RIGHT_PAREN) {
-				ERROR_OCCURED(")")
+			if(arg2 == NULL) {
+				freeTree(arg0);
+				freeTree(arg1);
+				return NULL;
+			}
+			value = malloc(strlen(OPERATOR) + 1);
+			if(value == NULL) {
+				freeTree(arg0);
+				freeTree(arg1);
+				freeTree(arg2);
+				return NULL;
+			}
+			strcpy(value,OPERATOR);
+			myself = g_node_new (value);
+			switch(g_scanner_get_next_token (gs)) {
+				case G_TOKEN_RIGHT_PAREN:
+				break;
+				case G_TOKEN_IDENTIFIER:
+					freeTree(arg0);
+					freeTree(arg1);
+					freeTree(arg2);
+					ERROR_OCCURED(")")
+				case G_TOKEN_INT :
+					freeTree(arg0);
+					freeTree(arg1);
+					freeTree(arg2);
+					ERROR_INT_UNEXCEPTED(")",buf)
+				default:
+					freeTree(arg0);
+					freeTree(arg1);
+					freeTree(arg2);
+					ERROR_UNKNOWN_OCCURED(")")
 			}
 			g_node_insert(myself,0,arg0);
 			g_node_insert(myself,1,arg1);
@@ -298,8 +343,9 @@ static Tree expression() {
 		case G_TOKEN_IDENTIFIER:
 			
 			if(strcmp(MINUS,char_value) == 0) {
-				value = malloc(size_cur_token);
-				memcpy(value,char_value, size_cur_token);
+				value = malloc(size_cur_token + 1);
+				if(value == NULL) return NULL;
+				strcpy(value,char_value);
 				arg0 = number();
 				*((int*) arg0 -> data) = - *((int*) arg0 -> data);
 				return arg0;
@@ -309,10 +355,14 @@ static Tree expression() {
 			|| strcmp(STATE,char_value) == 0 
 			|| strcmp(GPSX,char_value) == 0 
 			|| strcmp(GPSY,char_value) == 0) {
-				value = malloc(size_cur_token);
-				memcpy(value,char_value, size_cur_token);
+				value = malloc(size_cur_token + 1);
+				if(value == NULL) return NULL;
+				strcpy(value,char_value);
 				arg0 = expression();
-				if(arg0 == NULL) return NULL;
+				if(arg0 == NULL) {
+					free(value);
+					return NULL;
+				}
 				myself = g_node_new (value);
 				g_node_insert(myself,0,arg0);
 			}
@@ -320,23 +370,43 @@ static Tree expression() {
 			else if(strcmp(CARDINAL,char_value) == 0 
 			|| strcmp(SELF,char_value) == 0 
 			|| strcmp(SPEED,char_value) == 0 ) {
-				value = malloc(size_cur_token);
-				memcpy(value,char_value, size_cur_token);
+				value = malloc(size_cur_token + 1);
+				if(value == NULL) return NULL;
+				strcpy(value,char_value);
 				myself = g_node_new (value);
 			}
 			
 			else if(strcmp(DISTANCE,char_value) == 0
 			|| strcmp(ANGLE,char_value) == 0 ) {
-				value = malloc(size_cur_token);
-				memcpy(value,char_value, size_cur_token);
+				value = malloc(size_cur_token + 1);
+				if(value == NULL) return NULL;
+				strcpy(value,char_value);
 				arg0 = expression();
-				if(arg0 == NULL) return NULL;
+				if(arg0 == NULL) {
+					free(value);
+					return NULL;
+				}
 				arg1 = expression();
-				if(arg1 == NULL) return NULL;
+				if(arg1 == NULL) {
+					free(value);
+					freeTree(arg0);
+					return NULL;
+				}
 				arg2 = expression();
-				if(arg2 == NULL) return NULL;
+				if(arg2 == NULL) {
+					free(value);
+					freeTree(arg0);
+					freeTree(arg1);
+					return NULL;
+				}
 				arg3 = expression();
-				if(arg3 == NULL) return NULL;
+				if(arg3 == NULL) {
+					free(value);
+					freeTree(arg0);
+					freeTree(arg1);
+					freeTree(arg2);
+					return NULL;
+				}
 				myself = g_node_new (value);
 				g_node_insert(myself,0,arg0);
 				g_node_insert(myself,1,arg1);
@@ -344,14 +414,27 @@ static Tree expression() {
 				g_node_insert(myself,3,arg3);
 			}	
 			else if(strcmp(TARGETX,char_value) == 0 || strcmp(TARGETY,char_value) == 0) {
-				value = malloc(size_cur_token);
-				memcpy(value,char_value, size_cur_token);
+				value = malloc(size_cur_token + 1);
+				if(value == NULL) return NULL;
+				strcpy(value,char_value);
 				arg0 = expression();
-				if(arg0 == NULL) return NULL;
+				if(arg0 == NULL) {
+					free(value);
+					return NULL;
+				}
 				arg1 = expression();
-				if(arg1 == NULL) return NULL;
+				if(arg1 == NULL) { 
+					free(value);
+					freeTree(arg0);
+					return NULL;
+				}
 				arg2 = expression();
-				if(arg2 == NULL) return NULL;
+				if(arg2 == NULL) {
+					free(value);
+					freeTree(arg0);
+					freeTree(arg1);
+					return NULL;
+				}
 				myself = g_node_new (value);
 				g_node_insert(myself,0,arg0);
 				g_node_insert(myself,1,arg1);
@@ -373,8 +456,8 @@ static Tree command() {
 	Tree arg1;
 	Tree myself;
 	
+
 	GTokenType t = g_scanner_get_next_token (gs);
-	
 	int size_cur_token = sizeofToken(t);
 	
 	gchar* char_value = g_scanner_cur_value (gs).v_identifier;
@@ -387,39 +470,59 @@ static Tree command() {
 		case G_TOKEN_IDENTIFIER:
 			
 			if(strcmp(WAIT,char_value) == 0) {
-				value = malloc(size_cur_token);
-				memcpy(value, char_value, size_cur_token);
+				value = malloc(size_cur_token + 1);
+				if(value == NULL) return NULL;
+				strcpy(value, char_value);
 				
 				arg0 = expression();
-				if(arg0 == NULL) return NULL;
+				if(arg0 == NULL) {
+					free(value);
+					return NULL;
+				}
 				myself = g_node_new (value);
 				g_node_insert(myself,0,arg0); 
 			}
 			else if(strcmp(ENGINE,char_value) == 0 || strcmp(SHOOT,char_value) == 0 || strcmp(POKE,char_value) == 0) {
-				value = malloc(size_cur_token);
-				memcpy(value, char_value, size_cur_token);
+				value = malloc(size_cur_token + 1);
+				if(value == NULL) return NULL;
+				strcpy(value, char_value);
 				
 				arg0 = expression();
-				if(arg0 == NULL) return NULL;
+				if(arg0 == NULL) {
+					free(value);
+					return NULL;
+				}
 				arg1 = expression();
-				if(arg1 == NULL) return NULL;
+				if(arg1 == NULL) {
+					free(value);
+					freeTree(arg0);
+					return NULL;
+				}
 				myself = g_node_new (value);
 				g_node_insert(myself,0,arg0);
 				g_node_insert(myself,1,arg1);
 			}
 			else if(strcmp(GOTO,char_value) == 0) {
-				value = malloc(size_cur_token);
-				memcpy(value, char_value, size_cur_token);
+				value = malloc(size_cur_token + 1);
+				if(value == NULL) return NULL;
+				strcpy(value, char_value);
 				arg0 = number();
-				if(arg0 == NULL) return NULL;
+				if(arg0 == NULL) {
+					free(value);
+					return NULL;
+				}
 				myself = g_node_new (value);
 				g_node_insert(myself,0,arg0);
 			}
 			else if(strcmp(IF,char_value) == 0) {
-				value = malloc(size_cur_token);
-				memcpy(value, char_value, size_cur_token);
+				value = malloc(size_cur_token + 1);
+				if(value == NULL) return NULL;
+				strcpy(value, char_value);
 				arg0 = condition();
-				if(arg0 == NULL) return NULL;
+				if(arg0 == NULL) {
+					free(value);
+					return NULL;
+				}
 				//THEN
 				switch(g_scanner_get_next_token (gs)) {
 					case G_TOKEN_IDENTIFIER:
@@ -427,15 +530,26 @@ static Tree command() {
 							//ok
 						}
 						else {
+							free(value);
+							freeTree(arg0);
 							ERROR_OCCURED("a THEN")
 						}
 					break;
-					ERROR_INT_UNEXCEPTED("a THEN",buf)
+					case G_TOKEN_INT :
+						free(value);
+						freeTree(arg0);	
+						ERROR_INT_UNEXCEPTED("a THEN",buf)
 					default :
+						free(value);
+						freeTree(arg0);
 						ERROR_UNKNOWN_OCCURED("a THEN")
 				}
 				arg1 = number();
-				if(arg1 == NULL) return NULL;
+				if(arg1 == NULL) {
+					free(value);
+					freeTree(arg0);
+					return NULL;
+				}
 				myself = g_node_new (value);
 				g_node_insert(myself,0,arg0);
 				g_node_insert(myself,1,arg1);
@@ -444,7 +558,8 @@ static Tree command() {
 				ERROR_OCCURED("a valid command")
 			}
 			break;
-			ERROR_INT_UNEXCEPTED("a valid command",buf)
+			case G_TOKEN_INT :
+				ERROR_INT_UNEXCEPTED("a valid command",buf)
 		default :
 			ERROR_UNKNOWN_OCCURED("a valid command")
 	}
@@ -457,10 +572,25 @@ static Tree condition() {
 	Tree arg0 = expression();
 	if(arg0 == NULL) return NULL;
 	Tree arg1 = comparison();
-	if(arg1 == NULL) return NULL;
+	if(arg1 == NULL) {
+		freeTree(arg0);
+		return NULL;
+	}
 	Tree arg2 = expression();
-	if(arg2 == NULL) return NULL;
-	Tree myself = g_node_new (COND);
+	if(arg2 == NULL) {
+		freeTree(arg0);
+		freeTree(arg1);
+		return NULL;
+	}
+	gchar* value = malloc(strlen(COND) + 1);
+	if(value == NULL) {
+		freeTree(arg0);
+		freeTree(arg1);
+		freeTree(arg2);
+		return NULL;
+	}
+	strcpy(value,COND);
+	Tree myself = g_node_new (value);
 	g_node_insert(myself,0,arg0);
 	g_node_insert(myself,1,arg1);
 	g_node_insert(myself,2,arg2);
@@ -474,24 +604,44 @@ static Tree line(int num) {
 	
 		int excepted_size_message = snprintf(NULL, 0, "line %d", num) + 1;
 		char* excepted_token_tmp = malloc(excepted_size_message);
+		if(excepted_token_tmp == NULL) {
+			freeTree(arg0);
+			return NULL;
+		}
 		snprintf(excepted_token_tmp,excepted_size_message,"line %d",num);
 
 		
 		int error_size_message = snprintf(NULL, 0, "line %d", value) + 1;
 		char* error_token_tmp = malloc(error_size_message);
+		if(error_token_tmp == NULL) {
+			freeTree(arg0);
+			free(excepted_token_tmp);
+			return NULL;
+		}
 		snprintf(error_token_tmp,error_size_message,"line %d",value);
 
 		updateErrorMessage(error_token_tmp,excepted_token_tmp);
 		
 		free(excepted_token_tmp);
 		free(error_token_tmp);
+		freeTree(arg0);
 		return NULL;
 	} 
 	
 	
 	Tree arg1 = command();
-	if(arg1 == NULL) return NULL;
-	Tree myself = g_node_new (LINE);
+	if(arg1 == NULL) {
+		freeTree(arg0);
+		return NULL;
+	}
+	gchar* char_value = malloc(strlen(LINE) + 1);
+	if(char_value == NULL) {
+		freeTree(arg0);
+		freeTree(arg1);
+		return NULL;
+	}
+	strcpy(char_value,LINE);
+	Tree myself = g_node_new (char_value);
 	g_node_insert(myself,0,arg0);
 	g_node_insert(myself,1,arg1);
 	return myself;
@@ -500,11 +650,14 @@ static Tree line(int num) {
 
 static Tree program() {
 	Tree currentline;
-	Tree program = g_node_new("PROGRAM");
+	gchar* program_char = malloc(8);
+	if(program_char == NULL) return NULL;
+	strcpy(program_char,"PROGRAM");
+	Tree program = g_node_new(program_char);
 	int n = 0;
 	currentline = line(n);
 	if(currentline == NULL) {
-		g_node_destroy (program);
+		freeTree (program);
 		return NULL;
 	}
 	g_node_insert (program, n, currentline);
@@ -512,7 +665,7 @@ static Tree program() {
 		n++;
 		currentline = line(n);
 		if(currentline == NULL) {
-			g_node_destroy (program);
+			freeTree (program);
 			return NULL;
 		}
 		g_node_insert (program, n, currentline);
