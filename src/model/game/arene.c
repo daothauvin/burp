@@ -23,10 +23,11 @@ int remove_missile(Arene arene, Missile missile)
     {
         if (arene->list_missile[i] == missile)
         {
+             arene->nb_missiles -= 1;
             arene->list_missile[i] = arene->list_missile[arene->nb_missiles];
             free(missile);
             missile = NULL;
-            arene->nb_missiles -= 1;
+           
             return 0;
         }
     }
@@ -46,8 +47,9 @@ int remove_robot(Arene arene, Robot rob)
     {
         if (arene->list_robots[i] == rob)
         {
-            arene->list_robots[i] = arene->list_robots[arene->nb_robots];
             arene->nb_robots -= 1;
+            arene->list_robots[i] = arene->list_robots[arene->nb_robots];
+            
             return 0;
         }
     }
