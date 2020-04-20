@@ -424,11 +424,12 @@ void add_log(char* message) {
  */
 
 void updateArena(Arene arena) {
+	eraseArena();
 	for (int i = 0; i < number_of_robots; i++) {
 		printRobot(arena->list_robots[i]);
 		printInfoRobot(arena->list_robots[i]);
 	}
-	for (int i = 0; i < number_of_robots * missile_by_robot; i++) {
+	for (int i = 0; i < arena->nb_missiles; i++) {
 		printRocket(arena->list_missile[i]);
 	}
 }
@@ -456,7 +457,8 @@ static void drawArena() {
  * 		Q - Quit
  */
 
-void waitForInput() {
+static double time_between = 1;
+short waitForInput() {
 	/*
 	char msg[40];
 	Robot bob = create_robot();
@@ -481,12 +483,18 @@ void waitForInput() {
 	cbreak();
 	nodelay(stdscr, TRUE);
 	time_t cur_time = time(NULL);
-    while (time(NULL) - cur_time < 1) {
+    while (time(NULL) - cur_time < time_between) {
 		int c = getch();
 		switch (c) {
 			case 'q':
 			case 'Q':
-				return;
+				return 0;
+			case '+':
+				if(time_between > 0.1) time_between -= 0.1; 
+				break;
+			case '-':
+				if(time_between < 2) time_between += 0.1; 
+				break;
 			/*
 			// Tests
 			case '0':
@@ -542,6 +550,7 @@ void waitForInput() {
 				break;
 		}
 	}
+	return 1;
 }
 
 /**
