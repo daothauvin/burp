@@ -46,8 +46,7 @@ int add_robot(arena *arena, robot *rob)
     if (arena->nb_robots == number_of_robots)
         return -1;
     arena->list_robots[arena->nb_robots] = rob;
-    arena->nb_robots += 1;
-    return arena->nb_robots - 1;
+    return ++arena->nb_robots;
 }
 bool remove_robot(arena *arena, robot* rob)
 {

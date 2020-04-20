@@ -16,7 +16,7 @@
 
 void init();
 void anim_begin();
-void waitForInput();
+short waitForInput();
 int  quit();
 
 void add_log(char* message);
