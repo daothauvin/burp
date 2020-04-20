@@ -1,4 +1,5 @@
 #include "missile.h"
+#include "math.h"
 #include "../../define.h"
 #include <assert.h>
 #include <string.h>
@@ -14,7 +15,7 @@ struct missile_impl
     robot *owner;
 };
 
-missile* create(double pos_x, double pos_y, double angle, robot *rob, double explo_dist)
+missile* create_missile(double pos_x, double pos_y, double angle, robot *rob, double explo_dist)
 {
     assert((pos_x >= 0 && pos_x <= size_arena_x));
     assert((pos_y >= 0 && pos_y <= size_arena_y));
@@ -34,7 +35,15 @@ missile* create(double pos_x, double pos_y, double angle, robot *rob, double exp
 void update_pos_missile(missile *m)
 {
     assert(m);
-    double speed = (m->parcouru_distant + m->speed >= m->explosion_distant) ? m->explosion_distant - (m->speed + m->parcouru_distant) : m->speed;
+    double speed;
+    if(m->parcouru_distant + m->speed >= m->explosion_distant){
+        if(m->explosion_distant - (m->speed + m->parcouru_distant) <= 0)
+            speed = 0;
+        else 
+            speed = m->explosion_distant - (m->speed + m->parcouru_distant);
+    } else {
+        speed = m->speed;
+    }
     double x = m->pos.x + (speed * cos(degree_to_radians(m->angle)));
     double y = m->pos.y + (speed * sin(degree_to_radians(m->angle)));
     if (x >= size_arena_x) {
@@ -93,4 +102,11 @@ robot* get_missile_owner(missile *m){
 double get_explosion_distant(missile *m){
     assert(m);
     return m->explosion_distant;
+}
+bool destroy_missile(missile **m){
+    if(!m || !*m)
+        return false;
+    free(*m);
+    *m = NULL;
+    return true;
 }

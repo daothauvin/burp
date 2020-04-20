@@ -23,7 +23,7 @@ START_TEST(test_add_missile)
   missile **missiles_test = malloc(sizeof(missile*) * 10);
   for (int i = 0; i < nb_test_missiles; i++)
   {
-    missiles_test[i] = create(10.0, 10.0, 10.0, rob, max_range_explosion);
+    missiles_test[i] = create_missile(10.0, 10.0, 10.0, rob, max_range_explosion);
   }
   for (size_t i = 0; i < 8; i++)
   {

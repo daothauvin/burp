@@ -75,7 +75,7 @@ bool shoot(robot *rob, arena *arena, double angle, double explo_dist)
     if (rob && arena && get_robot_nb_missiles(rob) != missile_by_robot) {
         point rob_point;
         get_robot_pos(rob, &rob_point);
-        missile *m = create(rob_point.x,rob_point.y, angle, rob, explo_dist);
+        missile *m = create_missile(rob_point.x,rob_point.y, angle, rob, explo_dist);
         add_missile(arena, m);
         set_robot_nb_missiles(rob, get_robot_nb_missiles(rob) + 1);
         return true;
