@@ -13,8 +13,6 @@ void setup(void) {
 	add_robot(a,robot1);
 	add_robot(a,robot2);
 	add_robot(a,robot3);
-    assert(a != NULL);
-	assert(jean_paul != NULL);
 }
 
 static void teardown(void)

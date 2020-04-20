@@ -1,26 +1,44 @@
 #include "../../src/model/game/arene.h"
 #include "../../src/model/game/missile.h"
+#include "../../src/model/game/arene.c"
 #include "../../src/define.h"
 #include <check.h>
 
-static void setup(void) {}
+robot *rob;
+arena *a;
 
-static void teardown(void) {}
+static void setup(void)
+{
+  a = create_arena();
+  rob = create_robot(0, 0, 0, 0, 0);
+  robot *robot1 = create_robot(0, 0, 0, 0, 1);
+  robot *robot2 = create_robot(0, 0, 0, 0, 2);
+  robot *robot3 = create_robot(0, 0, 0, 0, 3);
+  add_robot(a, rob);
+  add_robot(a, robot1);
+  add_robot(a, robot2);
+  add_robot(a, robot3);
+}
+
+static void teardown(void)
+{
+  for (int i = 0; i < 4; ++i)
+  {
+    //arena->
+  }
+}
 
 START_TEST(test_create_arena)
 {
-  arena* a = create_arena();
   ck_assert_int_eq(get_nb_missiles_arena(a), 0);
-  ck_assert_int_eq(get_nb_robot_arena(a), 0);
+  ck_assert_int_eq(get_nb_robot_arena(a), 4);
 }
 END_TEST
 
 START_TEST(test_add_missile)
 {
   int nb_test_missiles = 10;
-  arena* a = create_arena();
-  robot* rob = create_robot(0,0,0,0,1);
-  missile **missiles_test = malloc(sizeof(missile*) * 10);
+  missile **missiles_test = malloc(sizeof(missile *) * 10);
   for (int i = 0; i < nb_test_missiles; i++)
   {
     missiles_test[i] = create_missile(10.0, 10.0, 10.0, rob, max_range_explosion);
@@ -35,6 +53,17 @@ END_TEST
 
 START_TEST(test_remove_missile)
 {
+  int nb_test_missiles = 10;
+  missile **missiles_test = malloc(sizeof(missile *) * 10);
+  for (int i = 0; i < nb_test_missiles; i++)
+  {
+    missiles_test[i] = create_missile(10.0, 10.0, 10.0, rob, max_range_explosion);
+  }
+  for (size_t i = 0; i < 8; i++)
+  {
+    ck_assert_int_eq(get_nb_missiles_arena(a), add_missile(a, missiles_test[i]));
+  }
+  ck_assert(remove_missile(a, missiles_test[5]));
 }
 END_TEST
 
