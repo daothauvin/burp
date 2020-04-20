@@ -1,34 +1,70 @@
+#include "../../src/model/game/arene.h"
 #include "../../src/model/game/missile.h"
+#include "../../src/define.h"
 #include <check.h>
 
-void setup(void) {}
+static void setup(void) {}
 
-void teardown(void) {}
+static void teardown(void) {}
 
 START_TEST(test_create_arena)
 {
-  ;     
+  arena* a = create_arena();
+  ck_assert_int_eq(get_nb_missiles_arena(a), 0);
+  ck_assert_int_eq(get_nb_robot_arena(a), 0);
 }
 END_TEST
 
-Suite * check_arena (void) {
-    Suite *s;
-    TCase *tc_core, *tc_limits;
+START_TEST(test_add_missile)
+{
+  int nb_test_missiles = 10;
+  arena* a = create_arena();
+  robot* rob = create_robot(0,0,0,0,1);
+  missile **missiles_test = malloc(sizeof(missile*) * 10);
+  for (int i = 0; i < nb_test_missiles; i++)
+  {
+    missiles_test[i] = create(10.0, 10.0, 10.0, rob, max_range_explosion);
+  }
+  for (size_t i = 0; i < 8; i++)
+  {
+    ck_assert_int_eq(get_nb_missiles_arena(a), add_missile(a, missiles_test[i]));
+  }
+  ck_assert_int_eq(-1, add_missile(a, missiles_test[0]));
+}
+END_TEST
 
-    s = suite_create("Create arena");
+START_TEST(test_remove_missile)
+{
+}
+END_TEST
 
-    /* Core test case */
-    tc_core = tcase_create("Core");
+START_TEST(test_add_robot)
+{
+}
+END_TEST
 
-    tcase_add_checked_fixture(tc_core, setup, teardown);
-	//tcase_add_test(tc_core, test_cardinal_and_if);
-    suite_add_tcase(s, tc_core);
+START_TEST(test_remove_robot)
+{
+}
+END_TEST
 
-    /* Limits test case */
-    tc_limits = tcase_create("Limits");
+Suite *check_arena(void)
+{
+  Suite *s;
+  TCase *tc_core;
 
-    //tcase_add_test(tc_limits, test_bad_expression);
-    suite_add_tcase(s, tc_limits);
+  s = suite_create("Create arena");
 
-    return s;
+  /* Core test case */
+  tc_core = tcase_create("Core");
+
+  tcase_add_checked_fixture(tc_core, setup, teardown);
+  tcase_add_test(tc_core, test_create_arena);
+  tcase_add_test(tc_core, test_add_missile);
+  tcase_add_test(tc_core, test_add_robot);
+  tcase_add_test(tc_core, test_remove_missile);
+  tcase_add_test(tc_core, test_remove_robot);
+  suite_add_tcase(s, tc_core);
+
+  return s;
 }

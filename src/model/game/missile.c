@@ -16,7 +16,11 @@ struct missile_impl
 
 missile* create(double pos_x, double pos_y, double angle, robot *rob, double explo_dist)
 {
-    missile *m = malloc(sizeof(missile));
+    assert((pos_x >= 0 && pos_x <= size_arena_x));
+    assert((pos_y >= 0 && pos_y <= size_arena_y));
+    assert(angle >= 0 && angle <=359);
+    missile *m = malloc(sizeof(struct missile_impl));
+    memset(m,0,sizeof(struct missile_impl));
     m->pos.x = pos_x;
     m->pos.y = pos_y;
     m->speed = missile_speed;
@@ -68,8 +72,25 @@ void collision_with_missiles(robot *rob, missile *m)
     if (robot_radius> d)
         m->will_explode = true;
 }
-double get_missile_angle(missile *m);
-double get_missile_speed(missile *m);
-void get_missile_pos(missile *m, point *p);
-double get_parcouru_distant(missile *m);
-bool get_missile_owner(missile *m, robot **res_rob);
+double get_missile_angle(missile *m){
+    return m->angle;
+}
+double get_missile_speed(missile *m){
+    return m->speed;
+}
+void get_missile_pos(missile *m, point *p){
+    assert(m);
+    memmove(p, &m->pos, sizeof(point));
+
+}
+double get_parcouru_distant(missile *m){
+    return m->parcouru_distant;
+}
+robot* get_missile_owner(missile *m){
+    assert(m);
+    return m->owner;
+}
+double get_explosion_distant(missile *m){
+    assert(m);
+    return m->explosion_distant;
+}

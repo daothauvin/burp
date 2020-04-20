@@ -10,13 +10,13 @@ double degree_to_radians(double x)
 struct robot_impl
 {
     char *robot_name;
-    double health_points; // Represented as a percentage
+    unsigned int health_points; // Represented as a percentage
     double angle;
     double speed; // Represented as a percentage
     point pos;
     int id;
     int missiles; //Number of missile in the area currently
-    int *memory;
+    int memory[robot_memory];
     unsigned int waiting_time; //cycle delay
 };
 
@@ -24,7 +24,6 @@ robot *create_robot(double x_1, double y_1, double angle, double speed, int id)
 {
     robot *rob = malloc(sizeof(struct robot_impl));
     rob->robot_name = malloc(sizeof(char) * robot_name_length);
-    rob->memory = malloc(robot_memory * (sizeof(int)));
     memset(rob, 0, sizeof(struct robot_impl));
     rob->health_points = 100;
     rob->pos.x = x_1;
@@ -100,7 +99,7 @@ char *get_robot_name(robot *rob)
 {
     return rob->robot_name;
 }
-double get_robot_health_points(robot *rob)
+unsigned int get_robot_health_points(robot *rob)
 {
     return rob->health_points;
 }
@@ -148,14 +147,14 @@ void set_waiting_time_robot(robot *rob, unsigned int waiting_time)
 {
     rob->waiting_time = waiting_time;
 }
-bool add_memory_to_robot(robot *rob, int *data, int pos)
+bool poke_memory_at(robot *rob, int data, int pos)
 {
-    if (pos > robot_memory)
+    if (pos >= robot_memory)
         return false;
-    memmove((void *)rob->memory + pos, data, sizeof(int));
+    rob->memory[pos] = data;
     return true;
 }
-int get_memory_at_i(robot *rob, int i)
+int peek_memory_at(robot *rob, int i)
 {
     if (i > robot_memory)
         return -1;
@@ -164,5 +163,6 @@ int get_memory_at_i(robot *rob, int i)
 void destroy_robot(robot **rob){
     if(!rob || !*rob)
         return ;
-    free(rob);
+    free(*rob);
+    *rob = NULL;
 }

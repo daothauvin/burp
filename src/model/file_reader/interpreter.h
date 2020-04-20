@@ -14,7 +14,7 @@
     corresponding at the file where come from the syntax tree [ tree ] 
     controlling the robot [ robot ] in the context [ arena ] 
 */
-int interprete(int line, Tree tree, Arene arena,Robot robot);
+int interprete(int line, Tree tree, arena *arena,robot *robot);
 
 /*
   Return the command in a printable way of the command 

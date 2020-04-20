@@ -1,5 +1,6 @@
 #include "arene.h"
 #include <string.h>
+
 struct arena_impl
 {
     robot **list_robots;
@@ -8,7 +9,7 @@ struct arena_impl
     unsigned int nb_robots;
 };
 
-arena *create_arene()
+arena *create_arena()
 {
     arena *a = malloc(sizeof(struct arena_impl));
     a->list_missile = malloc(sizeof(missile*) * missile_by_robot * number_of_robots);
@@ -17,11 +18,11 @@ arena *create_arene()
     a->nb_robots = 0;
     return a;
 }
-int add_missile(arena *arena, missile **m)
+int add_missile(arena *arena, missile *m)
 {
     if (arena->nb_missiles == missile_by_robot * number_of_robots)
         return -1;
-    memmove(arena->list_missile[arena->nb_missiles],m,sizeof(missile*));
+    arena->list_missile[arena->nb_missiles] = m;
     arena->nb_missiles += 1;
     return arena->nb_missiles - 1;
 }
@@ -95,7 +96,7 @@ robot *get_robot_index(arena *arena, int indx)
         return NULL;
     return arena->list_robots[indx];
 }
-bool get_missile_index(arena *arena, int indx)
+missile *get_missile_index(arena *arena, int indx)
 {
     if (!arena || indx >= arena->nb_missiles)
         return NULL;

@@ -22,4 +22,4 @@ int  quit();
 void add_log(char* message);
 void add_action(char* action, int id);
 
-void updateArena(Arene arena);
+void updateArena(arena* arena);

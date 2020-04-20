@@ -7,11 +7,11 @@ int wait_robot(robot *rob, unsigned int delay)
 }
 bool poke(robot *rob, int addr, int value)
 {
-    return add_memory_to_robot(rob, &value, addr);
+    return poke_memory_at(rob, value, addr);
 }
 int peek(robot *rob, int addr)
 {
-    return get_memory_at_i(rob, addr);
+    return peek_memory_at(rob, addr);
 }
 int go_to(int num)
 {
@@ -75,8 +75,8 @@ bool shoot(robot *rob, arena *arena, double angle, double explo_dist)
     if (rob && arena && get_robot_nb_missiles(rob) != missile_by_robot) {
         point rob_point;
         get_robot_pos(rob, &rob_point);
-        missile *m = create(rob_point.x,rob_point.y, missile_speed, rob, explo_dist);
-        add_missile(arena, &m);
+        missile *m = create(rob_point.x,rob_point.y, angle, rob, explo_dist);
+        add_missile(arena, m);
         set_robot_nb_missiles(rob, get_robot_nb_missiles(rob) + 1);
         return true;
     }

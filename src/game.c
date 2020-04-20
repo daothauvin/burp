@@ -4,8 +4,9 @@
 
 #include "game.h"
 
-void game(void* syntax_tree[4]){	
-	Arene a = create_arene();
+void game(void *syntax_tree[4])
+{
+	arena *a = create_arena();
 	init();
 	int line[4] = {0};
 

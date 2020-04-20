@@ -21,5 +21,6 @@ double get_missile_angle(missile *m);
 double get_missile_speed(missile *m);
 void get_missile_pos(missile *m,point *p);
 double get_parcouru_distant(missile *m);
-bool get_missile_owner(missile *m, robot **res_rob);
+robot* get_missile_owner(missile *m);
+double get_explosion_distant(missile *m);
 #endif

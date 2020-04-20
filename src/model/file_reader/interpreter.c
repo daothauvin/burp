@@ -30,7 +30,7 @@ static int numberline(Tree line);
 */
 static void searchline(Tree node, gpointer data);
 
-static int expression(Tree tree, Arene arene,Robot robot);
+static int expression(Tree tree, arena* arena,robot* rob);
 
 static short isTag(gpointer data) {
 	return 
@@ -112,10 +112,10 @@ char* getLine(Tree tree,int line) {
 	each return the result of the execution
 
 */
-static short condition(Tree node, Arene arene, Robot robot) {
+static short condition(Tree node, arena* arena,robot* robot) {
 	//printf("%p %p %p\n",node,arene,robot);
-	int x = expression(g_node_nth_child(node, 0),arene,robot);
-	int y = expression(g_node_nth_child(node, 2),arene,robot);
+	int x = expression(g_node_nth_child(node, 0),arena,robot);
+	int y = expression(g_node_nth_child(node, 2),arena,robot);
 	char* cond = g_node_nth_child(node, 1) -> data;
 	if(memcmp(cond,INF,sizeof(INF)) == 0) {
 		return x < y;
@@ -138,9 +138,9 @@ static short condition(Tree node, Arene arene, Robot robot) {
 	abort();
 }
 
-static int operator(Tree node, Arene arene, Robot robot) {
-	int x = expression(g_node_nth_child(node, 0),arene,robot);
-	int y = expression(g_node_nth_child(node, 2),arene,robot);
+static int operator(Tree node, arena* arena,robot* robot) {
+	int x = expression(g_node_nth_child(node, 0),arena,robot);
+	int y = expression(g_node_nth_child(node, 2),arena,robot);
 	char* op = g_node_nth_child(node, 1) -> data;
 	if(memcmp(op,PLUS,sizeof(PLUS)) == 0) {
 		return x + y;
@@ -164,36 +164,36 @@ static int operator(Tree node, Arene arene, Robot robot) {
 	
 }
 
-static int commands(Tree node,Arene arene,Robot robot) {
+static int commands(Tree node,arena *arena,robot *robot) {
 	char* data = node -> data;
 	//printf("data : %ld %s\n",strlen(data),data);
-	if(memcmp(IF,data,sizeof(IF)) == 0 && condition(g_node_nth_child(node, 0),arene,robot)) {
-			return expression(g_node_nth_child(node, 1),arene,robot);
+	if(memcmp(IF,data,sizeof(IF)) == 0 && condition(g_node_nth_child(node, 0),arena,robot)) {
+			return expression(g_node_nth_child(node, 1),arena,robot);
 	}
 	else if(memcmp(WAIT,data,sizeof(WAIT)) == 0) {
 		
-		int delay = expression(g_node_nth_child(node, 0),arene,robot);
+		int delay = expression(g_node_nth_child(node, 0),arena,robot);
 		wait_robot(robot,delay);
 		
 	}
 	else if(memcmp(GOTO,data,sizeof(GOTO)) == 0) {
-		int delay = expression(g_node_nth_child(node, 0),arene,robot);
+		int delay = expression(g_node_nth_child(node, 0),arena,robot);
 		return go_to(delay);
 		
 	}
 	else if(memcmp(POKE,data,sizeof(POKE)) == 0) {
-		int addr = expression(g_node_nth_child(node, 0),arene,robot);
-		int value = expression(g_node_nth_child(node, 1),arene,robot);
+		int addr = expression(g_node_nth_child(node, 0),arena,robot);
+		int value = expression(g_node_nth_child(node, 1),arena,robot);
 		poke(robot,addr,value);
 	}
 	else if(memcmp(SHOOT,data,sizeof(SHOOT)) == 0) {
-		double angle = expression(g_node_nth_child(node, 0),arene,robot);
-		double distance = expression(g_node_nth_child(node, 1),arene,robot);
-		shoot(robot,arene,angle,distance);
+		double angle = expression(g_node_nth_child(node, 0),arena,robot);
+		double distance = expression(g_node_nth_child(node, 1),arena,robot);
+		shoot(robot,arena,angle,distance);
 	}
 	else if(memcmp(ENGINE,data,sizeof(ENGINE)) == 0) {
-		double angle = expression(g_node_nth_child(node, 0),arene,robot);
-		double speed = expression(g_node_nth_child(node, 1),arene,robot);
+		double angle = expression(g_node_nth_child(node, 0),arena,robot);
+		double speed = expression(g_node_nth_child(node, 1),arena,robot);
 		engine(robot,angle,speed);
 		
 	}
@@ -202,69 +202,69 @@ static int commands(Tree node,Arene arene,Robot robot) {
 
 
 
-static int expression(Tree tree, Arene arene,Robot robot) {
+static int expression(Tree tree, arena* arena,robot* robot) {
 	Tree node = tree;
 	char* data = node -> data;
 	if(memcmp(OPERATOR,data,sizeof(OPERATOR)) == 0) {
-		return operator(tree,arene,robot);
+		return operator(tree,arena,robot);
 	}
 	else if(memcmp(GPSX,data,sizeof(GPSX)) == 0) {
-		int num = expression(g_node_nth_child(node, 0),arene,robot);
-		return gpsx(arene,num);
+		int num = expression(g_node_nth_child(node, 0),arena,robot);
+		return gpsx(arena,num);
 	}
 	else if(memcmp(GPSY,data,sizeof(GPSY)) == 0) {
-		int num = expression(g_node_nth_child(node, 0),arene,robot);
-		return gpsy(arene,num);
+		int num = expression(g_node_nth_child(node, 0),arena,robot);
+		return gpsy(arena,num);
 	}
 	else if(memcmp(SELF,data,sizeof(SELF)) == 0) {
 		return self(robot);
 	}
 	else if(memcmp(RAND,data,sizeof(RAND)) == 0) {
-		int max = expression(g_node_nth_child(node, 0),arene,robot);
+		int max = expression(g_node_nth_child(node, 0),arena,robot);
 		return randoms(max);
 	}
 	else if(memcmp(PEEK,data,sizeof(PEEK)) == 0) {
-		int addr = expression(g_node_nth_child(node, 0),arene,robot);
+		int addr = expression(g_node_nth_child(node, 0),arena,robot);
 		return peek(robot,addr);
 		//peek(robot,addr);
 	}
 	else if(memcmp(STATE,data,sizeof(STATE)) == 0) {
-		int num = expression(g_node_nth_child(node, 0),arene,robot);
-		return state(arene,num);
+		int num = expression(g_node_nth_child(node, 0),arena,robot);
+		return state(arena,num);
 	}
 	else if(memcmp(SPEED,data,sizeof(SPEED)) == 0) {
 		return speed(robot);
 	}
 	else if(memcmp(ANGLE,data,sizeof(ANGLE)) == 0) {
-		double x1 = expression(g_node_nth_child(node, 0),arene,robot);
-		double y1 = expression(g_node_nth_child(node, 1),arene,robot);
-		double x2 = expression(g_node_nth_child(node, 2),arene,robot);
-		double y2 = expression(g_node_nth_child(node, 3),arene,robot);
+		double x1 = expression(g_node_nth_child(node, 0),arena,robot);
+		double y1 = expression(g_node_nth_child(node, 1),arena,robot);
+		double x2 = expression(g_node_nth_child(node, 2),arena,robot);
+		double y2 = expression(g_node_nth_child(node, 3),arena,robot);
 		return angle(x1,y1,x2,y2);
 	}
 	
 	else if(memcmp(TARGETX,data,sizeof(TARGETX)) == 0) {
-		double x1 = expression(g_node_nth_child(node, 0),arene,robot);
-		double angle = expression(g_node_nth_child(node, 1),arene,robot);
-		double length = expression(g_node_nth_child(node, 2),arene,robot);
+		double x1 = expression(g_node_nth_child(node, 0),arena,robot);
+		double angle = expression(g_node_nth_child(node, 1),arena,robot);
+		double length = expression(g_node_nth_child(node, 2),arena,robot);
 		return targetx(x1,angle,length);
 	}
 	else if(memcmp(TARGETY,data,sizeof(TARGETY)) == 0) {
-		double y1 = expression(g_node_nth_child(node, 0),arene,robot);
-		double angle = expression(g_node_nth_child(node, 1),arene,robot);
-		double length = expression(g_node_nth_child(node, 2),arene,robot);
+		double y1 = expression(g_node_nth_child(node, 0),arena,robot);
+		double angle = expression(g_node_nth_child(node, 1),arena,robot);
+		double length = expression(g_node_nth_child(node, 2),arena,robot);
 		return targety(y1,angle,length);
 	}
 	else if(memcmp(DISTANCE,data,sizeof(DISTANCE)) == 0) {
-		double x1 = expression(g_node_nth_child(node, 0),arene,robot);
-		double y1 = expression(g_node_nth_child(node, 1),arene,robot);
-		double x2 = expression(g_node_nth_child(node, 2),arene,robot);
-		double y2 = expression(g_node_nth_child(node, 3),arene,robot);
+		double x1 = expression(g_node_nth_child(node, 0),arena,robot);
+		double y1 = expression(g_node_nth_child(node, 1),arena,robot);
+		double x2 = expression(g_node_nth_child(node, 2),arena,robot);
+		double y2 = expression(g_node_nth_child(node, 3),arena,robot);
 		return distance(x1,y1,x2,y2);
 	}
 
 	else if(memcmp(CARDINAL,data,sizeof(CARDINAL)) == 0) {
-		return cardinal(arene);
+		return cardinal(arena);
 	}
 	else {
 		return *((int*) data);
@@ -272,7 +272,7 @@ static int expression(Tree tree, Arene arene,Robot robot) {
 	return -1;
 }
 
-int interprete(int line, Tree tree, Arene arena,Robot robot) {
+int interprete(int line, Tree tree, arena* arena,robot* robot) {
 	Tree node = g_node_new (&line);
 	g_node_children_foreach (tree, G_TRAVERSE_ALL,searchline,node);
 	if(node -> next != NULL) {
