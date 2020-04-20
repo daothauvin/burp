@@ -6,13 +6,13 @@ char* getNextCommand(int idRobot) {
 	return next[idRobot];
 }
 
-short cycle(Arene a,int line[4],Tree syntax_tree[4]) {
+short cycle(arena* a,int line[4],Tree syntax_tree[4]) {
 
 	//lire script pour action suivante
-	for(int i = 0; i < a -> nb_robots ;i++) {
-		//printf("%d\n",a -> list_robots[i] ->id);
-		next[a -> list_robots[i] ->id] = getLine(syntax_tree[a -> list_robots[i] ->id],line[a -> list_robots[i] ->id]);
-		line[a -> list_robots[i] ->id] = interprete(line[a -> list_robots[i] ->id],syntax_tree[i],a,a -> list_robots[i]);
+	for(int i = 0; i < get_nb_robot_arena(a) ;i++) {
+		//printf("%d\n",get_robot_index(a,i) ->id);
+		next[get_robot_id(get_robot_index(a,i))] = getLine(syntax_tree[get_robot_id(get_robot_index(a,i))],line[get_robot_id(get_robot_index(a,i))]);
+		line[get_robot_id(get_robot_index(a,i))] = interprete(line[get_robot_id(get_robot_index(a,i))],syntax_tree[i],a,get_robot_index(a,i));
 		
 	}
 
@@ -27,9 +27,9 @@ short cycle(Arene a,int line[4],Tree syntax_tree[4]) {
 	}
 
 	//test collision
-	for(int i = 0; i < a -> nb_robots; i++) {
-		for(int j = i+1; j < a -> nb_robots; j++) {
-			if(check_collision_robots(a -> list_robots[i],a -> list_robots[j])) {
+	for(int i = 0; i < get_nb_robot_arena(a); i++) {
+		for(int j = i+1; j < get_nb_robot_arena(a); j++) {
+			if(check_collision_robots(get_robot_index(a,i),get_robot_index(a,j))) {
 				/*
 				printf("collision robots\n");
 				printf("les points : %f - %f %f - %f\n\n",
@@ -38,15 +38,15 @@ short cycle(Arene a,int line[4],Tree syntax_tree[4]) {
 					a ->list_robots[j]->pos->x,
 					a ->list_robots[j]->pos->y);
 					*/
-				inflict_damage_from_collision(a -> list_robots[i],a -> list_robots[j]);
+				inflict_damage_from_collision(get_robot_index(a,i),get_robot_index(a,j));
 			}
 		}
 	}
 
-	for(int i = 0; i < a -> nb_robots; i++) {
-		for(int j = 0; j < a -> nb_missiles; j++) {
+	for(int i = 0; i < get_nb_robot_arena(a); i++) {
+		for(int j = 0; j < get_nb_missiles_arena(a); j++) {
 			//printf("collision missiles\n");
-			collision_with_missiles(a -> list_robots[i],a -> list_missile[j]);
+			collision_with_missiles(get_robot_index(a,i),get_missile_index(a,j));
 		}
 	}
 

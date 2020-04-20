@@ -428,7 +428,7 @@ void add_log(char* message) {
  */
 
 void updateArena(arena* arena) {
-	eraseArena()
+	eraseArena();
 	for (int i = 0; i < get_nb_robot_arena(arena); i++) {
 		printRobot(get_robot_index(arena,i));
 		printInfoRobot(get_robot_index(arena,i));
