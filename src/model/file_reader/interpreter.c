@@ -57,6 +57,7 @@ static short isTag(gpointer data) {
 }
 
 void printTree(Tree tree) {
+	printf("- currrent:tag = %s\n",(char*)tree -> data);
 	int i = 0;
 	g_node_children_foreach (tree,G_TRAVERSE_ALL,&printnode,&i);
 	printf("number of node : %d\n",i);
