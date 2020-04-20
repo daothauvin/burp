@@ -1,22 +1,17 @@
 #include "commands.h"
 
-static double degree_to_radians(double x)
+int wait_robot(robot *rob, unsigned int delay)
 {
-    return x * (M_PI/180);
+    set_waiting_time_robot(rob, delay);
+    return get_waiting_time_robot(rob);
 }
-
-int wait_robot(Robot rob, int delay)
+bool poke(robot *rob, int addr, int value)
 {
-    rob->waiting_time = delay < 0 ? 0 : delay;
-    return delay;
+    return add_memory_to_robot(rob, &value, addr);
 }
-void poke(Robot rob, int addr, int value)
+int peek(robot *rob, int addr)
 {
-    rob->memory[addr] = value;
-}
-int peek(Robot rob, int addr)
-{
-    return rob->memory[addr];
+    return get_memory_at_i(rob, addr);
 }
 int go_to(int num)
 {
@@ -24,64 +19,69 @@ int go_to(int num)
 }
 int randoms(int num)
 {
-    //Definir la ssrand(TIme(NULL));
     return rand() % num;
 }
-int cardinal(Arene arene)
+int cardinal(arena *arena)
 {
-    return number_of_robots;
+    return get_nb_robot_arena(arena);
 }
-int self(Robot rob)
+int self(robot *rob)
 {
-    return rob->id;
+    return get_robot_id(rob);
 }
-double speed(Robot rob)
+double speed(robot *rob)
 {
-    return rob->speed;
+    return get_robot_speed(rob);
 }
-double state(Arene arene, int num)
+double state(arena *arena, int num)
 {
-    for (int i = 0; i < cardinal(arene); ++i)
-    {
-        if (arene->list_robots[i]->id == num)
-            return arene->list_robots[i]->health_points;
+    for (int i = 0; i < cardinal(arena); ++i) {
+        if (get_robot_id(get_robot_index(arena, i)) == num)
+            return get_robot_health_points(get_robot_index(arena,i));
     }
     return -1;
 }
-double gpsx(Arene arene, int num)
+double gpsx(arena *arena, int num)
 {
-    for (int i = 0; i < cardinal(arene); ++i)
-    {
-        if (arene->list_robots[i]->id == num)
-            return arene->list_robots[i]->pos->x;
+    for (int i = 0; i < cardinal(arena); ++i) {
+        if (get_robot_id(get_robot_index(arena, i)) == num) {
+            point rob_point;
+            get_robot_pos(get_robot_index(arena, i), &rob_point);
+            return rob_point.x;
+        }
     }
     return -1;
 }
-double gpsy(Arene arene, int num)
+double gpsy(arena *arena, int num)
 {
-    for (int i = 0; i < cardinal(arene); ++i)
-    {
-        if (arene->list_robots[i]->id == num)
-            return arene->list_robots[i]->pos->y;
+    for (int i = 0; i < cardinal(arena); ++i) {
+        if (get_robot_id(get_robot_index(arena, i)) == num) {
+            point rob_point;
+            get_robot_pos(get_robot_index(arena, i), &rob_point);
+            return rob_point.y;
+        }
     }
     return -1;
 }
-void engine(Robot rob, double angle, double speed)
+void engine(robot *rob, double angle, double speed)
 {
-    rob->angle = angle;
-    rob->speed = speed;
+    if (!rob)
+        return;
+    set_robot_angle(rob, angle);
+    set_robot_speed(rob, speed);
 }
-int shoot(Robot rob, Arene arene, double angle, double explo_dist)
+bool shoot(robot *rob, arena *arena, double angle, double explo_dist)
 {
-    if (rob->missiles != missile_by_robot)
-    {
-        Missile m = create(rob->pos->x, rob->pos->y, missile_speed, angle, rob, explo_dist);
-        add_missile(arene, m);
-        rob->missiles += 1;
-        return 0;
+    if (rob && arena && get_robot_nb_missiles(rob) != missile_by_robot) {
+        point rob_point;
+        get_robot_pos(rob, &rob_point);
+        missile *m = create(rob_point.x,rob_point.y, missile_speed, rob, explo_dist);
+        add_missile(arena, &m);
+        set_robot_nb_missiles(rob, get_robot_nb_missiles(rob) + 1);
+        return true;
     }
     else
-        return -1;
+        return false;
 }
 double angle(double x1, double y1, double x2, double y2)
 {

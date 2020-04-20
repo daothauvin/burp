@@ -5,17 +5,18 @@
 #include "missile.h"
 #include "../../define.h"
 
-typedef struct arene_impl {
-	Robot* list_robots;
-	Missile* list_missile;
-	int nb_missiles;
-	int nb_robots;
-}*Arene;
+typedef struct arena_impl arena;
 
-Arene create_arene();
-int add_missile(Arene arene,Missile missile);
-int remove_missile(Arene arene,Missile missile);
-int add_robot(Arene arene,Robot rob);
-int remove_robot(Arene arene,Robot rob);
+arena *create_arena();
+int add_missile(arena *arena, missile **m);
+int add_robot(arena *arena, robot *rob);
+bool remove_missile(arena *arena, missile *mis);
+bool remove_robot(arena *arena, robot *rob);
+void freeArena(arena **arena);
+int get_nb_missiles_arena(arena *arena);
+int get_nb_robot_arena(arena *arena);
+robot *get_robot_per_id(arena *arena, int id);
+robot *get_robot_index(arena *arena, int indx);
+bool get_missile_index(arena *arena, int indx);
 
-#endif 
+#endif

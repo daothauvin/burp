@@ -1,6 +1,12 @@
 #include "robot.h"
 #include <string.h>
 #include <stdbool.h>
+
+double degree_to_radians(double x)
+{
+    return x * (M_PI/180);
+}
+
 struct robot_impl
 {
     char *robot_name;
@@ -14,44 +20,36 @@ struct robot_impl
     unsigned int waiting_time; //cycle delay
 };
 
-robot *create_robot()
+robot *create_robot(double x_1, double y_1, double angle, double speed, int id)
 {
     robot *rob = malloc(sizeof(struct robot_impl));
     rob->robot_name = malloc(sizeof(char) * robot_name_length);
     rob->memory = malloc(robot_memory * (sizeof(int)));
     memset(rob, 0, sizeof(struct robot_impl));
     rob->health_points = 100;
-    return rob;
-}
-
-void initialize_robot(robot *rob, double x_1, double y_1, double angle, double speed, int id)
-{
     rob->pos.x = x_1;
     rob->pos.y = y_1;
     rob->angle = angle;
     rob->speed = speed;
     rob->id = id;
+    return rob;
 }
-
 void update_pos_robot(robot *rob)
 {
-    if (rob->waiting_time > 0)
-    {
+    if (rob->waiting_time > 0) {
         rob->waiting_time--;
         return;
     }
-    float x2 = rob->pos.x + (rob->speed * cos(rob->angle));
-    float y2 = rob->pos.y + (rob->speed * sin(rob->angle));
-    if (x2 > size_arena_x)
-    {
+    float x2 = rob->pos.x + (rob->speed * cos(degree_to_radians(rob->angle)));
+    float y2 = rob->pos.y + (rob->speed * sin(degree_to_radians(rob->angle)));
+    if (x2 > size_arena_x) {
         rob->pos.x = size_arena_x;
         rob->speed = 0.0;
         rob->health_points -= collision_damage;
     }
     else
         rob->pos.x = x2;
-    if (y2 > size_arena_y)
-    {
+    if (y2 > size_arena_y) {
         rob->pos.y = size_arena_y;
         rob->speed = 0.0;
         rob->health_points -= collision_damage;
@@ -139,6 +137,9 @@ int get_robot_nb_missiles(robot *rob)
 {
     return rob->missiles;
 }
+void set_robot_nb_missiles(robot *rob,int nb_missiles){
+    rob->missiles = nb_missiles;
+}
 int get_waiting_time_robot(robot *rob)
 {
     return rob->waiting_time;
@@ -159,4 +160,9 @@ int get_memory_at_i(robot *rob, int i)
     if (i > robot_memory)
         return -1;
     return rob->memory[i];
+}
+void destroy_robot(robot **rob){
+    if(!rob || !*rob)
+        return ;
+    free(rob);
 }
