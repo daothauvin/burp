@@ -62,7 +62,8 @@ void inflict_damage_from_collision(Robot rob1,Robot rob2){
 }
 short check_collision_robots(Robot rob1,Robot rob2){
     double dx = rob1->pos->x - rob2->pos->x;
-    double dy = rob1->pos->y - rob2->pos->x;
+    double dy = rob1->pos->y - rob2->pos->y;
     double d = sqrt((dx*dx) + (dy*dy));
+    //printf("check_collision_robot : %f %f %f\n",dx,dy,d);
     return rob1->robot_hitbox + rob2->robot_hitbox > d ? 1 : 0;
 }
