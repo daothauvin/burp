@@ -1,16 +1,17 @@
 #include <stdio.h>
 #include "game.h"
 #include "model/file_reader/syntax_analyse.h"
-
+#include <errno.h>
+#include <string.h>
 int main(int argc, char *argv[]) {
 	
 	if(argc == 5) {
-		void* tab[4];
-		tab[0] = init_file_tree(argv[1]);
+		Tree tab[4];
 		for(int i = 0; i < 4; i ++) {
 			int fd = open(argv[i+1],O_RDONLY);
 			if(fd <= 0 ) {
-				fprintf(stderr,"%s : Does not exist",argv[i+1]);
+				fprintf(stderr,"%s : %s",argv[i+1],strerror(errno));
+				exit(0);
 			} 
 			close(fd);
 			tab[i] = init_file_tree(argv[i+1]);
