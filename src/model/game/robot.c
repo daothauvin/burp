@@ -84,12 +84,12 @@ void inflict_damage_from_collision(robot *rob1, robot *rob2)
     rob1->speed = 0;
     rob2->speed = 0;
 }
-short check_collision_robots(robot *rob1, robot *rob2)
+bool check_collision_robots(robot *rob1, robot *rob2)
 {
     double dx = rob1->pos.x - rob2->pos.x;
     double dy = rob1->pos.y - rob2->pos.x;
     double d = sqrt((dx * dx) + (dy * dy));
-    return 2 * robot_radius > d ? 1 : 0;
+    return 2 * robot_radius > d ? true : false;
 }
 int get_robot_id(robot *rob)
 {
