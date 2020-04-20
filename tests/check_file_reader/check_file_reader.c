@@ -6,8 +6,17 @@ Tree p;
 void setup(void) {
 	a = create_arene();
 	jean_paul = create_robot();
-	add_robot(a,jean_paul);
+	Robot robot1 = create_robot();
+	Robot robot2 = create_robot();
+	Robot robot3 = create_robot();
+	initialize_robot(robot1,0,0,0,0,0);
 	initialize_robot(jean_paul,0,0,0,0,1);
+	initialize_robot(robot2,0,0,0,0,2);
+	initialize_robot(robot3,0,0,0,0,3);
+	add_robot(a,jean_paul);
+	add_robot(a,robot1);
+	add_robot(a,robot2);
+	add_robot(a,robot3);
     assert(a != NULL);
 	assert(jean_paul != NULL);
 }
@@ -101,12 +110,42 @@ START_TEST(test_unknown_char)
 }
 END_TEST
 
+START_TEST(test_empty)
+{
+	p = init_file_tree(PATH_TO_DIR "/f_empty.txt");
+	//write(1,message_error(),strlen(message_error()));
+	//printf("\n");
+	
+	ck_assert_msg(p == NULL, "Empty Script should not success");
+
+	int sizemessage = strlen(message_error());
+	char* exceptedmessage = "found UNKNOWN when searching a number at position 1 line 1";
+	ck_assert_msg(
+		sizemessage == strlen(exceptedmessage) && memcmp(message_error(),exceptedmessage,sizemessage) == 0
+		,"Unexcepted Error Message");
+}
+END_TEST
+
+
 START_TEST(test_cardinal_if)
 {
 	p = init_file_tree(PATH_TO_DIR "/s_cardinal_if.txt");
 	ck_assert_msg(p != NULL, "Init should success");
-	int res = interprete(0, p,a,jean_paul);
-	ck_assert_msg(res == 6,"Should enter in if and go to line 6 but found next line at %d",res);
+	//printTree(p);
+	int next_line = interprete(0, p,a,jean_paul);
+	int excepted_line = 6;
+	ck_assert_int_eq(next_line,excepted_line);
+}
+END_TEST
+
+
+START_TEST(test_cardinal_if_fail)
+{
+	p = init_file_tree(PATH_TO_DIR "/s_cardinal_if_2.txt");
+	ck_assert_msg(p != NULL, "Init should success");
+	int next_line = interprete(0, p,a,jean_paul);
+	int excepted_line = 1;
+	ck_assert_int_eq(next_line,excepted_line);
 }
 END_TEST
 
@@ -117,8 +156,9 @@ START_TEST(test_poke_peek_wait)
 	int start = 0;
 	while((start = interprete(start, p,a,jean_paul))!=3)
 		;
-	
-	ck_assert_msg(jean_paul -> waiting_time == 1000,"Robot Should have a waiting time of 1000 but found %d",jean_paul -> waiting_time);
+	int waiting_time = jean_paul -> waiting_time;
+	int excepted_waiting_time = 1000;
+	ck_assert_int_eq(waiting_time,excepted_waiting_time);
 }
 END_TEST
 
@@ -130,12 +170,15 @@ START_TEST(test_rand_speed_engine)
 
 	jean_paul -> speed = 1;
 	interprete(0, p,a,jean_paul);
-	ck_assert_msg(jean_paul -> angle == 7,"Robot's angle should be 7 but found %d",jean_paul -> angle);
+	int angle = jean_paul -> angle;
+	int excepted_angle = 7;
+	ck_assert_int_eq(angle,excepted_angle);
 	ck_assert_msg(jean_paul -> speed > 0,"Robot's speed should be > 0 but found %d",jean_paul -> speed);
 	ck_assert_msg(jean_paul -> speed < 4,"Robot's speed should be < 4 but found %d",jean_paul -> speed);
 
 }
 END_TEST
+
 
 START_TEST(test_gps_self)
 {
@@ -146,12 +189,13 @@ START_TEST(test_gps_self)
 	jean_paul -> angle = 1;
 	jean_paul -> speed = 1;
 	interprete(0, p,a,jean_paul);
-	ck_assert_msg(jean_paul -> angle == 0,
-		"Robot's angle should be 0 but found %d",
-		jean_paul -> angle);
-	ck_assert_msg(jean_paul -> speed == 0,
-		"Robot's speed should be 0 but found %d",
-		jean_paul -> speed);
+
+	int angle = jean_paul -> angle;
+	int excepted_angle = 0;
+	ck_assert_int_eq(angle,excepted_angle);
+	int speed = jean_paul -> speed;
+	int excepted_speed = 0;
+	ck_assert_int_eq(speed,excepted_speed);
 
 }
 END_TEST
@@ -162,15 +206,14 @@ START_TEST(test_shoot_distance_angle)
 	p = init_file_tree(PATH_TO_DIR "/s_shoot_distance_angle.txt");
 	ck_assert_msg(p != NULL, "Init should success");
 	interprete(0, p,a,jean_paul);
-	ck_assert_msg(a -> nb_missiles == 1,"The robot should have lunch a missile");
+	int nb_missiles = a -> nb_missiles;
+	int excepted_nb_missiles = 1;
+	ck_assert_int_eq(nb_missiles,excepted_nb_missiles);
 	ck_assert_msg(a -> list_missile[0] -> owner == jean_paul,"Missile's owner is wrong");
-	
-	printf("%f\n", a -> list_missile[0] -> angle);
-	
 	ck_assert_int_eq((int) a -> list_missile[0] -> angle,45);
-	ck_assert_msg(a -> list_missile[0] -> explosion_distant == 5,
-		"Missile's explosion distance should be 5 but found %d",
-		a -> list_missile[0] -> explosion_distant);
+	int excepted_explosion_distance = 5;
+	int explosion_distance = a -> list_missile[0] -> explosion_distant;
+	ck_assert_int_eq(explosion_distance,excepted_explosion_distance);
 	
 }
 END_TEST
@@ -185,9 +228,22 @@ START_TEST(test_state_target)
 	ck_assert_msg(p != NULL, "Init should success");
 	interprete(0, p,a,jean_paul);
 	int health_points = jean_paul -> health_points;
-	ck_assert_msg(health_points + 1 == jean_paul -> waiting_time,
-		"waiting time should be the same at health_points of the robot (%d) but found %d",
-		jean_paul -> health_points,jean_paul -> waiting_time);
+	int waiting_time = jean_paul -> waiting_time;
+	ck_assert_int_eq(health_points + 1,waiting_time);
+	
+}
+END_TEST
+
+START_TEST(test_no_line_here)
+{
+	
+	p = init_file_tree(PATH_TO_DIR "/s_state_target.txt");
+	//write(1,message_error(),strlen(message_error()));
+	//printf("\n");
+	ck_assert_msg(p != NULL, "Init should success");
+	int next_line = interprete(1, p,a,jean_paul);
+	int excepted_line = 2;
+	ck_assert_int_eq(next_line,excepted_line);
 	
 }
 END_TEST
@@ -204,11 +260,14 @@ Suite * make_file_reader(void) {
 
     tcase_add_checked_fixture(tc_core, setup, teardown);
 	tcase_add_test(tc_core, test_cardinal_if);
+	tcase_add_test(tc_core, test_no_line_here);
+	tcase_add_test(tc_core, test_cardinal_if_fail);
 	tcase_add_test(tc_core, test_poke_peek_wait);
 	tcase_add_test(tc_core, test_state_target);
 	tcase_add_test(tc_core, test_shoot_distance_angle);
 	tcase_add_test(tc_core, test_gps_self);
 	tcase_add_test(tc_core, test_rand_speed_engine);
+	
 	suite_add_tcase(s, tc_core);
 
     /* Limits test case */
@@ -220,6 +279,7 @@ Suite * make_file_reader(void) {
 	tcase_add_test(tc_limits, test_unexcepted_number);
 	tcase_add_test(tc_limits, test_unknown_char);
 	tcase_add_test(tc_limits, test_to_big_number);
+	tcase_add_test(tc_limits, test_empty);
     suite_add_tcase(s, tc_limits);
 
     return s;
