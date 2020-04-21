@@ -87,7 +87,7 @@ double angle(double x1, double y1, double x2, double y2)
 {
     double result = acos(abs(x1 - x2) / distance(x1, x2, y1, y2));
     double result_degree = result * (180 / M_PI);
-    return result_degree; //A verifier
+    return result_degree; 
 }
 double targetx(double x1, double angle, double length)
 {
