@@ -23,8 +23,7 @@ int add_missile(arena *arena, missile *m)
     if (arena->nb_missiles == missile_by_robot * number_of_robots)
         return -1;
     arena->list_missile[arena->nb_missiles] = m;
-    arena->nb_missiles += 1;
-    return arena->nb_missiles - 1;
+    return arena->nb_missiles++;
 }
 bool remove_missile(arena *arena, missile *m)
 {
@@ -46,7 +45,7 @@ int add_robot(arena *arena, robot *rob)
     if (arena->nb_robots == number_of_robots)
         return -1;
     arena->list_robots[arena->nb_robots] = rob;
-    return ++arena->nb_robots;
+    return arena->nb_robots++;
 }
 bool remove_robot(arena *arena, robot* rob)
 {
@@ -81,7 +80,7 @@ int get_nb_robot_arena(arena *arena)
 robot *get_robot_per_id(arena *arena, int id)
 {
     if (!arena)
-        return false;
+        return NULL;
     for (int i = 0; i < arena->nb_robots; ++i) {
         if (get_robot_id(arena->list_robots[i]) == id) {
             return arena->list_robots[i];
