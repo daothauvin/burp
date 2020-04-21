@@ -63,7 +63,7 @@ void free_arena(arena **arena)
 {
     if (!arena || !*arena)
         return;
-    free(arena);
+    free(*arena);
 }
 int get_nb_missiles_arena(arena *arena)
 {
