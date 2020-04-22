@@ -16,10 +16,10 @@
 
 void init();
 void anim_begin();
-void waitForInput();
+short waitForInput();
 int  quit();
 
 void add_log(char* message);
 void add_action(char* action, int id);
 
-void updateArena(Arene arena);
+void updateArena(arena* arena);

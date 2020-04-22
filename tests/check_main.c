@@ -7,9 +7,12 @@ int main(void) {
     int number_failed = 0;
     SRunner *sr;
 
-    sr = srunner_create(make_file_reader());
-    //srunner_add_suite(sr, make_sequence_number_suite());
-	
+    sr = srunner_create(check_robot());
+    srunner_add_suite(sr,check_missile());
+    srunner_add_suite(sr,check_arena());
+    srunner_add_suite(sr,check_commands());
+	srunner_add_suite(sr,make_file_reader());
+    
     srunner_run_all(sr, CK_VERBOSE);
     number_failed = srunner_ntests_failed(sr);
     srunner_free(sr);

@@ -1,19 +1,20 @@
-#include "../../src/model/game/missile.h"
+#include "../../src/model/game/commands.h"
 #include <check.h>
 
-void setup(void) {}
+static void setup(void) {}
 
-void teardown(void) {}
+static void teardown(void) {}
 
-START_TEST(create_arena)
+START_TEST(target_x)
 {
-  ;     
+  printf("%f\n",targety(4,90,4));
+  
 }
 END_TEST
 
 Suite * check_commands (void) {
     Suite *s;
-    TCase *tc_core, *tc_limits;
+    TCase *tc_core;
 
     s = suite_create("Create commands");
 
@@ -21,14 +22,8 @@ Suite * check_commands (void) {
     tc_core = tcase_create("Core");
 
     tcase_add_checked_fixture(tc_core, setup, teardown);
-	//tcase_add_test(tc_core, test_cardinal_and_if);
+	  tcase_add_test(tc_core, target_x);
     suite_add_tcase(s, tc_core);
-
-    /* Limits test case */
-    tc_limits = tcase_create("Limits");
-
-    //tcase_add_test(tc_limits, test_bad_expression);
-    suite_add_tcase(s, tc_limits);
 
     return s;
 }

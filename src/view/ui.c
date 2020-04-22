@@ -122,46 +122,47 @@ static void killRobotNb(int id) {
  * 		3
  */
 
-static void printRobot(Robot robot) {
-	if (robot->health_points == 0) {
-		killRobotNb(robot->id);
+void printRobot(robot* rob) {
+	if (get_robot_health_points(rob) == 0) {
+		killRobotNb(get_robot_id(rob));
 		return;
 	}
-
-	int x = robot->pos->x;
-	int y = robot->pos->y;
+	point rob_pos;
+	get_robot_pos(rob,&rob_pos);
+	int x = rob_pos.x;
+	int y = rob_pos.y;
 	int ux = size_arena_x / 80;
 	int uy = size_arena_y / 40;
     char c = '#';
-
+	int robot_id = get_robot_id(rob);
 	if (isEmpty(x, y)) {
-		attron(COLOR_PAIR(2 + robot->id));
+		attron(COLOR_PAIR(2 + robot_id));
 		printCharArena(x, y, c);
-		attroff(COLOR_PAIR(2 + robot->id));
+		attroff(COLOR_PAIR(2 + robot_id));
 		return;
 	}
 	if (isEmpty(x + ux, y)) {
-		attron(COLOR_PAIR(2 + robot->id));
+		attron(COLOR_PAIR(2 + robot_id));
 		printCharArena(x + ux, y, c);
-		attroff(COLOR_PAIR(2 + robot->id));
+		attroff(COLOR_PAIR(2 + robot_id));
 		return;
 	}
 	if (isEmpty(x, y + uy)) {
-		attron(COLOR_PAIR(2 + robot->id));
+		attron(COLOR_PAIR(2 + robot_id));
 		printCharArena(x, y + uy, c);
-		attroff(COLOR_PAIR(2 + robot->id));
+		attroff(COLOR_PAIR(2 + robot_id));
 		return;
 	}
 	if (isEmpty(x - ux, y)) {
-		attron(COLOR_PAIR(2 + robot->id));
+		attron(COLOR_PAIR(2 + robot_id));
 		printCharArena(x - ux, y, c);
-		attroff(COLOR_PAIR(2 + robot->id));
+		attroff(COLOR_PAIR(2 + robot_id));
 		return;
 	}
 	if (isEmpty(x, y - uy)) {
-		attron(COLOR_PAIR(2 + robot->id));
+		attron(COLOR_PAIR(2 + robot_id));
 		printCharArena(x, y - uy, c);
-		attroff(COLOR_PAIR(2 + robot->id));
+		attroff(COLOR_PAIR(2 + robot_id));
 		return;
 	}
 }
@@ -171,9 +172,11 @@ static void printRobot(Robot robot) {
  *  Works the same as printRobot()
  */
 
-static void printRocket(Missile rocket) { 
-	int x = rocket->pos_x;
-	int y = rocket->pos_y;
+void printRocket(missile *rocket) { 
+	point pos_mis;
+	get_missile_pos(rocket,&pos_mis);
+	int x = pos_mis.x;
+	int y = pos_mis.y;
 	int ux = size_arena_x / 80;
 	int uy = size_arena_y / 40;
     char c = '+';
@@ -205,17 +208,17 @@ static void printRocket(Missile rocket) {
  *  Print a robot information
  */
 
-static void printInfoRobot(Robot robot) {
+void printInfoRobot(robot* rob) {
 
-	if (robot->health_points == 0) {
-		killRobotNb(robot->id);
+	if (get_robot_health_points(rob) == 0) {
+		killRobotNb(get_robot_id(rob));
 		return;
 	}
 
 	int x;
 	int y = 16;
-
-	switch(robot->id) {
+	int robot_id = get_robot_id(rob);
+	switch(robot_id) {
 		case 0:
 			x = 87;
 			break;
@@ -235,46 +238,47 @@ static void printInfoRobot(Robot robot) {
 	char buff[11];
 	memset(buff, '\0', 11);
 
-	attron(COLOR_PAIR(12 + robot->id));
+	attron(COLOR_PAIR(12 + robot_id));
 	mvprintw(y + 1, x + 2, " ");
-	attroff(COLOR_PAIR(12 + robot->id));
+	attroff(COLOR_PAIR(12 + robot_id));
 
-	snprintf(buff, 11, "RBT_%d", robot->id);
+	snprintf(buff, 11, "RBT_%d", robot_id);
 	mvprintw(y + 1, x + 4, buff);
 	memset(buff, '\0', 11);
 
-	attron(COLOR_PAIR(12 + robot->id));
+	attron(COLOR_PAIR(12 + robot_id));
 	mvprintw(y + 1, x + 10, " ");
-	attroff(COLOR_PAIR(12 + robot->id));
+	attroff(COLOR_PAIR(12 + robot_id));
 
 	drawRectangle(x + 1, y + 3, 11, 3, "Hp");
-	if ((int)robot->health_points == 100) {
-		snprintf(buff, 11, "%d %s", (int)robot->health_points, "%%");
-	} else if ((int)robot->health_points > 9) {
-		snprintf(buff, 11, " %d %s", (int)robot->health_points, "%%");
+	if (get_robot_health_points(rob) == 100) {
+		snprintf(buff, 11, "%d %s", get_robot_health_points(rob), "%%");
+	} else if (get_robot_health_points(rob)> 9) {
+		snprintf(buff, 11, " %d %s", get_robot_health_points(rob), "%%");
 	} else {
-		snprintf(buff, 11, "  %d %s", (int)robot->health_points, "%%");
+		snprintf(buff, 11, "  %d %s", get_robot_health_points(rob), "%%");
 	}
 	
 	mvprintw(y + 4, x + 4, buff);
 	memset(buff, '\0', 11);
 
 	drawRectangle(x + 1, y + 7, 11, 3, "Spd");
-	if ((int)robot->speed == 100) {
-		snprintf(buff, 11, "%d %s", (int)robot->speed, "%%");
-	} else if ((int)robot->speed > 9) {
-		snprintf(buff, 11, " %d %s", (int)robot->speed, "%%");
+	int speed_robot = (int)get_robot_speed(rob);
+	if (speed_robot == 100) {
+		snprintf(buff, 11, "%d %s",speed_robot, "%%");
+	} else if (speed_robot > 9) {
+		snprintf(buff, 11, " %d %s",speed_robot, "%%");
 	} else {
-		snprintf(buff, 11, "  %d %s", (int)robot->speed, "%%");
+		snprintf(buff, 11, "  %d %s",speed_robot, "%%");
 	}
 	mvprintw(y + 8, x + 4, buff);
 
 	drawRectangle(x + 1, y + 11, 11, 5, "Action");
-	mvprintw(y + 12, x + 3, actions[3 * robot->id]);
+	mvprintw(y + 12, x + 3, actions[3 * robot_id]);
 	attron(COLOR_PAIR(1));
-	mvprintw(y + 13, x + 3, actions[3 * robot->id + 1]);
+	mvprintw(y + 13, x + 3, actions[3 * robot_id + 1]);
 	attroff(COLOR_PAIR(1));
-	mvprintw(y + 14, x + 3, actions[3 * robot->id + 2]);
+	mvprintw(y + 14, x + 3, actions[3 * robot_id + 2]);
      
 }
 
@@ -423,13 +427,14 @@ void add_log(char* message) {
  *  Update the arena, and the info with data in the arena
  */
 
-void updateArena(Arene arena) {
-	for (int i = 0; i < number_of_robots; i++) {
-		printRobot(arena->list_robots[i]);
-		printInfoRobot(arena->list_robots[i]);
+void updateArena(arena* arena) {
+	eraseArena();
+	for (int i = 0; i < get_nb_robot_arena(arena); i++) {
+		printRobot(get_robot_index(arena,i));
+		printInfoRobot(get_robot_index(arena,i));
 	}
-	for (int i = 0; i < number_of_robots * missile_by_robot; i++) {
-		printRocket(arena->list_missile[i]);
+	for (int i = 0; i < get_nb_missiles_arena(arena); i++) {
+		printRocket(get_missile_index(arena,i));
 	}
 }
 
@@ -456,24 +461,17 @@ static void drawArena() {
  * 		Q - Quit
  */
 
-void waitForInput() {
+static double time_between = 1;
+short waitForInput() {
 	/*
 	char msg[40];
-	Robot bob = create_robot();
-	initialize_robot(bob, 0.0, 0.0, 0.0, 0.0, 0);
-	bob->health_points = 42.0;
+	robot* bob = create_robot(0.0, 0.0, 0.0, 0.0, 0);
 
-	Robot rob = create_robot();
-	initialize_robot(rob, 0.0, 9999.0, 0.0, 0.0, 1);
-	rob->health_points = 100.0;
+	robot* rob = create_robot(0.0, 9999.0, 0.0, 0.0, 1);
 
-	Robot tob = create_robot();
-	initialize_robot(tob, 9999.0, 0.0, 0.0, 0.0, 2);
-	tob->health_points = 0.0;
+	robot* tob = create_robot(9999.0, 0.0, 0.0, 0.0, 2);
 
-	Robot zob = create_robot();
-	initialize_robot(zob, 9999.0, 9999.0, 0.0, 0.0, 3);
-	zob->health_points = 69.0;
+	robot* zob = create_robot(9999.0, 9999.0, 0.0, 0.0, 3);
 
 	char act[7];
 	*/
@@ -481,12 +479,18 @@ void waitForInput() {
 	cbreak();
 	nodelay(stdscr, TRUE);
 	time_t cur_time = time(NULL);
-    while (time(NULL) - cur_time < 1) {
+    while (time(NULL) - cur_time < time_between) {
 		int c = getch();
 		switch (c) {
 			case 'q':
 			case 'Q':
-				return;
+				return 0;
+			case '+':
+				if(time_between > 0.1) time_between -= 0.1; 
+				break;
+			case '-':
+				if(time_between < 2) time_between += 0.1; 
+				break;
 			/*
 			// Tests
 			case '0':
@@ -542,6 +546,7 @@ void waitForInput() {
 				break;
 		}
 	}
+	return 1;
 }
 
 /**
