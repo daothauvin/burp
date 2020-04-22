@@ -4,17 +4,14 @@
 
 #include "game.h"
 
-void game(Tree syntax_tree[4]){	
-	Arene a = create_arene();
+void game(Tree syntax_tree[4])
+{
+	arena *a = create_arena();
 	init();
-	Robot r1 = create_robot();
-	Robot r2 = create_robot();
-	Robot r3 = create_robot();
-	Robot r4 = create_robot();
-	initialize_robot(r1,5000,5000,0,100,0);
-	initialize_robot(r2,0,10000.0,0,0,1);
-	initialize_robot(r3,10000.0,10000.0,0,0,2);
-	initialize_robot(r4,10000.0,0,0,0,3);
+	robot* r1 = create_robot(5000,5000,0,100,0);
+	robot* r2 = create_robot(0,10000.0,0,0,1);
+	robot* r3 = create_robot(10000.0,10000.0,0,0,2);
+	robot* r4 = create_robot(10000.0,0,0,0,3);
 	add_robot(a,r1);
 	add_robot(a,r2);
 	add_robot(a,r3);
@@ -25,7 +22,7 @@ void game(Tree syntax_tree[4]){
 	while (cycle(a, line, syntax_tree)){
 		
 		updateArena(a);
-		for(int i = 0;i < a ->nb_robots; i++) {
+		for(int i = 0;i < get_nb_robot_arena(a); i++) {
 			add_action(getNextCommand(i),i);
 		}
 		

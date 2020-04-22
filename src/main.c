@@ -3,8 +3,11 @@
 #include "model/file_reader/syntax_analyse.h"
 #include <errno.h>
 #include <string.h>
+#include <time.h>
+#include <stdlib.h>
+
 int main(int argc, char *argv[]) {
-	
+	srand(time(NULL));
 	if(argc == 5) {
 		Tree tab[4];
 		for(int i = 0; i < 4; i ++) {

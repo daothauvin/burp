@@ -1,5 +1,6 @@
 #include "view/ui.h"
-#include "model/cycle.h"
 #include "model/game/arene.h"
+#include "model/file_reader/syntax_tree.h"
+#include "model/cycle.h"
 #include <stdio.h>
 void game(Tree syntax_tree[4]);

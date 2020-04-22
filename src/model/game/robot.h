@@ -1,39 +1,41 @@
-#ifndef ROBOT_H
-#define ROBOT_H
+#ifndef robot_H
+#define robot_H
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include "../../define.h"
+#include <stdbool.h>
+#include <assert.h>
 
-typedef struct point{
+double degree_to_radians(double x);
+typedef struct point_impl
+{
 	double x;
 	double y;
-}*Point;
+} point;
 
-typedef struct robot_impl
-{
-	char *robot_id;
-	int id;
-	double health_points;// Represented as a percentage
-	Point pos; 
-	double angle;
-	double speed;// Represented as a percentage
-	int missiles;//Number of missile in the area currently
-	double robot_hitbox;//robot hitbox size
-	int waiting_time;//cycle delay
-	int* memory;
-}*Robot;
+typedef struct robot_impl robot;
 
 //Functions prototypes
 // Allocate a robot at a time
-Robot create_robot();
-//allocate a robot with the script's contents
-void initialize_robot(Robot rob,double x_1,double y_1,double angle,double speed,int id);
-void update_pos_robot(Robot rob); // Fixed depending on angle and speed every cycle
-void modify_speed(Robot rob,double speed);
-void modify_angle(Robot rob,double angle);
-void inflict_damage_from_missile(Robot rob,Point p);
-void inflict_damage_from_collision(Robot rob1,Robot rob2);
-short collision_robots(Robot rob1,Robot rob2);
-short check_collision_robots(Robot rob1,Robot rob2);
+robot *create_robot(double x_1, double y_1, double angle, double speed, int id);
+void update_pos_robot(robot *rob); // Fixed depending on angle and speed every cycle
+void inflict_damage_from_missile(robot *rob, point p);
+void inflict_damage_from_collision(robot *rob1, robot *rob2);
+bool check_collision_robots(robot *rob1, robot *rob2);
+char *get_robot_name(robot *robot);
+unsigned int get_robot_health_points(robot *rob);
+double get_robot_angle(robot *rob);
+double get_robot_speed(robot *rob);
+void get_robot_pos(robot *rob, point *pos);
+int get_robot_id(robot *rob);
+int get_waiting_time_robot(robot *rob);
+int get_robot_nb_missiles(robot *rob);
+int peek_memory_at(robot *rob, int i);
+bool set_robot_angle(robot *rob, double angle);
+bool set_robot_speed(robot *rob, double speed);
+bool poke_memory_at(robot *rob, int data, int pos);
+void set_robot_nb_missiles(robot *rob,int nb_missiles);
+void set_waiting_time_robot(robot *rob, unsigned int waiting_time);
+void destroy_robot(robot **rob);
 #endif

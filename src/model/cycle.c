@@ -6,28 +6,30 @@ char* getNextCommand(int idRobot) {
 	return next[idRobot];
 }
 
-short cycle(Arene a,int line[4],Tree syntax_tree[4]) {
+short cycle(arena* a,int line[4],Tree syntax_tree[4]) {
 
 	//lire script pour action suivante
-	for(int i = 0; i < a -> nb_robots ;i++) {
-		//printf("%d\n",a -> list_robots[i] ->id);
-		next[a -> list_robots[i] ->id] = getLine(syntax_tree[a -> list_robots[i] ->id],line[a -> list_robots[i] ->id]);
-		line[a -> list_robots[i] ->id] = interprete(line[a -> list_robots[i] ->id],syntax_tree[i],a,a -> list_robots[i]);
+	for(int i = 0; i < get_nb_robot_arena(a) ;i++) {
+		//printf("%d\n",get_robot_index(a,i) ->id);
+		next[get_robot_id(get_robot_index(a,i))] = getLine(syntax_tree[get_robot_id(get_robot_index(a,i))],line[get_robot_id(get_robot_index(a,i))]);
+		line[get_robot_id(get_robot_index(a,i))] = interprete(line[get_robot_id(get_robot_index(a,i))],syntax_tree[i],a,get_robot_index(a,i));
 		
 	}
 
 	//modifie positions : robot + missile
-	for(int i = 0; i < a -> nb_robots ;i++) {
-		update_pos_robot(a -> list_robots[i]);
+	for (int i = 0; i < get_nb_robot_arena(a); i++)
+	{
+		update_pos_robot(get_robot_index(a, i));
 	}
-	for(int i = 0; i < a -> nb_missiles; i++) {
-		update_pos_missile(a -> list_missile[i]);
+	for (int i = 0; i < get_nb_missiles_arena(a); i++)
+	{
+		update_pos_missile(get_missile_index(a, i));
 	}
 
 	//test collision
-	for(int i = 0; i < a -> nb_robots; i++) {
-		for(int j = i+1; j < a -> nb_robots; j++) {
-			if(check_collision_robots(a -> list_robots[i],a -> list_robots[j])) {
+	for(int i = 0; i < get_nb_robot_arena(a); i++) {
+		for(int j = i+1; j < get_nb_robot_arena(a); j++) {
+			if(check_collision_robots(get_robot_index(a,i),get_robot_index(a,j))) {
 				/*
 				printf("collision robots\n");
 				printf("les points : %f - %f %f - %f\n\n",
@@ -36,35 +38,42 @@ short cycle(Arene a,int line[4],Tree syntax_tree[4]) {
 					a ->list_robots[j]->pos->x,
 					a ->list_robots[j]->pos->y);
 					*/
-				inflict_damage_from_collision(a -> list_robots[i],a -> list_robots[j]);
+				inflict_damage_from_collision(get_robot_index(a,i),get_robot_index(a,j));
 			}
 		}
 	}
 
-	for(int i = 0; i < a -> nb_robots; i++) {
-		for(int j = 0; j < a -> nb_missiles; j++) {
+	for(int i = 0; i < get_nb_robot_arena(a); i++) {
+		for(int j = 0; j < get_nb_missiles_arena(a); j++) {
 			//printf("collision missiles\n");
-			collision_with_missiles(a -> list_robots[i],a -> list_missile[j]);
+			collision_with_missiles(get_robot_index(a,i),get_missile_index(a,j));
 		}
 	}
 
 	//tue les robots morts
-	for(int i = 0; i < a -> nb_robots ;i++) {
-		if(a -> list_robots [i] -> health_points <= 0) {
-			remove_robot(a,a -> list_robots[i]);
+	for (int i = 0; i < get_nb_robot_arena(a); i++)
+	{
+		if(get_robot_health_points(get_robot_index(a, i)) <= 0)
+		{
+			remove_robot(a, get_robot_index(a, i));
 		}
 	}
-	
-	for(int i = 0; i < a -> nb_missiles; i++) {
-		if(will_explode(a -> list_missile[i]) < 0) {
-			Point p = explode(a -> list_missile[i]);
-			for(int i = 0; i < a -> nb_robots ;i++) {
-				inflict_damage_from_missile(a -> list_robots[i],p);
-			}
-			remove_missile(a,a -> list_missile[i]);
-		}
-	}
-	
-	return a -> nb_robots != 0;
 
+	for (int i = 0; i < get_nb_missiles_arena(a); i++)
+	{
+		if (will_explode(get_missile_index(a,i)) == true)
+		{
+			point p;
+			if(!explode(get_missile_index(a,i),&p)){
+				continue;
+			}
+			for (int i = 0; i < get_nb_robot_arena(a); i++)
+			{
+				inflict_damage_from_missile(get_robot_index(a, i), p);
+			}
+			remove_missile(a, get_missile_index(a,i));
+		}
+	}
+
+	return get_nb_robot_arena(a) != 0;
 }

@@ -3,26 +3,24 @@
 */
 #ifndef MISSILE_H
 #define MISSILE_H
-
 #include "robot.h"
 #include "math.h"
-typedef struct missile_impl
-{
-	double angle;
-	double pos_x;
-	double pos_y;
-	double speed;
-	double parcouru_distant;
-	double explosion_distant;
-	short will_explode;
-	Robot owner;
-} * Missile;
+#include <stdbool.h>
+
+typedef struct missile_impl missile;
 
 //prototypes
-Missile create(double pos_x, double pos_y, double speed, double angle, Robot rob, double explo_dist); //Angle will be calculated
-void update_pos_missile(Missile m);
-Point explode(Missile mis); // Might trigger an event in the view
-void check_distant(Missile m);
-short will_explode(Missile m);
-void collision_with_missiles(Robot rob, Missile m);
+missile* create_missile(double pos_x, double pos_y, double angle, robot* rob, double explo_dist); //Angle will be calculated
+void update_pos_missile(missile* m);
+bool explode(missile* mis,point *explode_point); // Might trigger an event in the view
+void check_distant(missile* m);
+bool will_explode(missile* m);
+void collision_with_missiles(robot* rob, missile* m);
+double get_missile_angle(missile *m);
+double get_missile_speed(missile *m);
+double get_explosion_distant(missile *m);
+double get_parcouru_distant(missile *m);
+void get_missile_pos(missile *m,point *p);
+robot* get_missile_owner(missile *m);
+bool destroy_missile(missile **m);
 #endif
