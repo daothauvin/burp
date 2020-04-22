@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "game.h"
 #include "model/file_reader/syntax_analyse.h"
+
 #include <errno.h>
 #include <string.h>
 #include <time.h>

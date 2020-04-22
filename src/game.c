@@ -31,5 +31,4 @@ void game(Tree syntax_tree[4])
 		//printf("one turn\n");
 	}
 	quit();
-	freeSyntaxAnalyseContest();
 }
