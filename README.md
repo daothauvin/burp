@@ -52,4 +52,6 @@ Décélérer : -
 
 ## Auteurs
 
-Par Dao Thauvin, Liece Cherchour et Thomas Bignon.
+[Dao Thauvin](https://github.com/daothauvin)  
+[Liece Cherchour](https://github.com/LieceC)  
+[Thomas Bignon](https://github.com/totocptbgn)  
