@@ -436,6 +436,7 @@ void updateArena(arena* arena) {
 	for (int i = 0; i < get_nb_missiles_arena(arena); i++) {
 		printRocket(get_missile_index(arena,i));
 	}
+	refresh();
 }
 
 /**
