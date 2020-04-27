@@ -23,7 +23,6 @@ void game(Tree syntax_tree[4])
 	init();
 	updateArena(a);
 	// anim_begin();
-
 	while (cycle(a, line, syntax_tree)){
 		updateArena(a);
 		for(int i = 0;i < get_nb_robot_arena(a); i++) {
