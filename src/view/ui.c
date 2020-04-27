@@ -493,7 +493,7 @@ short waitForInput() {
 					add_log("Speed up");
 				}
 				else {
-					add_log("Max speed reached");
+					add_log("Maximum speed reached");
 				}
 				break;
 			case '-':
@@ -502,7 +502,7 @@ short waitForInput() {
 					add_log("Speed down");
 				} 
 				else {
-					add_log("Lower speed reached");
+					add_log("Lowest speed reached");
 				}
 				break;
 			/*
