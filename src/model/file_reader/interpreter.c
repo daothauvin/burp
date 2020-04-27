@@ -290,7 +290,7 @@ static int expression(Tree tree, arena* arena,robot* robot) {
 			addWarning(1,addr,get_robot_id(robot));
 		}
 		addr = addr % robot_memory;
-		return peek(robot,addr) % robot_memory;
+		return peek(robot,addr);
 		//peek(robot,addr);
 	}
 	else if(memcmp(STATE,data,sizeof(STATE)) == 0) {
