@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "game.h"
 #include "model/file_reader/syntax_analyse.h"
+
 #include <errno.h>
 #include <string.h>
 #include <time.h>
@@ -34,5 +35,10 @@ int main(int argc, char *argv[]) {
 		} 
 	
 		game(tab);
+
+		for(int i = 0;i < 4;i++) {
+			freeTree(tab[i]);
+		}
+		freeSyntaxAnalyseContest();
 	}
 }
