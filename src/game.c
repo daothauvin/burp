@@ -18,7 +18,7 @@ void game(Tree syntax_tree[4])
 	add_robot(a,r4);
 	
 	int line[4] = {0};
-
+	init_next(a,line,syntax_tree);
 	while (cycle(a, line, syntax_tree)){
 		
 		updateArena(a);
