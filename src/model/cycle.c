@@ -6,14 +6,26 @@ char* getNextCommand(int idRobot) {
 	return next[idRobot];
 }
 
+
+void init_next(arena* a,int line[4],Tree syntax_tree[4]) {
+	for(int i = 0; i < get_nb_robot_arena(a) ;i++) {
+		//printf("%d\n",get_robot_index(a,i) ->id);
+		next[get_robot_id(get_robot_index(a,i))] = getLine(syntax_tree[get_robot_id(get_robot_index(a,i))],line[get_robot_id(get_robot_index(a,i))]);
+	}
+}
+
 short cycle(arena* a,int line[4],Tree syntax_tree[4]) {
 
 	//lire script pour action suivante
 	for(int i = 0; i < get_nb_robot_arena(a) ;i++) {
-		//printf("%d\n",get_robot_index(a,i) ->id);
-		next[get_robot_id(get_robot_index(a,i))] = getLine(syntax_tree[get_robot_id(get_robot_index(a,i))],line[get_robot_id(get_robot_index(a,i))]);
-		line[get_robot_id(get_robot_index(a,i))] = interprete(line[get_robot_id(get_robot_index(a,i))],syntax_tree[i],a,get_robot_index(a,i));
-		
+		if(get_waiting_time_robot(get_robot_index(a,i)) == 0) {
+			//printf("%d\n",get_robot_index(a,i) ->id);
+			line[get_robot_id(get_robot_index(a,i))] = interprete(line[get_robot_id(get_robot_index(a,i))],syntax_tree[i],a,get_robot_index(a,i));
+			
+		}
+		if(get_waiting_time_robot(get_robot_index(a,i)) < 2) {
+			next[get_robot_id(get_robot_index(a,i))] = getLine(syntax_tree[get_robot_id(get_robot_index(a,i))],line[get_robot_id(get_robot_index(a,i))]);
+		}
 	}
 
 	//modifie positions : robot + missile
