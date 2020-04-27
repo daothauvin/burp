@@ -25,7 +25,7 @@ robot *create_robot(double x_1, double y_1, double angle, double speed, int id)
     robot *rob = malloc(sizeof(struct robot_impl));
     rob->robot_name = malloc(sizeof(char) * robot_name_length);
     memset(rob, 0, sizeof(struct robot_impl));
-    memset(rob -> memory,0,robot_memory);
+    memset(rob -> memory,0,robot_memory*sizeof(int));
     rob->health_points = 100;
     rob->pos.x = x_1;
     rob->pos.y = y_1;
@@ -88,7 +88,7 @@ void inflict_damage_from_collision(robot *rob1, robot *rob2)
 bool check_collision_robots(robot *rob1, robot *rob2)
 {
     double dx = rob1->pos.x - rob2->pos.x;
-    double dy = rob1->pos.y - rob2->pos.x;
+    double dy = rob1->pos.y - rob2->pos.y;
     double d = sqrt((dx * dx) + (dy * dy));
     return 2 * robot_radius > d ? true : false;
 }
