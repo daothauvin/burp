@@ -107,6 +107,58 @@ char* getLine(Tree tree,int line) {
 
 }
 
+
+struct warning_message* burp_errors = NULL;
+struct warning_message* last_burp_error = NULL;
+
+/*
+	Add a warning to the burp error pipe [pipeError] 
+	where [value] correspond to the incorrect value
+	and [line] the line where it occurs
+	Burp errors : 
+	- unknown robot number ([num_warning] = 0)
+	- robot memory is too high ([num_warning] = 1)
+*/
+static void addWarning(int num_warning,int value,int robot) {
+	struct warning_message* new_error = malloc(sizeof(struct warning_message));
+	if(new_error == NULL) return;
+	new_error->num_robot=robot;
+	new_error->next_message=NULL;
+	switch (num_warning)
+	{
+		case 0:
+			snprintf(new_error->message,60,"robot number %d is invalid (max: %d)",value,number_of_robots - 1);
+			break;
+		case 1:
+			snprintf(new_error->message,60,"robot memory %d is invalid (max: %d)",value,robot_memory - 1);
+			break;
+		default:
+			break;
+	}
+	if(burp_errors == NULL) {
+		burp_errors = new_error;
+		last_burp_error = new_error;
+	}
+	else {
+		last_burp_error -> next_message = new_error;
+		last_burp_error = new_error;
+	}
+}
+
+struct warning_message* getWarnings() {
+	return burp_errors;
+}
+
+void freeWarnings() {
+	struct warning_message* tmp;
+	while(burp_errors != NULL) {
+		tmp = burp_errors;
+		burp_errors = burp_errors->next_message;
+		free(tmp);
+	}
+}
+
+
 /*
 
 	The following functions execute the burp language interpretation for the diverse symbol categories,
@@ -169,24 +221,25 @@ static int commands(Tree node,arena *arena,robot *robot) {
 	char* data = node -> data;
 	//printf("data : %ld %s\n",strlen(data),data);
 	if(memcmp(IF,data,sizeof(IF)) == 0 && condition(g_node_nth_child(node, 0),arena,robot)) {
-			return expression(g_node_nth_child(node, 1),arena,robot);
+		return expression(g_node_nth_child(node, 1),arena,robot);
 	}
 	else if(memcmp(WAIT,data,sizeof(WAIT)) == 0) {
-		
 		int delay = expression(g_node_nth_child(node, 0),arena,robot);
 		wait_robot(robot,delay);
-		
 	}
 	else if(memcmp(GOTO,data,sizeof(GOTO)) == 0) {
 		int line = expression(g_node_nth_child(node, 0),arena,robot);
 		return go_to(line);
-		
 	}
 	else if(memcmp(POKE,data,sizeof(POKE)) == 0) {
-		int addr = expression(g_node_nth_child(node, 0),arena,robot) % robot_memory;
+		int addr = expression(g_node_nth_child(node, 0),arena,robot);
+		if(addr >= robot_memory) {
+			addWarning(1,addr,get_robot_id(robot));
+		}
+		addr = addr % robot_memory;
 		int value = expression(g_node_nth_child(node, 1),arena,robot);
 		poke(robot,addr,value);
-	}
+	} 
 	else if(memcmp(SHOOT,data,sizeof(SHOOT)) == 0) {
 		double angle = expression(g_node_nth_child(node, 0),arena,robot) % 360;
 		double distance = expression(g_node_nth_child(node, 1),arena,robot);
@@ -194,7 +247,9 @@ static int commands(Tree node,arena *arena,robot *robot) {
 	}
 	else if(memcmp(ENGINE,data,sizeof(ENGINE)) == 0) {
 		double angle = expression(g_node_nth_child(node, 0),arena,robot) % 360;
-		double speed = expression(g_node_nth_child(node, 1),arena,robot) % 101;
+		double speed = expression(g_node_nth_child(node, 1),arena,robot);
+		if(speed > 100) speed = 100;
+		if(speed < 0) speed = 0;
 
 		engine(robot,angle,speed);
 		
@@ -211,11 +266,15 @@ static int expression(Tree tree, arena* arena,robot* robot) {
 		return operator(tree,arena,robot);
 	}
 	else if(memcmp(GPSX,data,sizeof(GPSX)) == 0) {
-		int num = expression(g_node_nth_child(node, 0),arena,robot) % number_of_robots;
+		int num = expression(g_node_nth_child(node, 0),arena,robot);
+		if(num >= number_of_robots) addWarning(0,num,get_robot_id(robot));
+		num = num % number_of_robots;
 		return gpsx(arena,num);
 	}
 	else if(memcmp(GPSY,data,sizeof(GPSY)) == 0) {
-		int num = expression(g_node_nth_child(node, 0),arena,robot) % number_of_robots;
+		int num = expression(g_node_nth_child(node, 0),arena,robot);
+		if(num >= number_of_robots) addWarning(0,num,get_robot_id(robot));
+		num = num % number_of_robots;
 		return gpsy(arena,num);
 	}
 	else if(memcmp(SELF,data,sizeof(SELF)) == 0) {
@@ -227,11 +286,17 @@ static int expression(Tree tree, arena* arena,robot* robot) {
 	}
 	else if(memcmp(PEEK,data,sizeof(PEEK)) == 0) {
 		int addr = expression(g_node_nth_child(node, 0),arena,robot);
+		if(addr >= robot_memory) {
+			addWarning(1,addr,get_robot_id(robot));
+		}
+		addr = addr % robot_memory;
 		return peek(robot,addr) % robot_memory;
 		//peek(robot,addr);
 	}
 	else if(memcmp(STATE,data,sizeof(STATE)) == 0) {
-		int num = expression(g_node_nth_child(node, 0),arena,robot) % number_of_robots;
+		int num = expression(g_node_nth_child(node, 0),arena,robot);
+		if(num >= number_of_robots) addWarning(0,num,get_robot_id(robot));
+		num = num % number_of_robots;
 		return state(arena,num);
 	}
 	else if(memcmp(SPEED,data,sizeof(SPEED)) == 0) {

@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
 					freeTree(tab[j]);
 				}
 				freeSyntaxAnalyseContest();
-				fprintf(stderr,"%s : %s",argv[i+1],strerror(errno));
+				fprintf(stderr,"%s : %s\n",argv[i+1],strerror(errno));
 				exit(0);
 			} 
 			close(fd);

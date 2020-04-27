@@ -125,7 +125,8 @@ char* message_error() {
 }
 
 void  freeSyntaxAnalyseContest() {
-	g_scanner_destroy(gs);
+	if(gs!=NULL)
+		g_scanner_destroy(gs);
 	free(excepted_token);
 	free(error_token);
 }

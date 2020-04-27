@@ -25,6 +25,7 @@ robot *create_robot(double x_1, double y_1, double angle, double speed, int id)
     robot *rob = malloc(sizeof(struct robot_impl));
     rob->robot_name = malloc(sizeof(char) * robot_name_length);
     memset(rob, 0, sizeof(struct robot_impl));
+    memset(rob -> memory,0,robot_memory);
     rob->health_points = 100;
     rob->pos.x = x_1;
     rob->pos.y = y_1;
