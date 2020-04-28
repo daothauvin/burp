@@ -33,7 +33,7 @@ double speed(robot *rob)
 {
     return get_robot_speed(rob);
 }
-double state(arena *arena, int num)
+int state(arena *arena, int num)
 {
     for (int i = 0; i < cardinal(arena); ++i) {
         if (get_robot_id(get_robot_index(arena, i)) == num)
@@ -85,7 +85,12 @@ bool shoot(robot *rob, arena *arena, double angle, double explo_dist)
 }
 double angle(double x1, double y1, double x2, double y2)
 {
-    double result = acos(fabs(x1 - x2) / distance(x1, x2, y1, y2));
+    double dist = distance(x1,y1,x2,y2);
+    double abs_dist = fabs(x1 -x2);
+    double x = abs_dist/dist;
+    //printf("distance = %f, abs_dist = %f, x = %f",dist,abs_dist,x);
+    double result = acos(x);
+    //printf("result = %f\n",result);
     double result_degree = result * (180 / M_PI);
     return result_degree; 
 }

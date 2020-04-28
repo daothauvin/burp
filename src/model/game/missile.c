@@ -106,6 +106,8 @@ double get_explosion_distant(missile *m){
 bool destroy_missile(missile **m){
     if(!m || !*m)
         return false;
+    if((*m)->owner)
+        decrement_nb_missile((*m)->owner);
     free(*m);
     *m = NULL;
     return true;

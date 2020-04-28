@@ -33,7 +33,7 @@ bool remove_missile(arena *arena, missile *m)
         if (arena->list_missile[i] == m) {
             arena->nb_missiles -= 1;
             arena->list_missile[i] = arena->list_missile[arena->nb_missiles];
-            free(m);
+            destroy_missile(&m);
             m = NULL;
             return true;
         }
