@@ -13,11 +13,9 @@ static void setup(void)
   rob = create_robot(0, 0, 0, 0, 0);
   robot *robot1 = create_robot(0, 0, 0, 0, 1);
   robot *robot2 = create_robot(0, 0, 0, 0, 2);
-  robot *robot3 = create_robot(0, 0, 0, 0, 3);
   add_robot(a, rob);
   add_robot(a, robot1);
   add_robot(a, robot2);
-  add_robot(a, robot3);
 }
 
 static void teardown(void)
@@ -28,7 +26,7 @@ static void teardown(void)
 START_TEST(test_create_arena)
 {
   ck_assert_int_eq(get_nb_missiles_arena(a), 0);
-  ck_assert_int_eq(get_nb_robot_arena(a), 4);
+  ck_assert_int_eq(get_nb_robot_arena(a), 3);
 }
 END_TEST
 
@@ -75,11 +73,21 @@ END_TEST
 
 START_TEST(test_add_robot)
 {
+    robot *robot3 = create_robot(0, 0, 0, 0, 3);
+    ck_assert_int_eq(add_robot(a,robot3),3);
+    ck_assert_int_eq(add_robot(a,robot3),-1);
 }
 END_TEST
 
 START_TEST(test_remove_robot)
 {
+    robot *robot3 = create_robot(0, 0, 0, 0, 3);
+    add_robot(a,robot3);
+    ck_assert_int_eq(get_nb_robot_arena(a),4);
+    ck_assert(remove_robot(a,robot3) == true);
+    ck_assert_int_eq(get_nb_robot_arena(a),3);
+    ck_assert(remove_robot(a,robot3) == false);
+    ck_assert_int_eq(get_nb_robot_arena(a),3);
 }
 END_TEST
 

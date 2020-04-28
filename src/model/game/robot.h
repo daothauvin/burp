@@ -37,5 +37,6 @@ bool set_robot_speed(robot *rob, double speed);
 bool poke_memory_at(robot *rob, int data, int pos);
 void set_robot_nb_missiles(robot *rob,int nb_missiles);
 void set_waiting_time_robot(robot *rob, unsigned int waiting_time);
+void decrement_nb_missile(robot *rob);
 void destroy_robot(robot **rob);
 #endif

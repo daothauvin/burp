@@ -158,6 +158,11 @@ int peek_memory_at(robot *rob, int i)
         return -1;
     return rob->memory[i];
 }
+void decrement_nb_missile(robot *rob)
+{
+    if(rob->missiles > 0)
+        rob->missiles--;
+}
 void destroy_robot(robot **rob){
     if(!rob || !*rob)
         return ;

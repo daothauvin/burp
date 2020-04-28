@@ -15,12 +15,11 @@ int wait_robot(robot *rob,unsigned int delay);
 bool poke(robot *rob, int addr, int value);
 int peek(robot *rob, int addr);
 int go_to(int num);
-//A voir comment implementer int checkif()
 int randoms(int num);
 int cardinal(arena *arena);
 int self(robot *rob);
+int state(arena *arena, int num);
 double speed(robot *rob);
-double state(arena *arena, int num);
 double gpsx(arena *arena, int num);
 double gpsy(arena *arena, int num);
 void engine(robot *rob, double angle, double speed);
