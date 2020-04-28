@@ -25,6 +25,7 @@ void game(Tree syntax_tree[4])
 	int line[4] = {0};
 	int previousline[4] = {0};
 	init();
+	init_next(a,line,syntax_tree);
 	updateArena(a);
 	// anim_begin();
 	while (cycle(a, line, syntax_tree)){
