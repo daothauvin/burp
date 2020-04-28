@@ -22,10 +22,7 @@ static void setup(void)
 
 static void teardown(void)
 {
-  for (int i = 0; i < 4; ++i)
-  {
-    //arena->
-  }
+  freeArena(&a);
 }
 
 START_TEST(test_create_arena)
@@ -47,7 +44,12 @@ START_TEST(test_add_missile)
   {
     ck_assert_int_eq(get_nb_missiles_arena(a), add_missile(a, missiles_test[i]));
   }
-  ck_assert_int_eq(-1, add_missile(a, missiles_test[0]));
+  ck_assert_int_eq(-1, add_missile(a, missiles_test[8]));
+  for (size_t i = 8; i < nb_test_missiles; i++)
+  {
+    destroy_missile(&(missiles_test[i]));
+  }
+  free(missiles_test);
 }
 END_TEST
 
@@ -55,15 +57,19 @@ START_TEST(test_remove_missile)
 {
   int nb_test_missiles = 10;
   missile **missiles_test = malloc(sizeof(missile *) * 10);
-  for (int i = 0; i < nb_test_missiles; i++)
-  {
+  for (int i = 0; i < nb_test_missiles; i++) {
     missiles_test[i] = create_missile(10.0, 10.0, 10.0, rob, max_range_explosion);
   }
-  for (size_t i = 0; i < 8; i++)
-  {
+  
+  for (size_t i = 0; i < 8; i++) {
     ck_assert_int_eq(get_nb_missiles_arena(a), add_missile(a, missiles_test[i]));
   }
   ck_assert(remove_missile(a, missiles_test[5]));
+  
+  for (size_t i = 8; i < nb_test_missiles; i++) {
+    destroy_missile(&(missiles_test[i]));
+  }
+  free(missiles_test);
 }
 END_TEST
 

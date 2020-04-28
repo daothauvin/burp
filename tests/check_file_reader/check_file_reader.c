@@ -17,8 +17,7 @@ void setup(void) {
 
 static void teardown(void)
 {
-	free(jean_paul);
-	free(a);
+	freeArena(&a);
 	freeSyntaxAnalyseContest();
 	if (p != NULL)
 		freeTree(p);
