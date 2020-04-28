@@ -436,6 +436,7 @@ void updateArena(arena* arena) {
 	for (int i = 0; i < get_nb_missiles_arena(arena); i++) {
 		printRocket(get_missile_index(arena,i));
 	}
+	refresh();
 }
 
 /**
@@ -461,7 +462,7 @@ static void drawArena() {
  * 		Q - Quit
  */
 
-static double time_between = 1;
+static int time_between = 1000000;
 short waitForInput() {
 	/*
 	char msg[40];
@@ -477,19 +478,33 @@ short waitForInput() {
 	*/
 
 	cbreak();
+	int diff;
 	nodelay(stdscr, TRUE);
-	time_t cur_time = time(NULL);
-    while (time(NULL) - cur_time < time_between) {
+	struct timeval start, cur;
+	gettimeofday(&start, NULL);
+    while (diff < time_between) {
 		int c = getch();
 		switch (c) {
 			case 'q':
 			case 'Q':
 				return 0;
 			case '+':
-				if(time_between > 0.1) time_between -= 0.1; 
+				if(time_between > 100000) {
+					time_between -= 100000;
+					add_log("Speed up");
+				}
+				else {
+					add_log("Maximum speed reached");
+				}
 				break;
 			case '-':
-				if(time_between < 2) time_between += 0.1; 
+				if(time_between < 10000000) {
+					time_between += 100000; 
+					add_log("Speed down");
+				} 
+				else {
+					add_log("Lowest speed reached");
+				}
 				break;
 			/*
 			// Tests
@@ -545,6 +560,9 @@ short waitForInput() {
 			default:
 				break;
 		}
+		gettimeofday(&cur, NULL);
+		diff = (cur.tv_sec - start.tv_sec) * 1000000 + (cur.tv_usec - start.tv_usec);
+
 	}
 	return 1;
 }

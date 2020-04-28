@@ -3,60 +3,34 @@
 
 > B.U.R.P - Basic Used for Robots Programming
 
-## Auteurs
+## Langage BURP et descriptif du sujet
 
-Par Dao Thauvin, Liece Cherchour et Thomas Bignon.
+La sémantique du langage BURP est disponible [ici](docs/grammar/diagram.xhtml) référencée dans le sujet disponible [ici](docs/sujet_1.0.pdf).
 
 ## Description
 
 Le but de ce projet est d’implémenter en langage C un jeu de programmation dans le cadre du cours de CP6. Dans ce jeu, des robots s’entretuent dans une arène, chacun d’eux exécutant un script donné en début de partie. Le jeu se termine lorsqu’il ne reste plus qu’un seul robot encore fonctionnel dans l’arêne : son script est alors déclaré gagnant. Le langage de script que nous utiliserons est une version très simplifiée de l’antique langage BASIC. Le programme devra permettre la simulation de l’arène, ainsi que l’interprétation en temps réel du script de chaque robot.
 
-## Sujet
+## Dépendances
 
-Le projet est disponible [ici](docs/sujet_1.0.pdf).
+* CMake (>= 3.0) [cmake](https://cmake.org/)
 
-## Notes
+* Check (>= 0.10.0) [check](https://libcheck.github.io/check/)
 
-### `#define`
+* PkgConfig (>= 0.29) [pkg-config](https://www.freedesktop.org/wiki/Software/pkg-config/)
 
-- taille de l’arène -> 10 000 × 10 000
-- vitesse maximum -> 10 (unités par cycle -> bouge de 10 cases)
-- vitesse missile -> 500 (unités)
-- distance maximale d’explosion -> 7000 (unités)
-- taille du robot -> 10 × 10
-- nombre de missile max par robot -> 2
-- low_range -> 50 unités
-- degat_explosion_low_range -> 10%
-- mid_range -> 200 unités
-- degat_explosion_mid_range -> 5%
-- high_range -> 400 unités
-- degat_explosion_high_range -> 3%
-- temps_loop -> ?
+* Glib (>= 2.0) [glib](https://github.com/GNOME/glib)
 
-### Départ
+* NCurses (>= 6.1) [ncurses](https://invisible-island.net/ncurses/ncurses.html)
 
-- positions robots -> coins de l'arène
-- nombre de robots -> 4
+* Subunit (>= 1.20) [subunit](https://packages.ubuntu.com/xenial/libsubunit-dev)
 
-### Implémentation
 
-- coordonnées -> double
-- position du robot -> centré dans un carré
-- collision = arrêt
+## Diagramme de classe
 
-### Script
+TODO
 
-- manipule entiers
-- Commandes (extensible mais doit pouvoir être traduit dans language de base) :
-	- Engine vitesse (en pourcentage), direction (angle)
-    - Shoot direction `distance_explosion`
-
-### Actions
-
-- pause
-- vitesse
-
-### Launch
+## Launch
 
 En premier temps, on peut utiliser les scripts `./build_main.sh` pour le programme principal
 et `./build_test.sh` pour effectuer les tests
@@ -64,57 +38,20 @@ et `./build_test.sh` pour effectuer les tests
 `./build_main.sh` se chargera de lancer le programme avec les fichiers prog[x].burp défini dans leur 
 repertoire associé.
 
-Par la suite, il suffit de faire :  `./burp prog1.burp ... prog4.burp` pour lancer le programme
-### Roles
+Par la suite, il suffit d'utiliser l'exécutable se trouvant dans `build\src\` en faisant :  
+`./burp prog1.burp ... prog4.burp` pour lancer le programme
 
-- affichage [ ncurses, Actions, Launch ]
-- gestion cycles [ mise à jour, collisions, Depart, Implementation ]
-- interpreteur [ Script, [traducteur] ]
+### Contrôle de l'utilisateur : 
 
-### GLib
+L'utilisateur dispose de 4 contrôles pour altérer l'interface utilisateur et le déroulement de la partie.
 
-GLib doc : https://developer.gnome.org/glib/stable/
+Pause : p  
+Quitter : q  
+Accélérer : +  
+Décélérer : -  
 
-#### General
+## Auteurs
 
-- structures : https://developer.ibm.com/tutorials/l-glib/ (liste,arbre, file, table de hachage)
-- memoire : https://developer.gnome.org/glib/stable/glib-Memory-Allocation.html
-- gestion string : https://developer.gnome.org/glib/stable/glib-String-Utility-Functions.html
-- gestion random : https://developer.gnome.org/glib/stable/glib-RandomNumbers.html
-- utiliser des commandes shell : https://developer.gnome.org/glib/stable/glib-Shell-related-Utilities.html
-
-#### Utile pour affichage
-
-- timer : https://developer.gnome.org/glib/stable/glib-Timers.html
-
-#### Utile pour commande
-
-- gestion options commande : https://developer.gnome.org/glib/stable/glib-Commandline-option-parser.html
-
-#### Utile pour interpréteur
-
-- syntaxe expressions régulières : https://developer.gnome.org/glib/stable/glib-regex-syntax.html
-
-- gestion regex : https://developer.gnome.org/glib/stable/glib-Perl-compatible-regular-expressions.html | https://developer.gnome.org/glib/stable/glib-Glob-style-pattern-matching.html
-
-**Remarque** : le premier lien est plus complet
-
-- gestion file : https://developer.gnome.org/glib/stable/glib-File-Utilities.html
-
-- Scanner : https://developer.gnome.org/glib/stable/glib-Lexical-Scanner.html#g-scanner-input-file
-
-#### Autre
-
-- creation fichier forme data=value : https://developer.gnome.org/glib/stable/glib-Key-value-file-parser.html
-
-# Exterior Needs
-## Modele
-### Parser
-
-### Game Management
-
-## Vue
-acces to missile/robot (**Do not impact robots**)
-update() -> mise a jour de la vue
-
-## Controlleur
+[Dao Thauvin](https://github.com/daothauvin)  
+[Liece Cherchour](https://github.com/LieceC)  
+[Thomas Bignon](https://github.com/totocptbgn)  

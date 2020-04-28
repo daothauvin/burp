@@ -82,7 +82,9 @@ START_TEST(test_to_big_number)
 		snprintf(exceptedmessage, mysize + 1, "found a very high number when searching a number <= %d at position 53 line 1", INT_MAX);
 		ck_assert_msg(
 			sizemessage == mysize && memcmp(message_error(), exceptedmessage, sizemessage) == 0, "Unexcepted Error Message");
+		free(exceptedmessage);
 	}
+
 }
 END_TEST
 
