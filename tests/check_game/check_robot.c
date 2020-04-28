@@ -114,13 +114,6 @@ START_TEST(test_get_robot_nb_missiles)
 }
 END_TEST
 
-START_TEST(test_set_robot_nb_missiles)
-{
-  set_robot_nb_missiles(rob, 2);
-  ck_assert_int_eq(get_robot_nb_missiles(rob), 2);
-}
-END_TEST
-
 START_TEST(test_get_waiting_time_robot)
 {
   ck_assert_int_eq(get_waiting_time_robot(rob), 0);
@@ -173,7 +166,6 @@ Suite *check_robot(void)
   tcase_add_test(tc_core, test_get_robot_pos);
   tcase_add_test(tc_core, test_get_robot_id);
   tcase_add_test(tc_core, test_get_robot_nb_missiles);
-  tcase_add_test(tc_core, test_set_robot_nb_missiles);
   tcase_add_test(tc_core, test_get_waiting_time_robot);
   tcase_add_test(tc_core, test_set_waiting_time_robot);
   tcase_add_test(tc_core, test_poke_memory_at);

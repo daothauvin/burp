@@ -134,8 +134,8 @@ int get_robot_nb_missiles(robot *rob)
 {
     return rob->missiles;
 }
-void set_robot_nb_missiles(robot *rob,int nb_missiles){
-    rob->missiles = nb_missiles;
+void increment_nb_missile(robot *rob){
+    rob->missiles++;
 }
 int get_waiting_time_robot(robot *rob)
 {
