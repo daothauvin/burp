@@ -9,7 +9,7 @@ double degree_to_radians(double x)
 
 struct robot_impl
 {
-    char *robot_name;
+    char robot_name[robot_name_length];
     unsigned int health_points; // Represented as a percentage
     double angle;
     double speed; // Represented as a percentage
@@ -23,9 +23,7 @@ struct robot_impl
 robot *create_robot(double x_1, double y_1, double angle, double speed, int id)
 {
     robot *rob = malloc(sizeof(struct robot_impl));
-    rob->robot_name = malloc(sizeof(char) * robot_name_length);
     memset(rob, 0, sizeof(struct robot_impl));
-    memset(rob -> memory,0,robot_memory*sizeof(int));
     rob->health_points = 100;
     rob->pos.x = x_1;
     rob->pos.y = y_1;
@@ -121,8 +119,7 @@ double get_robot_speed(robot *rob)
 }
 bool set_robot_speed(robot *rob, double speed)
 {
-    if (speed < 0 && speed > max_speed)
-    {
+    if (speed < 0 && speed > max_speed) {
         return false;
     }
     rob->speed = speed;

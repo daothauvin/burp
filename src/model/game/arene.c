@@ -59,11 +59,22 @@ bool remove_robot(arena *arena, robot* rob)
     return -1;
 }
 
-void free_arena(arena **arena)
+void freeArena(arena **arena)
 {
     if (!arena || !*arena)
         return;
+    for (size_t i = 0; i < (*arena)->nb_missiles; i++)
+    {
+        destroy_missile(&(*arena)->list_missile[i]);
+    }
+    for (size_t i = 0; i < (*arena)->nb_robots; i++)
+    {
+        destroy_robot(&(*arena)->list_robots[i]);
+    }
+    free((*arena)->list_missile);
+    free((*arena)->list_robots);
     free(*arena);
+    *arena = NULL;
 }
 int get_nb_missiles_arena(arena *arena)
 {
