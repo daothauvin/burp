@@ -53,10 +53,10 @@ bool remove_robot(arena *arena, robot* rob)
         if (arena->list_robots[i] == rob) {
             arena->nb_robots -= 1;
             arena->list_robots[i] = arena->list_robots[arena->nb_robots];
-            return 0;
+            return true;
         }
     }
-    return -1;
+    return false;
 }
 
 void freeArena(arena **arena)
