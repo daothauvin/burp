@@ -106,6 +106,7 @@ END_TEST
 START_TEST(test_angle)
 {
      ck_assert_int_eq(angle(0,0,3,3),45);
+     ck_assert_int_eq(angle(3,3,3,3),90);
 }
 END_TEST
 
