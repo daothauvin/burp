@@ -111,19 +111,21 @@ END_TEST
 
 START_TEST(test_targetx)
 {
-  printf("%f\n", targety(4, 90, 4));
+    ck_assert_int_eq((int)targetx(0,90,4),0);
+    ck_assert_int_eq((int)targetx(0,0,4),4);
 }
 END_TEST
 
 START_TEST(test_targety)
 {
-  printf("%f\n", targety(4, 90, 4));
+    ck_assert_int_eq((int)targety(0,90,4),4);
+    ck_assert_int_eq((int)targety(0,0,4),0);
 }
 END_TEST
 
 START_TEST(test_distance)
 {
-  printf("%f\n", targety(4, 90, 4));
+  ck_assert_int_eq((int)distance(14,17,25,25),13);
 }
 END_TEST
 
