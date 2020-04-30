@@ -235,8 +235,8 @@ static int commands(Tree node,arena *arena,robot *robot) {
 		int addr = expression(g_node_nth_child(node, 0),arena,robot);
 		if(addr >= robot_memory) {
 			addWarning(1,addr,get_robot_id(robot));
+			addr = robot_memory - 1;
 		}
-		addr = addr % robot_memory;
 		int value = expression(g_node_nth_child(node, 1),arena,robot);
 		poke(robot,addr,value);
 	} 
@@ -267,14 +267,20 @@ static int expression(Tree tree, arena* arena,robot* robot) {
 	}
 	else if(memcmp(GPSX,data,sizeof(GPSX)) == 0) {
 		int num = expression(g_node_nth_child(node, 0),arena,robot);
-		if(num >= number_of_robots) addWarning(0,num,get_robot_id(robot));
-		num = num % number_of_robots;
+		if(num >= number_of_robots) {
+			addWarning(0,num,get_robot_id(robot));
+			num = number_of_robots - 1;
+		}
+		
 		return gpsx(arena,num);
 	}
 	else if(memcmp(GPSY,data,sizeof(GPSY)) == 0) {
 		int num = expression(g_node_nth_child(node, 0),arena,robot);
-		if(num >= number_of_robots) addWarning(0,num,get_robot_id(robot));
-		num = num % number_of_robots;
+		if(num >= number_of_robots) {
+			addWarning(0,num,get_robot_id(robot));
+			num = number_of_robots - 1;
+		}
+		
 		return gpsy(arena,num);
 	}
 	else if(memcmp(SELF,data,sizeof(SELF)) == 0) {
@@ -288,15 +294,18 @@ static int expression(Tree tree, arena* arena,robot* robot) {
 		int addr = expression(g_node_nth_child(node, 0),arena,robot);
 		if(addr >= robot_memory) {
 			addWarning(1,addr,get_robot_id(robot));
+			addr = robot_memory - 1;
 		}
-		addr = addr % robot_memory;
+		
 		return peek(robot,addr);
 		//peek(robot,addr);
 	}
 	else if(memcmp(STATE,data,sizeof(STATE)) == 0) {
 		int num = expression(g_node_nth_child(node, 0),arena,robot);
-		if(num >= number_of_robots) addWarning(0,num,get_robot_id(robot));
-		num = num % number_of_robots;
+		if(num >= number_of_robots) {
+			addWarning(0,num,get_robot_id(robot));
+			num = number_of_robots - 1;
+		}
 		return state(arena,num);
 	}
 	else if(memcmp(SPEED,data,sizeof(SPEED)) == 0) {
