@@ -21,6 +21,7 @@ static void teardown(void)
 	freeSyntaxAnalyseContest();
 	if (p != NULL)
 		freeTree(p);
+	freeWarnings();
 }
 
 START_TEST(test_bad_expression)
@@ -73,7 +74,8 @@ END_TEST
 START_TEST(test_to_big_number)
 {
 	p = init_file_tree(PATH_TO_DIR "/f_bigint.txt");
-	// difficult to test because the script can't update to contain more than the max value on every computer
+	// difficult to test because the script can't update 
+	//to contain more than the max value on every computer
 	if (p == NULL)
 	{
 		int sizemessage = strlen(message_error());
@@ -120,9 +122,12 @@ END_TEST
 START_TEST(test_cardinal_if)
 {
 	p = init_file_tree(PATH_TO_DIR "/s_cardinal_if.txt");
+
 	ck_assert_msg(p != NULL, "Init should success");
 	//printTree(p);
 	int next_line = interprete(0, p,a,jean_paul);
+
+	ck_assert_ptr_eq(getWarnings(),NULL);
 	int excepted_line = 6;
 	ck_assert_int_eq(next_line,excepted_line);
 }
@@ -133,7 +138,10 @@ START_TEST(test_cardinal_if_fail)
 {
 	p = init_file_tree(PATH_TO_DIR "/s_cardinal_if_2.txt");
 	ck_assert_msg(p != NULL, "Init should success");
+
 	int next_line = interprete(0, p,a,jean_paul);
+
+	ck_assert_ptr_eq(getWarnings(),NULL);
 	int excepted_line = 1;
 	ck_assert_int_eq(next_line,excepted_line);
 }
@@ -142,10 +150,13 @@ END_TEST
 START_TEST(test_poke_peek_wait)
 {
 	p = init_file_tree(PATH_TO_DIR "/s_poke_peek_wait.txt");
+	
 	ck_assert_msg(p != NULL, "Init should success");
 	int start = 0;
 	while ((start = interprete(start, p, a, jean_paul)) != 3)
 		;
+
+	ck_assert_ptr_eq(getWarnings(),NULL);
 	int waiting_time = get_waiting_time_robot(jean_paul);
 	int excepted_waiting_time = 1000;
 	ck_assert_int_eq(waiting_time,excepted_waiting_time);
@@ -156,10 +167,13 @@ START_TEST(test_rand_speed_engine)
 {
 
 	p = init_file_tree(PATH_TO_DIR "/s_rand_speed_engine.txt");
+	
 	ck_assert_msg(p != NULL, "Init should success");
 
 	set_robot_speed(jean_paul,1);
 	interprete(0, p,a,jean_paul);
+
+	ck_assert_ptr_eq(getWarnings(),NULL);
 	int angle = get_robot_angle(jean_paul);
 	int excepted_angle = 7;
 	ck_assert_int_eq(angle,excepted_angle);
@@ -180,6 +194,7 @@ START_TEST(test_gps_self)
 	set_robot_speed(jean_paul,1);
 	interprete(0, p,a,jean_paul);
 
+	ck_assert_ptr_eq(getWarnings(),NULL);
 	int angle = get_robot_angle(jean_paul);
 	int excepted_angle = 0;
 	ck_assert_int_eq(angle,excepted_angle);
@@ -196,6 +211,8 @@ START_TEST(test_shoot_distance_angle)
 	p = init_file_tree(PATH_TO_DIR "/s_shoot_distance_angle.txt");
 	ck_assert_msg(p != NULL, "Init should success");
 	interprete(0, p,a,jean_paul);
+
+	ck_assert_ptr_eq(getWarnings(),NULL);
 	int nb_missiles = get_nb_missiles_arena(a);
 	int excepted_nb_missiles = 1;
 	ck_assert_int_eq(nb_missiles,excepted_nb_missiles);
@@ -208,41 +225,57 @@ START_TEST(test_shoot_distance_angle)
 }
 END_TEST
 
-/*
+
 START_TEST(test_state_target)
 {
 	
 	p = init_file_tree(PATH_TO_DIR "/s_state_target.txt");
-	//write(1,message_error(),strlen(message_error()));
-	//printf("\n");
+	
 	ck_assert_msg(p != NULL, "Init should success");
 	interprete(0, p,a,jean_paul);
-	int health_points = jean_paul -> health_points;
-	int waiting_time = jean_paul -> waiting_time;
+
+	ck_assert_ptr_eq(getWarnings(),NULL);
+	int health_points = get_robot_health_points(jean_paul);
+	int waiting_time = get_waiting_time_robot(jean_paul);
 	ck_assert_int_eq(health_points + 1,waiting_time);
+	
 	
 }
 END_TEST
 
-START_TEST(test_no_line_here)
+START_TEST(test_memory_number_to_big)
 {
-	
-	p = init_file_tree(PATH_TO_DIR "/s_state_target.txt");
-	//write(1,message_error(),strlen(message_error()));
-	//printf("\n");
+	p = init_file_tree(PATH_TO_DIR "/w_memory_size.txt");
 	ck_assert_msg(p != NULL, "Init should success");
-	int next_line = interprete(1, p,a,jean_paul);
-	int excepted_line = 2;
-	ck_assert_int_eq(next_line,excepted_line);
+	
+	interprete(0, p,a,jean_paul);
+	struct warning_message * message = getWarnings();
+	ck_assert_ptr_ne(NULL,message);
+	ck_assert_ptr_eq(message->next_message,NULL);
+	ck_assert_str_eq(message->message,"robot memory 300 is invalid (max: 255)");
+	
 	
 }
 END_TEST
-*/
+
+START_TEST(test_robot_number_to_big)
+{
+	p = init_file_tree(PATH_TO_DIR "/w_robot_number.txt");
+	ck_assert_msg(p != NULL, "Init should success");
+	interprete(0, p,a,jean_paul);
+	struct warning_message * message = getWarnings();
+	ck_assert_ptr_ne(NULL,message);
+	ck_assert_ptr_eq(message->next_message,NULL);
+	ck_assert_str_eq(message->message,"robot number 6 is invalid (max: 3)");
+
+
+}
+END_TEST
 
 Suite *make_file_reader(void)
 {
 	Suite *s;
-	TCase *tc_core, *tc_limits;
+	TCase *tc_core, *tc_limits, *tc_warnings;
 
 	s = suite_create("FileReader");
 
@@ -253,7 +286,7 @@ Suite *make_file_reader(void)
 	tcase_add_test(tc_core, test_cardinal_if);
 	tcase_add_test(tc_core, test_cardinal_if_fail);
 	tcase_add_test(tc_core, test_poke_peek_wait);
-	//tcase_add_test(tc_core, test_state_target);
+	tcase_add_test(tc_core, test_state_target);
 	tcase_add_test(tc_core, test_shoot_distance_angle);
 	tcase_add_test(tc_core, test_gps_self);
 	tcase_add_test(tc_core, test_rand_speed_engine);
@@ -262,7 +295,7 @@ Suite *make_file_reader(void)
 
 	/* Limits test case */
 	tc_limits = tcase_create("Limits");
-
+	tcase_add_checked_fixture(tc_limits, setup, teardown);
 	tcase_add_test(tc_limits, test_bad_expression);
 	tcase_add_test(tc_limits, test_negative_goto);
 	tcase_add_test(tc_limits, test_unexcepted_line);
@@ -271,6 +304,13 @@ Suite *make_file_reader(void)
 	tcase_add_test(tc_limits, test_to_big_number);
 	tcase_add_test(tc_limits, test_empty);
     suite_add_tcase(s, tc_limits);
+	
+	tc_warnings = tcase_create("Warnings");
+	tcase_add_checked_fixture(tc_warnings, setup, teardown);
+	tcase_add_test(tc_warnings, test_memory_number_to_big);
+	tcase_add_test(tc_warnings, test_robot_number_to_big);
+
+	suite_add_tcase(s, tc_warnings);
 
 	return s;
 }
