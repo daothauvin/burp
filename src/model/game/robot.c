@@ -41,14 +41,29 @@ void update_pos_robot(robot *rob)
     float x2 = rob->pos.x + (rob->speed * cos(degree_to_radians(rob->angle)));
     float y2 = rob->pos.y + (rob->speed * sin(degree_to_radians(rob->angle)));
     if (x2 > size_arena_x) {
-        rob->pos.x = size_arena_x;
+        rob->pos.x = size_arena_x -1;
         rob->speed = 0.0;
         rob->health_points -= collision_damage;
     }
     else
         rob->pos.x = x2;
-    if (y2 > size_arena_y) {
+    if (y2 > size_arena_y -1) {
         rob->pos.y = size_arena_y;
+        rob->speed = 0.0;
+        rob->health_points -= collision_damage;
+    }
+    else
+        rob->pos.y = y2;
+
+    if (x2 < 0) {
+        rob->pos.x = 0;
+        rob->speed = 0.0;
+        rob->health_points -= collision_damage;
+    }
+    else
+        rob->pos.x = x2;
+    if (y2 < 0) {
+        rob->pos.y = 0;
         rob->speed = 0.0;
         rob->health_points -= collision_damage;
     }
