@@ -10,7 +10,7 @@ double degree_to_radians(double x)
 struct robot_impl
 {
     char robot_name[robot_name_length];
-    unsigned int health_points; // Represented as a percentage
+    int health_points; // Represented as a percentage
     double angle;
     double speed; // Represented as a percentage
     point pos;
@@ -41,31 +41,31 @@ void update_pos_robot(robot *rob)
     float x2 = rob->pos.x + (rob->speed * cos(degree_to_radians(rob->angle)));
     float y2 = rob->pos.y + (rob->speed * sin(degree_to_radians(rob->angle)));
     if (x2 >= size_arena_x) {
-        rob->pos.x = size_arena_x -1;
+        rob->pos.x = (float)size_arena_x -1;
         rob->speed = 0.0;
-        rob->health_points -= collision_damage;
+        rob->health_points = rob->health_points - collision_damage > 0 ? rob->health_points - collision_damage : 0;;
     }
     else
         rob->pos.x = x2;
-    if (y2 >= size_arena_y) {
-        rob->pos.y = size_arena_y;
+    if ((int) y2 >= size_arena_y) {
+        rob->pos.y = (float)size_arena_y -1;
         rob->speed = 0.0;
-        rob->health_points -= collision_damage;
+        rob->health_points = rob->health_points - collision_damage > 0 ? rob->health_points - collision_damage : 0;;
     }
     else
         rob->pos.y = y2;
 
     if (x2 < 0) {
-        rob->pos.x = 0;
+        rob->pos.x = 0.0;
         rob->speed = 0.0;
-        rob->health_points -= collision_damage;
+        rob->health_points = rob->health_points - collision_damage > 0 ? rob->health_points - collision_damage : 0;;
     }
     else
         rob->pos.x = x2;
     if (y2 < 0) {
-        rob->pos.y = 0;
+        rob->pos.y = 0.0;
         rob->speed = 0.0;
-        rob->health_points -= collision_damage;
+        rob->health_points = rob->health_points - collision_damage > 0 ? rob->health_points - collision_damage : 0;;
     }
     else
         rob->pos.y = y2;
@@ -85,18 +85,18 @@ void inflict_damage_from_missile(robot *rob, point p)
     double dy = rob->pos.y - p.y;
     double d = sqrt((dx * dx) + (dy * dy));
     if (d < low_range)
-        rob->health_points -= damage_explosion_low_range;
+        rob->health_points = rob->health_points - damage_explosion_low_range > 0 ? rob->health_points - damage_explosion_low_range: 0;
     else if (d < middle_range)
-        rob->health_points -= damage_explosion_middle_range;
+        rob->health_points = rob->health_points - damage_explosion_middle_range > 0 ? rob->health_points - damage_explosion_middle_range: 0;
     else if (d < high_range)
-        rob->health_points -= damage_explosion_high_range;
+        rob->health_points = rob->health_points - damage_explosion_high_range > 0 ? rob->health_points - damage_explosion_high_range: 0;
 }
 void inflict_damage_from_collision(robot *rob1, robot *rob2)
 {
-    rob1->health_points -= collision_damage;
-    rob2->health_points -= collision_damage;
-    rob1->speed = 0;
-    rob2->speed = 0;
+    rob1->health_points = rob1->health_points - collision_damage > 0 ? rob1->health_points - collision_damage : 0;;
+    rob2->health_points = rob2->health_points - collision_damage > 0 ? rob2->health_points - collision_damage : 0;;
+    rob1->speed = 0.0;
+    rob2->speed = 0.0;
 }
 bool check_collision_robots(robot *rob1, robot *rob2)
 {
