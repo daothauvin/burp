@@ -241,12 +241,12 @@ static int commands(Tree node,arena *arena,robot *robot) {
 		poke(robot,addr,value);
 	} 
 	else if(memcmp(SHOOT,data,sizeof(SHOOT)) == 0) {
-		double angle = expression(g_node_nth_child(node, 0),arena,robot) % 360;
+		double angle = expression(g_node_nth_child(node, 0),arena,robot);
 		double distance = expression(g_node_nth_child(node, 1),arena,robot);
 		shoot(robot,arena,angle,distance);
 	}
 	else if(memcmp(ENGINE,data,sizeof(ENGINE)) == 0) {
-		double angle = expression(g_node_nth_child(node, 0),arena,robot) % 360;
+		double angle = expression(g_node_nth_child(node, 0),arena,robot);
 		double speed = expression(g_node_nth_child(node, 1),arena,robot);
 		if(speed > 100) speed = 100;
 		if(speed < 0) speed = 0;
@@ -316,18 +316,21 @@ static int expression(Tree tree, arena* arena,robot* robot) {
 		double y1 = expression(g_node_nth_child(node, 1),arena,robot);
 		double x2 = expression(g_node_nth_child(node, 2),arena,robot);
 		double y2 = expression(g_node_nth_child(node, 3),arena,robot);
-		return angle(x1,y1,x2,y2);
+		fprintf(stderr,"x1 : %f y1 : %f\n x2 : %f y2 : %f\n",x1,y1,x2,y2);
+		double x =  angle(x1,y1,x2,y2);
+		fprintf(stderr,"angle : %f\n",x);
+		return x;
 	}
 	
 	else if(memcmp(TARGETX,data,sizeof(TARGETX)) == 0) {
 		double x1 = expression(g_node_nth_child(node, 0),arena,robot);
-		double angle = expression(g_node_nth_child(node, 1),arena,robot) % 360;
+		double angle = expression(g_node_nth_child(node, 1),arena,robot);
 		double length = expression(g_node_nth_child(node, 2),arena,robot);
 		return targetx(x1,angle,length);
 	}
 	else if(memcmp(TARGETY,data,sizeof(TARGETY)) == 0) {
 		double y1 = expression(g_node_nth_child(node, 0),arena,robot);
-		double angle = expression(g_node_nth_child(node, 1),arena,robot) % 360;
+		double angle = expression(g_node_nth_child(node, 1),arena,robot);
 		double length = expression(g_node_nth_child(node, 2),arena,robot);
 		return targety(y1,angle,length);
 	}

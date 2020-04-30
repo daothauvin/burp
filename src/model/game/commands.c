@@ -89,16 +89,12 @@ double angle(double x1, double y1, double x2, double y2)
     double dist = distance(x1,y1,x2,y2);
     if(dist == zero)
         return 0.0;
-    double abs_dist = fabs(x1 -x2);
-    double x = abs_dist/dist;
-    //printf("distance = %f, abs_dist = %f, x = %f",dist,abs_dist,x);
-    double result = acos(x);
-    //printf("result = %f\n",result);
+    double delta_x = fabs(x1 - x2);
+    double delta_y = fabs(y1 - y2);
+    double x = delta_y / delta_x;
+    double result = atan(x);
     double result_degree = result * (180 / M_PI);
-
-    if(result_degree < 0)
-        return fmod(result_degree,-360);
-    return fmod(result_degree,360); 
+    return result_degree;
 }
 double targetx(double x1, double angle, double length)
 {
@@ -110,5 +106,5 @@ double targety(double y1, double angle, double length)
 }
 double distance(double x1, double y1, double x2, double y2)
 {
-    return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
+    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
 }
