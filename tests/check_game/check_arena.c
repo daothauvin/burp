@@ -88,6 +88,7 @@ START_TEST(test_remove_robot)
     ck_assert_int_eq(get_nb_robot_arena(a),3);
     ck_assert(remove_robot(a,robot3) == false);
     ck_assert_int_eq(get_nb_robot_arena(a),3);
+    destroy_robot(&robot3);
 }
 END_TEST
 

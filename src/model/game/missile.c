@@ -28,7 +28,10 @@ missile* create_missile(double pos_x, double pos_y, double angle, robot *rob, do
     m->angle = angle;
     m->owner = rob;
     m->parcouru_distant = 0;
-    m->explosion_distant = explo_dist;
+    if(explo_dist >= max_range_explosion)
+        m->explosion_distant = 7000;
+    else 
+        m->explosion_distant = explo_dist;
     m->will_explode = 0;
     return m;
 }
@@ -47,11 +50,19 @@ void update_pos_missile(missile *m)
     double x = m->pos.x + (speed * cos(degree_to_radians(m->angle)));
     double y = m->pos.y + (speed * sin(degree_to_radians(m->angle)));
     if (x >= size_arena_x) {
-        x = size_arena_x;
+        x = size_arena_x -1;
         m->will_explode = 1;
     }
     if (y >= size_arena_y) {
-        x = size_arena_y;
+        x = size_arena_y -1;
+        m->will_explode = 1;
+    }
+    if (x < 0) {
+        x = 0;
+        m->will_explode = 1;
+    }
+    if (y < 0) {
+        x = 0;
         m->will_explode = 1;
     }
     m->parcouru_distant += speed;
@@ -78,7 +89,7 @@ void collision_with_missiles(robot *rob, missile *m)
     double dx = rob_pos.x- m->pos.x;
     double dy = rob_pos.y - m->pos.y;
     double d = sqrt((dx * dx) + (dy * dy));
-    if (robot_radius> d)
+    if (robot_radius >= d)
         m->will_explode = true;
 }
 double get_missile_angle(missile *m){
