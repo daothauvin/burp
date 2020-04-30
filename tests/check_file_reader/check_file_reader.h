@@ -11,4 +11,4 @@
 #include <sys/types.h>
 #include <assert.h>
 
-#define PATH_TO_DIR "/home/dao/git/burp/tests/check_file_reader/test_files"
+#define PATH_TO_DIR "/home/xenow/L3/S6/cp6/burp/tests/check_file_reader/test_files"

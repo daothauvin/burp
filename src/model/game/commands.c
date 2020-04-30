@@ -95,7 +95,10 @@ double angle(double x1, double y1, double x2, double y2)
     double result = acos(x);
     //printf("result = %f\n",result);
     double result_degree = result * (180 / M_PI);
-    return result_degree; 
+
+    if(result_degree < 0)
+        return fmod(result_degree,-360);
+    return fmod(result_degree,360); 
 }
 double targetx(double x1, double angle, double length)
 {
