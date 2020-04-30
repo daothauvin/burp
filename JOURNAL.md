@@ -67,7 +67,13 @@ Finishing life cycle of the program
 
 ## Week 20 April - 27 April
 Check Tests for Arena  
-Handling burp error  
-Fix Tests of file_reader(free Robots and Arena)  
+Handling burp error (with warning)  
+Fix Tests of file_reader (free Robots and Arena)  
 Valgrind Tests for Arena, Robots and Missiles tests  
-Continue touch handling
+Continue touch handling  
+
+## Week 28 April - 3 May
+Add tests for burp warning  
+Reimplementation of speed up/down  
+Creation of a burp script  
+Bug fix  
