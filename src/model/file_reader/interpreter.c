@@ -304,7 +304,7 @@ static int expression(Tree tree, arena* arena,robot* robot) {
 		int num = expression(g_node_nth_child(node, 0),arena,robot);
 		if(num >= number_of_robots) {
 			addWarning(0,num,get_robot_id(robot));
-			addr = number_of_robots - 1;
+			num = number_of_robots - 1;
 		}
 		return state(arena,num);
 	}
