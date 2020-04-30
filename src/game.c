@@ -26,6 +26,9 @@ void game(Tree syntax_tree[4])
 	int previousline[4] = {0};
 	init();
 	init_next(a,line,syntax_tree);
+	for(int i = 0;i < get_nb_robot_arena(a); i++) {
+		add_action(getNextCommand(i),i);
+	}
 	updateArena(a);
 	// anim_begin();
 	while (cycle(a, line, syntax_tree)){
