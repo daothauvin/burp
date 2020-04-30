@@ -2,12 +2,13 @@
 #include "../../src/model/game/robot.c"
 #include <check.h>
 
+point x = {10,10};
 robot *rob;
 robot *rob1;
 static void setup(void)
 {
-  rob = create_robot(0.0, 0.0, 0.0, max_speed, 0);
-  rob1 = create_robot(0.0, 0.0, 0.0, max_speed, 1);
+  rob = create_robot(x.x, x.y, 0.0, max_speed, 0);
+  rob1 = create_robot(x.x,x.y, 0.0, max_speed, 1);
 }
 
 static void teardown(void)
@@ -18,7 +19,7 @@ static void teardown(void)
 
 START_TEST(test_create_robot)
 {
-  ck_assert(rob->pos.x == 0.0 && rob->pos.y == 0.0);
+  ck_assert(rob->pos.x == x.x && rob->pos.y == x.y);
   ck_assert(rob->angle == 0.0);
   ck_assert(rob->health_points == 100);
   ck_assert_int_eq(rob->id, 0);
@@ -31,7 +32,7 @@ END_TEST
 START_TEST(test_update_pos_robot)
 {
   update_pos_robot(rob);
-  ck_assert(rob->pos.x == max_speed && rob->pos.y == 0.0);
+  ck_assert(rob->pos.x == x.x+max_speed && rob->pos.y == x.y);
 }
 END_TEST
 

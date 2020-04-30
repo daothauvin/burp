@@ -26,7 +26,7 @@ typedef struct robot_impl robot;
  * coordinate, [angle] as its angle, [speed] as the speed and
  * [id] as the robot number.
  */ 
-robot *create_robot(double x_1, double y_1, double angle, double speed, int id);
+robot *create_robot(double x_1, double y_1, double angle, int speed, int id);
 
 /**
  * Update the position of a robot [rob] to its next iteration,
@@ -74,7 +74,7 @@ double get_robot_angle(robot *rob);
 /**
  * Return the speed of the robot [rob].
  */
-double get_robot_speed(robot *rob);
+int get_robot_speed(robot *rob);
 
 /**
  * Put the coordinate as a point of a robot [rob]
@@ -119,7 +119,7 @@ bool set_robot_angle(robot *rob, double angle);
  * the operation will fail and it'll return false.
  * If the operation succeed, it'll return true.
  */
-bool set_robot_speed(robot *rob, double speed);
+bool set_robot_speed(robot *rob, int speed);
 
 /**
  * Set the integer [data] to the indice [pos]

@@ -12,10 +12,10 @@ void game(Tree syntax_tree[4])
 	char warning[100];
 	arena *a = create_arena();
 	//                        X        Y      Angle  Spd   Id
-	robot* r0 = create_robot(0.0,     0.0,     0.0,  0.0,  0);
-	robot* r1 = create_robot(0.0,     9999.0,  0.0,  0.0,  1);
-	robot* r2 = create_robot(9999.0,  9999.0,  0.0,  0.0,  2);
-	robot* r3 = create_robot(9999.0,  0.0,     0.0,  0.0,  3);
+	robot* r0 = create_robot(6.0,     6.0,     0.0,  0.0,  0);
+	robot* r1 = create_robot(6.0,     9995.0,  0.0,  0.0,  1);
+	robot* r2 = create_robot(9995.0,  9995.0,  0.0,  0.0,  2);
+	robot* r3 = create_robot(9995.0,  6.0,     0.0,  0.0,  3);
 
 	add_robot(a,r0);
 	add_robot(a,r1);
@@ -32,7 +32,11 @@ void game(Tree syntax_tree[4])
 	updateArena(a);
 	// anim_begin();
 	while (cycle(a, line, syntax_tree)){
-		
+		point p;
+		get_robot_pos(r0,&p);
+		char slt[1000];
+		snprintf(slt,1000,"ps x : %f , ps y : %f",p.x,p.y);
+		add_log(slt);
 		updateArena(a);
 
 		for(int i = 0;i < get_nb_robot_arena(a); i++) {

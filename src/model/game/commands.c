@@ -29,7 +29,7 @@ int self(robot *rob)
 {
     return get_robot_id(rob);
 }
-double speed(robot *rob)
+int speed(robot *rob)
 {
     return get_robot_speed(rob);
 }
@@ -88,7 +88,7 @@ double angle(double x1, double y1, double x2, double y2)
     double zero = 0;
     double dist = distance(x1,y1,x2,y2);
     if(dist == zero)
-        return 90.0;
+        return 0.0;
     double abs_dist = fabs(x1 -x2);
     double x = abs_dist/dist;
     //printf("distance = %f, abs_dist = %f, x = %f",dist,abs_dist,x);
