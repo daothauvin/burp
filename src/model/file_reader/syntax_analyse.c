@@ -16,6 +16,7 @@ macro executed when an error occured during the syntax analyse
 #define ERROR_OCCURED(token) \
 	updateErrorMessage(g_scanner_cur_value (gs).v_string, token);\
     g_scanner_destroy (gs);\
+	gs = NULL;\
     return NULL;
 
 /*
@@ -31,6 +32,7 @@ error_token_tmp is the buffer to stock the result temporarily
 	updateErrorMessage(error_token_tmp, token);\
 	free(error_token_tmp);\
     g_scanner_destroy (gs);\
+	gs = NULL;\
     return NULL;
 		
 /*
@@ -125,8 +127,10 @@ char* message_error() {
 }
 
 void  freeSyntaxAnalyseContest() {
-	if(gs!=NULL)
+	if(gs!=NULL) {
 		g_scanner_destroy(gs);
+		gs = NULL;
+	}
 	free(excepted_token);
 	free(error_token);
 }
@@ -189,6 +193,7 @@ static Tree number() {
 				updateErrorMessage("a very high number", message);
 				free(message);
     			g_scanner_destroy (gs);
+				gs = NULL;
    				return NULL;
 			}
 			stocked_value = malloc(sizeof(int));
@@ -675,7 +680,7 @@ static Tree program() {
 }
 
 Tree init_file_tree(char* pathname) {
-	
+	if(gs != NULL) g_scanner_destroy(gs);
 	gs = g_scanner_new (NULL);
 	
 	GScannerConfig* gsc = gs -> config;
