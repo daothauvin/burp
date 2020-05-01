@@ -276,10 +276,13 @@ void printInfoRobot(robot* rob) {
 	mvprintw(y + 8, x + 4, buff);
 
 	drawRectangle(x + 1, y + 11, 11, 5, "Action");
+	mvprintw(y + 12, x + 3, "       ");
 	mvprintw(y + 12, x + 3, actions[3 * robot_id]);
 	attron(COLOR_PAIR(1));
+	mvprintw(y + 13, x + 3, "       ");
 	mvprintw(y + 13, x + 3, actions[3 * robot_id + 1]);
 	attroff(COLOR_PAIR(1));
+	mvprintw(y + 14, x + 3, "       ");
 	mvprintw(y + 14, x + 3, actions[3 * robot_id + 2]);
      
 }
