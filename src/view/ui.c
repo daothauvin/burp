@@ -466,19 +466,7 @@ static void drawArena() {
 
 static int time_between = 1000000;
 short waitForInput() {
-	/*
-	char msg[40];
-	robot* bob = create_robot(0.0, 0.0, 0.0, 0.0, 0);
-
-	robot* rob = create_robot(0.0, 9999.0, 0.0, 0.0, 1);
-
-	robot* tob = create_robot(9999.0, 0.0, 0.0, 0.0, 2);
-
-	robot* zob = create_robot(9999.0, 9999.0, 0.0, 0.0, 3);
-
-	char act[7];
-	*/
-
+	
 	cbreak();
 	int diff = 0;
 	nodelay(stdscr, TRUE);
@@ -508,63 +496,11 @@ short waitForInput() {
 					add_log("Lowest speed reached");
 				}
 				break;
-			/*
-			// Tests
-			case '0':
-			case '1':
-			case '2':
-			case '3':
-				killRobotNb(c - '0');
-				break;
-			case 'p':
-				sprintf(msg, "Message log #%d", cmpt);
-				cmpt++;
-				add_log(msg);
-				break;
-			case 'a':
-				anim_begin();
-				break;
-			case 'r':
-				printRobot(bob);
-				printRobot(rob);
-				printRobot(tob);
-				printRobot(zob);
-				break;
-			case 'e':
-				eraseArena();
-				break;
-			case 'y':
-				printInfoRobot(bob);
-				printInfoRobot(rob);
-				printInfoRobot(tob);
-				printInfoRobot(zob);
-				break;
-			case 'x':
-				memset(act, '\0', 7);
-				snprintf(act, 7, "A_%d_%d", cmpt_1, 0);
-				add_action(act, 0);
-
-				memset(act, '\0', 7);
-				snprintf(act, 7, "A_%d_%d", cmpt_1, 1);
-				add_action(act, 1);
-
-				memset(act, '\0', 7);
-				snprintf(act, 7, "A_%d_%d", cmpt_1, 2);
-				add_action(act, 2);
-
-				memset(act, '\0', 7);
-				snprintf(act, 7, "A_%d_%d", cmpt_1, 3);
-				add_action(act, 3);
-				
-				cmpt_1++;
-				break;
-				*/
 			default:
 				break;
 		}
 		gettimeofday(&cur, NULL);
 		diff = (cur.tv_sec - start.tv_sec) * 1000000 + (cur.tv_usec - start.tv_usec);
-
 	}
 	return 1;
 }

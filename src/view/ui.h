@@ -15,12 +15,12 @@
 
 #define LOG_SIZE 60
 
-void init();
-void anim_begin();
-short waitForInput();
-int  quit();
+void  init();         // Initialise the interface
+void  anim_begin();   // Launch the begin animation
+short waitForInput(); // Check for user keyboard input
+int   quit();         // End the inteface
 
-void add_log(char* message);
-void add_action(char* action, int id);
+void add_log(char* message); // Add a message in the log
+void add_action(char* action, int id); // Add an action for a robot in the info tab
 
-void updateArena(arena* arena);
+void updateArena(arena* arena); // Update position and value of interface with arena data
