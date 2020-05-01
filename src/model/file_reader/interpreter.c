@@ -30,7 +30,7 @@ static int numberline(Tree line);
 */
 static void searchline(Tree node, gpointer data);
 
-static int expression(Tree tree, arena* arena,robot* rob);
+static double expression(Tree tree, arena* arena,robot* rob);
 
 static short isTag(gpointer data) {
 	return 
@@ -175,8 +175,8 @@ void freeWarnings() {
 */
 static short condition(Tree node, arena* arena,robot* robot) {
 	//printf("%p %p %p\n",node,arene,robot);
-	int x = expression(g_node_nth_child(node, 0),arena,robot);
-	int y = expression(g_node_nth_child(node, 2),arena,robot);
+	double x = expression(g_node_nth_child(node, 0),arena,robot);
+	double y = expression(g_node_nth_child(node, 2),arena,robot);
 	char* cond = g_node_nth_child(node, 1) -> data;
 	if(memcmp(cond,INF,sizeof(INF)) == 0) {
 		return x < y;
@@ -200,8 +200,8 @@ static short condition(Tree node, arena* arena,robot* robot) {
 }
 
 static int operator(Tree node, arena* arena,robot* robot) {
-	int x = expression(g_node_nth_child(node, 0),arena,robot);
-	int y = expression(g_node_nth_child(node, 2),arena,robot);
+	double x = expression(g_node_nth_child(node, 0),arena,robot);
+	double y = expression(g_node_nth_child(node, 2),arena,robot);
 	char* op = g_node_nth_child(node, 1) -> data;
 	if(memcmp(op,PLUS,sizeof(PLUS)) == 0) {
 		return x + y;
@@ -219,7 +219,7 @@ static int operator(Tree node, arena* arena,robot* robot) {
 		return x / y;
 	}
 	else if(memcmp(op,MOD,sizeof(MOD)) == 0) {
-		return x % y;
+		return fmod(x,y);
 	}
 	return -1;
 	
@@ -267,7 +267,7 @@ static int commands(Tree node,arena *arena,robot *robot) {
 
 
 
-static int expression(Tree tree, arena* arena,robot* robot) {
+static double expression(Tree tree, arena* arena,robot* robot) {
 	Tree node = tree;
 	char* data = node -> data;
 	if(memcmp(OPERATOR,data,sizeof(OPERATOR)) == 0) {
