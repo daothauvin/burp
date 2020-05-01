@@ -13,6 +13,8 @@
 #include "../define.h"
 #include <sys/time.h>
 
+#define LOG_SIZE 60
+
 void init();
 void anim_begin();
 short waitForInput();

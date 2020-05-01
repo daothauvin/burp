@@ -6,7 +6,7 @@
  */
 
 // Log 
-char logs[5][60];
+char logs[5][LOG_SIZE];
 int full_log;
 int cursor;
 
@@ -381,7 +381,7 @@ static void drawTitle() {
  */
 
 static void print_log() {
-	eraseArea(87, 36, 60, 5);
+	eraseArea(87, 36, LOG_SIZE, 5);
 	mvprintw(36, 87, logs[0]);
 	mvprintw(37, 87, logs[1]);
 	mvprintw(38, 87, logs[2]);
