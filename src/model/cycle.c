@@ -16,6 +16,17 @@ void init_next(arena* a,int line[4],Tree syntax_tree[4]) {
 
 short cycle(arena* a,int line[4],Tree syntax_tree[4]) {
 
+
+	//tue les robots morts
+	for (int i = 0; i < get_nb_robot_arena(a); i++)
+	{
+		if(get_robot_health_points(get_robot_index(a, i)) <= 0)
+		{
+			remove_robot(a, get_robot_index(a, i));
+			i--;
+		}
+	}
+
 	//lire script pour action suivante
 	for(int i = 0; i < get_nb_robot_arena(a) ;i++) {
 		if(get_waiting_time_robot(get_robot_index(a,i)) == 0) {
@@ -33,6 +44,8 @@ short cycle(arena* a,int line[4],Tree syntax_tree[4]) {
 	{
 		update_pos_robot(get_robot_index(a, i));
 	}
+
+	fprintf(stderr,"missiles : %d\n",get_nb_missiles_arena(a));
 	for (int i = 0; i < get_nb_missiles_arena(a); i++)
 	{
 		update_pos_missile(get_missile_index(a, i));
@@ -62,14 +75,6 @@ short cycle(arena* a,int line[4],Tree syntax_tree[4]) {
 		}
 	}
 
-	//tue les robots morts
-	for (int i = 0; i < get_nb_robot_arena(a); i++)
-	{
-		if(get_robot_health_points(get_robot_index(a, i)) <= 0)
-		{
-			remove_robot(a, get_robot_index(a, i));
-		}
-	}
 
 	for (int i = 0; i < get_nb_missiles_arena(a); i++)
 	{

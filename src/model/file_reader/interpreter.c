@@ -316,9 +316,9 @@ static int expression(Tree tree, arena* arena,robot* robot) {
 		double y1 = expression(g_node_nth_child(node, 1),arena,robot);
 		double x2 = expression(g_node_nth_child(node, 2),arena,robot);
 		double y2 = expression(g_node_nth_child(node, 3),arena,robot);
-		fprintf(stderr,"x1 : %f y1 : %f\n x2 : %f y2 : %f\n",x1,y1,x2,y2);
+		//fprintf(stderr,"x1 : %f y1 : %f\n x2 : %f y2 : %f\n",x1,y1,x2,y2);
 		double x =  angle(x1,y1,x2,y2);
-		fprintf(stderr,"angle : %f\n",x);
+		//fprintf(stderr,"angle : %f\n",x);
 		return x;
 	}
 	

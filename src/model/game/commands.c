@@ -89,8 +89,8 @@ double angle(double x1, double y1, double x2, double y2)
     double dist = distance(x1,y1,x2,y2);
     if(dist == zero)
         return 0.0;
-    double delta_x = fabs(x1 - x2);
-    double delta_y = fabs(y1 - y2);
+    double delta_x = x2 - x1;
+    double delta_y = y2 - y1;
     double x = delta_y / delta_x;
     double result = atan(x);
     double result_degree = result * (180 / M_PI);
