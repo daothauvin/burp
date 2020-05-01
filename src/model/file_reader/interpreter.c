@@ -118,6 +118,8 @@ struct warning_message* last_burp_error = NULL;
 	Burp errors : 
 	- unknown robot number ([num_warning] = 0)
 	- robot memory is too high ([num_warning] = 1)
+	- gpsx on dead robot ([num_warning] = 2)
+	- gpsy on dead robot ([num_warning] = 3)
 */
 static void addWarning(int num_warning,int value,int robot) {
 	struct warning_message* new_error = malloc(sizeof(struct warning_message));
@@ -131,6 +133,12 @@ static void addWarning(int num_warning,int value,int robot) {
 			break;
 		case 1:
 			snprintf(new_error->message,60,"robot memory %d is invalid (max: %d)",value,robot_memory - 1);
+			break;
+		case 2:
+			snprintf(new_error->message,60,"gpsx on dead robot %d",value);
+			break;
+		case 3:
+			snprintf(new_error->message,60,"gpsy on dead robot %d",value);
 			break;
 		default:
 			break;
@@ -271,6 +279,10 @@ static int expression(Tree tree, arena* arena,robot* robot) {
 			addWarning(0,num,get_robot_id(robot));
 			num = number_of_robots - 1;
 		}
+		else if(num == -1) {
+			addWarning(2,num,get_robot_id(robot));
+			return 0;
+		}
 		
 		return gpsx(arena,num);
 	}
@@ -279,6 +291,10 @@ static int expression(Tree tree, arena* arena,robot* robot) {
 		if(num >= number_of_robots) {
 			addWarning(0,num,get_robot_id(robot));
 			num = number_of_robots - 1;
+		}
+		else if(num == -1) {
+			addWarning(3,num,get_robot_id(robot));
+			return 0;
 		}
 		
 		return gpsy(arena,num);
