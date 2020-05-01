@@ -217,7 +217,7 @@ START_TEST(test_shoot_distance_angle)
 	int excepted_nb_missiles = 1;
 	ck_assert_int_eq(nb_missiles,excepted_nb_missiles);
 	ck_assert_msg(get_missile_owner(get_missile_index(a,0)) == jean_paul,"Missile's owner is wrong");
-	ck_assert_int_eq((int) get_missile_angle(get_missile_index(a,0)),45);
+	ck_assert_int_eq((int) get_missile_angle(get_missile_index(a,0)),-45);
 	int excepted_explosion_distance = 5;
 	int explosion_distance = get_explosion_distant(get_missile_index(a,0));
 	ck_assert_int_eq(explosion_distance,excepted_explosion_distance);

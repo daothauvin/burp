@@ -1,5 +1,5 @@
 #include "commands.h"
-
+#include "../../view/ui.h"
 int wait_robot(robot *rob, unsigned int delay)
 {
     set_waiting_time_robot(rob, delay);
@@ -29,7 +29,7 @@ int self(robot *rob)
 {
     return get_robot_id(rob);
 }
-double speed(robot *rob)
+int speed(robot *rob)
 {
     return get_robot_speed(rob);
 }
@@ -39,7 +39,7 @@ int state(arena *arena, int num)
         if (get_robot_id(get_robot_index(arena, i)) == num)
             return get_robot_health_points(get_robot_index(arena,i));
     }
-    return -1;
+    return 0;
 }
 double gpsx(arena *arena, int num)
 {
@@ -88,17 +88,14 @@ double angle(double x1, double y1, double x2, double y2)
     double zero = 0;
     double dist = distance(x1,y1,x2,y2);
     if(dist == zero)
-        return 90.0;
-    double abs_dist = fabs(x1 -x2);
-    double x = abs_dist/dist;
-    //printf("distance = %f, abs_dist = %f, x = %f",dist,abs_dist,x);
-    double result = acos(x);
-    //printf("result = %f\n",result);
+        return 0.0;
+    double delta_x = x2 - x1;
+    double delta_y = y2 - y1;
+    //double x = delta_y / delta_x;
+    double result = atan2(delta_y,delta_x);
     double result_degree = result * (180 / M_PI);
-
-    if(result_degree < 0)
-        return fmod(result_degree,-360);
-    return fmod(result_degree,360); 
+    fprintf(stderr,"angle %f\n",result_degree);
+    return result_degree;
 }
 double targetx(double x1, double angle, double length)
 {
@@ -110,5 +107,7 @@ double targety(double y1, double angle, double length)
 }
 double distance(double x1, double y1, double x2, double y2)
 {
-    return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
+    double d = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+	fprintf(stderr,"dist between me (%f,%f) and target (%f,%f) : %f\n",x1,y1,x2,y2,d);		
+    return d;
 }

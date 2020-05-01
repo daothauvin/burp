@@ -123,7 +123,9 @@ static void killRobotNb(int id) {
  */
 
 void printRobot(robot* rob) {
+	//fprintf(stderr,"health : %d\n",get_robot_health_points(rob));
 	if (get_robot_health_points(rob) == 0) {
+		
 		killRobotNb(get_robot_id(rob));
 		return;
 	}
@@ -478,7 +480,7 @@ short waitForInput() {
 	*/
 
 	cbreak();
-	int diff;
+	int diff = 0;
 	nodelay(stdscr, TRUE);
 	struct timeval start, cur;
 	gettimeofday(&start, NULL);
