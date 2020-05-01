@@ -118,6 +118,8 @@ struct warning_message* last_burp_error = NULL;
 	Burp errors : 
 	- unknown robot number ([num_warning] = 0)
 	- robot memory is too high ([num_warning] = 1)
+	- gpsx on dead robot ([num_warning] = 2)
+	- gpsy on dead robot ([num_warning] = 3)
 */
 static void addWarning(int num_warning,int value,int robot) {
 	struct warning_message* new_error = malloc(sizeof(struct warning_message));
@@ -131,6 +133,12 @@ static void addWarning(int num_warning,int value,int robot) {
 			break;
 		case 1:
 			snprintf(new_error->message,60,"robot memory %d is invalid (max: %d)",value,robot_memory - 1);
+			break;
+		case 2:
+			snprintf(new_error->message,60,"gpsx on dead robot %d",value);
+			break;
+		case 3:
+			snprintf(new_error->message,60,"gpsy on dead robot %d",value);
 			break;
 		default:
 			break;
@@ -241,12 +249,12 @@ static int commands(Tree node,arena *arena,robot *robot) {
 		poke(robot,addr,value);
 	} 
 	else if(memcmp(SHOOT,data,sizeof(SHOOT)) == 0) {
-		double angle = expression(g_node_nth_child(node, 0),arena,robot) % 360;
+		double angle = expression(g_node_nth_child(node, 0),arena,robot);
 		double distance = expression(g_node_nth_child(node, 1),arena,robot);
 		shoot(robot,arena,angle,distance);
 	}
 	else if(memcmp(ENGINE,data,sizeof(ENGINE)) == 0) {
-		double angle = expression(g_node_nth_child(node, 0),arena,robot) % 360;
+		double angle = expression(g_node_nth_child(node, 0),arena,robot);
 		double speed = expression(g_node_nth_child(node, 1),arena,robot);
 		if(speed > 100) speed = 100;
 		if(speed < 0) speed = 0;
@@ -271,6 +279,10 @@ static int expression(Tree tree, arena* arena,robot* robot) {
 			addWarning(0,num,get_robot_id(robot));
 			num = number_of_robots - 1;
 		}
+		else if(num == -1) {
+			addWarning(2,num,get_robot_id(robot));
+			return 0;
+		}
 		
 		return gpsx(arena,num);
 	}
@@ -279,6 +291,10 @@ static int expression(Tree tree, arena* arena,robot* robot) {
 		if(num >= number_of_robots) {
 			addWarning(0,num,get_robot_id(robot));
 			num = number_of_robots - 1;
+		}
+		else if(num == -1) {
+			addWarning(3,num,get_robot_id(robot));
+			return 0;
 		}
 		
 		return gpsy(arena,num);
@@ -316,18 +332,21 @@ static int expression(Tree tree, arena* arena,robot* robot) {
 		double y1 = expression(g_node_nth_child(node, 1),arena,robot);
 		double x2 = expression(g_node_nth_child(node, 2),arena,robot);
 		double y2 = expression(g_node_nth_child(node, 3),arena,robot);
-		return angle(x1,y1,x2,y2);
+		//fprintf(stderr,"x1 : %f y1 : %f\n x2 : %f y2 : %f\n",x1,y1,x2,y2);
+		double x =  angle(x1,y1,x2,y2);
+		//fprintf(stderr,"angle : %f\n",x);
+		return x;
 	}
 	
 	else if(memcmp(TARGETX,data,sizeof(TARGETX)) == 0) {
 		double x1 = expression(g_node_nth_child(node, 0),arena,robot);
-		double angle = expression(g_node_nth_child(node, 1),arena,robot) % 360;
+		double angle = expression(g_node_nth_child(node, 1),arena,robot);
 		double length = expression(g_node_nth_child(node, 2),arena,robot);
 		return targetx(x1,angle,length);
 	}
 	else if(memcmp(TARGETY,data,sizeof(TARGETY)) == 0) {
 		double y1 = expression(g_node_nth_child(node, 0),arena,robot);
-		double angle = expression(g_node_nth_child(node, 1),arena,robot) % 360;
+		double angle = expression(g_node_nth_child(node, 1),arena,robot);
 		double length = expression(g_node_nth_child(node, 2),arena,robot);
 		return targety(y1,angle,length);
 	}

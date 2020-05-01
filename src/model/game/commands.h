@@ -63,7 +63,7 @@ int state(arena *arena, int num);
 /**
  * return the speed of the robot [rob].
  */
-double speed(robot *rob);
+int speed(robot *rob);
 
 /**
  * return the x coordinate of the robot

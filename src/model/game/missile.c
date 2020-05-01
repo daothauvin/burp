@@ -19,7 +19,7 @@ missile* create_missile(double pos_x, double pos_y, double angle, robot *rob, do
 {
     assert((pos_x >= 0 && pos_x <= size_arena_x));
     assert((pos_y >= 0 && pos_y <= size_arena_y));
-    assert(angle >= 0 && angle <=359);
+    //assert(angle >= 0 && angle <=359);
     missile *m = malloc(sizeof(struct missile_impl));
     memset(m,0,sizeof(struct missile_impl));
     m->pos.x = pos_x;
@@ -40,35 +40,24 @@ void update_pos_missile(missile *m)
     assert(m);
     double speed;
     if(m->parcouru_distant + m->speed >= m->explosion_distant){
-        if(m->explosion_distant - (m->speed + m->parcouru_distant) <= 0)
-            speed = 0;
-        else 
-            speed = m->explosion_distant - (m->speed + m->parcouru_distant);
+        m->will_explode = true;
+        return;
     } else {
         speed = m->speed;
     }
     double x = m->pos.x + (speed * cos(degree_to_radians(m->angle)));
     double y = m->pos.y + (speed * sin(degree_to_radians(m->angle)));
-    if (x >= size_arena_x) {
-        x = size_arena_x -1;
+    if (x > size_arena_x || x < 0) {
+        x = x < 0 ? 0 : size_arena_x - 1;
         m->will_explode = true;
     }
-    if (y >= size_arena_y) {
-        x = size_arena_y -1;
-        m->will_explode = true;
-    }
-    if (x < 0) {
-        x = 0;
-        m->will_explode = true;
-    }
-    if (y < 0) {
-        x = 0;
+    if (y > size_arena_y || y < 0) {
+        y = y < 0 ? 0 : size_arena_y - 1;
         m->will_explode = true;
     }
     m->parcouru_distant += speed;
     m->pos.x = x;
     m->pos.y = y;
-    m->will_explode = (m->parcouru_distant >= m->explosion_distant) ? true : false;
 }
 bool will_explode(missile *m)
 {
