@@ -76,4 +76,6 @@ Continue touch handling
 Add tests for burp warning  
 Reimplementation of speed up/down  
 Creation of a burp script  
+Break program  
+Fix buffer rewrite above with burp action  
 Bug fix  

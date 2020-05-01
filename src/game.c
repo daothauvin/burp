@@ -24,8 +24,13 @@ void game(Tree syntax_tree[4])
 	
 	int line[4] = {0};
 	int previousline[4] = {0};
+
+
 	init();
 	init_next(a,line,syntax_tree);
+
+	anim_begin();
+
 	for(int i = 0;i < get_nb_robot_arena(a); i++) {
 		add_action(getNextCommand(i),i);
 	}
@@ -33,7 +38,7 @@ void game(Tree syntax_tree[4])
 	// anim_begin();
 	while (cycle(a, line, syntax_tree)){
 	
-		updateArena(a);
+		
 
 		for(int i = 0;i < get_nb_robot_arena(a); i++) {
 			add_action(getNextCommand(i),i);
@@ -50,7 +55,6 @@ void game(Tree syntax_tree[4])
 		}
 		
 		freeWarnings();
-
 		updateArena(a);
 	}
 	quit();
