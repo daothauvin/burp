@@ -1,5 +1,5 @@
 #include "commands.h"
-
+#include "../../view/ui.h"
 int wait_robot(robot *rob, unsigned int delay)
 {
     set_waiting_time_robot(rob, delay);
@@ -91,9 +91,10 @@ double angle(double x1, double y1, double x2, double y2)
         return 0.0;
     double delta_x = x2 - x1;
     double delta_y = y2 - y1;
-    double x = delta_y / delta_x;
-    double result = atan(x);
+    //double x = delta_y / delta_x;
+    double result = atan2(delta_y,delta_x);
     double result_degree = result * (180 / M_PI);
+    fprintf(stderr,"angle %f\n",result_degree);
     return result_degree;
 }
 double targetx(double x1, double angle, double length)
@@ -106,5 +107,7 @@ double targety(double y1, double angle, double length)
 }
 double distance(double x1, double y1, double x2, double y2)
 {
-    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+    double d = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+	fprintf(stderr,"dist between me (%f,%f) and target (%f,%f) : %f\n",x1,y1,x2,y2,d);		
+    return d;
 }

@@ -39,14 +39,8 @@ void update_pos_robot(robot *rob)
         rob->waiting_time--;
         return;
     }
-
-    //int update_x = (rob->speed * cos(degree_to_radians(rob->angle)));
-    //int update_y = (rob->speed * sin(degree_to_radians(rob->angle)));
-    //fprintf(stderr,"angle : %f, cos : %f\n",rob->angle,cos(degree_to_radians(rob->angle)));
-    //fprintf(stderr,"angle : %f, sin : %f\n",rob->angle,sin(degree_to_radians(rob->angle)));
-    //fprintf(stderr,"%d %d\n",update_x,update_y);
-    float x2 = rob->pos.x + rob->angle * cos(degree_to_radians(rob->angle));
-    float y2 = rob->pos.y + rob->angle * sin(degree_to_radians(rob->angle));
+    double x2 = rob->pos.x + (rob->speed * cos(degree_to_radians(rob->angle)));
+    double y2 = rob->pos.y + (rob->speed * sin(degree_to_radians(rob->angle)));
     int collision_radius = robot_radius/2;
     if (x2 > size_arena_x - collision_radius || x2 < collision_radius) {
         rob->pos.y = x2 < collision_radius ? collision_radius : size_arena_x - collision_radius;

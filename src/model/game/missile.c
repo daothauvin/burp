@@ -41,6 +41,7 @@ void update_pos_missile(missile *m)
     double speed;
     if(m->parcouru_distant + m->speed >= m->explosion_distant){
         m->will_explode = true;
+        return;
     } else {
         speed = m->speed;
     }
