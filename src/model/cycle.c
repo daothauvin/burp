@@ -46,7 +46,7 @@ short cycle(arena* a,int line[4],Tree syntax_tree[4]) {
 		update_pos_robot(get_robot_index(a, i));
 	}
 
-	fprintf(stderr,"missiles : %d\n",get_nb_missiles_arena(a));
+	//fprintf(stderr,"missiles : %d\n",get_nb_missiles_arena(a));
 	for (int i = 0; i < get_nb_missiles_arena(a); i++)
 	{
 		update_pos_missile(get_missile_index(a, i));
