@@ -34,12 +34,11 @@ void game(Tree syntax_tree[4])
 	while (cycle(a, line, syntax_tree)){
 		point p;
 		get_robot_pos(r0,&p);
-		/*
 		char slt[1000];
 		snprintf(slt,1000,"ps x : %f , ps y : %f",p.x,p.y);
 		add_log(slt);
-		*/
-		updateArena(a);
+		
+		
 
 		for(int i = 0;i < get_nb_robot_arena(a); i++) {
 			add_action(getNextCommand(i),i);
@@ -56,6 +55,8 @@ void game(Tree syntax_tree[4])
 		}
 		
 		freeWarnings();
+
+		updateArena(a);
 	}
 	quit();
 }
