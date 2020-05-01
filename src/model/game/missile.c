@@ -32,7 +32,7 @@ missile* create_missile(double pos_x, double pos_y, double angle, robot *rob, do
         m->explosion_distant = 7000;
     else 
         m->explosion_distant = explo_dist;
-    m->will_explode = 0;
+    m->will_explode = false;
     return m;
 }
 void update_pos_missile(missile *m)
@@ -51,19 +51,19 @@ void update_pos_missile(missile *m)
     double y = m->pos.y + (speed * sin(degree_to_radians(m->angle)));
     if (x >= size_arena_x) {
         x = size_arena_x -1;
-        m->will_explode = 1;
+        m->will_explode = true;
     }
     if (y >= size_arena_y) {
         x = size_arena_y -1;
-        m->will_explode = 1;
+        m->will_explode = true;
     }
     if (x < 0) {
         x = 0;
-        m->will_explode = 1;
+        m->will_explode = true;
     }
     if (y < 0) {
         x = 0;
-        m->will_explode = 1;
+        m->will_explode = true;
     }
     m->parcouru_distant += speed;
     m->pos.x = x;
