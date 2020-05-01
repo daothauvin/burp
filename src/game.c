@@ -32,10 +32,6 @@ void game(Tree syntax_tree[4])
 	updateArena(a);
 	// anim_begin();
 	while (cycle(a, line, syntax_tree)){
-		char slt[1000];
-		snprintf(slt,1000,"ps x : %d",get_robot_nb_missiles(r0));
-		add_log(slt);
-		
 	
 		updateArena(a);
 
