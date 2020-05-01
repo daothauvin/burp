@@ -27,6 +27,7 @@ short cycle(arena* a,int line[4],Tree syntax_tree[4]) {
 		}
 	}
 
+
 	//lire script pour action suivante
 	for(int i = 0; i < get_nb_robot_arena(a) ;i++) {
 		if(get_waiting_time_robot(get_robot_index(a,i)) == 0) {
@@ -89,8 +90,9 @@ short cycle(arena* a,int line[4],Tree syntax_tree[4]) {
 				inflict_damage_from_missile(get_robot_index(a, i), p);
 			}
 			remove_missile(a, get_missile_index(a,i));
+			i--;
 		}
 	}
 
-	return get_nb_robot_arena(a) != 0;
+	return get_nb_robot_arena(a) != 1;
 }

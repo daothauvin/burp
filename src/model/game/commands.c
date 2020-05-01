@@ -39,7 +39,7 @@ int state(arena *arena, int num)
         if (get_robot_id(get_robot_index(arena, i)) == num)
             return get_robot_health_points(get_robot_index(arena,i));
     }
-    return -1;
+    return 0;
 }
 double gpsx(arena *arena, int num)
 {

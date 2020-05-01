@@ -47,7 +47,6 @@ void update_pos_missile(missile *m)
     }
     double x = m->pos.x + (speed * cos(degree_to_radians(m->angle)));
     double y = m->pos.y + (speed * sin(degree_to_radians(m->angle)));
-    fprintf(stderr,"%f-%f\n",x,y);
     if (x > size_arena_x || x < 0) {
         x = x < 0 ? 0 : size_arena_x - 1;
         m->will_explode = true;

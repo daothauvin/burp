@@ -73,6 +73,9 @@ void inflict_damage_from_missile(robot *rob, point p)
     double dx = rob->pos.x - p.x;
     double dy = rob->pos.y - p.y;
     double d = sqrt((dx * dx) + (dy * dy));
+    fprintf(stderr,"robot point : (%f,%f)\n",rob->pos.x,rob->pos.y);
+    fprintf(stderr,"missile point : (%f,%f)\n",p.x,p.y);
+    fprintf(stderr,"point d %f\n",d);
     if (d < low_range)
         rob->health_points = rob->health_points - damage_explosion_low_range > 0 ? rob->health_points - damage_explosion_low_range: 0;
     else if (d < middle_range)

@@ -47,12 +47,14 @@ int add_robot(arena *arena, robot *rob)
     arena->list_robots[arena->nb_robots] = rob;
     return arena->nb_robots++;
 }
+
 bool remove_robot(arena *arena, robot* rob)
 {
-    for (int i = 0; i < arena->nb_robots; ++i) {
+    for (int i = 0; i < arena->nb_robots; i++) {
         if (arena->list_robots[i] == rob) {
             arena->nb_robots -= 1;
             arena->list_robots[i] = arena->list_robots[arena->nb_robots];
+            rob = NULL;
             return true;
         }
     }
