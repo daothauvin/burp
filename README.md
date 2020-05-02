@@ -1,5 +1,4 @@
-[![CircleCI](https://circleci.com/gh/daothauvin/burp.svg?style=shield&circle-token=f74b04aaa5d2902abc5866058190ef1484703670)](https://app.circleci.com/pipelines/github/daothauvin/burp?branch=master)
-# BURP
+# BURP [![CircleCI](https://circleci.com/gh/daothauvin/burp.svg?style=shield&circle-token=f74b04aaa5d2902abc5866058190ef1484703670)](https://app.circleci.com/pipelines/github/daothauvin/burp?branch=master)
 
 > B.U.R.P - Basic Used for Robots Programming
 
@@ -28,7 +27,32 @@ Le but de ce projet est d’implémenter en langage C un jeu de programmation da
 
 ## Diagramme de classe
 
-TODO
+    ├── define.h
+    ├── game.c
+    ├── game.h
+    ├── main.c
+    ├── model/
+    │   ├── cycle.c
+    │   ├── cycle.h
+    │   ├── file_reader
+    │   │   ├── interpreter.c
+    │   │   ├── interpreter.h
+    │   │   ├── syntax_analyse.c
+    │   │   ├── syntax_analyse.h
+    │   │   └── syntax_tree.h
+    │   └── game/
+    │       ├── arene.c
+    │       ├── arene.h
+    │       ├── commands.c
+    │       ├── commands.h
+    │       ├── missile.c
+    │       ├── missile.h
+    │       ├── robot.c
+    │       └── robot.h
+    └── view/
+        ├── Makefile
+        ├── ui.c
+        └── ui.h
 
 ## Launch
 
