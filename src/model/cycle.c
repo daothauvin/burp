@@ -23,6 +23,10 @@ short cycle(arena* a,int line[4],Tree syntax_tree[4]) {
 		if(get_robot_health_points(get_robot_index(a, i)) <= 0)
 		{
 			remove_robot(a, get_robot_index(a, i));
+			char message [LOG_SIZE];
+			memset(message, '\0', LOG_SIZE);
+			snprintf(message, LOG_SIZE, "[X] Robot n°%d is dead.", i);
+			add_log(message);
 			i--;
 		}
 	}
@@ -65,6 +69,12 @@ short cycle(arena* a,int line[4],Tree syntax_tree[4]) {
 					a ->list_robots[j]->pos->y);
 					*/
 				inflict_damage_from_collision(get_robot_index(a,i),get_robot_index(a,j));
+				/*
+				char message [LOG_SIZE];
+				memset(message, '\0', LOG_SIZE);
+				snprintf(message, LOG_SIZE, "[!] Robot n°%d crashed into Robot n°%d !", i, j);
+				add_log(message);
+				*/
 			}
 		}
 	}
@@ -73,6 +83,12 @@ short cycle(arena* a,int line[4],Tree syntax_tree[4]) {
 		for(int j = 0; j < get_nb_missiles_arena(a); j++) {
 			//printf("collision missiles\n");
 			collision_with_missiles(get_robot_index(a,i),get_missile_index(a,j));
+			/*
+			char message [LOG_SIZE];
+			memset(message, '\0', LOG_SIZE);
+			snprintf(message, LOG_SIZE, "[!] Robot n°%d got hit by a rocket !", i);
+			add_log(message);
+			*/
 		}
 	}
 

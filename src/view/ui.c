@@ -368,15 +368,17 @@ void anim_begin() {
  */
 
 static void drawTitle() {
-	mvprintw(3, 93, "oooooooooo.        Basic Used for Robots Programming");
-	mvprintw(4, 93, "`888'   `Y8b");
-	mvprintw(5, 94, "888     888 oooo  oooo  oooo d8b oo.ooooo.");
-	mvprintw(6, 94, "888oooo888' `888  `888  `888""8P    888' `88b      ;");
-	mvprintw(7, 94, "888    `88b  888   888   888      888   888     [\"]/");
-	mvprintw(8, 94, "888    .88P  888   888   888      888   888    /[_]");
-	mvprintw(9, 93, "o888bood8P'   `V88V\"V8P' d888b     888bod8P'     ] [");
-	mvprintw(10, 128, "888");
-	mvprintw(11, 127, "o888o");
+	mvprintw(2, 94, "oooooooooo.        Basic Used for Robots Programming");
+	mvprintw(3, 94, "`888'   `Y8b");
+	mvprintw(4, 95, "888     888 oooo  oooo  oooo d8b oo.ooooo.");
+	mvprintw(5, 95, "888oooo888' `888  `888  `888""8P    888' `88b      ;");
+	mvprintw(6, 95, "888    `88b  888   888   888      888   888     [\"]/");
+	mvprintw(7, 95, "888    .88P  888   888   888      888   888    /[_]");
+	mvprintw(8, 94, "o888bood8P'   `V88V\"V8P' d888b     888bod8P'     ] [");
+	mvprintw(9, 129, "888");
+	mvprintw(10, 128, "o888o");
+	mvprintw(11, 90, "[Q] Quit       [P] Pause");
+	mvprintw(12, 90, "[+] Speed up   [-] Slow up");
 }
 
 /**
@@ -484,19 +486,27 @@ short waitForInput() {
 			case '+':
 				if(time_between > 100000) {
 					time_between -= 100000;
-					add_log("Speed up");
+					add_log("[+] Speeded up.");
 				}
 				else {
-					add_log("Maximum speed reached");
+					add_log("[!] Max speed reached.");
 				}
 				break;
 			case '-':
 				if(time_between < 10000000) {
 					time_between += 100000; 
-					add_log("Speed down");
+					add_log("[-] Slowed down.");
 				} 
 				else {
-					add_log("Lowest speed reached");
+					add_log("[!] Lowest speed reached.");
+				}
+				break;
+			case 'p':
+			case 'P':
+				if (pause_game()) {
+					add_log("[o] Game paused.");
+				} else {
+					add_log("[o] Game resumed.");
 				}
 				break;
 			default:

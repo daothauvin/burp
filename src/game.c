@@ -4,6 +4,13 @@
 #define _GNU_SOURCE
 #include "game.h"
 
+short paused = 0;
+
+short pause_game() {
+	paused = !paused;
+	return paused;
+}
+
 void game(Tree syntax_tree[4])
 {
 
@@ -37,9 +44,13 @@ void game(Tree syntax_tree[4])
 	updateArena(a);
 	// anim_begin();
 	while (cycle(a, line, syntax_tree)){
-	
+		if (paused) {
+			while (paused) {
+				if(!waitForInput())
+					break;
+			}
+		}
 		
-
 		for(int i = 0;i < get_nb_robot_arena(a); i++) {
 			add_action(getNextCommand(i),i);
 		}
