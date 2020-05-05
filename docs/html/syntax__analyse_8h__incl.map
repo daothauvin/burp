@@ -1,13 +1,7 @@
 <map id="src/model/file_reader/syntax_analyse.h" name="src/model/file_reader/syntax_analyse.h">
-<area shape="rect" id="node1" title=" " alt="" coords="357,5,500,47"/>
-<area shape="rect" id="node2" title=" " alt="" coords="87,169,170,196"/>
-<area shape="rect" id="node3" title=" " alt="" coords="25,95,78,121"/>
-<area shape="rect" id="node4" title=" " alt="" coords="102,95,195,121"/>
-<area shape="rect" id="node5" href="$syntax__tree_8h.html" title=" " alt="" coords="219,95,321,121"/>
-<area shape="rect" id="node6" title=" " alt="" coords="345,95,411,121"/>
-<area shape="rect" id="node7" title=" " alt="" coords="435,95,526,121"/>
-<area shape="rect" id="node8" title=" " alt="" coords="550,95,630,121"/>
-<area shape="rect" id="node9" title=" " alt="" coords="654,95,713,121"/>
-<area shape="rect" id="node10" title=" " alt="" coords="737,95,801,121"/>
-<area shape="rect" id="node11" title=" " alt="" coords="825,95,889,121"/>
+<area shape="rect" id="node1" title=" " alt="" coords="26,5,168,47"/>
+<area shape="rect" id="node2" title=" " alt="" coords="85,169,168,196"/>
+<area shape="rect" id="node3" title=" " alt="" coords="22,95,76,121"/>
+<area shape="rect" id="node4" title=" " alt="" coords="100,95,193,121"/>
+<area shape="rect" id="node5" href="$syntax__tree_8h.html" title=" " alt="" coords="217,95,318,121"/>
 </map>
