@@ -1,0 +1,32 @@
+\begin{quote}
+B.\+U.\+R.\+P -\/ Basic Used for Robots Programming \end{quote}
+\hypertarget{md_doxygen_index_autotoc_md1}{}\doxysection{Langage B\+U\+R\+P et descriptif du sujet}\label{md_doxygen_index_autotoc_md1}
+La sémantique du langage B\+U\+RP est disponible \href{../../doc/grammar/diagram.xhtml}{\texttt{ ici}} référencée dans le sujet disponible \href{../../doc/sujet_1.0.pdf}{\texttt{ ici}}.\hypertarget{md_doxygen_index_autotoc_md2}{}\doxysection{Description}\label{md_doxygen_index_autotoc_md2}
+Le but de ce projet est d’implémenter en langage C un jeu de programmation dans le cadre du cours de C\+P6. Dans ce jeu, des robots s’entretuent dans une arène, chacun d’eux exécutant un script donné en début de partie. Le jeu se termine lorsqu’il ne reste plus qu’un seul robot encore fonctionnel dans l’arêne \+: son script est alors déclaré gagnant. Le langage de script que nous utiliserons est une version très simplifiée de l’antique langage B\+A\+S\+IC. Le programme devra permettre la simulation de l’arène, ainsi que l’interprétation en temps réel du script de chaque robot.\hypertarget{md_doxygen_index_autotoc_md3}{}\doxysection{Dépendances}\label{md_doxygen_index_autotoc_md3}
+
+\begin{DoxyItemize}
+\item C\+Make ($>$= 3.\+0) \href{https://cmake.org/}{\texttt{ cmake}}
+\item Check ($>$= 0.\+10.\+0) \href{https://libcheck.github.io/check/}{\texttt{ check}}
+\item Pkg\+Config ($>$= 0.\+29) \href{https://www.freedesktop.org/wiki/Software/pkg-config/}{\texttt{ pkg-\/config}}
+\item Glib ($>$= 2.\+0) \href{https://github.com/GNOME/glib}{\texttt{ glib}}
+\item N\+Curses ($>$= 6.\+1) \href{https://invisible-island.net/ncurses/ncurses.html}{\texttt{ ncurses}}
+\item Subunit ($>$= 1.\+20) \href{https://packages.ubuntu.com/xenial/libsubunit-dev}{\texttt{ subunit}}
+\end{DoxyItemize}\hypertarget{md_doxygen_index_autotoc_md4}{}\doxysection{Diagramme de classe}\label{md_doxygen_index_autotoc_md4}
+\hypertarget{md_doxygen_index_autotoc_md5}{}\doxysection{Launch}\label{md_doxygen_index_autotoc_md5}
+En premier temps, on peut utiliser les scripts {\ttfamily ./build\+\_\+main.sh} pour le programme principal et {\ttfamily ./build\+\_\+test.sh} pour effectuer les tests
+
+{\ttfamily ./build\+\_\+main.sh} se chargera de lancer le programme avec les fichiers prog\mbox{[}x\mbox{]}.burp défini dans leur repertoire associé.
+
+Par la suite, il suffit d\textquotesingle{}utiliser l\textquotesingle{}exécutable se trouvant dans {\ttfamily build\textbackslash{}src\textbackslash{}} en faisant \+: ~\newline
+ {\ttfamily ./burp prog1.\+burp ... prog4.\+burp} pour lancer le programme\hypertarget{md_doxygen_index_autotoc_md6}{}\doxysubsection{Contrôle de l\textquotesingle{}utilisateur \+:}\label{md_doxygen_index_autotoc_md6}
+L\textquotesingle{}utilisateur dispose de 4 contrôles pour altérer l\textquotesingle{}interface utilisateur et le déroulement de la partie.
+
+Pause \+: p ~\newline
+ Quitter \+: q ~\newline
+ Accélérer \+: + ~\newline
+ Décélérer \+: -\/ ~\newline
+\hypertarget{md_doxygen_index_autotoc_md7}{}\doxysection{Auteurs}\label{md_doxygen_index_autotoc_md7}
+\href{https://github.com/daothauvin}{\texttt{ Dao Thauvin}} ~\newline
+ \href{https://github.com/LieceC}{\texttt{ Liece Cherchour}} ~\newline
+ \href{https://github.com/totocptbgn}{\texttt{ Thomas Bignon}} ~\newline
+ 
