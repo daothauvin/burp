@@ -1,11 +1,10 @@
-[![CircleCI](https://circleci.com/gh/daothauvin/burp.svg?style=shield&circle-token=f74b04aaa5d2902abc5866058190ef1484703670)](https://app.circleci.com/pipelines/github/daothauvin/burp?branch=master)
 # BURP
 
 > B.U.R.P - Basic Used for Robots Programming
 
 ## Langage BURP et descriptif du sujet
 
-La sémantique du langage BURP est disponible [ici](docs/grammar/diagram.xhtml) référencée dans le sujet disponible [ici](docs/sujet_1.0.pdf).
+La sémantique du langage BURP est disponible [ici](grammar/diagram.xhtml) référencée dans le sujet disponible [ici](sujet_1.0.pdf).
 
 ## Description
 
@@ -28,8 +27,7 @@ Le but de ce projet est d’implémenter en langage C un jeu de programmation da
 
 ## Diagramme de classe
 
-Lien vers la page doxygen du projet : [doxygen](docs/doxygen/html/index.html)
-![CLass_Diagram](docs/doxygen/html/main_8c__incl.png)
+![CLass_Diagram](main_8c__incl.png)
 
 ## Launch
 

@@ -1,0 +1,4 @@
+<map id="collision_with_missiles" name="collision_with_missiles">
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,160,32"/>
+<area shape="rect" id="node2" href="$robot_8c.html#afbf064e3ff996e9e17124eff6bcf0ea2" title=" " alt="" coords="208,5,312,32"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="shoot" name="shoot">
+<area shape="rect" id="node1" title=" " alt="" coords="5,132,60,159"/>
+<area shape="rect" id="node2" href="$arene_8c.html#a385b76a9b459e61105794a241ad6a33a" title=" " alt="" coords="139,5,229,32"/>
+<area shape="rect" id="node3" href="$commands_8c.html#a9fcbe4518ef7cee1509025b612f722d4" title=" " alt="" coords="308,81,361,108"/>
+<area shape="rect" id="node5" href="$missile_8c.html#a68bf8a71d820ca78f5b12b749467b6bd" title=" " alt="" coords="131,107,237,133"/>
+<area shape="rect" id="node6" href="$robot_8c.html#a7f964181d5baea96a9df684957accd1b" title=" " alt="" coords="108,157,260,184"/>
+<area shape="rect" id="node7" href="$robot_8c.html#afbf064e3ff996e9e17124eff6bcf0ea2" title=" " alt="" coords="132,208,236,235"/>
+<area shape="rect" id="node8" href="$robot_8c.html#ac34639189534024434a3689901dfd9b4" title=" " alt="" coords="110,259,258,285"/>
+<area shape="rect" id="node4" href="$commands_8c.html#a7d653a23bc3022afd9b32e419abbbc2d" title=" " alt="" coords="409,81,480,108"/>
+</map>
