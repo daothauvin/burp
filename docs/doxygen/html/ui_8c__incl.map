@@ -1,9 +1,0 @@
-<map id="src/view/ui.c" name="src/view/ui.c">
-<area shape="rect" id="node1" title=" " alt="" coords="187,5,283,32"/>
-<area shape="rect" id="node2" href="$ui_8h.html" title=" " alt="" coords="214,80,257,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,155,84,181"/>
-<area shape="rect" id="node4" href="$robot_8h.html" title=" " alt="" coords="273,304,422,331"/>
-<area shape="rect" id="node5" href="$define_8h.html" title=" " alt="" coords="245,379,337,405"/>
-<area shape="rect" id="node6" href="$missile_8h.html" title=" " alt="" coords="385,229,547,256"/>
-<area shape="rect" id="node7" href="$arene_8h.html" title=" " alt="" coords="159,155,311,181"/>
-</map>
