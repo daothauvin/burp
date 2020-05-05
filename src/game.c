@@ -52,7 +52,8 @@ void game(Tree syntax_tree[4])
 		}
 		
 		for(int i = 0;i < get_nb_robot_arena(a); i++) {
-			add_action(getNextCommand(i),i);
+			int id = get_robot_id(get_robot_index(a,i));
+			add_action(getNextCommand(id),id);
 		}
 		memcpy(previousline,line,4*sizeof(int));
 		if(!waitForInput())
