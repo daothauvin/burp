@@ -1,0 +1,15 @@
+<map id="main" name="main">
+<area shape="rect" id="node1" title=" " alt="" coords="5,107,56,133"/>
+<area shape="rect" id="node2" href="$syntax__analyse_8c.html#a2e45cc8ea33eccb78f96cf06b6e29286" title=" " alt="" coords="104,5,283,32"/>
+<area shape="rect" id="node3" href="$syntax__analyse_8c.html#adad87c52077f102085fda24e843746ce" title=" " alt="" coords="158,56,229,83"/>
+<area shape="rect" id="node4" href="$game_8c.html#a019b61339f6e277e51c96ce040d54ee0" title=" " alt="" coords="166,107,221,133"/>
+<area shape="rect" id="node12" href="$syntax__analyse_8c.html#a507c67351524e2ff0b93f6ba7e48a9e7" title=" " alt="" coords="147,157,239,184"/>
+<area shape="rect" id="node13" href="$syntax__analyse_8c.html#ab9d818c32962f60f31560d06b3bd01b2" title=" " alt="" coords="139,208,247,235"/>
+<area shape="rect" id="node5" href="$arene_8c.html#ad6bb32fce4ad247a5e5028cf78d1cbda" title=" " alt="" coords="340,56,419,83"/>
+<area shape="rect" id="node6" href="$arene_8c.html#ac31e5f4912f492e345a78397658cb8da" title=" " alt="" coords="331,107,428,133"/>
+<area shape="rect" id="node7" href="$robot_8c.html#a5a9e6897cfd298fc0a81fa898d4526d7" title=" " alt="" coords="332,157,427,184"/>
+<area shape="rect" id="node8" href="$commands_8c.html#a9fcbe4518ef7cee1509025b612f722d4" title=" " alt="" coords="478,132,531,159"/>
+<area shape="rect" id="node10" href="$commands_8c.html#a906d8acbe869697e7fb763aa7e47cf68" title=" " alt="" coords="476,183,533,209"/>
+<area shape="rect" id="node9" href="$commands_8c.html#a7d653a23bc3022afd9b32e419abbbc2d" title=" " alt="" coords="605,132,676,159"/>
+<area shape="rect" id="node11" href="$robot_8c.html#afd1fbe93d3fe1ac3776bcc992b013d31" title=" " alt="" coords="581,183,700,209"/>
+</map>
