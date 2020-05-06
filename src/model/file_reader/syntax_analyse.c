@@ -172,6 +172,15 @@ static int sizeofToken(GTokenType t) {
 
 static Tree condition();
 
+static void freeTrees(int number_tree, ...) {
+   va_list va;
+   va_start (va, number_tree);
+	for(int i = 0; i < number_tree; i++) {
+		Tree t = va_arg (va, Tree);
+		free(t);
+	}
+	va_end (va);
+}
 //number
 static Tree number() {
 	GTokenType t = g_scanner_get_next_token (gs);
@@ -309,15 +318,12 @@ static Tree expression() {
 			}
 			arg2 = expression();
 			if(arg2 == NULL) {
-				freeTree(arg0);
-				freeTree(arg1);
+				freeTrees(2,arg0,arg1);
 				return NULL;
 			}
 			value = malloc(strlen(OPERATOR) + 1);
 			if(value == NULL) {
-				freeTree(arg0);
-				freeTree(arg1);
-				freeTree(arg2);
+				freeTrees(3,arg0,arg1,arg2);
 				return NULL;
 			}
 			strcpy(value,OPERATOR);
@@ -325,20 +331,12 @@ static Tree expression() {
 			switch(g_scanner_get_next_token (gs)) {
 				case G_TOKEN_RIGHT_PAREN:
 				break;
+				freeTrees(3,arg0,arg1,arg2);
 				case G_TOKEN_IDENTIFIER:
-					freeTree(arg0);
-					freeTree(arg1);
-					freeTree(arg2);
 					ERROR_OCCURED(")")
 				case G_TOKEN_INT :
-					freeTree(arg0);
-					freeTree(arg1);
-					freeTree(arg2);
 					ERROR_INT_UNEXCEPTED(")",buf)
 				default:
-					freeTree(arg0);
-					freeTree(arg1);
-					freeTree(arg2);
 					ERROR_UNKNOWN_OCCURED(")")
 			}
 			g_node_insert(myself,0,arg0);
@@ -401,16 +399,13 @@ static Tree expression() {
 				arg2 = expression();
 				if(arg2 == NULL) {
 					free(value);
-					freeTree(arg0);
-					freeTree(arg1);
+					freeTrees(2,arg0,arg1);
 					return NULL;
 				}
 				arg3 = expression();
 				if(arg3 == NULL) {
 					free(value);
-					freeTree(arg0);
-					freeTree(arg1);
-					freeTree(arg2);
+					freeTrees(3,arg0,arg1,arg2);
 					return NULL;
 				}
 				myself = g_node_new (value);
@@ -437,8 +432,7 @@ static Tree expression() {
 				arg2 = expression();
 				if(arg2 == NULL) {
 					free(value);
-					freeTree(arg0);
-					freeTree(arg1);
+					freeTrees(2,arg0,arg1);
 					return NULL;
 				}
 				myself = g_node_new (value);
@@ -584,15 +578,12 @@ static Tree condition() {
 	}
 	Tree arg2 = expression();
 	if(arg2 == NULL) {
-		freeTree(arg0);
-		freeTree(arg1);
+		freeTrees(2,arg0,arg1);
 		return NULL;
 	}
 	gchar* value = malloc(strlen(COND) + 1);
 	if(value == NULL) {
-		freeTree(arg0);
-		freeTree(arg1);
-		freeTree(arg2);
+		freeTrees(3,arg0,arg1,arg2);
 		return NULL;
 	}
 	strcpy(value,COND);
@@ -642,8 +633,7 @@ static Tree line(int num) {
 	}
 	gchar* char_value = malloc(strlen(LINE) + 1);
 	if(char_value == NULL) {
-		freeTree(arg0);
-		freeTree(arg1);
+		freeTrees(2,arg0,arg1);
 		return NULL;
 	}
 	strcpy(char_value,LINE);
@@ -693,12 +683,7 @@ Tree init_file_tree(char* pathname) {
 	if(fd < -1) {
 		return NULL;
 	}
-	
-	//printf("symbol %p\n",g_scanner_lookup_symbol(sc,"+"));
-	
 	g_scanner_input_file (gs,fd);
 	Tree n = program();
-	
-	//printf("depth : %d\n",g_node_max_height (n));
 	return n;
 }
