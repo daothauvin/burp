@@ -1,5 +1,5 @@
 #include "commands.h"
-#include "../../view/ui.h"
+
 int wait_robot(robot *rob, unsigned int delay)
 {
     set_waiting_time_robot(rob, delay);
