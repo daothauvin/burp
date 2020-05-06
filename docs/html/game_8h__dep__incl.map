@@ -1,10 +1,9 @@
 <map id="src/game.h" name="src/game.h">
-<area shape="rect" id="node1" title=" " alt="" coords="214,5,301,32"/>
-<area shape="rect" id="node2" href="$game_8c.html" title=" " alt="" coords="98,80,185,107"/>
-<area shape="rect" id="node3" href="$ui_8h.html" title=" " alt="" coords="209,80,305,107"/>
-<area shape="rect" id="node8" href="$main_8c.html" title=" " alt="" coords="329,80,412,107"/>
-<area shape="rect" id="node4" href="$cycle_8h.html" title=" " alt="" coords="372,155,497,181"/>
-<area shape="rect" id="node6" href="$commands_8c.html" title=" " alt="" coords="5,155,200,181"/>
-<area shape="rect" id="node7" href="$ui_8c.html" title=" " alt="" coords="224,155,320,181"/>
-<area shape="rect" id="node5" href="$cycle_8c.html" title=" " alt="" coords="372,229,497,256"/>
+<area shape="rect" id="node1" title=" " alt="" coords="121,5,208,32"/>
+<area shape="rect" id="node2" href="$game_8c.html" title=" " alt="" coords="5,80,92,107"/>
+<area shape="rect" id="node3" href="$ui_8h.html" title=" " alt="" coords="117,80,213,107"/>
+<area shape="rect" id="node7" href="$main_8c.html" title=" " alt="" coords="237,80,319,107"/>
+<area shape="rect" id="node4" href="$cycle_8h.html" title=" " alt="" coords="265,155,390,181"/>
+<area shape="rect" id="node6" href="$ui_8c.html" title=" " alt="" coords="117,155,213,181"/>
+<area shape="rect" id="node5" href="$cycle_8c.html" title=" " alt="" coords="265,229,390,256"/>
 </map>
