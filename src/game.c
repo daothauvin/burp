@@ -4,7 +4,6 @@
 #define _GNU_SOURCE
 #include "game.h"
 
-static short paused = 0;
 
 void game(Tree syntax_tree[4])
 {
@@ -58,13 +57,4 @@ void game(Tree syntax_tree[4])
 		updateArena(a);
 	}
 	quit();
-}
-
-short pause_game() {
-	paused = !paused;
-	return paused;
-}
-
-short getPause() {
-	return paused;
 }
