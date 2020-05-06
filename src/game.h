@@ -6,3 +6,4 @@
 #include <string.h>
 void game(Tree syntax_tree[4]);
 short pause_game();
+short getPause();

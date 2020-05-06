@@ -477,7 +477,7 @@ short waitForInput() {
 	nodelay(stdscr, TRUE);
 	struct timeval start, cur;
 	gettimeofday(&start, NULL);
-    while (diff < time_between) {
+    while (diff < time_between || getPause()) {
 		int c = getch();
 		switch (c) {
 			case 'q':
