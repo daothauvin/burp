@@ -4,11 +4,9 @@
 #define _GNU_SOURCE
 #include "game.h"
 
-
 void game(Tree syntax_tree[4])
 {
 
-	
 	struct warning_message* message;
 	char warning[100];
 	arena *a = create_arena();
@@ -25,7 +23,6 @@ void game(Tree syntax_tree[4])
 	
 	int line[4] = {0};
 	int previousline[4] = {0};
-
 
 	init();
 	init_next(a,line,syntax_tree);
@@ -56,5 +53,8 @@ void game(Tree syntax_tree[4])
 		freeWarnings();
 		updateArena(a);
 	}
+	// TODO: - Ajouter une condition (il faut que la game soit finie, pas interrompue)
+	//       - Mettre le bon nom en paramêtre
+	end_screen("ROB_?");
 	quit();
 }
