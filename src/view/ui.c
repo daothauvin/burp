@@ -381,6 +381,16 @@ static void drawTitle() {
 }
 
 /**
+ *  Draw the end screen
+ */
+
+void end_screen(char* winner_name) {
+	nodelay(stdscr, FALSE);
+	clear();
+	getch();
+}
+
+/**
  *  Print the log
  */
 
