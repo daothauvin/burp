@@ -19,10 +19,10 @@ void game(Tree syntax_tree[4])
 	char warning[100];
 	arena *a = create_arena();
 	//                        X        Y      Angle  Spd   Id
-	robot* r0 = create_robot(6.0,     6.0,     0.0,  0.0,  0);
-	robot* r1 = create_robot(6.0,     9995.0,  0.0,  0.0,  1);
-	robot* r2 = create_robot(9995.0,  9995.0,  0.0,  0.0,  2);
-	robot* r3 = create_robot(9995.0,  6.0,     0.0,  0.0,  3);
+	robot* r0 = create_robot(6.0,     6.0,     0.0,  0.0,  0,"abc");
+	robot* r1 = create_robot(6.0,     9995.0,  0.0,  0.0,  1,"cba");
+	robot* r2 = create_robot(9995.0,  9995.0,  0.0,  0.0,  2,"slt");
+	robot* r3 = create_robot(9995.0,  6.0,     0.0,  0.0,  3,"elb");
 
 	add_robot(a,r0);
 	add_robot(a,r1);

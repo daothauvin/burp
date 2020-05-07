@@ -7,8 +7,8 @@ robot *rob;
 robot *rob1;
 static void setup(void)
 {
-  rob = create_robot(x.x, x.y, 0.0, max_speed, 0);
-  rob1 = create_robot(x.x,x.y, 0.0, max_speed, 1);
+  rob = create_robot(x.x, x.y, 0.0, max_speed, 0, "aaa");
+  rob1 = create_robot(x.x,x.y, 0.0, max_speed, 1, "bbb");
 }
 
 static void teardown(void)
@@ -26,6 +26,8 @@ START_TEST(test_create_robot)
   ck_assert_int_eq(rob->missiles, 0);
   ck_assert(rob->speed == max_speed);
   ck_assert_int_eq(rob->waiting_time, 0);
+  fprintf(stderr,"'%s' 'aaa'",rob->robot_name);
+  ck_assert(strcmp(rob->robot_name,"aaa") == 0);
 }
 END_TEST
 

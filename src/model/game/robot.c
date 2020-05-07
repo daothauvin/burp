@@ -20,7 +20,7 @@ struct robot_impl
     unsigned int waiting_time; //cycle delay
 };
 
-robot *create_robot(double x_1, double y_1, double angle, int speed, int id)
+robot *create_robot(double x_1, double y_1, double angle, int speed, int id, char *r_name)
 {
     robot *rob = malloc(sizeof(struct robot_impl));
     memset(rob, 0, sizeof(struct robot_impl));
@@ -30,6 +30,7 @@ robot *create_robot(double x_1, double y_1, double angle, int speed, int id)
     rob->angle = angle;
     rob->speed = speed;
     rob->id = id;
+    memmove(rob->robot_name,r_name,robot_name_length);
     return rob;
 }
 void update_pos_robot(robot *rob)

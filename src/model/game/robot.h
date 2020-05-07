@@ -26,7 +26,7 @@ typedef struct robot_impl robot;
  * coordinate, [angle] as its angle, [speed] as the speed and
  * [id] as the robot number.
  */ 
-robot *create_robot(double x_1, double y_1, double angle, int speed, int id);
+robot *create_robot(double x_1, double y_1, double angle, int speed, int id, char *r_name);
 
 /**
  * Update the position of a robot [rob] to its next iteration,

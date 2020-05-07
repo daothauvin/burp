@@ -7,9 +7,9 @@ arena *a;
 static void setup(void)
 {
   a = create_arena();
-  rob = create_robot(7000.0, 3500.0, 14.0, 27.0, 0);
-  robot *robot1 = create_robot(0, 0, 0, 0, 1);
-  robot *robot2 = create_robot(0, 0, 0, 0, 2);
+  rob = create_robot(7000.0, 3500.0, 14.0, 27.0, 0,"ccc");
+  robot *robot1 = create_robot(0, 0, 0, 0, 1,"bbb");
+  robot *robot2 = create_robot(0, 0, 0, 0, 2,"aaa");
   add_robot(a, rob);
   add_robot(a, robot1);
   add_robot(a, robot2);
