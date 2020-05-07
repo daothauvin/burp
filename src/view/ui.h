@@ -20,9 +20,10 @@ short waitForInput();                   // Check for user keyboard input
 int   quit();                           // End the inteface
 
 void anim_begin();                      // Launch the begin animation
-void end_screen(char* winner_name);                // Launch the end screen and print the winner
+void end_screen(robot* robot);                // Launch the end screen and print the winner
 
 void add_log(char* message);            // Add a message in the log
 void add_action(char* action, int id);  // Add an action for a robot in the info tab
 
 void updateArena(arena* arena);         // Update position and value of interface with arena data
+

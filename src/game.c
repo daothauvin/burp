@@ -4,17 +4,58 @@
 #define _GNU_SOURCE
 #include "game.h"
 
-void game(Tree syntax_tree[4])
+
+static char* setupName(char* filename, int id) {
+    char* res = malloc(6 * sizeof(char));
+    memset(res, '\0', 6);
+
+    char fname[3];
+    memset(fname, '\0', 3);
+    strcpy(fname, res);
+
+    if (strlen(filename) < 3) {
+        snprintf(res, 6, "ROB_%d", id);
+        return res;
+    } else if (strlen(filename) == 3) {
+        for (size_t i = 0; i < 3; i++) {
+            fname[i] = toupper(filename[i]);
+        }
+        snprintf(res, 6, "%c%c%c_%d", fname[0], fname[1], fname[2], id);
+        return res;
+    } else {
+        int compt = 0;
+        for (size_t i = 0; i < strlen(filename); i++) {
+            if (tolower(filename[i]) != 'a' && tolower(filename[i]) != 'e' && tolower(filename[i]) != 'i'
+            && tolower(filename[i]) != 'o' && tolower(filename[i]) != 'u' && tolower(filename[i]) != 'y') {
+                fname[compt] = toupper(filename[i]);
+                compt++;
+                if (compt == 3) break;
+            }
+        }
+        if (compt != 3) {
+            for (size_t i = 0; i < 3; i++) {
+                fname[i] = toupper(filename[i]);
+            }
+            snprintf(res, 6, "%c%c%c_%d", fname[0], fname[1], fname[2], id);
+            return res;
+        }
+        snprintf(res, 6, "%c%c%c_%d", fname[0], fname[1], fname[2], id);
+        return res;    
+    }
+}
+
+void game(Tree syntax_tree[4],char* robot_names[4])
 {
 
 	struct warning_message* message;
 	char warning[100];
 	arena *a = create_arena();
-	//                        X        Y      Angle  Spd   Id
-	robot* r0 = create_robot(6.0,     6.0,     0.0,  0.0,  0,"abc");
-	robot* r1 = create_robot(6.0,     9995.0,  0.0,  0.0,  1,"cba");
-	robot* r2 = create_robot(9995.0,  9995.0,  0.0,  0.0,  2,"slt");
-	robot* r3 = create_robot(9995.0,  6.0,     0.0,  0.0,  3,"elb");
+	
+	//                        X        Y      Angle  Spd   Id Name
+	robot* r0 = create_robot(6.0,     6.0,     0.0,  0.0,  0, setupName(robot_names[0],0));
+	robot* r1 = create_robot(6.0,     9995.0,  0.0,  0.0,  1, setupName(robot_names[1],1));
+	robot* r2 = create_robot(9995.0,  9995.0,  0.0,  0.0,  2, setupName(robot_names[2],2));
+	robot* r3 = create_robot(9995.0,  6.0,     0.0,  0.0,  3, setupName(robot_names[3],3));
 
 	add_robot(a,r0);
 	add_robot(a,r1);
@@ -55,6 +96,8 @@ void game(Tree syntax_tree[4])
 	}
 	// TODO: - Ajouter une condition (il faut que la game soit finie, pas interrompue)
 	//       - Mettre le bon nom en paramêtre
-	end_screen("ROB_?");
+	if(get_nb_robot_arena(a) == 1) {
+		end_screen(get_robot_index(a,0));
+	}
 	quit();
 }
