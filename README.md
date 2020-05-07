@@ -5,7 +5,7 @@
 
 ## Langage BURP et descriptif du sujet
 
-La sémantique du langage BURP est disponible [ici](docs/grammar/diagram.xhtml) référencée dans le sujet disponible [ici](docs/sujet_1.0.pdf).
+La sémantique du langage BURP est disponible [ici](https://daothauvin.github.io/burp/html/grammar/diagram.xhtml) référencée dans le sujet disponible [ici](https://daothauvin.github.io/burp/html/sujet_1.0.pdf).
 
 ## Description
 
@@ -28,7 +28,7 @@ Le but de ce projet est d’implémenter en langage C un jeu de programmation da
 
 ## Diagramme de classe
 
-Lien vers la page doxygen du projet : [doxygen](docs/doxygen/html/index.html)
+Lien vers la page doxygen du projet : [doxygen](https://daothauvin.github.io/burp/html/)
 ![Class_Diagram](https://daothauvin.github.io/burp/html/main_8c__incl.png)
 
 ## Launch
