@@ -29,7 +29,7 @@ Le but de ce projet est d’implémenter en langage C un jeu de programmation da
 ## Diagramme de classe
 
 Lien vers la page doxygen du projet : [doxygen](docs/doxygen/html/index.html)
-![CLass_Diagram](docs/doxygen/html/main_8c__incl.png)
+![Class_Diagram](https://daothauvin.github.io/burp/html/main_8c__incl.png)
 
 ## Launch
 

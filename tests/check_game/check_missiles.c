@@ -4,7 +4,7 @@
 robot* rob;
 missile *m;
 static void setup(void) {
-  rob = create_robot(0.0,0.0,0.0,0.0,0);
+  rob = create_robot(0.0,0.0,0.0,0.0,0,"aaa");
   m = create_missile(0.0,0.0,0.0,rob,0.0);
 }
 

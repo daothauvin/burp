@@ -10,9 +10,9 @@ arena *a;
 static void setup(void)
 {
   a = create_arena();
-  rob = create_robot(0, 0, 0, 0, 0);
-  robot *robot1 = create_robot(0, 0, 0, 0, 1);
-  robot *robot2 = create_robot(0, 0, 0, 0, 2);
+  rob = create_robot(0, 0, 0, 0, 0,"abc");
+  robot *robot1 = create_robot(0, 0, 0, 0, 1,"bcc");
+  robot *robot2 = create_robot(0, 0, 0, 0, 2,"bdd");
   add_robot(a, rob);
   add_robot(a, robot1);
   add_robot(a, robot2);
@@ -73,7 +73,7 @@ END_TEST
 
 START_TEST(test_add_robot)
 {
-    robot *robot3 = create_robot(0, 0, 0, 0, 3);
+    robot *robot3 = create_robot(0, 0, 0, 0, 3,"slt");
     ck_assert_int_eq(add_robot(a,robot3),3);
     ck_assert_int_eq(add_robot(a,robot3),-1);
 }
@@ -81,7 +81,7 @@ END_TEST
 
 START_TEST(test_remove_robot)
 {
-    robot *robot3 = create_robot(0, 0, 0, 0, 3);
+    robot *robot3 = create_robot(0, 0, 0, 0, 3, "slt");
     add_robot(a,robot3);
     ck_assert_int_eq(get_nb_robot_arena(a),4);
     ck_assert(remove_robot(a,robot3) == true);

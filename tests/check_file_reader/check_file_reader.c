@@ -5,10 +5,10 @@ robot* jean_paul;
 Tree p;
 void setup(void) {
 	a = create_arena();
-	jean_paul = create_robot(0,0,0,0,0);
-	robot* robot1 = create_robot(0,0,0,0,1);
-	robot* robot2 = create_robot(0,0,0,0,2);
-	robot* robot3 = create_robot(0,0,0,0,3);
+	jean_paul = create_robot(0,0,0,0,0, 	"dao");
+	robot* robot1 = create_robot(0,0,0,0,1, "dao");
+	robot* robot2 = create_robot(0,0,0,0,2, "dao");
+	robot* robot3 = create_robot(0,0,0,0,3, "dao");
 	add_robot(a,jean_paul);
 	add_robot(a,robot1);
 	add_robot(a,robot2);
