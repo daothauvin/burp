@@ -387,6 +387,30 @@ static void drawTitle() {
 void end_screen(char* winner_name) {
 	nodelay(stdscr, FALSE);
 	clear();
+	mvprintw(2, 0, "  +        +        +        +        +        +        +        +        +        +        +        +        +        +        +        +        +");
+	mvprintw(5, 0, "       +        +        +        +        +        +        +        +        +        +        +        +        +        +        +        +");
+	mvprintw(8, 0, "   +        +        +        +        +        +        +        +        +        +        +        +        +        +        +        +        +");
+	mvprintw(10, 0, "                                                    oooooooooo.        Basic Used for Robots Programming");
+	mvprintw(11, 0, "       +        +        +        +        +        `888'   `Y8b                                                   +        +        +        +");
+	mvprintw(12, 0, "                                                     888     888 oooo  oooo  oooo d8b oo.ooooo.");
+	mvprintw(13, 0, "                                                     888oooo888' `888  `888  `8888P    888' `88b      ;");
+	mvprintw(14, 0, "  +        +        +        +        +        +     888    `88b  888   888   888      888   888     [\"]/     +       +        +        +        +");
+	mvprintw(15, 0, "                                                     888    .88P  888   888   888      888   888    /[_]");
+	mvprintw(16, 0, "                                                    o888bood8P'   `V88V\"V8P' d888b     888bod8P'     ] [");
+	mvprintw(17, 0, "       +        +        +        +        +        +       +         +        +       888       +       +        +        +        +        +");
+	mvprintw(18, 0, "                                                                                      o888o");
+	mvprintw(19, 0, "");
+	mvprintw(20, 0, "  +        +        +        +        +        +        +        +        +        +        +        +        +        +        +        +        +");
+	mvprintw(22, 0, "                                                            +-------------------------------+");
+	mvprintw(23, 0, "       +        +        +        +         +       +            Congratulation, %s.          +        +        +        +        +        +", winner_name);
+	mvprintw(24, 0, "                                                               You're the survivor Robot !");
+	mvprintw(25, 0, "                                                            +-------------------------------+");
+	mvprintw(26, 0, "  +         +        +        +        +        +        +        +        +        +        +        +        +        +        +        +        +");
+	mvprintw(29, 0, "       +        +        +        +        +        +        +        +        +        +        +        +        +        +        +        +");
+	mvprintw(32, 0, "  +        +        +        +        +        +         +        +        +        +        +        +        +        +        +        +        +");
+	mvprintw(35, 0, "       +        +        +        +        +        +        +        +        +        +        +        +        +        +        +        +");
+	mvprintw(38, 0, "  +        +        +        +        +        +        +        +        +        +        +        +        +        +        +        +        +");
+	mvprintw(41, 0, "        +        +        +        +        +        +        +        +        +        +        +        +        +        +        +        +");
 	getch();
 }
 

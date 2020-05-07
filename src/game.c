@@ -53,6 +53,8 @@ void game(Tree syntax_tree[4])
 		freeWarnings();
 		updateArena(a);
 	}
-	end_screen("TOTO_");
+	// TODO: - Ajouter une condition (il faut que la game soit finie, pas interrompue)
+	//       - Mettre le bon nom en paramêtre
+	end_screen("ROB_?");
 	quit();
 }
