@@ -4,7 +4,7 @@
 
 ## Langage BURP et descriptif du sujet
 
-La sémantique du langage BURP est disponible [ici](diagram.xhtml) référencée dans le sujet disponible [ici](sujet_1.0.pdf).
+La sémantique du langage BURP est disponible [ici](../../doc/grammar/diagram.xhtml) référencée dans le sujet disponible [ici](../../doc/sujet_1.0.pdf).
 
 ## Description
 

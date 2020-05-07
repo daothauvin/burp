@@ -1,7 +1,9 @@
 <map id="src/view/ui.h" name="src/view/ui.h">
-<area shape="rect" id="node1" title=" " alt="" coords="113,5,209,32"/>
-<area shape="rect" id="node2" href="$game_8h.html" title=" " alt="" coords="60,80,147,107"/>
-<area shape="rect" id="node5" href="$ui_8c.html" title=" " alt="" coords="171,80,267,107"/>
-<area shape="rect" id="node3" href="$game_8c.html" title=" " alt="" coords="5,155,92,181"/>
-<area shape="rect" id="node4" href="$main_8c.html" title=" " alt="" coords="117,155,199,181"/>
+<area shape="rect" id="node1" title=" " alt="" coords="111,5,207,32"/>
+<area shape="rect" id="node2" href="$game_8h.html" title=" " alt="" coords="60,155,147,181"/>
+<area shape="rect" id="node5" href="$cycle_8h.html" title=" " alt="" coords="153,80,278,107"/>
+<area shape="rect" id="node7" href="$ui_8c.html" title=" " alt="" coords="302,80,398,107"/>
+<area shape="rect" id="node3" href="$game_8c.html" title=" " alt="" coords="5,229,92,256"/>
+<area shape="rect" id="node4" href="$main_8c.html" title=" " alt="" coords="117,229,199,256"/>
+<area shape="rect" id="node6" href="$cycle_8c.html" title=" " alt="" coords="171,155,297,181"/>
 </map>

@@ -9,7 +9,7 @@ var searchData=
   ['destroy_5fmissile_38',['destroy_missile',['../missile_8c.html#ab23e049e8e31bd4616a321b5816981df',1,'destroy_missile(missile **m):&#160;missile.c'],['../missile_8h.html#ab23e049e8e31bd4616a321b5816981df',1,'destroy_missile(missile **m):&#160;missile.c']]],
   ['destroy_5frobot_39',['destroy_robot',['../robot_8c.html#ac8ef917224b8dc99481d8aa1289c1658',1,'destroy_robot(robot **rob):&#160;robot.c'],['../robot_8h.html#ac8ef917224b8dc99481d8aa1289c1658',1,'destroy_robot(robot **rob):&#160;robot.c']]],
   ['diff_40',['DIFF',['../syntax__tree_8h.html#a3e3f16eb72cacad45afd6616d62a9ff5',1,'syntax_tree.h']]],
-  ['distance_41',['distance',['../commands_8c.html#a7d653a23bc3022afd9b32e419abbbc2d',1,'distance(double x1, double y1, double x2, double y2):&#160;commands.c'],['../commands_8h.html#a7d653a23bc3022afd9b32e419abbbc2d',1,'distance(double x1, double y1, double x2, double y2):&#160;commands.c'],['../syntax__tree_8h.html#a9d41d147039787c25d6631b276ab4330',1,'DISTANCE():&#160;syntax_tree.h']]],
+  ['distance_41',['DISTANCE',['../syntax__tree_8h.html#a9d41d147039787c25d6631b276ab4330',1,'DISTANCE():&#160;syntax_tree.h'],['../commands_8c.html#a7d653a23bc3022afd9b32e419abbbc2d',1,'distance(double x1, double y1, double x2, double y2):&#160;commands.c'],['../commands_8h.html#a7d653a23bc3022afd9b32e419abbbc2d',1,'distance(double x1, double y1, double x2, double y2):&#160;commands.c']]],
   ['div_42',['DIV',['../syntax__tree_8h.html#a8295e0aed07a8923d8363ce46c7b08e2',1,'syntax_tree.h']]],
   ['doxygen_5findex_2emd_43',['doxygen_index.md',['../doxygen__index_8md.html',1,'']]]
 ];

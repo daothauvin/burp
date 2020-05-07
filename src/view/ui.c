@@ -13,9 +13,8 @@ int cursor;
 // Info robot
 char actions[12][7];
 
-// Test
-int cmpt = 0;
-int cmpt_1 = 0;
+// Pause var
+static short paused = 0;
 
 /**
  *  Draw a rectangle.
@@ -477,7 +476,7 @@ short waitForInput() {
 	nodelay(stdscr, TRUE);
 	struct timeval start, cur;
 	gettimeofday(&start, NULL);
-    while (diff < time_between) {
+    while (diff < time_between || paused) {
 		int c = getch();
 		switch (c) {
 			case 'q':
@@ -503,7 +502,8 @@ short waitForInput() {
 				break;
 			case 'p':
 			case 'P':
-				if (pause_game()) {
+				paused = !paused;
+				if (paused) {
 					add_log("[o] Game paused.");
 				} else {
 					add_log("[o] Game resumed.");

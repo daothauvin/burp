@@ -1,11 +1,13 @@
 <map id="src/model/game/commands.h" name="src/model/game/commands.h">
-<area shape="rect" id="node1" title=" " alt="" coords="246,5,441,32"/>
-<area shape="rect" id="node2" href="$interpreter_8h.html" title=" " alt="" coords="176,80,319,121"/>
-<area shape="rect" id="node9" href="$commands_8c.html" title=" " alt="" coords="343,87,538,114"/>
-<area shape="rect" id="node3" href="$cycle_8h.html" title=" " alt="" coords="106,177,231,203"/>
-<area shape="rect" id="node8" href="$interpreter_8c.html" title=" " alt="" coords="256,169,399,211"/>
-<area shape="rect" id="node4" href="$game_8h.html" title=" " alt="" coords="60,259,147,285"/>
-<area shape="rect" id="node7" href="$cycle_8c.html" title=" " alt="" coords="171,259,297,285"/>
+<area shape="rect" id="node1" title=" " alt="" coords="366,5,561,32"/>
+<area shape="rect" id="node2" href="$interpreter_8h.html" title=" " alt="" coords="296,80,439,121"/>
+<area shape="rect" id="node11" href="$commands_8c.html" title=" " alt="" coords="463,87,658,114"/>
+<area shape="rect" id="node3" href="$cycle_8h.html" title=" " alt="" coords="226,177,351,203"/>
+<area shape="rect" id="node10" href="$interpreter_8c.html" title=" " alt="" coords="376,169,519,211"/>
+<area shape="rect" id="node4" href="$game_8h.html" title=" " alt="" coords="115,259,201,285"/>
+<area shape="rect" id="node9" href="$cycle_8c.html" title=" " alt="" coords="226,259,351,285"/>
 <area shape="rect" id="node5" href="$game_8c.html" title=" " alt="" coords="5,333,92,360"/>
-<area shape="rect" id="node6" href="$main_8c.html" title=" " alt="" coords="117,333,199,360"/>
+<area shape="rect" id="node6" href="$ui_8h.html" title=" " alt="" coords="223,333,319,360"/>
+<area shape="rect" id="node8" href="$main_8c.html" title=" " alt="" coords="117,333,199,360"/>
+<area shape="rect" id="node7" href="$ui_8c.html" title=" " alt="" coords="223,408,319,435"/>
 </map>
