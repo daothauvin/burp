@@ -1,0 +1,21 @@
+/** \dir model/
+ *  \brief manages the data, logic and rules of the program
+ *  \details The model should be independent from outside modules. <br>
+ *   It does not contain the cycle handling that interact with the user interface.
+ * \dir view/
+ *  \brief user interface
+ * \details The interface is implemented with ncurses
+ * \dir model/file_reader/
+ *  \brief internal structure of the burp language interpreter
+ *  \details This part of the project is the only part that use glib librairy. <br>
+ * We use the scanner of glib to read files given.
+ * \dir model/game/
+ *  \brief internal structure of the game
+ *  \details This module should be independent. <br>
+ * It includes robots, missiles and arena internal structures.
+ * \dir src/
+ * \brief the whole project code
+ * \details Our project is separate in two modules : view and model
+ * The other files contained in src link those two modules
+ *
+ */

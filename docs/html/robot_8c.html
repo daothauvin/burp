@@ -73,14 +73,22 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="robot_8h_source.html">robot.h</a>&quot;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for robot.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="robot_8c__incl.png" border="0" usemap="#src_2model_2game_2robot_8c" alt=""/></div>
 <map name="src_2model_2game_2robot_8c" id="src_2model_2game_2robot_8c">
-<area shape="rect" title=" " alt="" coords="5,5,164,32"/>
-<area shape="rect" href="robot_8h.html" title=" " alt="" coords="53,80,116,107"/>
-<area shape="rect" href="define_8h.html" title=" " alt="" coords="39,155,131,181"/>
+<area shape="rect" title=" " alt="" coords="367,5,526,32"/>
+<area shape="rect" href="robot_8h.html" title=" " alt="" coords="281,80,343,107"/>
+<area shape="rect" title=" " alt="" coords="476,155,551,181"/>
+<area shape="rect" title=" " alt="" coords="485,80,550,107"/>
+<area shape="rect" title=" " alt="" coords="5,155,67,181"/>
+<area shape="rect" title=" " alt="" coords="91,155,155,181"/>
+<area shape="rect" title=" " alt="" coords="179,155,242,181"/>
+<area shape="rect" href="define_8h.html" title=" " alt="" coords="266,155,358,181"/>
+<area shape="rect" title=" " alt="" coords="383,155,452,181"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -93,8 +101,8 @@ Data Structures</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a4b43750d354d4f81ce53bce0dbfaafc6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="robot_8c.html#a4b43750d354d4f81ce53bce0dbfaafc6">degree_to_radians</a> (double x)</td></tr>
 <tr class="separator:a4b43750d354d4f81ce53bce0dbfaafc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a9e6897cfd298fc0a81fa898d4526d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="robot_8h.html#a38a4bfb19fff6c50c79c2574440a484b">robot</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="robot_8c.html#a5a9e6897cfd298fc0a81fa898d4526d7">create_robot</a> (double x_1, double y_1, double <a class="el" href="commands_8h.html#a9fcbe4518ef7cee1509025b612f722d4">angle</a>, int <a class="el" href="commands_8h.html#a906d8acbe869697e7fb763aa7e47cf68">speed</a>, int id)</td></tr>
-<tr class="separator:a5a9e6897cfd298fc0a81fa898d4526d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a282c5a9383041dec2dbaeff2a2086862"><td class="memItemLeft" align="right" valign="top"><a class="el" href="robot_8h.html#a38a4bfb19fff6c50c79c2574440a484b">robot</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="robot_8c.html#a282c5a9383041dec2dbaeff2a2086862">create_robot</a> (double x_1, double y_1, double <a class="el" href="commands_8h.html#a9fcbe4518ef7cee1509025b612f722d4">angle</a>, int <a class="el" href="commands_8h.html#a906d8acbe869697e7fb763aa7e47cf68">speed</a>, int id, char *r_name)</td></tr>
+<tr class="separator:a282c5a9383041dec2dbaeff2a2086862"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1eef754f1c44ea49fdf2bf06568d0eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="robot_8c.html#ac1eef754f1c44ea49fdf2bf06568d0eb">update_pos_robot</a> (<a class="el" href="robot_8h.html#a38a4bfb19fff6c50c79c2574440a484b">robot</a> *rob)</td></tr>
 <tr class="separator:ac1eef754f1c44ea49fdf2bf06568d0eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a361fb99eb98e31d9653d81e4e5c01faf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="robot_8c.html#a361fb99eb98e31d9653d81e4e5c01faf">modify_speed</a> (<a class="el" href="robot_8h.html#a38a4bfb19fff6c50c79c2574440a484b">robot</a> *rob, int <a class="el" href="commands_8h.html#a906d8acbe869697e7fb763aa7e47cf68">speed</a>)</td></tr>
@@ -170,8 +178,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a5a9e6897cfd298fc0a81fa898d4526d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a9e6897cfd298fc0a81fa898d4526d7">&#9670;&nbsp;</a></span>create_robot()</h2>
+<a id="a282c5a9383041dec2dbaeff2a2086862"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a282c5a9383041dec2dbaeff2a2086862">&#9670;&nbsp;</a></span>create_robot()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -204,7 +212,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>id</em>&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>r_name</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -217,8 +231,8 @@ Functions</h2></td></tr>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="robot_8c_a5a9e6897cfd298fc0a81fa898d4526d7_cgraph.png" border="0" usemap="#robot_8c_a5a9e6897cfd298fc0a81fa898d4526d7_cgraph" alt=""/></div>
-<map name="robot_8c_a5a9e6897cfd298fc0a81fa898d4526d7_cgraph" id="robot_8c_a5a9e6897cfd298fc0a81fa898d4526d7_cgraph">
+<div class="center"><img src="robot_8c_a282c5a9383041dec2dbaeff2a2086862_cgraph.png" border="0" usemap="#robot_8c_a282c5a9383041dec2dbaeff2a2086862_cgraph" alt=""/></div>
+<map name="robot_8c_a282c5a9383041dec2dbaeff2a2086862_cgraph" id="robot_8c_a282c5a9383041dec2dbaeff2a2086862_cgraph">
 <area shape="rect" title=" " alt="" coords="5,31,100,57"/>
 <area shape="rect" href="commands_8c.html#a9fcbe4518ef7cee1509025b612f722d4" title=" " alt="" coords="150,5,203,32"/>
 <area shape="rect" href="commands_8c.html#a906d8acbe869697e7fb763aa7e47cf68" title=" " alt="" coords="148,56,205,83"/>

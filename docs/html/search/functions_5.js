@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['game_252',['game',['../game_8c.html#a019b61339f6e277e51c96ce040d54ee0',1,'game(Tree syntax_tree[4]):&#160;game.c'],['../game_8h.html#a019b61339f6e277e51c96ce040d54ee0',1,'game(Tree syntax_tree[4]):&#160;game.c']]],
+  ['game_252',['game',['../game_8c.html#aa680f47e5c96209ce932584fe5bf7bcc',1,'game(Tree syntax_tree[4], char *robot_names[4]):&#160;game.c'],['../game_8h.html#aa680f47e5c96209ce932584fe5bf7bcc',1,'game(Tree syntax_tree[4], char *robot_names[4]):&#160;game.c']]],
   ['get_5fexplosion_5fdistant_253',['get_explosion_distant',['../missile_8c.html#a7f2c550804b1e464c8e83ad2b6a9f918',1,'get_explosion_distant(missile *m):&#160;missile.c'],['../missile_8h.html#a7f2c550804b1e464c8e83ad2b6a9f918',1,'get_explosion_distant(missile *m):&#160;missile.c']]],
   ['get_5fmissile_5fangle_254',['get_missile_angle',['../missile_8c.html#aff4ce2425a4d72ff53e49f1fea4c85ef',1,'get_missile_angle(missile *m):&#160;missile.c'],['../missile_8h.html#aff4ce2425a4d72ff53e49f1fea4c85ef',1,'get_missile_angle(missile *m):&#160;missile.c']]],
   ['get_5fmissile_5findex_255',['get_missile_index',['../arene_8c.html#a9eced759a21075a72c70f4924f2d2755',1,'get_missile_index(arena *arena, int indx):&#160;arene.c'],['../arene_8h.html#a9eced759a21075a72c70f4924f2d2755',1,'get_missile_index(arena *arena, int indx):&#160;arene.c']]],

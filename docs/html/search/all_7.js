@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['game_57',['game',['../game_8c.html#a019b61339f6e277e51c96ce040d54ee0',1,'game(Tree syntax_tree[4]):&#160;game.c'],['../game_8h.html#a019b61339f6e277e51c96ce040d54ee0',1,'game(Tree syntax_tree[4]):&#160;game.c']]],
+  ['game_57',['game',['../game_8c.html#aa680f47e5c96209ce932584fe5bf7bcc',1,'game(Tree syntax_tree[4], char *robot_names[4]):&#160;game.c'],['../game_8h.html#aa680f47e5c96209ce932584fe5bf7bcc',1,'game(Tree syntax_tree[4], char *robot_names[4]):&#160;game.c']]],
   ['game_2ec_58',['game.c',['../game_8c.html',1,'']]],
   ['game_2eh_59',['game.h',['../game_8h.html',1,'']]],
   ['get_5fexplosion_5fdistant_60',['get_explosion_distant',['../missile_8c.html#a7f2c550804b1e464c8e83ad2b6a9f918',1,'get_explosion_distant(missile *m):&#160;missile.c'],['../missile_8h.html#a7f2c550804b1e464c8e83ad2b6a9f918',1,'get_explosion_distant(missile *m):&#160;missile.c']]],
@@ -30,5 +30,5 @@ var searchData=
   ['go_5fto_84',['go_to',['../commands_8c.html#a772b3d19c240434b7146f9565c789d79',1,'go_to(int num):&#160;commands.c'],['../commands_8h.html#a772b3d19c240434b7146f9565c789d79',1,'go_to(int num):&#160;commands.c']]],
   ['goto_85',['GOTO',['../syntax__tree_8h.html#a99c49863330dfa251ff4a631ba976dc7',1,'syntax_tree.h']]],
   ['gpsx_86',['gpsx',['../commands_8c.html#add88c8c947f8d99950f3b3c1556eca87',1,'gpsx(arena *arena, int num):&#160;commands.c'],['../commands_8h.html#add88c8c947f8d99950f3b3c1556eca87',1,'gpsx(arena *arena, int num):&#160;commands.c'],['../syntax__tree_8h.html#afa422150188ede5d98cf652ef3da6861',1,'GPSX():&#160;syntax_tree.h']]],
-  ['gpsy_87',['gpsy',['../commands_8c.html#a13cf07b919b4f0b804e5b9122fde8461',1,'gpsy(arena *arena, int num):&#160;commands.c'],['../commands_8h.html#a13cf07b919b4f0b804e5b9122fde8461',1,'gpsy(arena *arena, int num):&#160;commands.c'],['../syntax__tree_8h.html#ad92c6c5d79e20782efa2c460b32db7c7',1,'GPSY():&#160;syntax_tree.h']]]
+  ['gpsy_87',['GPSY',['../syntax__tree_8h.html#ad92c6c5d79e20782efa2c460b32db7c7',1,'GPSY():&#160;syntax_tree.h'],['../commands_8c.html#a13cf07b919b4f0b804e5b9122fde8461',1,'gpsy(arena *arena, int num):&#160;commands.c'],['../commands_8h.html#a13cf07b919b4f0b804e5b9122fde8461',1,'gpsy(arena *arena, int num):&#160;commands.c']]]
 ];

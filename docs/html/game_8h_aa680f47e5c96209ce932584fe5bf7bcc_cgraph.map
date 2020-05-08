@@ -1,0 +1,9 @@
+<map id="game" name="game">
+<area shape="rect" id="node1" title=" " alt="" coords="5,31,60,57"/>
+<area shape="rect" id="node2" href="$arene_8c.html#ac31e5f4912f492e345a78397658cb8da" title=" " alt="" coords="108,5,205,32"/>
+<area shape="rect" id="node3" href="$robot_8c.html#a282c5a9383041dec2dbaeff2a2086862" title=" " alt="" coords="109,56,204,83"/>
+<area shape="rect" id="node4" href="$commands_8c.html#a9fcbe4518ef7cee1509025b612f722d4" title=" " alt="" coords="255,31,309,57"/>
+<area shape="rect" id="node6" href="$commands_8c.html#a906d8acbe869697e7fb763aa7e47cf68" title=" " alt="" coords="253,81,311,108"/>
+<area shape="rect" id="node5" href="$commands_8c.html#a7d653a23bc3022afd9b32e419abbbc2d" title=" " alt="" coords="383,31,453,57"/>
+<area shape="rect" id="node7" href="$robot_8c.html#afd1fbe93d3fe1ac3776bcc992b013d31" title=" " alt="" coords="359,81,477,108"/>
+</map>

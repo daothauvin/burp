@@ -73,14 +73,24 @@ $(function() {
 <div class="title">robot.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="define_8h_source.html">../../define.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;math.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="define_8h_source.html">../../define.h</a>&quot;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;assert.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for robot.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="robot_8h__incl.png" border="0" usemap="#src_2model_2game_2robot_8h" alt=""/></div>
 <map name="src_2model_2game_2robot_8h" id="src_2model_2game_2robot_8h">
-<area shape="rect" title=" " alt="" coords="5,5,164,32"/>
-<area shape="rect" href="define_8h.html" title=" " alt="" coords="39,80,131,107"/>
+<area shape="rect" title=" " alt="" coords="182,5,341,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,67,107"/>
+<area shape="rect" title=" " alt="" coords="91,80,155,107"/>
+<area shape="rect" title=" " alt="" coords="179,80,242,107"/>
+<area shape="rect" href="define_8h.html" title=" " alt="" coords="266,80,358,107"/>
+<area shape="rect" title=" " alt="" coords="383,80,457,107"/>
+<area shape="rect" title=" " alt="" coords="481,80,551,107"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -88,23 +98,23 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="robot_8h__dep__incl.png" border="0" usemap="#src_2model_2game_2robot_8hdep" alt=""/></div>
 <map name="src_2model_2game_2robot_8hdep" id="src_2model_2game_2robot_8hdep">
-<area shape="rect" title=" " alt="" coords="610,5,769,32"/>
+<area shape="rect" title=" " alt="" coords="510,5,669,32"/>
 <area shape="rect" href="ui_8h.html" title=" " alt="" coords="5,229,101,256"/>
-<area shape="rect" href="cycle_8h.html" title=" " alt="" coords="363,401,488,427"/>
-<area shape="rect" href="missile_8h.html" title=" " alt="" coords="363,80,533,107"/>
-<area shape="rect" href="arene_8h.html" title=" " alt="" coords="244,155,407,181"/>
+<area shape="rect" href="missile_8h.html" title=" " alt="" coords="331,80,501,107"/>
+<area shape="rect" href="arene_8h.html" title=" " alt="" coords="336,155,499,181"/>
+<area shape="rect" href="cycle_8h.html" title=" " alt="" coords="437,401,563,427"/>
 <area shape="rect" href="commands_8h.html" title=" " alt="" coords="464,229,659,256"/>
-<area shape="rect" href="interpreter_8h.html" title=" " alt="" coords="414,304,557,345"/>
+<area shape="rect" href="interpreter_8h.html" title=" " alt="" coords="633,304,775,345"/>
 <area shape="rect" href="robot_8c.html" title=" " alt="" coords="851,80,1010,107"/>
-<area shape="rect" href="game_8h.html" title=" " alt="" coords="131,483,218,509"/>
-<area shape="rect" href="ui_8c.html" title=" " alt="" coords="153,311,249,338"/>
-<area shape="rect" href="game_8c.html" title=" " alt="" coords="77,557,163,584"/>
-<area shape="rect" href="main_8c.html" title=" " alt="" coords="188,557,271,584"/>
-<area shape="rect" href="cycle_8c.html" title=" " alt="" coords="363,483,488,509"/>
-<area shape="rect" href="missile_8c.html" title=" " alt="" coords="481,155,652,181"/>
+<area shape="rect" href="game_8h.html" title=" " alt="" coords="282,483,369,509"/>
+<area shape="rect" href="ui_8c.html" title=" " alt="" coords="5,311,101,338"/>
+<area shape="rect" href="game_8c.html" title=" " alt="" coords="227,557,314,584"/>
+<area shape="rect" href="main_8c.html" title=" " alt="" coords="339,557,421,584"/>
+<area shape="rect" href="missile_8c.html" title=" " alt="" coords="141,155,312,181"/>
 <area shape="rect" href="arene_8c.html" title=" " alt="" coords="125,229,288,256"/>
-<area shape="rect" href="commands_8c.html" title=" " alt="" coords="581,311,776,338"/>
-<area shape="rect" href="interpreter_8c.html" title=" " alt="" coords="513,393,655,435"/>
+<area shape="rect" href="cycle_8c.html" title=" " alt="" coords="437,483,563,509"/>
+<area shape="rect" href="commands_8c.html" title=" " alt="" coords="413,311,608,338"/>
+<area shape="rect" href="interpreter_8c.html" title=" " alt="" coords="633,393,775,435"/>
 </map>
 </div>
 </div>
@@ -126,8 +136,8 @@ Typedefs</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a4b43750d354d4f81ce53bce0dbfaafc6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="robot_8h.html#a4b43750d354d4f81ce53bce0dbfaafc6">degree_to_radians</a> (double x)</td></tr>
 <tr class="separator:a4b43750d354d4f81ce53bce0dbfaafc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a9e6897cfd298fc0a81fa898d4526d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="robot_8h.html#a38a4bfb19fff6c50c79c2574440a484b">robot</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="robot_8h.html#a5a9e6897cfd298fc0a81fa898d4526d7">create_robot</a> (double x_1, double y_1, double <a class="el" href="commands_8h.html#a9fcbe4518ef7cee1509025b612f722d4">angle</a>, int <a class="el" href="commands_8h.html#a906d8acbe869697e7fb763aa7e47cf68">speed</a>, int id)</td></tr>
-<tr class="separator:a5a9e6897cfd298fc0a81fa898d4526d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a282c5a9383041dec2dbaeff2a2086862"><td class="memItemLeft" align="right" valign="top"><a class="el" href="robot_8h.html#a38a4bfb19fff6c50c79c2574440a484b">robot</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="robot_8h.html#a282c5a9383041dec2dbaeff2a2086862">create_robot</a> (double x_1, double y_1, double <a class="el" href="commands_8h.html#a9fcbe4518ef7cee1509025b612f722d4">angle</a>, int <a class="el" href="commands_8h.html#a906d8acbe869697e7fb763aa7e47cf68">speed</a>, int id, char *r_name)</td></tr>
+<tr class="separator:a282c5a9383041dec2dbaeff2a2086862"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1eef754f1c44ea49fdf2bf06568d0eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="robot_8h.html#ac1eef754f1c44ea49fdf2bf06568d0eb">update_pos_robot</a> (<a class="el" href="robot_8h.html#a38a4bfb19fff6c50c79c2574440a484b">robot</a> *rob)</td></tr>
 <tr class="separator:ac1eef754f1c44ea49fdf2bf06568d0eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43ec793f8041dda7e8ac7f4dc1892014"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="robot_8h.html#a43ec793f8041dda7e8ac7f4dc1892014">inflict_damage_from_missile</a> (<a class="el" href="robot_8h.html#a38a4bfb19fff6c50c79c2574440a484b">robot</a> *rob, <a class="el" href="robot_8h.html#a6d652f300e6f20f4a6530347fe5ae469">point</a> p)</td></tr>
@@ -228,8 +238,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a5a9e6897cfd298fc0a81fa898d4526d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a9e6897cfd298fc0a81fa898d4526d7">&#9670;&nbsp;</a></span>create_robot()</h2>
+<a id="a282c5a9383041dec2dbaeff2a2086862"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a282c5a9383041dec2dbaeff2a2086862">&#9670;&nbsp;</a></span>create_robot()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -262,7 +272,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>id</em>&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>r_name</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -275,8 +291,8 @@ Functions</h2></td></tr>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="robot_8h_a5a9e6897cfd298fc0a81fa898d4526d7_cgraph.png" border="0" usemap="#robot_8h_a5a9e6897cfd298fc0a81fa898d4526d7_cgraph" alt=""/></div>
-<map name="robot_8h_a5a9e6897cfd298fc0a81fa898d4526d7_cgraph" id="robot_8h_a5a9e6897cfd298fc0a81fa898d4526d7_cgraph">
+<div class="center"><img src="robot_8h_a282c5a9383041dec2dbaeff2a2086862_cgraph.png" border="0" usemap="#robot_8h_a282c5a9383041dec2dbaeff2a2086862_cgraph" alt=""/></div>
+<map name="robot_8h_a282c5a9383041dec2dbaeff2a2086862_cgraph" id="robot_8h_a282c5a9383041dec2dbaeff2a2086862_cgraph">
 <area shape="rect" title=" " alt="" coords="5,31,100,57"/>
 <area shape="rect" href="commands_8c.html#a9fcbe4518ef7cee1509025b612f722d4" title=" " alt="" coords="150,5,203,32"/>
 <area shape="rect" href="commands_8c.html#a906d8acbe869697e7fb763aa7e47cf68" title=" " alt="" coords="148,56,205,83"/>

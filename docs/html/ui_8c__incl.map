@@ -1,15 +1,19 @@
 <map id="src/view/ui.c" name="src/view/ui.c">
-<area shape="rect" id="node1" title=" " alt="" coords="213,5,309,32"/>
-<area shape="rect" id="node2" href="$ui_8h.html" title=" " alt="" coords="239,80,282,107"/>
+<area shape="rect" id="node1" title=" " alt="" coords="453,5,549,32"/>
+<area shape="rect" id="node2" href="$ui_8h.html" title=" " alt="" coords="441,80,483,107"/>
+<area shape="rect" id="node17" title=" " alt="" coords="508,80,573,107"/>
 <area shape="rect" id="node3" title=" " alt="" coords="5,155,84,181"/>
-<area shape="rect" id="node4" href="$robot_8h.html" title=" " alt="" coords="531,617,681,644"/>
-<area shape="rect" id="node5" href="$define_8h.html" title=" " alt="" coords="279,692,371,719"/>
-<area shape="rect" id="node6" href="$missile_8h.html" title=" " alt="" coords="244,543,405,569"/>
-<area shape="rect" id="node7" href="$arene_8h.html" title=" " alt="" coords="249,468,401,495"/>
-<area shape="rect" id="node8" href="$game_8h.html" title=" " alt="" coords="261,155,338,181"/>
-<area shape="rect" id="node9" href="$syntax__tree_8h.html" title=" " alt="" coords="583,379,747,420"/>
-<area shape="rect" id="node11" href="$cycle_8h.html" title=" " alt="" coords="363,229,465,256"/>
-<area shape="rect" id="node10" title=" " alt="" coords="670,468,753,495"/>
-<area shape="rect" id="node12" href="$interpreter_8h.html" title=" " alt="" coords="501,304,655,331"/>
-<area shape="rect" id="node13" href="$commands_8h.html" title=" " alt="" coords="413,386,559,413"/>
+<area shape="rect" id="node4" title=" " alt="" coords="19,379,83,405"/>
+<area shape="rect" id="node5" title=" " alt="" coords="557,155,625,181"/>
+<area shape="rect" id="node6" title=" " alt="" coords="650,155,717,181"/>
+<area shape="rect" id="node7" title=" " alt="" coords="741,155,807,181"/>
+<area shape="rect" id="node8" href="$robot_8h.html" title=" " alt="" coords="159,304,309,331"/>
+<area shape="rect" id="node11" href="$define_8h.html" title=" " alt="" coords="473,379,565,405"/>
+<area shape="rect" id="node14" href="$missile_8h.html" title=" " alt="" coords="269,229,431,256"/>
+<area shape="rect" id="node15" href="$arene_8h.html" title=" " alt="" coords="330,155,482,181"/>
+<area shape="rect" id="node16" title=" " alt="" coords="831,155,914,181"/>
+<area shape="rect" id="node9" title=" " alt="" coords="107,379,169,405"/>
+<area shape="rect" id="node10" title=" " alt="" coords="287,379,349,405"/>
+<area shape="rect" id="node12" title=" " alt="" coords="374,379,449,405"/>
+<area shape="rect" id="node13" title=" " alt="" coords="193,379,262,405"/>
 </map>
