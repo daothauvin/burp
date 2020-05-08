@@ -4,6 +4,9 @@
 #include "robot.h"
 #include "missile.h"
 #include "../../define.h"
+/// \cond
+#include <string.h>
+/// \endcond
 
 typedef struct arena_impl arena;
 

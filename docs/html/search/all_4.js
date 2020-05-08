@@ -10,7 +10,7 @@ var searchData=
   ['destroy_5frobot_37',['destroy_robot',['../robot_8c.html#ac8ef917224b8dc99481d8aa1289c1658',1,'destroy_robot(robot **rob):&#160;robot.c'],['../robot_8h.html#ac8ef917224b8dc99481d8aa1289c1658',1,'destroy_robot(robot **rob):&#160;robot.c']]],
   ['diff_38',['DIFF',['../syntax__tree_8h.html#a3e3f16eb72cacad45afd6616d62a9ff5',1,'syntax_tree.h']]],
   ['dir_2edoc_39',['dir.doc',['../dir_8doc.html',1,'']]],
-  ['distance_40',['DISTANCE',['../syntax__tree_8h.html#a9d41d147039787c25d6631b276ab4330',1,'DISTANCE():&#160;syntax_tree.h'],['../commands_8c.html#a7d653a23bc3022afd9b32e419abbbc2d',1,'distance(double x1, double y1, double x2, double y2):&#160;commands.c'],['../commands_8h.html#a7d653a23bc3022afd9b32e419abbbc2d',1,'distance(double x1, double y1, double x2, double y2):&#160;commands.c']]],
+  ['distance_40',['distance',['../commands_8c.html#a7d653a23bc3022afd9b32e419abbbc2d',1,'distance(double x1, double y1, double x2, double y2):&#160;commands.c'],['../commands_8h.html#a7d653a23bc3022afd9b32e419abbbc2d',1,'distance(double x1, double y1, double x2, double y2):&#160;commands.c'],['../syntax__tree_8h.html#a9d41d147039787c25d6631b276ab4330',1,'DISTANCE():&#160;syntax_tree.h']]],
   ['div_41',['DIV',['../syntax__tree_8h.html#a8295e0aed07a8923d8363ce46c7b08e2',1,'syntax_tree.h']]],
   ['doxygen_5findex_2emd_42',['doxygen_index.md',['../doxygen__index_8md.html',1,'']]]
 ];

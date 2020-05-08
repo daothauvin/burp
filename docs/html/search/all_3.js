@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['cardinal_15',['CARDINAL',['../syntax__tree_8h.html#a7dddcd6d6ee5c12554f1da070875f07c',1,'CARDINAL():&#160;syntax_tree.h'],['../commands_8c.html#a8340f4029c8f2e8cb88e43cc011e0d29',1,'cardinal(arena *arena):&#160;commands.c'],['../commands_8h.html#a8340f4029c8f2e8cb88e43cc011e0d29',1,'cardinal(arena *arena):&#160;commands.c']]],
+  ['cardinal_15',['cardinal',['../commands_8c.html#a8340f4029c8f2e8cb88e43cc011e0d29',1,'cardinal(arena *arena):&#160;commands.c'],['../commands_8h.html#a8340f4029c8f2e8cb88e43cc011e0d29',1,'cardinal(arena *arena):&#160;commands.c'],['../syntax__tree_8h.html#a7dddcd6d6ee5c12554f1da070875f07c',1,'CARDINAL():&#160;syntax_tree.h']]],
   ['check_5fcollision_5frobots_16',['check_collision_robots',['../robot_8c.html#afec8fce8b6ca2ec6a5841acc1b540e7f',1,'check_collision_robots(robot *rob1, robot *rob2):&#160;robot.c'],['../robot_8h.html#afec8fce8b6ca2ec6a5841acc1b540e7f',1,'check_collision_robots(robot *rob1, robot *rob2):&#160;robot.c']]],
   ['cmakelists_2etxt_17',['CMakeLists.txt',['../CMakeLists_8txt.html',1,'(Global Namespace)'],['../model_2CMakeLists_8txt.html',1,'(Global Namespace)'],['../model_2file__reader_2CMakeLists_8txt.html',1,'(Global Namespace)'],['../model_2game_2CMakeLists_8txt.html',1,'(Global Namespace)'],['../view_2CMakeLists_8txt.html',1,'(Global Namespace)']]],
   ['collision_5fdamage_18',['collision_damage',['../define_8h.html#a07bd1c4bbcbee32661cef7956b4d2ac1',1,'define.h']]],

@@ -1,6 +1,5 @@
 #include "robot.h"
-#include <string.h>
-#include <stdbool.h>
+
 
 double degree_to_radians(double x)
 {

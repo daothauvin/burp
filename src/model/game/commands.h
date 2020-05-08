@@ -6,10 +6,13 @@
 #include "robot.h"
 #include "missile.h"
 #include "arene.h"
+/// \cond
 #include <math.h>
-#include "../../define.h"
 #include <stdio.h>
 #include <stdlib.h>
+/// \endcond
+#include "../../define.h"
+
 
 /**
  * set the robot [rob] is waiting time to [delay]

@@ -1,11 +1,15 @@
 #ifndef robot_H
 #define robot_H
+/// \cond
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "../../define.h"
 #include <stdbool.h>
 #include <assert.h>
+#include <string.h>
+/// \endcond
+#include "../../define.h"
+
 
 /**
  * take a radius [x] in degree

@@ -1,5 +1,4 @@
 #include "ui.h"
-#include <ctype.h>
 
 /**
  *  Global variable

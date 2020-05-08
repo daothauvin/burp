@@ -1,5 +1,8 @@
 #include "commands.h"
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0ee2097bd902e66aebdd238284d69b177970b6c1
 int wait_robot(robot *rob, unsigned int delay)
 {
     set_waiting_time_robot(rob, delay);

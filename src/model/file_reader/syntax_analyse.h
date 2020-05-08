@@ -10,13 +10,14 @@
 #include "syntax_tree.h"
 
 //other
+/// \cond
 #include <string.h>
-#include <gmodule.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <stdlib.h>
 #include <limits.h>
+/// \endcond
 
 /**
 *    Do the syntax analyse of the file [ pathname ] and return it 

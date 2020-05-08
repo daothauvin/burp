@@ -1,20 +1,12 @@
 <map id="src/model/cycle.c" name="src/model/cycle.c">
-<area shape="rect" id="node1" title=" " alt="" coords="357,5,483,32"/>
-<area shape="rect" id="node2" href="$cycle_8h.html" title=" " alt="" coords="388,80,452,107"/>
-<area shape="rect" id="node3" href="$arene_8h.html" title=" " alt="" coords="499,304,600,331"/>
-<area shape="rect" id="node4" href="$robot_8h.html" title=" " alt="" coords="246,453,309,480"/>
-<area shape="rect" id="node12" href="$interpreter_8h.html" title=" " alt="" coords="460,155,615,181"/>
-<area shape="rect" id="node8" href="$define_8h.html" title=" " alt="" coords="521,528,613,555"/>
-<area shape="rect" id="node11" href="$missile_8h.html" title=" " alt="" coords="397,379,472,405"/>
-<area shape="rect" id="node5" title=" " alt="" coords="67,528,128,555"/>
-<area shape="rect" id="node6" title=" " alt="" coords="152,528,216,555"/>
-<area shape="rect" id="node7" title=" " alt="" coords="334,528,397,555"/>
-<area shape="rect" id="node9" title=" " alt="" coords="421,528,496,555"/>
-<area shape="rect" id="node10" title=" " alt="" coords="240,528,309,555"/>
-<area shape="rect" id="node13" title=" " alt="" coords="827,304,909,331"/>
-<area shape="rect" id="node14" title=" " alt="" coords="509,229,574,256"/>
-<area shape="rect" id="node15" title=" " alt="" coords="598,229,666,256"/>
-<area shape="rect" id="node16" href="$syntax__tree_8h.html" title=" " alt="" coords="773,229,875,256"/>
-<area shape="rect" id="node17" href="$commands_8h.html" title=" " alt="" coords="237,229,382,256"/>
-<area shape="rect" id="node18" title=" " alt="" coords="691,229,749,256"/>
+<area shape="rect" id="node1" title=" " alt="" coords="169,5,295,32"/>
+<area shape="rect" id="node2" href="$cycle_8h.html" title=" " alt="" coords="200,80,264,107"/>
+<area shape="rect" id="node3" href="$arene_8h.html" title=" " alt="" coords="460,304,561,331"/>
+<area shape="rect" id="node4" href="$robot_8h.html" title=" " alt="" coords="282,453,345,480"/>
+<area shape="rect" id="node7" href="$interpreter_8h.html" title=" " alt="" coords="155,155,309,181"/>
+<area shape="rect" id="node5" href="$define_8h.html" title=" " alt="" coords="402,528,494,555"/>
+<area shape="rect" id="node6" href="$missile_8h.html" title=" " alt="" coords="317,379,392,405"/>
+<area shape="rect" id="node8" title=" " alt="" coords="80,304,163,331"/>
+<area shape="rect" id="node9" href="$syntax__tree_8h.html" title=" " alt="" coords="43,229,144,256"/>
+<area shape="rect" id="node10" href="$commands_8h.html" title=" " alt="" coords="277,229,422,256"/>
 </map>

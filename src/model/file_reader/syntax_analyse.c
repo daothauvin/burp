@@ -1,17 +1,17 @@
 #include "syntax_analyse.h"
 
 
-/*
-macro executed when a analyse error occure with something we do not know 
-( v_string could be without \0 )
+/**
+* macro executed when a analyse error occure with something we do not know 
+* ( v_string could be without \0 )
 */
 #define ERROR_UNKNOWN_OCCURED(token) \
     updateErrorMessage("UNKNOWN", token);\
     return NULL;
 
-/*
-macro executed when an error occured during the syntax analyse 
-( with a string value )
+/**
+* macro executed when an error occured during the syntax analyse 
+* ( with a string value )
 */
 #define ERROR_OCCURED(token) \
 	updateErrorMessage(g_scanner_cur_value (gs).v_string, token);\
@@ -19,10 +19,10 @@ macro executed when an error occured during the syntax analyse
 	gs = NULL;\
     return NULL;
 
-/*
-from for a case if a G_TOKEN_INT IS NOT EXCEPTED ( need to declare int size_cur_token before )
-[ size_cur_token ] should be defined and have the good value, 
-error_token_tmp is the buffer to stock the result temporarily
+/**
+* from for a case if a G_TOKEN_INT IS NOT EXCEPTED ( need to declare int size_cur_token before )
+* [ size_cur_token ] should be defined and have the good value, 
+* error_token_tmp is the buffer to stock the result temporarily
 */
 #define ERROR_INT_UNEXCEPTED(token,error_token_tmp) \
 	error_token_tmp = malloc(size_cur_token + 1);\
@@ -34,15 +34,10 @@ error_token_tmp is the buffer to stock the result temporarily
     g_scanner_destroy (gs);\
 	gs = NULL;\
     return NULL;
-		
-/*
-	TODO : 
-	create functions to free everything
-*/
 
 
-/*
-	Configure the Scanner
+/**
+*	Configure the Scanner
 */
 static void init_config(GScannerConfig* gsc);
 
@@ -54,13 +49,13 @@ static void init_config(GScannerConfig* gsc);
 
 
 
-/*
-	Uptade error message, free error_token and excepted_token
+/**
+*	Uptade error message, free error_token and excepted_token
 */
 static void updateErrorMessage(char* error_token_tmp,char* excepted_token_tmp);
 
-/*
-	Return the size of a token, if it is not a G_TOKEN_IDENTIFIER then return -1
+/**
+*	Return the size of a token, if it is not a G_TOKEN_IDENTIFIER then return -1
 */
 static int sizeofToken(GTokenType t);
 
@@ -135,8 +130,8 @@ void  freeSyntaxAnalyseContest() {
 	free(error_token);
 }
 
-/*
-	Configure the Scanner
+/**
+*	Configure the Scanner
 */
 static void init_config(GScannerConfig* gsc) {
 	//accept identifier with one char
@@ -152,8 +147,8 @@ static void init_config(GScannerConfig* gsc) {
 	gsc -> cset_identifier_nth = newcset_identifier_nth;
 }
 
-/*
-	Return the size of a token, if it is not a G_TOKEN_IDENTIFIER or G_TOKEN_INT then return -1
+/**
+*	Return the size of a token, if it is not a G_TOKEN_IDENTIFIER or G_TOKEN_INT then return -1
 */
 static int sizeofToken(GTokenType t) {
 	if(t == G_TOKEN_IDENTIFIER) {

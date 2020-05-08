@@ -1,8 +1,6 @@
 #include "missile.h"
-#include "math.h"
-#include "../../define.h"
-#include <assert.h>
-#include <string.h>
+
+
 
 struct missile_impl
 {

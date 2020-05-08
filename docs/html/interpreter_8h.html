@@ -73,35 +73,23 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;gmodule.h&gt;</code><br />
-<code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &lt;unistd.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="syntax__tree_8h_source.html">syntax_tree.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="commands_8h_source.html">../game/commands.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="robot_8h_source.html">../game/robot.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="arene_8h_source.html">../game/arene.h</a>&quot;</code><br />
-<code>#include &lt;fcntl.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for interpreter.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="interpreter_8h__incl.png" border="0" usemap="#src_2model_2file__reader_2interpreter_8h" alt=""/></div>
 <map name="src_2model_2file__reader_2interpreter_8h" id="src_2model_2file__reader_2interpreter_8h">
-<area shape="rect" title=" " alt="" coords="307,5,450,47"/>
-<area shape="rect" title=" " alt="" coords="107,169,189,196"/>
-<area shape="rect" title=" " alt="" coords="131,95,197,121"/>
-<area shape="rect" title=" " alt="" coords="292,393,353,420"/>
-<area shape="rect" title=" " alt="" coords="273,95,341,121"/>
+<area shape="rect" title=" " alt="" coords="123,5,266,47"/>
+<area shape="rect" title=" " alt="" coords="45,169,128,196"/>
 <area shape="rect" href="syntax__tree_8h.html" title=" " alt="" coords="5,95,107,121"/>
-<area shape="rect" href="commands_8h.html" title=" " alt="" coords="422,95,567,121"/>
-<area shape="rect" href="robot_8h.html" title=" " alt="" coords="562,319,625,345"/>
-<area shape="rect" href="arene_8h.html" title=" " alt="" coords="579,169,645,196"/>
-<area shape="rect" title=" " alt="" coords="872,95,931,121"/>
-<area shape="rect" title=" " alt="" coords="657,393,721,420"/>
-<area shape="rect" title=" " alt="" coords="378,393,441,420"/>
-<area shape="rect" href="define_8h.html" title=" " alt="" coords="746,393,838,420"/>
-<area shape="rect" href="missile_8h.html" title=" " alt="" coords="453,244,528,271"/>
-<area shape="rect" title=" " alt="" coords="465,393,540,420"/>
-<area shape="rect" title=" " alt="" coords="564,393,633,420"/>
+<area shape="rect" href="commands_8h.html" title=" " alt="" coords="233,95,378,121"/>
+<area shape="rect" href="robot_8h.html" title=" " alt="" coords="315,319,378,345"/>
+<area shape="rect" href="arene_8h.html" title=" " alt="" coords="385,169,450,196"/>
+<area shape="rect" href="define_8h.html" title=" " alt="" coords="338,393,430,420"/>
+<area shape="rect" href="missile_8h.html" title=" " alt="" coords="384,244,459,271"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -109,13 +97,15 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="interpreter_8h__dep__incl.png" border="0" usemap="#src_2model_2file__reader_2interpreter_8hdep" alt=""/></div>
 <map name="src_2model_2file__reader_2interpreter_8hdep" id="src_2model_2file__reader_2interpreter_8hdep">
-<area shape="rect" title=" " alt="" coords="176,5,319,47"/>
-<area shape="rect" href="cycle_8h.html" title=" " alt="" coords="106,102,231,129"/>
-<area shape="rect" href="interpreter_8c.html" title=" " alt="" coords="256,95,399,136"/>
-<area shape="rect" href="game_8h.html" title=" " alt="" coords="60,184,147,211"/>
-<area shape="rect" href="cycle_8c.html" title=" " alt="" coords="171,184,297,211"/>
+<area shape="rect" title=" " alt="" coords="237,5,380,47"/>
+<area shape="rect" href="cycle_8h.html" title=" " alt="" coords="167,102,293,129"/>
+<area shape="rect" href="interpreter_8c.html" title=" " alt="" coords="317,95,460,136"/>
+<area shape="rect" href="game_8h.html" title=" " alt="" coords="121,184,208,211"/>
+<area shape="rect" href="cycle_8c.html" title=" " alt="" coords="233,184,358,211"/>
 <area shape="rect" href="game_8c.html" title=" " alt="" coords="5,259,92,285"/>
-<area shape="rect" href="main_8c.html" title=" " alt="" coords="117,259,199,285"/>
+<area shape="rect" href="ui_8h.html" title=" " alt="" coords="117,259,213,285"/>
+<area shape="rect" href="main_8c.html" title=" " alt="" coords="237,259,319,285"/>
+<area shape="rect" href="ui_8c.html" title=" " alt="" coords="117,333,213,360"/>
 </map>
 </div>
 </div>
@@ -182,6 +172,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Return the command in a printable way of the command executed at line [ line ] with the syntax tree [ tree ] </p>
 
 </div>
 </div>
@@ -239,6 +230,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>interprete the line [ line ] of the script, corresponding at the file where come from the syntax tree [ tree ] controlling the robot [ robot ] in the context [ arena ] </p>
 
 </div>
 </div>
@@ -257,6 +249,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Print syntax tree [ tree ] ( for debuging ) </p>
 
 </div>
 </div>

@@ -1,17 +1,25 @@
-/** 
+/**
  *         - ui.c & ui.h supply functions to use the textual interface -
  */
 
 #include <ncurses.h>
+/// \cond
 #include <stdlib.h>
 #include <unistd.h>
 #include <signal.h>
 #include <string.h>
+#include <sys/time.h>
+#include <ctype.h>
+/// \endcond
 #include "../model/game/robot.h"
 #include "../model/game/missile.h"
 #include "../model/game/arene.h"
 #include "../define.h"
+<<<<<<< HEAD
 #include <sys/time.h>
+=======
+#include "../game.h"
+>>>>>>> 0ee2097bd902e66aebdd238284d69b177970b6c1
 
 #define LOG_SIZE 60
 
@@ -27,3 +35,7 @@ void add_action(char* action, int id);  // Add an action for a robot in the info
 
 void updateArena(arena* arena);         // Update position and value of interface with arena data
 
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 0ee2097bd902e66aebdd238284d69b177970b6c1

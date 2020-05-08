@@ -1,5 +1,5 @@
 #include "arene.h"
-#include <string.h>
+
 
 struct arena_impl
 {

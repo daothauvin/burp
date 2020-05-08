@@ -3,9 +3,15 @@
 */
 #ifndef MISSILE_H
 #define MISSILE_H
+
 #include "robot.h"
-#include "math.h"
+#include "../../define.h"
+/// \cond
+#include <assert.h>
+#include <string.h>
+#include <math.h>
 #include <stdbool.h>
+/// \endcond
 
 typedef struct missile_impl missile;
 

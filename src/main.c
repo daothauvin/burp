@@ -1,12 +1,12 @@
-#include <stdio.h>
 #include "game.h"
 #include "model/file_reader/syntax_analyse.h"
-
+/// \cond
+#include <stdio.h>
 #include <errno.h>
 #include <string.h>
 #include <time.h>
 #include <stdlib.h>
-
+/// \endcond
 int main(int argc, char *argv[]) {
 	char* name_files[4];
 	for(int i = 0;i<4;i++) {
