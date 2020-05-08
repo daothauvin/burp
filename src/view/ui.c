@@ -243,7 +243,7 @@ void printInfoRobot(robot* rob) {
 	mvprintw(y + 1, x + 2, " ");
 	attroff(COLOR_PAIR(12 + robot_id));
 
-	snprintf(buff, 11, "RBT_%d", robot_id);
+	snprintf(buff, 11, "%s_%d", get_robot_name(rob),robot_id);
 	mvprintw(y + 1, x + 4, buff);
 	memset(buff, '\0', 11);
 
@@ -384,7 +384,7 @@ static void drawTitle() {
  *  Draw the end screen
  */
 
-void end_screen(char* winner_name) {
+void end_screen(robot* robot) {
 	nodelay(stdscr, FALSE);
 	clear();
 	mvprintw(2, 0, "  +        +        +        +        +        +        +        +        +        +        +        +        +        +        +        +        +");
@@ -402,7 +402,7 @@ void end_screen(char* winner_name) {
 	mvprintw(19, 0, "");
 	mvprintw(20, 0, "  +        +        +        +        +        +        +        +        +        +        +        +        +        +        +        +        +");
 	mvprintw(22, 0, "                                                            +-------------------------------+");
-	mvprintw(23, 0, "       +        +        +        +         +       +            Congratulation, %s.          +        +        +        +        +        +", winner_name);
+	mvprintw(23, 0, "       +        +        +        +         +       +            Congratulation, %s_%d.        +        +        +        +        +        +", get_robot_name(robot),get_robot_id(robot));
 	mvprintw(24, 0, "                                                               You're the survivor Robot !");
 	mvprintw(25, 0, "                                                            +-------------------------------+");
 	mvprintw(26, 0, "  +         +        +        +        +        +        +        +        +        +        +        +        +        +        +        +        +");

@@ -4,5 +4,6 @@
 #include "model/cycle.h"
 #include <stdio.h>
 #include <string.h>
-void game(Tree syntax_tree[4]);
+#include <ctype.h>
+void game(Tree syntax_tree[4],char* robot_names[4]);
 

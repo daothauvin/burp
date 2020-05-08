@@ -8,6 +8,12 @@
 #include <stdlib.h>
 
 int main(int argc, char *argv[]) {
+	char* name_files[4];
+	for(int i = 0;i<4;i++) {
+		name_files[i] = argv[i+1];
+		char* name = strrchr(name_files[i],'/') + 1;
+		if(name != NULL) name_files[i] = name;
+	}
 	srand(time(NULL));
 	if(argc == 5) {
 		Tree tab[4];
@@ -34,7 +40,7 @@ int main(int argc, char *argv[]) {
 			}
 		} 
 	
-		game(tab);
+		game(tab,name_files);
 
 		for(int i = 0;i < 4;i++) {
 			freeTree(tab[i]);
