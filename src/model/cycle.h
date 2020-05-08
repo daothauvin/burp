@@ -5,7 +5,7 @@
 #include "game/arene.h"
 #include "file_reader/interpreter.h"
 #include "game/robot.h"
-#include "../view/ui.h"
+
 /*
 
 */
