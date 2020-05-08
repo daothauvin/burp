@@ -1,17 +1,17 @@
 #include "syntax_analyse.h"
 
 
-/*
-macro executed when a analyse error occure with something we do not know 
-( v_string could be without \0 )
+/**
+*	macro executed when a analyse error occure with something we do not know 
+*	( v_string could be without \0 )
 */
 #define ERROR_UNKNOWN_OCCURED(token) \
     updateErrorMessage("UNKNOWN", token);\
     return NULL;
 
-/*
-macro executed when an error occured during the syntax analyse 
-( with a string value )
+/**
+*	macro executed when an error occured during the syntax analyse 
+*	( with a string value )
 */
 #define ERROR_OCCURED(token) \
 	updateErrorMessage(g_scanner_cur_value (gs).v_string, token);\
@@ -19,10 +19,11 @@ macro executed when an error occured during the syntax analyse
 	gs = NULL;\
     return NULL;
 
-/*
-from for a case if a G_TOKEN_INT IS NOT EXCEPTED ( need to declare int size_cur_token before )
-[ size_cur_token ] should be defined and have the good value, 
-error_token_tmp is the buffer to stock the result temporarily
+/**
+*	from for a case if a G_TOKEN_INT IS NOT EXCEPTED 
+*	( need to declare int size_cur_token before )
+*	[ size_cur_token ] should be defined and have the good value, 
+*	error_token_tmp is the buffer to stock the result temporarily
 */
 #define ERROR_INT_UNEXCEPTED(token,error_token_tmp) \
 	error_token_tmp = malloc(size_cur_token + 1);\
@@ -34,33 +35,21 @@ error_token_tmp is the buffer to stock the result temporarily
     g_scanner_destroy (gs);\
 	gs = NULL;\
     return NULL;
-		
-/*
-	TODO : 
-	create functions to free everything
-*/
 
-
-/*
-	Configure the Scanner
+/**
+*	Configure the Scanner
 */
 static void init_config(GScannerConfig* gsc);
 
-/*
-	Free the data of [ node ], 
-	this function is given to g_node_children_foreach to free values of nodes in freeTree
-*/
-//static void freeNodeData(GNode *node, gpointer data);
 
 
-
-/*
-	Uptade error message, free error_token and excepted_token
+/**
+*	Uptade error message, free error_token and excepted_token
 */
 static void updateErrorMessage(char* error_token_tmp,char* excepted_token_tmp);
 
-/*
-	Return the size of a token, if it is not a G_TOKEN_IDENTIFIER then return -1
+/**
+*	Return the size of a token, if it is not a G_TOKEN_IDENTIFIER then return -1
 */
 static int sizeofToken(GTokenType t);
 
@@ -70,7 +59,6 @@ static GScanner * gs;
 
 
 static gboolean freeNodeData(GNode *node, gpointer data) {
-	//printf("%p\n",node -> data);	
 	if(node -> data != NULL) {
 		free(node -> data);
 	}
@@ -81,7 +69,6 @@ static gboolean freeNodeData(GNode *node, gpointer data) {
 
 void freeTree(Tree t) {
 	g_node_traverse (t,G_POST_ORDER,G_TRAVERSE_ALL,-1, freeNodeData, NULL);
-	//g_node_children_foreach (t,G_TRAVERSE_ALL,freeNodeData,NULL);
 	g_node_destroy(t);
 }
 
@@ -135,25 +122,28 @@ void  freeSyntaxAnalyseContest() {
 	free(error_token);
 }
 
-/*
-	Configure the Scanner
+/**
+*	Configure the Scanner
 */
 static void init_config(GScannerConfig* gsc) {
 	//accept identifier with one char
 	gsc -> scan_identifier_1char = 1;
 
 	//add excepted token as identifier
-	gchar* newcset_identifier_first = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-*/%=<>";
+	gchar* newcset_identifier_first = 
+		"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-*/%=<>";
 
 	
-	gchar* newcset_identifier_nth = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ=>";
+	gchar* newcset_identifier_nth = 
+		"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ=>";
 	
 	gsc -> cset_identifier_first = newcset_identifier_first;
 	gsc -> cset_identifier_nth = newcset_identifier_nth;
 }
 
-/*
-	Return the size of a token, if it is not a G_TOKEN_IDENTIFIER or G_TOKEN_INT then return -1
+/**
+*	Return the size of a token, 
+*	if it is not a G_TOKEN_IDENTIFIER or G_TOKEN_INT then return -1
 */
 static int sizeofToken(GTokenType t) {
 	if(t == G_TOKEN_IDENTIFIER) {
@@ -164,14 +154,10 @@ static int sizeofToken(GTokenType t) {
 	}
 	return -1;
 }
-/*
 
-	The next functions correspond to every tags in Burp language
-
+/**
+*	Free multiples trees at once
 */
-
-static Tree condition();
-
 static void freeTrees(int number_tree, ...) {
    va_list va;
    va_start (va, number_tree);
@@ -181,6 +167,15 @@ static void freeTrees(int number_tree, ...) {
 	}
 	va_end (va);
 }
+
+/*
+
+	The next functions correspond to every tags in Burp language
+
+*/
+
+static Tree condition();
+
 //number
 static Tree number() {
 	GTokenType t = g_scanner_get_next_token (gs);
@@ -414,7 +409,8 @@ static Tree expression() {
 				g_node_insert(myself,2,arg2);
 				g_node_insert(myself,3,arg3);
 			}	
-			else if(strcmp(TARGETX,char_value) == 0 || strcmp(TARGETY,char_value) == 0) {
+			else if(strcmp(TARGETX,char_value) == 0 
+			|| strcmp(TARGETY,char_value) == 0) {
 				value = malloc(size_cur_token + 1);
 				if(value == NULL) return NULL;
 				strcpy(value,char_value);
@@ -482,7 +478,8 @@ static Tree command() {
 				myself = g_node_new (value);
 				g_node_insert(myself,0,arg0); 
 			}
-			else if(strcmp(ENGINE,char_value) == 0 || strcmp(SHOOT,char_value) == 0 || strcmp(POKE,char_value) == 0) {
+			else if(strcmp(ENGINE,char_value) == 0 || 
+			strcmp(SHOOT,char_value) == 0 || strcmp(POKE,char_value) == 0) {
 				value = malloc(size_cur_token + 1);
 				if(value == NULL) return NULL;
 				strcpy(value, char_value);
@@ -526,7 +523,8 @@ static Tree command() {
 				//THEN
 				switch(g_scanner_get_next_token (gs)) {
 					case G_TOKEN_IDENTIFIER:
-						if(strcmp(THEN,g_scanner_cur_value (gs).v_identifier) == 0) {
+						if(strcmp(THEN,
+							g_scanner_cur_value(gs).v_identifier)==0) {
 							//ok
 						}
 						else {

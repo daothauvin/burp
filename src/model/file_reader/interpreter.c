@@ -1,32 +1,36 @@
-/*
-	Interprete a branch of the syntax tree given by syntax_analyse
-	use the commands file of the game model
+/**
+*	Interprete a branch of the syntax tree given by syntax_analyse
+*	use the commands file of the game model
 */
 
 #include "interpreter.h"
 
 
-/*
-	Print the node [node], 
-	this function is given to g_node_children_foreach to print every nodes with print
+/**
+*	Print the node [node], 
+*	this function is given to g_node_children_foreach 
+*	to print every nodes with print
 */
 static void printnode(Tree node, gpointer data);
 
-/*
-return 1 if the [ data ] given is a data that can be a leaf of the syntax tree
-( INF, INF_EG, EG, DIFF, SUP_EG, CARDINAL, SELF, SPEED, PLUS, MINUS, TIME, DIV, MOD for now ) 
-Allow to find numbers
+/**
+*	return 1 if the [ data ] given is a data that can be a 
+*	leaf of the syntax tree
+*	( INF, INF_EG, EG, DIFF, SUP_EG, CARDINAL, 
+*	SELF, SPEED, PLUS, MINUS, TIME, DIV, MOD for now ) 
+*	Allow to find numbers
 */
 static short isTag(gpointer data);
 
-/*
-	print the number of the line [ line ]
+/**
+*	print the number of the line [ line ]
 */
 static int numberline(Tree line);
 
-/*
-	Put in [ data ] the [ node ] if he corresponds to the line given in [ data ], 
-	this function is given to g_node_children_foreach to find a given line in  getLine and interprete
+/**
+*	Put in [ data ] the [ node ] if he corresponds to the line given in [ data ] 
+*	This function is given to g_node_children_foreach 
+*	to find a given line in getLine and interprete
 */
 static void searchline(Tree node, gpointer data);
 
@@ -111,15 +115,15 @@ char* getLine(Tree tree,int line) {
 struct warning_message* burp_errors = NULL;
 struct warning_message* last_burp_error = NULL;
 
-/*
-	Add a warning to the burp error pipe [pipeError] 
-	where [value] correspond to the incorrect value
-	and [line] the line where it occurs
-	Burp errors : 
-	- unknown robot number ([num_warning] = 0)
-	- robot memory is too high ([num_warning] = 1)
-	- gpsx on dead robot ([num_warning] = 2)
-	- gpsy on dead robot ([num_warning] = 3)
+/**
+*	Add a warning to the burp error pipe [pipeError] 
+*	where [value] correspond to the incorrect value
+*	and [line] the line where it occurs
+*	Burp errors : 
+*	- unknown robot number ([num_warning] = 0)
+*	- robot memory is too high ([num_warning] = 1)
+*	- gpsx on dead robot ([num_warning] = 2)
+*	- gpsy on dead robot ([num_warning] = 3)
 */
 static void addWarning(int num_warning,int value,int robot) {
 	struct warning_message* new_error = malloc(sizeof(struct warning_message));
@@ -129,10 +133,14 @@ static void addWarning(int num_warning,int value,int robot) {
 	switch (num_warning)
 	{
 		case 0:
-			snprintf(new_error->message,60,"robot number %d is invalid (max: %d)",value,number_of_robots - 1);
+			snprintf(new_error->message,60,
+				"robot number %d is invalid (max: %d)",
+				value,number_of_robots - 1);
 			break;
 		case 1:
-			snprintf(new_error->message,60,"robot memory %d is invalid (max: %d)",value,robot_memory - 1);
+			snprintf(new_error->message,60,
+				"robot memory %d is invalid (max: %d)",
+				value,robot_memory - 1);
 			break;
 		case 2:
 			snprintf(new_error->message,60,"gpsx on dead robot %d",value);
@@ -174,7 +182,6 @@ void freeWarnings() {
 
 */
 static short condition(Tree node, arena* arena,robot* robot) {
-	//printf("%p %p %p\n",node,arene,robot);
 	double x = expression(g_node_nth_child(node, 0),arena,robot);
 	double y = expression(g_node_nth_child(node, 2),arena,robot);
 	char* cond = g_node_nth_child(node, 1) -> data;
@@ -227,8 +234,8 @@ static int operator(Tree node, arena* arena,robot* robot) {
 
 static int commands(Tree node,arena *arena,robot *robot) {
 	char* data = node -> data;
-	//printf("data : %ld %s\n",strlen(data),data);
-	if(memcmp(IF,data,sizeof(IF)) == 0 && condition(g_node_nth_child(node, 0),arena,robot)) {
+	if(memcmp(IF,data,sizeof(IF)) == 0 
+		&& condition(g_node_nth_child(node, 0),arena,robot)) {
 		return expression(g_node_nth_child(node, 1),arena,robot);
 	}
 	else if(memcmp(WAIT,data,sizeof(WAIT)) == 0) {
@@ -314,7 +321,6 @@ static double expression(Tree tree, arena* arena,robot* robot) {
 		}
 		
 		return peek(robot,addr);
-		//peek(robot,addr);
 	}
 	else if(memcmp(STATE,data,sizeof(STATE)) == 0) {
 		int num = expression(g_node_nth_child(node, 0),arena,robot);
@@ -332,9 +338,7 @@ static double expression(Tree tree, arena* arena,robot* robot) {
 		double y1 = expression(g_node_nth_child(node, 1),arena,robot);
 		double x2 = expression(g_node_nth_child(node, 2),arena,robot);
 		double y2 = expression(g_node_nth_child(node, 3),arena,robot);
-		//fprintf(stderr,"x1 : %f y1 : %f\n x2 : %f y2 : %f\n",x1,y1,x2,y2);
 		double x =  angle(x1,y1,x2,y2);
-		//fprintf(stderr,"angle : %f\n",x);
 		return x;
 	}
 	
