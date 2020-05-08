@@ -207,7 +207,7 @@ static short condition(Tree node, arena* arena,robot* robot) {
 	abort();
 }
 
-static int operator(Tree node, arena* arena,robot* robot) {
+static double operator(Tree node, arena* arena,robot* robot) {
 	double x = expression(g_node_nth_child(node, 0),arena,robot);
 	double y = expression(g_node_nth_child(node, 2),arena,robot);
 	char* op = g_node_nth_child(node, 1) -> data;
