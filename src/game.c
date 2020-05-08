@@ -94,8 +94,7 @@ void game(Tree syntax_tree[4],char* robot_names[4])
 		freeWarnings();
 		updateArena(a);
 	}
-	// TODO: - Ajouter une condition (il faut que la game soit finie, pas interrompue)
-	//       - Mettre le bon nom en paramêtre
+
 	if(get_nb_robot_arena(a) == 1) {
 		end_screen(get_robot_index(a,0));
 	}
