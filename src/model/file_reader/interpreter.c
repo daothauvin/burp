@@ -177,7 +177,8 @@ void freeWarnings() {
 
 /*
 
-	The following functions execute the burp language interpretation for the diverse symbol categories,
+	The following functions execute the burp language interpretation for the 
+	diverse symbol categories,
 	each return the result of the execution
 
 */

@@ -1,5 +1,5 @@
 #include "syntax_analyse.h"
-
+typedef Tree branch();
 
 /**
 *	macro executed when a analyse error occure with something we do not know 
@@ -168,6 +168,32 @@ static void freeTrees(int number_tree, ...) {
 	va_end (va);
 }
 
+
+
+/**
+*	Create a new node, his children will be initilialized this functions of type
+*	branch and the number of children should be [nb_branch]
+*/
+
+static Tree create_Tree_branches(char* myvalue, int size, int nb_branch, ...) {
+	gchar* value = malloc(size);
+	if(value == NULL) return NULL;
+	Tree myself = g_node_new (value);
+	memcpy(value,myvalue,size);
+	va_list va;
+   	va_start (va, nb_branch);
+	for(int i = 0; i < nb_branch; i++) {
+		Tree t = va_arg (va, branch*)();
+		if(t == NULL) {
+			freeTree(myself);
+			return NULL;
+		}
+		g_node_insert(myself,i,t);
+	}
+	va_end(va);
+	return myself;
+}
+
 /*
 
 	The next functions correspond to every tags in Burp language
@@ -218,7 +244,7 @@ static Tree operator() {
 	GTokenType t = g_scanner_get_next_token (gs);
 	int size_cur_token = sizeofToken(t);
 	GTokenValue curValue = g_scanner_cur_value (gs);
-	gchar *value;
+	//gchar *value;
 	char* buf;
 	switch(t) {
 		case G_TOKEN_IDENTIFIER :			
@@ -227,10 +253,8 @@ static Tree operator() {
 			|| strcmp(TIME,curValue.v_identifier) == 0 
 			|| strcmp(DIV,curValue.v_identifier) == 0 
 			|| strcmp(MOD,curValue.v_identifier) == 0) {
-				value = malloc(size_cur_token + 1);
-				if(value == NULL) return NULL;
-				strcpy(value,curValue.v_identifier);
-				return g_node_new (value);	
+				return create_Tree_branches(curValue.v_identifier, 
+					size_cur_token + 1, 0);
 			}
 			ERROR_OCCURED("an operator")
 			break;
@@ -250,7 +274,6 @@ static Tree comparison() {
 	
 	int size_cur_token = sizeofToken(t);
 	gchar* char_value = g_scanner_cur_value (gs).v_identifier;
-	gchar *value;
 	char* buf;
 	switch(t) {
 		case G_TOKEN_IDENTIFIER :
@@ -260,10 +283,7 @@ static Tree comparison() {
 			|| strcmp(DIFF,char_value) == 0 
 			|| strcmp(SUP_EG,char_value) == 0 
 			|| strcmp(SUP,char_value) == 0) {
-				value = malloc(size_cur_token + 1);
-				if(value == NULL) return NULL;
-				strcpy(value, char_value);
-				return g_node_new (value);
+				return create_Tree_branches(char_value, size_cur_token + 1, 0);
 			}
 			ERROR_OCCURED("a comparison operator")
 			break;
@@ -274,6 +294,10 @@ static Tree comparison() {
 	}
 	ERROR_UNKNOWN_OCCURED("a comparison operator")
 }
+
+
+
+
 
 
 //expression
@@ -290,43 +314,19 @@ static Tree expression() {
 	gchar* char_value = g_scanner_cur_value (gs).v_identifier;
 	
 	Tree arg0;
-	Tree arg1;
-	Tree arg2;
-	Tree arg3;
 	Tree myself;
 	
 	switch(t) {
-		
 		case G_TOKEN_INT:
-				value = malloc(sizeof(int));
-				if(value == NULL) return NULL;
-				memcpy(value, &int_value, sizeof(int));
-				myself = g_node_new (value);
+				return create_Tree_branches((char*) &int_value, sizeof(int), 0);
 			break;
 		case G_TOKEN_LEFT_PAREN:
-			arg0 = expression();
-			if(arg0 == NULL) return NULL;
-			arg1 = operator();
-			if(arg1 == NULL) {
-				freeTree(arg0);
-				return NULL;
-			}
-			arg2 = expression();
-			if(arg2 == NULL) {
-				freeTrees(2,arg0,arg1);
-				return NULL;
-			}
-			value = malloc(strlen(OPERATOR) + 1);
-			if(value == NULL) {
-				freeTrees(3,arg0,arg1,arg2);
-				return NULL;
-			}
-			strcpy(value,OPERATOR);
-			myself = g_node_new (value);
+			myself = create_Tree_branches(OPERATOR, sizeof(OPERATOR) + 1, 
+				3, expression , operator, expression);
 			switch(g_scanner_get_next_token (gs)) {
 				case G_TOKEN_RIGHT_PAREN:
 				break;
-				freeTrees(3,arg0,arg1,arg2);
+				freeTree(myself);
 				case G_TOKEN_IDENTIFIER:
 					ERROR_OCCURED(")")
 				case G_TOKEN_INT :
@@ -334,9 +334,6 @@ static Tree expression() {
 				default:
 					ERROR_UNKNOWN_OCCURED(")")
 			}
-			g_node_insert(myself,0,arg0);
-			g_node_insert(myself,1,arg1);
-			g_node_insert(myself,2,arg2);
 			break;
 			
 		case G_TOKEN_IDENTIFIER:
@@ -354,87 +351,20 @@ static Tree expression() {
 			|| strcmp(STATE,char_value) == 0 
 			|| strcmp(GPSX,char_value) == 0 
 			|| strcmp(GPSY,char_value) == 0) {
-				value = malloc(size_cur_token + 1);
-				if(value == NULL) return NULL;
-				strcpy(value,char_value);
-				arg0 = expression();
-				if(arg0 == NULL) {
-					free(value);
-					return NULL;
-				}
-				myself = g_node_new (value);
-				g_node_insert(myself,0,arg0);
-			}
-			
-			else if(strcmp(CARDINAL,char_value) == 0 
+				myself = create_Tree_branches(char_value, size_cur_token + 1, 
+					1, expression);
+			} else if(strcmp(CARDINAL,char_value) == 0 
 			|| strcmp(SELF,char_value) == 0 
 			|| strcmp(SPEED,char_value) == 0 ) {
-				value = malloc(size_cur_token + 1);
-				if(value == NULL) return NULL;
-				strcpy(value,char_value);
-				myself = g_node_new (value);
-			}
-			
-			else if(strcmp(DISTANCE,char_value) == 0
+				myself = create_Tree_branches(char_value, size_cur_token + 1,0);
+			} else if(strcmp(DISTANCE,char_value) == 0
 			|| strcmp(ANGLE,char_value) == 0 ) {
-				value = malloc(size_cur_token + 1);
-				if(value == NULL) return NULL;
-				strcpy(value,char_value);
-				arg0 = expression();
-				if(arg0 == NULL) {
-					free(value);
-					return NULL;
-				}
-				arg1 = expression();
-				if(arg1 == NULL) {
-					free(value);
-					freeTree(arg0);
-					return NULL;
-				}
-				arg2 = expression();
-				if(arg2 == NULL) {
-					free(value);
-					freeTrees(2,arg0,arg1);
-					return NULL;
-				}
-				arg3 = expression();
-				if(arg3 == NULL) {
-					free(value);
-					freeTrees(3,arg0,arg1,arg2);
-					return NULL;
-				}
-				myself = g_node_new (value);
-				g_node_insert(myself,0,arg0);
-				g_node_insert(myself,1,arg1);
-				g_node_insert(myself,2,arg2);
-				g_node_insert(myself,3,arg3);
-			}	
-			else if(strcmp(TARGETX,char_value) == 0 
+				myself = create_Tree_branches(char_value, size_cur_token + 1, 
+					4, expression, expression, expression, expression);
+			} else if(strcmp(TARGETX,char_value) == 0 
 			|| strcmp(TARGETY,char_value) == 0) {
-				value = malloc(size_cur_token + 1);
-				if(value == NULL) return NULL;
-				strcpy(value,char_value);
-				arg0 = expression();
-				if(arg0 == NULL) {
-					free(value);
-					return NULL;
-				}
-				arg1 = expression();
-				if(arg1 == NULL) { 
-					free(value);
-					freeTree(arg0);
-					return NULL;
-				}
-				arg2 = expression();
-				if(arg2 == NULL) {
-					free(value);
-					freeTrees(2,arg0,arg1);
-					return NULL;
-				}
-				myself = g_node_new (value);
-				g_node_insert(myself,0,arg0);
-				g_node_insert(myself,1,arg1);
-				g_node_insert(myself,2,arg2);
+				myself = create_Tree_branches(char_value, size_cur_token + 1, 
+					3, expression, expression, expression);
 			}
 			else {
 				ERROR_OCCURED("a valid expression")
@@ -466,50 +396,17 @@ static Tree command() {
 		case G_TOKEN_IDENTIFIER:
 			
 			if(strcmp(WAIT,char_value) == 0) {
-				value = malloc(size_cur_token + 1);
-				if(value == NULL) return NULL;
-				strcpy(value, char_value);
-				
-				arg0 = expression();
-				if(arg0 == NULL) {
-					free(value);
-					return NULL;
-				}
-				myself = g_node_new (value);
-				g_node_insert(myself,0,arg0); 
+				myself = create_Tree_branches(char_value, size_cur_token + 1, 
+					1, expression);
 			}
-			else if(strcmp(ENGINE,char_value) == 0 || 
-			strcmp(SHOOT,char_value) == 0 || strcmp(POKE,char_value) == 0) {
-				value = malloc(size_cur_token + 1);
-				if(value == NULL) return NULL;
-				strcpy(value, char_value);
-				
-				arg0 = expression();
-				if(arg0 == NULL) {
-					free(value);
-					return NULL;
-				}
-				arg1 = expression();
-				if(arg1 == NULL) {
-					free(value);
-					freeTree(arg0);
-					return NULL;
-				}
-				myself = g_node_new (value);
-				g_node_insert(myself,0,arg0);
-				g_node_insert(myself,1,arg1);
+			else if(strcmp(ENGINE,char_value) == 0 
+			|| strcmp(SHOOT,char_value) == 0 || strcmp(POKE,char_value) == 0) {
+				myself = create_Tree_branches(char_value, size_cur_token + 1, 
+					2, expression, expression);
 			}
 			else if(strcmp(GOTO,char_value) == 0) {
-				value = malloc(size_cur_token + 1);
-				if(value == NULL) return NULL;
-				strcpy(value, char_value);
-				arg0 = number();
-				if(arg0 == NULL) {
-					free(value);
-					return NULL;
-				}
-				myself = g_node_new (value);
-				g_node_insert(myself,0,arg0);
+				myself = create_Tree_branches(char_value, size_cur_token + 1, 
+					1, number);
 			}
 			else if(strcmp(IF,char_value) == 0) {
 				value = malloc(size_cur_token + 1);
@@ -567,31 +464,11 @@ static Tree command() {
 
 
 static Tree condition() {
-	Tree arg0 = expression();
-	if(arg0 == NULL) return NULL;
-	Tree arg1 = comparison();
-	if(arg1 == NULL) {
-		freeTree(arg0);
-		return NULL;
-	}
-	Tree arg2 = expression();
-	if(arg2 == NULL) {
-		freeTrees(2,arg0,arg1);
-		return NULL;
-	}
-	gchar* value = malloc(strlen(COND) + 1);
-	if(value == NULL) {
-		freeTrees(3,arg0,arg1,arg2);
-		return NULL;
-	}
-	strcpy(value,COND);
-	Tree myself = g_node_new (value);
-	g_node_insert(myself,0,arg0);
-	g_node_insert(myself,1,arg1);
-	g_node_insert(myself,2,arg2);
-	return myself;
+	return create_Tree_branches(COND, strlen(COND) + 1, 
+					3, expression, comparison, expression);
 }
 static Tree line(int num) {
+	
 	Tree arg0 = number();
 	if(arg0 == NULL) return NULL;
 	int value = *((int*) arg0 -> data);
