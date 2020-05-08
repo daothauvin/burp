@@ -18,25 +18,25 @@
 #include <stdlib.h>
 #include <limits.h>
 
-/*
-    Do the syntax analyse of the file [ pathname ] and return it 
-    return NULL if an error occured, if message_error is also at NULL then the bug
-    is a file opening error
+/**
+*    Do the syntax analyse of the file [ pathname ] and return it 
+*    return NULL if an error occured, if message_error is also at NULL then the bug
+*    is a file opening error
 */
 Tree init_file_tree(char* pathname);
 
-/*
-    NULL if no error else the last message of error
+/**
+*    if an error occured return it if not, return NULL
 */
 char* message_error();
 
-/*
-    Free the context of the syntax analyse, excepted syntax tree
-    Todo after last syntax analyse
+/**
+*    Free the context of the syntax analyse, excepted syntax tree
+*    Todo after last syntax analyse
 */
 void freeSyntaxAnalyseContest();
-/*
-    free a tree
+/**
+*    free a syntax tree
 */
 void freeTree(Tree t);
 #endif
