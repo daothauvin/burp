@@ -77,24 +77,26 @@ $(function() {
 <code>#include &quot;<a class="el" href="missile_8h_source.html">../model/game/missile.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="arene_8h_source.html">../model/game/arene.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="define_8h_source.html">../define.h</a>&quot;</code><br />
+<code>#include &lt;sys/time.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="game_8h_source.html">../game.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for ui.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui_8h__incl.png" border="0" usemap="#src_2view_2ui_8h" alt=""/></div>
 <map name="src_2view_2ui_8h" id="src_2view_2ui_8h">
-<area shape="rect" title=" " alt="" coords="213,5,309,32"/>
+<area shape="rect" title=" " alt="" coords="201,5,297,32"/>
 <area shape="rect" title=" " alt="" coords="5,80,84,107"/>
-<area shape="rect" href="robot_8h.html" title=" " alt="" coords="531,543,681,569"/>
-<area shape="rect" href="define_8h.html" title=" " alt="" coords="279,617,371,644"/>
-<area shape="rect" href="missile_8h.html" title=" " alt="" coords="244,468,405,495"/>
-<area shape="rect" href="arene_8h.html" title=" " alt="" coords="249,393,401,420"/>
-<area shape="rect" href="game_8h.html" title=" " alt="" coords="261,80,338,107"/>
-<area shape="rect" href="syntax__tree_8h.html" title=" " alt="" coords="583,304,747,345"/>
-<area shape="rect" href="cycle_8h.html" title=" " alt="" coords="363,155,465,181"/>
-<area shape="rect" title=" " alt="" coords="670,393,753,420"/>
-<area shape="rect" href="interpreter_8h.html" title=" " alt="" coords="501,229,655,256"/>
-<area shape="rect" href="commands_8h.html" title=" " alt="" coords="413,311,559,338"/>
+<area shape="rect" href="robot_8h.html" title=" " alt="" coords="401,543,550,569"/>
+<area shape="rect" href="define_8h.html" title=" " alt="" coords="429,617,521,644"/>
+<area shape="rect" href="missile_8h.html" title=" " alt="" coords="251,468,412,495"/>
+<area shape="rect" href="arene_8h.html" title=" " alt="" coords="261,393,413,420"/>
+<area shape="rect" title=" " alt="" coords="413,80,495,107"/>
+<area shape="rect" href="game_8h.html" title=" " alt="" coords="311,80,389,107"/>
+<area shape="rect" href="syntax__tree_8h.html" title=" " alt="" coords="787,304,951,345"/>
+<area shape="rect" href="cycle_8h.html" title=" " alt="" coords="395,155,497,181"/>
+<area shape="rect" title=" " alt="" coords="783,393,866,420"/>
+<area shape="rect" href="interpreter_8h.html" title=" " alt="" coords="567,229,722,256"/>
+<area shape="rect" href="commands_8h.html" title=" " alt="" coords="515,311,660,338"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -102,13 +104,11 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui_8h__dep__incl.png" border="0" usemap="#src_2view_2ui_8hdep" alt=""/></div>
 <map name="src_2view_2ui_8hdep" id="src_2view_2ui_8hdep">
-<area shape="rect" title=" " alt="" coords="111,5,207,32"/>
-<area shape="rect" href="game_8h.html" title=" " alt="" coords="60,155,147,181"/>
-<area shape="rect" href="cycle_8h.html" title=" " alt="" coords="153,80,278,107"/>
-<area shape="rect" href="ui_8c.html" title=" " alt="" coords="302,80,398,107"/>
-<area shape="rect" href="game_8c.html" title=" " alt="" coords="5,229,92,256"/>
-<area shape="rect" href="main_8c.html" title=" " alt="" coords="117,229,199,256"/>
-<area shape="rect" href="cycle_8c.html" title=" " alt="" coords="171,155,297,181"/>
+<area shape="rect" title=" " alt="" coords="55,5,151,32"/>
+<area shape="rect" href="game_8h.html" title=" " alt="" coords="60,80,147,107"/>
+<area shape="rect" href="ui_8c.html" title=" " alt="" coords="171,80,267,107"/>
+<area shape="rect" href="game_8c.html" title=" " alt="" coords="5,155,92,181"/>
+<area shape="rect" href="main_8c.html" title=" " alt="" coords="117,155,199,181"/>
 </map>
 </div>
 </div>
@@ -123,12 +123,14 @@ Macros</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a02fd73d861ef2e4aabb38c0c9ff82947"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a02fd73d861ef2e4aabb38c0c9ff82947">init</a> ()</td></tr>
 <tr class="separator:a02fd73d861ef2e4aabb38c0c9ff82947"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afde705a231e7bc3339f386f8f89f2ff7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#afde705a231e7bc3339f386f8f89f2ff7">anim_begin</a> ()</td></tr>
-<tr class="separator:afde705a231e7bc3339f386f8f89f2ff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab41e35f671203bfc26b410cc5a75e9d5"><td class="memItemLeft" align="right" valign="top">short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#ab41e35f671203bfc26b410cc5a75e9d5">waitForInput</a> ()</td></tr>
 <tr class="separator:ab41e35f671203bfc26b410cc5a75e9d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a041c4fd02fe320e833aa34a820274935"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a041c4fd02fe320e833aa34a820274935">quit</a> ()</td></tr>
 <tr class="separator:a041c4fd02fe320e833aa34a820274935"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afde705a231e7bc3339f386f8f89f2ff7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#afde705a231e7bc3339f386f8f89f2ff7">anim_begin</a> ()</td></tr>
+<tr class="separator:afde705a231e7bc3339f386f8f89f2ff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a263ec02189cd012888b7524c38aaa63e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a263ec02189cd012888b7524c38aaa63e">end_screen</a> (<a class="el" href="robot_8h.html#a38a4bfb19fff6c50c79c2574440a484b">robot</a> *<a class="el" href="robot_8h.html#a38a4bfb19fff6c50c79c2574440a484b">robot</a>)</td></tr>
+<tr class="separator:a263ec02189cd012888b7524c38aaa63e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9582eb371ae51885270e842326dbe242"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a9582eb371ae51885270e842326dbe242">add_log</a> (char *message)</td></tr>
 <tr class="separator:a9582eb371ae51885270e842326dbe242"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31d4e186d2d41b49f72c847edc191a14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a31d4e186d2d41b49f72c847edc191a14">add_action</a> (char *action, int id)</td></tr>
@@ -221,6 +223,35 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a263ec02189cd012888b7524c38aaa63e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a263ec02189cd012888b7524c38aaa63e">&#9670;&nbsp;</a></span>end_screen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void end_screen </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="robot_8h.html#a38a4bfb19fff6c50c79c2574440a484b">robot</a> *&#160;</td>
+          <td class="paramname"><em>robot</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Draw the end screen </p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui_8h_a263ec02189cd012888b7524c38aaa63e_cgraph.png" border="0" usemap="#ui_8h_a263ec02189cd012888b7524c38aaa63e_cgraph" alt=""/></div>
+<map name="ui_8h_a263ec02189cd012888b7524c38aaa63e_cgraph" id="ui_8h_a263ec02189cd012888b7524c38aaa63e_cgraph">
+<area shape="rect" title=" " alt="" coords="5,31,95,57"/>
+<area shape="rect" href="robot_8c.html#adafac2683edb37fccba9db5f5a5b2d7c" title=" " alt="" coords="153,5,247,32"/>
+<area shape="rect" href="robot_8c.html#a197d34735687db3691c206562eeac2c8" title=" " alt="" coords="143,56,257,83"/>
+</map>
+</div>
+
+</div>
+</div>
 <a id="a02fd73d861ef2e4aabb38c0c9ff82947"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a02fd73d861ef2e4aabb38c0c9ff82947">&#9670;&nbsp;</a></span>init()</h2>
 
@@ -286,9 +317,11 @@ Here is the call graph for this function:</div>
 <area shape="rect" href="arene_8c.html#ac7d7094eb5a97c7bed8e02400d16c393" title=" " alt="" coords="168,208,283,235"/>
 <area shape="rect" href="ui_8c.html#ab806825c7a938089ec355a3734c710df" title=" " alt="" coords="173,259,277,285"/>
 <area shape="rect" href="ui_8c.html#a4b10a900955988991700e96c2c6dc248" title=" " alt="" coords="184,309,267,336"/>
-<area shape="rect" href="ui_8c.html#a4f6c124382a20a7d8d3adf7f2615452b" title=" " alt="" coords="181,360,270,387"/>
-<area shape="rect" href="robot_8c.html#a0f61d19d0dc3ba18587309f98b7278a0" title=" " alt="" coords="351,284,511,311"/>
-<area shape="rect" href="missile_8c.html#a4d14227d52d662b88121ffd78423aa95" title=" " alt="" coords="373,360,489,387"/>
+<area shape="rect" href="ui_8c.html#a4f6c124382a20a7d8d3adf7f2615452b" title=" " alt="" coords="181,385,270,412"/>
+<area shape="rect" href="robot_8c.html#a0f61d19d0dc3ba18587309f98b7278a0" title=" " alt="" coords="351,259,511,285"/>
+<area shape="rect" href="ui_8c.html#a9582eb371ae51885270e842326dbe242" title=" " alt="" coords="397,309,464,336"/>
+<area shape="rect" href="robot_8c.html#adafac2683edb37fccba9db5f5a5b2d7c" title=" " alt="" coords="384,360,477,387"/>
+<area shape="rect" href="missile_8c.html#a4d14227d52d662b88121ffd78423aa95" title=" " alt="" coords="373,411,489,437"/>
 </map>
 </div>
 

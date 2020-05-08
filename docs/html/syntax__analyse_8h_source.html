@@ -88,26 +88,11 @@ $(function() {
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;limits.h&gt;</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">    Do the syntax analyse of the file [ pathname ] and return it </span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">    return NULL if an error occured, if message_error is also at NULL then the bug</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">    is a file opening error</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<a class="code" href="syntax__tree_8h.html#a830fa45038d23ecefc342533073e2a8b">Tree</a> <a class="code" href="syntax__analyse_8h.html#a507c67351524e2ff0b93f6ba7e48a9e7">init_file_tree</a>(<span class="keywordtype">char</span>* pathname);</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    NULL if no error else the last message of error</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keywordtype">char</span>* <a class="code" href="syntax__analyse_8h.html#ab9d818c32962f60f31560d06b3bd01b2">message_error</a>();</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">    Free the context of the syntax analyse, excepted syntax tree</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">    Todo after last syntax analyse</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">void</span> <a class="code" href="syntax__analyse_8h.html#a2e45cc8ea33eccb78f96cf06b6e29286">freeSyntaxAnalyseContest</a>();</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">    free a tree</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordtype">void</span> <a class="code" href="syntax__analyse_8h.html#adad87c52077f102085fda24e843746ce">freeTree</a>(<a class="code" href="syntax__tree_8h.html#a830fa45038d23ecefc342533073e2a8b">Tree</a> t);</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -144,7 +129,7 @@ $(function() {
 <div class="ttc" id="asyntax__tree_8h_html_ad9884c43f4f50a5852711a614f2343ac"><div class="ttname"><a href="syntax__tree_8h.html#ad9884c43f4f50a5852711a614f2343ac">THEN</a></div><div class="ttdeci">#define THEN</div><div class="ttdef"><b>Definition:</b> syntax_tree.h:18</div></div>
 <div class="ttc" id="asyntax__tree_8h_html_afa422150188ede5d98cf652ef3da6861"><div class="ttname"><a href="syntax__tree_8h.html#afa422150188ede5d98cf652ef3da6861">GPSX</a></div><div class="ttdeci">#define GPSX</div><div class="ttdef"><b>Definition:</b> syntax_tree.h:36</div></div>
 <div class="ttc" id="asyntax__analyse_8c_html_a83e92905a61907dd5fb93c73153f907f"><div class="ttname"><a href="syntax__analyse_8c.html#a83e92905a61907dd5fb93c73153f907f">ERROR_INT_UNEXCEPTED</a></div><div class="ttdeci">#define ERROR_INT_UNEXCEPTED(token, error_token_tmp)</div><div class="ttdef"><b>Definition:</b> syntax_analyse.c:27</div></div>
-<div class="ttc" id="asyntax__analyse_8h_html_a507c67351524e2ff0b93f6ba7e48a9e7"><div class="ttname"><a href="syntax__analyse_8h.html#a507c67351524e2ff0b93f6ba7e48a9e7">init_file_tree</a></div><div class="ttdeci">Tree init_file_tree(char *pathname)</div><div class="ttdef"><b>Definition:</b> syntax_analyse.c:677</div></div>
+<div class="ttc" id="asyntax__analyse_8h_html_a507c67351524e2ff0b93f6ba7e48a9e7"><div class="ttname"><a href="syntax__analyse_8h.html#a507c67351524e2ff0b93f6ba7e48a9e7">init_file_tree</a></div><div class="ttdeci">Tree init_file_tree(char *pathname)</div><div class="ttdef"><b>Definition:</b> syntax_analyse.c:667</div></div>
 <div class="ttc" id="astructwarning__message_html_afb5681b88eb58405251598eee3db7b2c"><div class="ttname"><a href="structwarning__message.html#afb5681b88eb58405251598eee3db7b2c">warning_message::message</a></div><div class="ttdeci">char message[60]</div><div class="ttdef"><b>Definition:</b> interpreter.h:19</div></div>
 <div class="ttc" id="asyntax__tree_8h_html_af94cfb03461685fead1fe045d5c96f01"><div class="ttname"><a href="syntax__tree_8h.html#af94cfb03461685fead1fe045d5c96f01">LINE</a></div><div class="ttdeci">#define LINE</div><div class="ttdef"><b>Definition:</b> syntax_tree.h:10</div></div>
 <div class="ttc" id="asyntax__tree_8h_html_a839a9222721835f53c5b248241f535f4"><div class="ttname"><a href="syntax__tree_8h.html#a839a9222721835f53c5b248241f535f4">RAND</a></div><div class="ttdeci">#define RAND</div><div class="ttdef"><b>Definition:</b> syntax_tree.h:31</div></div>
@@ -157,7 +142,7 @@ $(function() {
 <div class="ttc" id="asyntax__tree_8h_html_a8295e0aed07a8923d8363ce46c7b08e2"><div class="ttname"><a href="syntax__tree_8h.html#a8295e0aed07a8923d8363ce46c7b08e2">DIV</a></div><div class="ttdeci">#define DIV</div><div class="ttdef"><b>Definition:</b> syntax_tree.h:26</div></div>
 <div class="ttc" id="asyntax__tree_8h_html_aa1df29274ed7237eefbdbae5711629b0"><div class="ttname"><a href="syntax__tree_8h.html#aa1df29274ed7237eefbdbae5711629b0">POKE</a></div><div class="ttdeci">#define POKE</div><div class="ttdef"><b>Definition:</b> syntax_tree.h:15</div></div>
 <div class="ttc" id="asyntax__tree_8h_html_a3e3f16eb72cacad45afd6616d62a9ff5"><div class="ttname"><a href="syntax__tree_8h.html#a3e3f16eb72cacad45afd6616d62a9ff5">DIFF</a></div><div class="ttdeci">#define DIFF</div><div class="ttdef"><b>Definition:</b> syntax_tree.h:48</div></div>
-<div class="ttc" id="asyntax__analyse_8c_html_a507c67351524e2ff0b93f6ba7e48a9e7"><div class="ttname"><a href="syntax__analyse_8c.html#a507c67351524e2ff0b93f6ba7e48a9e7">init_file_tree</a></div><div class="ttdeci">Tree init_file_tree(char *pathname)</div><div class="ttdef"><b>Definition:</b> syntax_analyse.c:677</div></div>
+<div class="ttc" id="asyntax__analyse_8c_html_a507c67351524e2ff0b93f6ba7e48a9e7"><div class="ttname"><a href="syntax__analyse_8c.html#a507c67351524e2ff0b93f6ba7e48a9e7">init_file_tree</a></div><div class="ttdeci">Tree init_file_tree(char *pathname)</div><div class="ttdef"><b>Definition:</b> syntax_analyse.c:667</div></div>
 <div class="ttc" id="asyntax__tree_8h_html_a5381a445a1e4bdc36460151d82eed95a"><div class="ttname"><a href="syntax__tree_8h.html#a5381a445a1e4bdc36460151d82eed95a">MINUS</a></div><div class="ttdeci">#define MINUS</div><div class="ttdef"><b>Definition:</b> syntax_tree.h:24</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['game_57',['game',['../game_8c.html#a019b61339f6e277e51c96ce040d54ee0',1,'game(Tree syntax_tree[4]):&#160;game.c'],['../game_8h.html#a019b61339f6e277e51c96ce040d54ee0',1,'game(Tree syntax_tree[4]):&#160;game.c']]],
+  ['game_57',['game',['../game_8c.html#aa680f47e5c96209ce932584fe5bf7bcc',1,'game(Tree syntax_tree[4], char *robot_names[4]):&#160;game.c'],['../game_8h.html#a019b61339f6e277e51c96ce040d54ee0',1,'game(Tree syntax_tree[4]):&#160;game.h']]],
   ['game_2ec_58',['game.c',['../game_8c.html',1,'']]],
   ['game_2eh_59',['game.h',['../game_8h.html',1,'']]],
   ['get_5fexplosion_5fdistant_60',['get_explosion_distant',['../missile_8c.html#a7f2c550804b1e464c8e83ad2b6a9f918',1,'get_explosion_distant(missile *m):&#160;missile.c'],['../missile_8h.html#a7f2c550804b1e464c8e83ad2b6a9f918',1,'get_explosion_distant(missile *m):&#160;missile.c']]],
