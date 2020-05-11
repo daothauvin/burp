@@ -5,8 +5,7 @@
 #include "game.h"
 
 
-static char* setupName(char* filename, int id) {
-    char* res = malloc(6 * sizeof(char));
+static char* setupName(char* filename, int id,char res[6]) {
     memset(res, '\0', 6);
 
     char fname[3];
@@ -50,12 +49,12 @@ void game(Tree syntax_tree[4],char* robot_names[4])
 	struct warning_message* message;
 	char warning[100];
 	arena *a = create_arena();
-	
+	char name[6];
 	//                        X        Y      Angle  Spd   Id Name
-	robot* r0 = create_robot(6.0,     6.0,     0.0,  0.0,  0, setupName(robot_names[0],0));
-	robot* r1 = create_robot(6.0,     9995.0,  0.0,  0.0,  1, setupName(robot_names[1],1));
-	robot* r2 = create_robot(9995.0,  9995.0,  0.0,  0.0,  2, setupName(robot_names[2],2));
-	robot* r3 = create_robot(9995.0,  6.0,     0.0,  0.0,  3, setupName(robot_names[3],3));
+	robot* r0 = create_robot(6.0,     6.0,     0.0,  0.0,  0, setupName(robot_names[0],0,name));
+	robot* r1 = create_robot(6.0,     9995.0,  0.0,  0.0,  1, setupName(robot_names[1],1,name));
+	robot* r2 = create_robot(9995.0,  9995.0,  0.0,  0.0,  2, setupName(robot_names[2],2,name));
+	robot* r3 = create_robot(9995.0,  6.0,     0.0,  0.0,  3, setupName(robot_names[3],3,name));
 
 	add_robot(a,r0);
 	add_robot(a,r1);
@@ -94,10 +93,11 @@ void game(Tree syntax_tree[4],char* robot_names[4])
 		freeWarnings();
 		updateArena(a);
 	}
-	// TODO: - Ajouter une condition (il faut que la game soit finie, pas interrompue)
-	//       - Mettre le bon nom en paramêtre
+	
 	if(get_nb_robot_arena(a) == 1) {
 		end_screen(get_robot_index(a,0));
 	}
+
+	freeArena(&a);
 	quit();
 }
