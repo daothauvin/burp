@@ -7,6 +7,8 @@
 
 La sémantique du langage BURP est disponible [ici](https://daothauvin.github.io/burp/html/grammar/diagram.xhtml) référencée dans le sujet disponible [ici](https://daothauvin.github.io/burp/html/sujet_1.0.pdf).
 
+Le rapport du projet est disponible [ici](rendu/REPORT_CP6.pdf)
+
 ## Description
 
 Le but de ce projet est d’implémenter en langage C un jeu de programmation dans le cadre du cours de CP6. Dans ce jeu, des robots s’entretuent dans une arène, chacun d’eux exécutant un script donné en début de partie. Le jeu se termine lorsqu’il ne reste plus qu’un seul robot encore fonctionnel dans l’arêne : son script est alors déclaré gagnant. Le langage de script que nous utiliserons est une version très simplifiée de l’antique langage BASIC. Le programme devra permettre la simulation de l’arène, ainsi que l’interprétation en temps réel du script de chaque robot.
