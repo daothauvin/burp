@@ -15,16 +15,11 @@
 #include "../model/game/missile.h"
 #include "../model/game/arene.h"
 #include "../define.h"
-<<<<<<< HEAD
-#include <sys/time.h>
-=======
 #include "../game.h"
->>>>>>> 0ee2097bd902e66aebdd238284d69b177970b6c1
 
 #define LOG_SIZE 60
 
 void  init();                           // Initialise the interface
-short waitForInput();                   // Check for user keyboard input
 int   quit();                           // End the inteface
 
 void anim_begin();                      // Launch the begin animation
