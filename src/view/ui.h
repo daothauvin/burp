@@ -15,7 +15,6 @@
 #include "../model/game/missile.h"
 #include "../model/game/arene.h"
 #include "../define.h"
-#include "../game.h"
 
 #define LOG_SIZE 60
 
@@ -30,7 +29,3 @@ void add_action(char* action, int id);  // Add an action for a robot in the info
 
 void updateArena(arena* arena);         // Update position and value of interface with arena data
 
-<<<<<<< HEAD
-=======
-#endif
->>>>>>> 0ee2097bd902e66aebdd238284d69b177970b6c1

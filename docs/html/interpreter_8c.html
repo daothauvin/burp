@@ -66,8 +66,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">interpreter.c File Reference</div>  </div>
 </div><!--header-->
@@ -102,13 +101,6 @@ Functions</h2></td></tr>
 <tr class="separator:aa7f668e295218bb1d14419034b8beab8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c5248786347a5fdcb752c32161b0c52"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpreter_8c.html#a7c5248786347a5fdcb752c32161b0c52">interprete</a> (int line, <a class="el" href="syntax__tree_8h.html#a830fa45038d23ecefc342533073e2a8b">Tree</a> tree, <a class="el" href="arene_8h.html#aef76983cd728b7493651369aee663096">arena</a> *<a class="el" href="arene_8h.html#aef76983cd728b7493651369aee663096">arena</a>, <a class="el" href="robot_8h.html#a38a4bfb19fff6c50c79c2574440a484b">robot</a> *<a class="el" href="robot_8h.html#a38a4bfb19fff6c50c79c2574440a484b">robot</a>)</td></tr>
 <tr class="separator:a7c5248786347a5fdcb752c32161b0c52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a17b998a9987589d4938c295bcf50cc63"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structwarning__message.html">warning_message</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpreter_8c.html#a17b998a9987589d4938c295bcf50cc63">burp_errors</a> = NULL</td></tr>
-<tr class="separator:a17b998a9987589d4938c295bcf50cc63"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac67ea45b0685519380a45cd0a4575d70"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structwarning__message.html">warning_message</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpreter_8c.html#ac67ea45b0685519380a45cd0a4575d70">last_burp_error</a> = NULL</td></tr>
-<tr class="separator:ac67ea45b0685519380a45cd0a4575d70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="aa7f668e295218bb1d14419034b8beab8"></a>
@@ -125,6 +117,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Free all Warnings </p>
 
 </div>
 </div>
@@ -171,6 +164,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Return a structure that contain every warnings found during last interpretation </p>
 
 </div>
 </div>
@@ -230,36 +224,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Print syntax tree [ tree ] ( for debuging ) </p>
-
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a17b998a9987589d4938c295bcf50cc63"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17b998a9987589d4938c295bcf50cc63">&#9670;&nbsp;</a></span>burp_errors</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">struct <a class="el" href="structwarning__message.html">warning_message</a>* burp_errors = NULL</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ac67ea45b0685519380a45cd0a4575d70"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac67ea45b0685519380a45cd0a4575d70">&#9670;&nbsp;</a></span>last_burp_error</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">struct <a class="el" href="structwarning__message.html">warning_message</a>* last_burp_error = NULL</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Print syntax tree [ tree ] (for debuging) </p>
 
 </div>
 </div>

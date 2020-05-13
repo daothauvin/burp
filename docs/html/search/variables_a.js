@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['owner_340',['owner',['../structmissile__impl.html#a98b3ae2d4415b1d966e8f2a6b708e1aa',1,'missile_impl']]]
+  ['speed_331',['speed',['../structmissile__impl.html#a8fcaa4242d50ec6e4b319154798b4302',1,'missile_impl::speed()'],['../structrobot__impl.html#ab748ba9f2e949f99671b527215ccefc4',1,'robot_impl::speed()']]]
 ];

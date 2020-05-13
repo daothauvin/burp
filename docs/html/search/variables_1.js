@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['burp_5ferrors_323',['burp_errors',['../interpreter_8c.html#a17b998a9987589d4938c295bcf50cc63',1,'interpreter.c']]]
+  ['explosion_5fdistant_315',['explosion_distant',['../structmissile__impl.html#a9e08cbba562263b4da888bf7777e68fe',1,'missile_impl']]]
 ];

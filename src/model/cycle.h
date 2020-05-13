@@ -5,6 +5,7 @@
 #include "game/arene.h"
 #include "file_reader/interpreter.h"
 #include "game/robot.h"
+#include "game/missile.h"
 
 /**
 *	Realise a cycle of the model.
