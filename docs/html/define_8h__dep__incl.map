@@ -1,22 +1,22 @@
 <map id="src/define.h" name="src/define.h">
-<area shape="rect" id="node1" title=" " alt="" coords="569,5,660,32"/>
-<area shape="rect" id="node2" href="$robot_8h.html" title=" " alt="" coords="535,80,694,107"/>
-<area shape="rect" id="node3" href="$ui_8h.html" title=" " alt="" coords="229,304,325,331"/>
-<area shape="rect" id="node10" href="$missile_8h.html" title=" " alt="" coords="728,155,899,181"/>
-<area shape="rect" id="node11" href="$arene_8h.html" title=" " alt="" coords="440,229,603,256"/>
-<area shape="rect" id="node14" href="$commands_8h.html" title=" " alt="" coords="739,304,933,331"/>
-<area shape="rect" id="node6" href="$game_8h.html" title=" " alt="" coords="319,557,406,584"/>
-<area shape="rect" id="node12" href="$cycle_8h.html" title=" " alt="" coords="725,475,851,502"/>
-<area shape="rect" id="node15" href="$interpreter_8h.html" title=" " alt="" coords="638,379,781,420"/>
-<area shape="rect" id="node20" href="$robot_8c.html" title=" " alt="" coords="393,155,551,181"/>
-<area shape="rect" id="node4" href="$controller_8h.html" title=" " alt="" coords="46,386,205,413"/>
-<area shape="rect" id="node9" href="$ui_8c.html" title=" " alt="" coords="229,386,325,413"/>
-<area shape="rect" id="node5" href="$controller_8c.html" title=" " alt="" coords="46,475,205,502"/>
-<area shape="rect" id="node7" href="$game_8c.html" title=" " alt="" coords="265,632,351,659"/>
-<area shape="rect" id="node8" href="$main_8c.html" title=" " alt="" coords="376,632,459,659"/>
-<area shape="rect" id="node19" href="$missile_8c.html" title=" " alt="" coords="779,229,949,256"/>
-<area shape="rect" id="node18" href="$arene_8c.html" title=" " alt="" coords="400,304,563,331"/>
-<area shape="rect" id="node13" href="$cycle_8c.html" title=" " alt="" coords="725,557,851,584"/>
-<area shape="rect" id="node17" href="$commands_8c.html" title=" " alt="" coords="805,386,1000,413"/>
-<area shape="rect" id="node16" href="$interpreter_8c.html" title=" " alt="" coords="558,468,701,509"/>
+<area shape="rect" id="node1" title=" " alt="" coords="575,5,665,32"/>
+<area shape="rect" id="node2" href="$robot_8h.html" title=" " alt="" coords="541,80,699,107"/>
+<area shape="rect" id="node3" href="$ui_8h.html" title=" " alt="" coords="235,304,331,331"/>
+<area shape="rect" id="node10" href="$missile_8h.html" title=" " alt="" coords="733,155,904,181"/>
+<area shape="rect" id="node11" href="$arene_8h.html" title=" " alt="" coords="445,229,608,256"/>
+<area shape="rect" id="node14" href="$commands_8h.html" title=" " alt="" coords="744,304,939,331"/>
+<area shape="rect" id="node6" href="$game_8h.html" title=" " alt="" coords="325,557,411,584"/>
+<area shape="rect" id="node12" href="$cycle_8h.html" title=" " alt="" coords="731,475,856,502"/>
+<area shape="rect" id="node15" href="$interpreter_8h.html" title=" " alt="" coords="643,379,786,420"/>
+<area shape="rect" id="node20" href="$robot_8c.html" title=" " alt="" coords="398,155,557,181"/>
+<area shape="rect" id="node4" href="$controller_8h.html" title=" " alt="" coords="45,386,211,413"/>
+<area shape="rect" id="node9" href="$ui_8c.html" title=" " alt="" coords="235,386,331,413"/>
+<area shape="rect" id="node5" href="$controller_8c.html" title=" " alt="" coords="45,475,211,502"/>
+<area shape="rect" id="node7" href="$game_8c.html" title=" " alt="" coords="270,632,357,659"/>
+<area shape="rect" id="node8" href="$main_8c.html" title=" " alt="" coords="381,632,464,659"/>
+<area shape="rect" id="node19" href="$missile_8c.html" title=" " alt="" coords="784,229,955,256"/>
+<area shape="rect" id="node18" href="$arene_8c.html" title=" " alt="" coords="405,304,568,331"/>
+<area shape="rect" id="node13" href="$cycle_8c.html" title=" " alt="" coords="731,557,856,584"/>
+<area shape="rect" id="node17" href="$commands_8c.html" title=" " alt="" coords="811,386,1005,413"/>
+<area shape="rect" id="node16" href="$interpreter_8c.html" title=" " alt="" coords="563,468,706,509"/>
 </map>
