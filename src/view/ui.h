@@ -16,7 +16,6 @@
 #define LOG_SIZE 60
 
 void  init();                           // Initialise the interface
-short waitForInput();                   // Check for user keyboard input
 int   quit();                           // End the inteface
 
 void anim_begin();                      // Launch the begin animation

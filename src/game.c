@@ -5,6 +5,7 @@
 #include "game.h"
 
 
+
 static char* setupName(char* filename, int id) {
     char* res = malloc(6 * sizeof(char));
     memset(res, '\0', 6);
