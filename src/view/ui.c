@@ -6,12 +6,12 @@
  */
 
 // Log 
-char logs[5][LOG_SIZE];
-int full_log;
-int cursor;
+static char logs[5][LOG_SIZE];
+static int full_log;
+static int cursor;
 
 // Info robot
-char actions[12][7];
+static char actions[12][7];
 
 /**
  *  Draw a rectangle.

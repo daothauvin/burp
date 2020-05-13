@@ -112,8 +112,8 @@ char* getLine(Tree tree,int line) {
 }
 
 
-struct warning_message* burp_errors = NULL;
-struct warning_message* last_burp_error = NULL;
+static struct warning_message* burp_errors = NULL;
+static struct warning_message* last_burp_error = NULL;
 
 /**
 *	Add a warning to the burp error pipe [pipeError] 

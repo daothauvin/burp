@@ -19,14 +19,20 @@ struct warning_message {
 };
 
 
+/**
+* Return a structure that contain every warnings found 
+* during last interpretation
+*/
 struct warning_message* getWarnings();
-
+/*
+* Free all Warnings
+*/
 void freeWarnings();
 
-/*
-    interprete the line [ line ] of the script,
-    corresponding at the file where come from the syntax tree [ tree ] 
-    controlling the robot [ robot ] in the context [ arena ] 
+/**
+*    interprete the line [ line ] of the script,
+*    corresponding at the file where come from the syntax tree [ tree ] 
+*    controlling the robot [ robot ] in the context [ arena ] 
 */
 int interprete(int line, Tree tree, arena *arena,robot *robot);
 
@@ -36,8 +42,8 @@ int interprete(int line, Tree tree, arena *arena,robot *robot);
 */
 char* getLine(Tree tree,int line);
 
-/*
-   Print syntax tree [ tree ] ( for debuging )
+/**
+*   Print syntax tree [ tree ] (for debuging)
 */
 void printTree(Tree tree);
 
