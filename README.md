@@ -30,9 +30,12 @@ Le but de ce projet est d’implémenter en langage C un jeu de programmation da
 
 
 Diagramme de classe avec tout les fichiers :  
-![Class_Diagram](https://daothauvin.github.io/burp/html/main_8c__incl.png)
+![Class_Diagram](https://daothauvin.github.io/burp/html/main_8c__incl.png)  
 Pour plus de détail sur les différents fichiers : [page doxygen](https://daothauvin.github.io/burp/html/main_8c.html)  
-Diagramme de classe avec les différents modules du modèle :  
+Diagramme de classe avec les différents modules :  
+![Diagram](https://daothauvin.github.io/burp/html/dir_68267d1309a1af8e8297ef4c3efbcdba_dep.png)   
+Pour avoir plus d'informations : [page doxygen](https://daothauvin.github.io/burp/html/dir_68267d1309a1af8e8297ef4c3efbcdba.html)  
+Model est séparé en deux sous modules :  
 ![Model_Diagram](https://daothauvin.github.io/burp/html/dir_5dd65160827af56e6353642206b80129_dep.png)  
 Pour avoir plus d'informations : [page doxygen](https://daothauvin.github.io/burp/html/dir_5dd65160827af56e6353642206b80129.html)  
 

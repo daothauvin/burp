@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['health_5fpoints_327',['health_points',['../structrobot__impl.html#a3647ff5af4518890eb36d34fb4fb17b4',1,'robot_impl']]]
+  ['memory_320',['memory',['../structrobot__impl.html#adb4a7b9a0755d2dfe5585b7b7f7e668f',1,'robot_impl']]],
+  ['message_321',['message',['../structwarning__message.html#afb5681b88eb58405251598eee3db7b2c',1,'warning_message']]],
+  ['missiles_322',['missiles',['../structrobot__impl.html#ae95a99bba02f6660a4bf2e43afb6cf4d',1,'robot_impl']]]
 ];

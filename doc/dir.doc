@@ -15,7 +15,10 @@
  * It includes robots, missiles and arena internal structures.
  * \dir src/
  * \brief the whole project code
- * \details Our project is separate in two modules : view and model
- * The other files contained in src link those two modules
+ * \details Our project is separate in three modules : view, model and controler
+ * The other files contained in src link these three modules
+ * \dir controler/
+ * \brief Handle user input
+ * \details Waiting time between each turn of the game is handled her.
  *
  */
