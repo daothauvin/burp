@@ -1,13 +1,15 @@
 /** 
- *         - controler.c & controler.h supply functions to interact with the textual interface -
+ *         - controller.c & controller.h supply functions to interact with the textual interface -
  */
 
 #include "../view/ui.h"
+/// \cond
 #include <stdlib.h>
 #include <unistd.h>
 #include <signal.h>
 #include <string.h>
 #include <sys/time.h>
+/// \endcond
 
 /** 
 * Check for user keyboard input.

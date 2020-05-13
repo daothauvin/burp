@@ -1,4 +1,4 @@
-#include "controler.h"
+#include "controller.h"
 
 
 // Pause var

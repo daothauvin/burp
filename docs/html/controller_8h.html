@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.19"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Burp: src/controller/CMakeLists.txt File Reference</title>
+<title>Burp: src/controller/controller.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -59,36 +59,58 @@ $(function() {
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_41ef5d8a90b9cc03a02949a5c062e6f0.html">controller</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">src/controller/CMakeLists.txt File Reference</div>  </div>
+<div class="title">controller.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="ui_8h_source.html">../view/ui.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for controller.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="controller_8h__incl.png" border="0" usemap="#src_2controller_2controller_8h" alt=""/></div>
+<!-- MAP 0 -->
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="controller_8h__dep__incl.png" border="0" usemap="#src_2controller_2controller_8hdep" alt=""/></div>
+<!-- MAP 1 -->
+</div>
+</div>
+<p><a href="controller_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3c2b50bfeed4523408342d500ac8e41c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controller_2CMakeLists_8txt.html#a3c2b50bfeed4523408342d500ac8e41c">set</a> (TEST_HEADERS controller.h) set(TEST_SOURCES controller.c) add_library(controller $</td></tr>
-<tr class="separator:a3c2b50bfeed4523408342d500ac8e41c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab41e35f671203bfc26b410cc5a75e9d5"><td class="memItemLeft" align="right" valign="top">short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controller_8h.html#ab41e35f671203bfc26b410cc5a75e9d5">waitForInput</a> ()</td></tr>
+<tr class="separator:ab41e35f671203bfc26b410cc5a75e9d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a3c2b50bfeed4523408342d500ac8e41c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c2b50bfeed4523408342d500ac8e41c">&#9670;&nbsp;</a></span>set()</h2>
+<a id="ab41e35f671203bfc26b410cc5a75e9d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab41e35f671203bfc26b410cc5a75e9d5">&#9670;&nbsp;</a></span>waitForInput()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">set </td>
+          <td class="memname">short waitForInput </td>
           <td>(</td>
-          <td class="paramtype">TEST_HEADERS controller.&#160;</td>
-          <td class="paramname"><em>h</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+<ul>
+<li><a class="el" href="controller_8c.html">controller.c</a> &amp; <a class="el" href="controller_8h.html">controller.h</a> supply functions to interact with the textual interface - Check for user keyboard input. Return 0 if the user asked to stop the program. If not return 1.</li>
+</ul>
+<p>-Normally not- blocking functions that wait for user input to interact. The different beheviours are : Q - Quit </p>
 
 </div>
 </div>
