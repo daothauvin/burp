@@ -55,9 +55,11 @@ bool remove_robot(arena *arena, robot* rob)
             arena->nb_robots -= 1;
             arena->list_robots[i] = arena->list_robots[arena->nb_robots];
             rob = NULL;
+            destroy_robot(&rob);
             return true;
         }
     }
+    
     return false;
 }
 
