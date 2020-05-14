@@ -94,10 +94,23 @@ void game(Tree syntax_tree[4],char* robot_names[4])
 		updateArena(a);
 	}
 	
+
+	
 	if(get_nb_robot_arena(a) == 1) {
+
+		
 		end_screen(get_robot_index(a,0));
 	}
-
+	if(get_robot_index(a,0) != r0)
+		destroy_robot(&r0);
+	if(get_robot_index(a,0) != r1)
+		destroy_robot(&r1);
+	if(get_robot_index(a,0) != r2)
+		destroy_robot(&r2);
+	if(get_robot_index(a,0) != r3)
+		destroy_robot(&r3);
 	freeArena(&a);
+	
+	
 	quit();
 }
