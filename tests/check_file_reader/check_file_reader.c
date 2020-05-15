@@ -280,6 +280,36 @@ START_TEST(test_memory_number_to_big)
 }
 END_TEST
 
+START_TEST(test_gpsx_dead_robot)
+{
+	p = init_file_tree(PATH_TO_DIR "/w_gps_on_dead_robots.txt");
+	ck_assert_msg(p != NULL, "Init should success");
+	robot* r1 = get_robot_per_id(a,1);
+	remove_robot(a,r1);
+	destroy_robot(&r1);
+	interprete(0, p,a,jean_paul);
+	struct warning_message * message = getWarnings();
+	ck_assert_ptr_ne(NULL,message);
+	ck_assert_ptr_eq(message->next_message,NULL);
+	ck_assert_str_eq(message->message,"gpsx on dead robot 1");
+}
+END_TEST
+
+START_TEST(test_gpsy_dead_robot)
+{
+	p = init_file_tree(PATH_TO_DIR "/w_gps_on_dead_robots.txt");
+	ck_assert_msg(p != NULL, "Init should success");
+	robot* r1 = get_robot_per_id(a,1);
+	remove_robot(a,r1);
+	destroy_robot(&r1);
+	interprete(1, p,a,jean_paul);
+	struct warning_message * message = getWarnings();
+	ck_assert_ptr_ne(NULL,message);
+	ck_assert_ptr_eq(message->next_message,NULL);
+	ck_assert_str_eq(message->message,"gpsy on dead robot 1");
+}
+END_TEST
+
 START_TEST(test_robot_number_to_big)
 {
 	p = init_file_tree(PATH_TO_DIR "/w_robot_number.txt");
@@ -293,6 +323,8 @@ START_TEST(test_robot_number_to_big)
 
 }
 END_TEST
+
+
 
 Suite *make_file_reader(void)
 {
@@ -331,7 +363,8 @@ Suite *make_file_reader(void)
 	tcase_add_checked_fixture(tc_warnings, setup, teardown);
 	tcase_add_test(tc_warnings, test_memory_number_to_big);
 	tcase_add_test(tc_warnings, test_robot_number_to_big);
-
+	tcase_add_test(tc_warnings, test_gpsx_dead_robot);
+	tcase_add_test(tc_warnings, test_gpsy_dead_robot);
 	suite_add_tcase(s, tc_warnings);
 
 	return s;
