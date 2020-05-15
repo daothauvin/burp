@@ -310,6 +310,41 @@ START_TEST(test_gpsy_dead_robot)
 }
 END_TEST
 
+START_TEST(test_negative_waiting_time)
+{
+	p = init_file_tree(PATH_TO_DIR "/w_negative_waiting_time.txt");
+	ck_assert_msg(p != NULL, "Init should success");
+	interprete(0, p,a,jean_paul);
+	struct warning_message * message = getWarnings();
+	ck_assert_ptr_ne(NULL,message);
+	ck_assert_ptr_eq(message->next_message,NULL);
+	ck_assert_str_eq(message->message,
+		"waiting time -15 should not be negative");
+}
+END_TEST
+
+
+START_TEST(test_negative_distance)
+{
+	p = init_file_tree(PATH_TO_DIR "/w_negative_distance.txt");
+	ck_assert_msg(p != NULL, "Init should success");
+	interprete(0, p,a,jean_paul);
+	struct warning_message * message = getWarnings();
+	ck_assert_ptr_ne(NULL,message);
+	
+	ck_assert_str_eq(message->message,
+		"distance -5 should not be negative");
+	
+	message = message -> next_message;
+	ck_assert_ptr_ne(NULL,message);
+	ck_assert_ptr_eq(message->next_message,NULL);
+	ck_assert_str_eq(message->message,
+		"distance -10 should not be negative");
+}
+END_TEST
+
+
+
 START_TEST(test_robot_number_to_big)
 {
 	p = init_file_tree(PATH_TO_DIR "/w_robot_number.txt");
@@ -365,6 +400,9 @@ Suite *make_file_reader(void)
 	tcase_add_test(tc_warnings, test_robot_number_to_big);
 	tcase_add_test(tc_warnings, test_gpsx_dead_robot);
 	tcase_add_test(tc_warnings, test_gpsy_dead_robot);
+	tcase_add_test(tc_warnings, test_negative_waiting_time);
+	tcase_add_test(tc_warnings, test_negative_distance);
+	
 	suite_add_tcase(s, tc_warnings);
 
 	return s;
