@@ -23,7 +23,7 @@ int randoms(int num)
 }
 int cardinal(arena *arena)
 {
-    return get_nb_robot_arena(arena);
+    return number_of_robots;
 }
 int self(robot *rob)
 {
@@ -35,7 +35,7 @@ int speed(robot *rob)
 }
 int state(arena *arena, int num)
 {
-    for (int i = 0; i < cardinal(arena); ++i) {
+    for (int i = 0; i < get_nb_robot_arena(arena); ++i) {
         if (get_robot_id(get_robot_index(arena, i)) == num)
             return get_robot_health_points(get_robot_index(arena,i));
     }
@@ -43,7 +43,7 @@ int state(arena *arena, int num)
 }
 double gpsx(arena *arena, int num)
 {
-    for (int i = 0; i < cardinal(arena); ++i) {
+    for (int i = 0; i < get_nb_robot_arena(arena); ++i) {
         if (get_robot_id(get_robot_index(arena, i)) == num) {
             point rob_point;
             get_robot_pos(get_robot_index(arena, i), &rob_point);
@@ -54,7 +54,7 @@ double gpsx(arena *arena, int num)
 }
 double gpsy(arena *arena, int num)
 {
-    for (int i = 0; i < cardinal(arena); ++i) {
+    for (int i = 0; i < get_nb_robot_arena(arena); ++i) {
         if (get_robot_id(get_robot_index(arena, i)) == num) {
             point rob_point;
             get_robot_pos(get_robot_index(arena, i), &rob_point);

@@ -36,8 +36,7 @@ END_TEST
 
 START_TEST(test_cardinal)
 {
-  ck_assert_int_eq(cardinal(a), get_nb_robot_arena(a));
-  ck_assert_int_eq(cardinal(a), 3);
+  ck_assert_int_eq(cardinal(a), number_of_robots);
 }
 END_TEST
 
