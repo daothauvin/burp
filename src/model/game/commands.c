@@ -50,7 +50,7 @@ double gpsx(arena *arena, int num)
             return rob_point.x;
         }
     }
-    return 0;
+    return -1;
 }
 double gpsy(arena *arena, int num)
 {
@@ -61,7 +61,7 @@ double gpsy(arena *arena, int num)
             return rob_point.y;
         }
     }
-    return 0;
+    return -1;
 }
 void engine(robot *rob, double angle, double speed)
 {
