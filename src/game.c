@@ -69,12 +69,13 @@ void game(Tree syntax_tree[4],char* robot_names[4])
 	anim_begin();
 
 	for(int i = 0;i < get_nb_robot_arena(a); i++) {
-		add_action(getNextCommand(i),i);
+		int id = get_robot_id(get_robot_index(a,i));
+		
+		add_action(getNextCommand(id),id);
 	}
 
 	updateArena(a);
 	while (cycle(a, line, syntax_tree)){
-		
 		for(int i = 0;i < get_nb_robot_arena(a); i++) {
 			int id = get_robot_id(get_robot_index(a,i));
 			add_action(getNextCommand(id),id);

@@ -287,12 +287,13 @@ static int expression(Tree tree, arena* arena,robot* robot) {
 			addWarning(0,num,get_robot_id(robot));
 			num = number_of_robots - 1;
 		}
-		else if(num == -1) {
+		int gpsx_v = gpsx(arena,num);
+		if(gpsx_v == -1) {
 			addWarning(2,num,get_robot_id(robot));
 			return 0;
 		}
 		
-		return gpsx(arena,num);
+		return gpsx_v;
 	}
 	else if(memcmp(GPSY,data,sizeof(GPSY)) == 0) {
 		int num = expression(g_node_nth_child(node, 0),arena,robot);
@@ -300,12 +301,13 @@ static int expression(Tree tree, arena* arena,robot* robot) {
 			addWarning(0,num,get_robot_id(robot));
 			num = number_of_robots - 1;
 		}
-		else if(num == -1) {
+		int gpsy_y = gpsy(arena,num);
+		if(gpsy_y == -1) {
 			addWarning(3,num,get_robot_id(robot));
 			return 0;
 		}
 		
-		return gpsy(arena,num);
+		return gpsy_y;
 	}
 	else if(memcmp(SELF,data,sizeof(SELF)) == 0) {
 		return self(robot);

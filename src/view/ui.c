@@ -120,7 +120,6 @@ static void killRobotNb(int id) {
  */
 
 void printRobot(robot* rob) {
-	//fprintf(stderr,"health : %d\n",get_robot_health_points(rob));
 	if (get_robot_health_points(rob) == 0) {
 		char message [LOG_SIZE];
 		memset(message, '\0', LOG_SIZE);
@@ -450,11 +449,11 @@ static void init_log() {
 
 void add_log(char* message) {
 	if (full_log) {
-		sprintf(logs[0], "%s", logs[1]);
-		sprintf(logs[1], "%s", logs[2]);
-		sprintf(logs[2], "%s", logs[3]);
-		sprintf(logs[3], "%s", logs[4]);
-		sprintf(logs[4], "%s", message);
+		sprintf(logs[0], "%.*s", LOG_SIZE - 1, logs[1]);
+		sprintf(logs[1], "%.*s", LOG_SIZE - 1, logs[2]);
+		sprintf(logs[2], "%.*s", LOG_SIZE - 1, logs[3]);
+		sprintf(logs[3], "%.*s", LOG_SIZE - 1, logs[4]);
+		sprintf(logs[4], "%.*s", LOG_SIZE - 1, message);
 	} else {
 		sprintf(logs[cursor], "%s", message);
 		cursor++;
