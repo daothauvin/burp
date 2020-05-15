@@ -124,6 +124,8 @@ static struct warning_message* last_burp_error = NULL;
 *	- robot memory is too high ([num_warning] = 1)
 *	- gpsx on dead robot ([num_warning] = 2)
 *	- gpsy on dead robot ([num_warning] = 3)
+*	- negative waiting time ([num_warning] = 4)
+*	- negative distance ([num_warning] = 5)
 */
 static void addWarning(int num_warning,int value,int robot) {
 	struct warning_message* new_error = malloc(sizeof(struct warning_message));
@@ -147,6 +149,14 @@ static void addWarning(int num_warning,int value,int robot) {
 			break;
 		case 3:
 			snprintf(new_error->message,60,"gpsy on dead robot %d",value);
+			break;
+		case 4:
+			snprintf(new_error->message,60,
+				"waiting time %d should not be negative",value);
+			break;
+		case 5:
+			snprintf(new_error->message,60,
+				"distance %d should not be negative",value);
 			break;
 		default:
 			break;
@@ -241,7 +251,11 @@ static int commands(Tree node,arena *arena,robot *robot) {
 	}
 	else if(memcmp(WAIT,data,sizeof(WAIT)) == 0) {
 		int delay = expression(g_node_nth_child(node, 0),arena,robot);
-		wait_robot(robot,delay);
+		if(delay < 0) {
+			addWarning(4,delay,get_robot_id(robot));
+		}
+		else 
+			wait_robot(robot,delay);
 	}
 	else if(memcmp(GOTO,data,sizeof(GOTO)) == 0) {
 		int line = expression(g_node_nth_child(node, 0),arena,robot);
@@ -249,7 +263,7 @@ static int commands(Tree node,arena *arena,robot *robot) {
 	}
 	else if(memcmp(POKE,data,sizeof(POKE)) == 0) {
 		int addr = expression(g_node_nth_child(node, 0),arena,robot);
-		if(addr >= robot_memory) {
+		if(addr >= robot_memory || addr < 0) {
 			addWarning(1,addr,get_robot_id(robot));
 			addr = robot_memory - 1;
 		}
@@ -259,7 +273,10 @@ static int commands(Tree node,arena *arena,robot *robot) {
 	else if(memcmp(SHOOT,data,sizeof(SHOOT)) == 0) {
 		int angle = expression(g_node_nth_child(node, 0),arena,robot);
 		int distance = expression(g_node_nth_child(node, 1),arena,robot);
-		shoot(robot,arena,angle,distance);
+		if(distance < 0)
+			addWarning(5,distance,get_robot_id(robot));
+		else
+			shoot(robot,arena,angle,distance);
 	}
 	else if(memcmp(ENGINE,data,sizeof(ENGINE)) == 0) {
 		int angle = expression(g_node_nth_child(node, 0),arena,robot);
@@ -283,7 +300,7 @@ static int expression(Tree tree, arena* arena,robot* robot) {
 	}
 	else if(memcmp(GPSX,data,sizeof(GPSX)) == 0) {
 		int num = expression(g_node_nth_child(node, 0),arena,robot);
-		if(num >= number_of_robots) {
+		if(num >= number_of_robots || num < 0) {
 			addWarning(0,num,get_robot_id(robot));
 			num = number_of_robots - 1;
 		}
@@ -297,7 +314,7 @@ static int expression(Tree tree, arena* arena,robot* robot) {
 	}
 	else if(memcmp(GPSY,data,sizeof(GPSY)) == 0) {
 		int num = expression(g_node_nth_child(node, 0),arena,robot);
-		if(num >= number_of_robots) {
+		if(num >= number_of_robots || num < 0) {
 			addWarning(0,num,get_robot_id(robot));
 			num = number_of_robots - 1;
 		}
@@ -318,7 +335,7 @@ static int expression(Tree tree, arena* arena,robot* robot) {
 	}
 	else if(memcmp(PEEK,data,sizeof(PEEK)) == 0) {
 		int addr = expression(g_node_nth_child(node, 0),arena,robot);
-		if(addr >= robot_memory) {
+		if(addr >= robot_memory || addr < 0) {
 			addWarning(1,addr,get_robot_id(robot));
 			addr = robot_memory - 1;
 		}
@@ -327,7 +344,7 @@ static int expression(Tree tree, arena* arena,robot* robot) {
 	}
 	else if(memcmp(STATE,data,sizeof(STATE)) == 0) {
 		int num = expression(g_node_nth_child(node, 0),arena,robot);
-		if(num >= number_of_robots) {
+		if(num >= number_of_robots || num < 0) {
 			addWarning(0,num,get_robot_id(robot));
 			num = number_of_robots - 1;
 		}
@@ -349,13 +366,23 @@ static int expression(Tree tree, arena* arena,robot* robot) {
 		int x1 = expression(g_node_nth_child(node, 0),arena,robot);
 		int angle = expression(g_node_nth_child(node, 1),arena,robot);
 		int length = expression(g_node_nth_child(node, 2),arena,robot);
-		return targetx(x1,angle,length);
+		if(length < 0) {
+			addWarning(5,length,get_robot_id(robot));
+			return 0;
+		}
+		else
+			return targetx(x1,angle,length);
 	}
 	else if(memcmp(TARGETY,data,sizeof(TARGETY)) == 0) {
 		int y1 = expression(g_node_nth_child(node, 0),arena,robot);
 		int angle = expression(g_node_nth_child(node, 1),arena,robot);
 		int length = expression(g_node_nth_child(node, 2),arena,robot);
-		return targety(y1,angle,length);
+		if(length < 0) {
+			addWarning(5,length,get_robot_id(robot));
+			return 0;
+		}
+		else
+			return targety(y1,angle,length);
 	}
 	else if(memcmp(DISTANCE,data,sizeof(DISTANCE)) == 0) {
 		int x1 = expression(g_node_nth_child(node, 0),arena,robot);
