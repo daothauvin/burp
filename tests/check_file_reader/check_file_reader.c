@@ -5,10 +5,10 @@ robot* jean_paul;
 Tree p;
 void setup(void) {
 	a = create_arena();
-	jean_paul = create_robot(0,0,0,0,0, 	"dao");
-	robot* robot1 = create_robot(0,0,0,0,1, "dao");
-	robot* robot2 = create_robot(0,0,0,0,2, "dao");
-	robot* robot3 = create_robot(0,0,0,0,3, "dao");
+	jean_paul = create_robot(0,0,0,0,0, 	"rb1");
+	robot* robot1 = create_robot(0,0,0,0,1, "rb2");
+	robot* robot2 = create_robot(0,0,0,0,2, "rb3");
+	robot* robot3 = create_robot(0,0,0,0,3, "rb4");
 	add_robot(a,jean_paul);
 	add_robot(a,robot1);
 	add_robot(a,robot2);
@@ -29,9 +29,11 @@ START_TEST(test_bad_expression)
 	p = init_file_tree(PATH_TO_DIR "/f_expression.txt");
 	ck_assert_msg(p == NULL, "SALUT has been accepted as an expression");
 	int sizemessage = strlen(message_error());
-	char *exceptedmessage = "found SALUT when searching a valid expression at position 12 line 1";
+	char *exceptedmessage = "found SALUT when searching a valid expression at"
+		" position 12 line 1";
 	ck_assert_msg(
-		sizemessage == strlen(exceptedmessage) && memcmp(message_error(), exceptedmessage, sizemessage) == 0, "Unexcepted Error Message");
+		sizemessage == strlen(exceptedmessage) && memcmp(message_error(), 
+		exceptedmessage, sizemessage) == 0, "Unexcepted Error Message");
 }
 END_TEST
 
@@ -41,9 +43,11 @@ START_TEST(test_negative_goto)
 
 	ck_assert_msg(p == NULL, "goto should not accept negative number");
 	int sizemessage = strlen(message_error());
-	char *exceptedmessage = "found - when searching a number at position 8 line 1";
+	char *exceptedmessage=
+		"found - when searching a number at position 8 line 1";
 	ck_assert_msg(
-		sizemessage == strlen(exceptedmessage) && memcmp(message_error(), exceptedmessage, sizemessage) == 0, "Unexcepted Error Message");
+		sizemessage == strlen(exceptedmessage) && memcmp(message_error(), 
+		exceptedmessage, sizemessage) == 0, "Unexcepted Error Message");
 }
 END_TEST
 
@@ -53,9 +57,11 @@ START_TEST(test_unexcepted_line)
 	ck_assert_msg(p == NULL, "line should be in order");
 
 	int sizemessage = strlen(message_error());
-	char *exceptedmessage = "found line 42 when searching line 0 at position 2 line 1";
+	char *exceptedmessage = 
+		"found line 42 when searching line 0 at position 2 line 1";
 	ck_assert_msg(
-		sizemessage == strlen(exceptedmessage) && memcmp(message_error(), exceptedmessage, sizemessage) == 0, "Unexcepted Error Message");
+		sizemessage == strlen(exceptedmessage) && memcmp(message_error(), 
+		exceptedmessage, sizemessage) == 0, "Unexcepted Error Message");
 }
 END_TEST
 
@@ -65,9 +71,11 @@ START_TEST(test_unexcepted_number)
 	ck_assert_msg(p == NULL, "A number is not a valid command");
 
 	int sizemessage = strlen(message_error());
-	char *exceptedmessage = "found 1 when searching a valid command at position 3 line 1";
-	ck_assert_msg(
-		sizemessage == strlen(exceptedmessage) && memcmp(message_error(), exceptedmessage, sizemessage) == 0, "Unexcepted Error Message");
+	char *exceptedmessage = 
+		"found 1 when searching a valid command at position 3 line 1";
+	ck_assert_msg(sizemessage == strlen(exceptedmessage) 
+		&& memcmp(message_error(), exceptedmessage, sizemessage) == 0, 
+		"Unexcepted Error Message");
 }
 END_TEST
 
@@ -79,11 +87,18 @@ START_TEST(test_to_big_number)
 	if (p == NULL)
 	{
 		int sizemessage = strlen(message_error());
-		int mysize = snprintf(NULL, 0, "found a very high number when searching a number <= %d at position 53 line 1", INT_MAX);
+		int mysize = 
+			snprintf(NULL, 0, 
+			"found a very high number when searching a number <= %d at"
+			" position 53 line 1", INT_MAX);
 		char *exceptedmessage = malloc(mysize + 1);
-		snprintf(exceptedmessage, mysize + 1, "found a very high number when searching a number <= %d at position 53 line 1", INT_MAX);
+		snprintf(exceptedmessage, mysize + 1, 
+			"found a very high number when searching a number <= %d at"
+			" position 53 line 1", INT_MAX);
 		ck_assert_msg(
-			sizemessage == mysize && memcmp(message_error(), exceptedmessage, sizemessage) == 0, "Unexcepted Error Message");
+			sizemessage == mysize 
+			&& memcmp(message_error(), exceptedmessage, sizemessage) == 0, 
+			"Unexcepted Error Message");
 		free(exceptedmessage);
 	}
 
@@ -96,9 +111,12 @@ START_TEST(test_unknown_char)
 	ck_assert_msg(p == NULL, "( is not a correct command");
 
 	int sizemessage = strlen(message_error());
-	char *exceptedmessage = "found UNKNOWN when searching a number at position 8 line 1";
+	char *exceptedmessage = 
+		"found UNKNOWN when searching a number at position 8 line 1";
 	ck_assert_msg(
-		sizemessage == strlen(exceptedmessage) && memcmp(message_error(), exceptedmessage, sizemessage) == 0, "Unexcepted Error Message");
+		sizemessage == strlen(exceptedmessage) && 
+		memcmp(message_error(), exceptedmessage, sizemessage) == 0, 
+		"Unexcepted Error Message");
 }
 END_TEST
 
@@ -113,8 +131,9 @@ START_TEST(test_empty)
 	int sizemessage = strlen(message_error());
 	char* exceptedmessage = "found UNKNOWN when searching a number at position 1 line 1";
 	ck_assert_msg(
-		sizemessage == strlen(exceptedmessage) && memcmp(message_error(),exceptedmessage,sizemessage) == 0
-		,"Unexcepted Error Message");
+		sizemessage == strlen(exceptedmessage) && 
+		memcmp(message_error(),exceptedmessage,sizemessage) == 0,
+		"Unexcepted Error Message");
 }
 END_TEST
 
@@ -177,8 +196,10 @@ START_TEST(test_rand_speed_engine)
 	int angle = get_robot_angle(jean_paul);
 	int excepted_angle = 7;
 	ck_assert_int_eq(angle,excepted_angle);
-	ck_assert_msg(get_robot_speed(jean_paul) > 0,"Robot's speed should be > 0 but found %d",get_robot_speed(jean_paul));
-	ck_assert_msg(get_robot_speed(jean_paul) < 4,"Robot's speed should be < 4 but found %d",get_robot_speed(jean_paul));
+	ck_assert_msg(get_robot_speed(jean_paul) > 0,
+		"Robot's speed should be > 0 but found %d",get_robot_speed(jean_paul));
+	ck_assert_msg(get_robot_speed(jean_paul) < 4,
+		"Robot's speed should be < 4 but found %d",get_robot_speed(jean_paul));
 
 }
 END_TEST
@@ -216,7 +237,8 @@ START_TEST(test_shoot_distance_angle)
 	int nb_missiles = get_nb_missiles_arena(a);
 	int excepted_nb_missiles = 1;
 	ck_assert_int_eq(nb_missiles,excepted_nb_missiles);
-	ck_assert_msg(get_missile_owner(get_missile_index(a,0)) == jean_paul,"Missile's owner is wrong");
+	ck_assert_msg(get_missile_owner(get_missile_index(a,0)) == jean_paul,
+		"Missile's owner is wrong");
 	ck_assert_int_eq((int) get_missile_angle(get_missile_index(a,0)),-45);
 	int excepted_explosion_distance = 5;
 	int explosion_distance = get_explosion_distant(get_missile_index(a,0));

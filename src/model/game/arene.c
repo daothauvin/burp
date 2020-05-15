@@ -12,7 +12,8 @@ struct arena_impl
 arena *create_arena()
 {
     arena *a = malloc(sizeof(struct arena_impl));
-    a->list_missile = malloc(sizeof(missile*) * missile_by_robot * number_of_robots);
+    a->list_missile = 
+        malloc(sizeof(missile*) * missile_by_robot * number_of_robots);
     a->list_robots = malloc(sizeof(robot*) * number_of_robots);
     a->nb_missiles = 0;
     a->nb_robots = 0;

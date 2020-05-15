@@ -43,7 +43,8 @@ END_TEST
 
 START_TEST(test_self)
 {
-  ck_assert_int_eq(get_robot_id(get_robot_index(a, 2)), self(get_robot_index(a, 2)));
+  ck_assert_int_eq(get_robot_id(get_robot_index(a, 2)),  
+    self(get_robot_index(a, 2)));
 }
 END_TEST
 

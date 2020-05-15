@@ -16,7 +16,8 @@ typedef struct missile_impl missile;
  * the missile can navigate before exploding.
  * The speed value is equal to [MISSILE_SPEED]
  */
-missile* create_missile(double pos_x, double pos_y, double angle, robot* rob, double explo_dist);
+missile* create_missile(double pos_x, double pos_y, double angle, 
+	robot* rob, double explo_dist);
 
 /**
  * Update the missile is position and will also check if the missile

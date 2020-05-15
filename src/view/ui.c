@@ -112,7 +112,8 @@ static void killRobotNb(int id) {
 
 /**
  *	Print a robot in the arena
- *  If the case is already used, then write on another case following this order :
+ *  If the case is already used, 
+ *  then write on another case following this order :
  *  	5
  *     4#2
  * 		3
@@ -123,7 +124,8 @@ void printRobot(robot* rob) {
 	if (get_robot_health_points(rob) == 0) {
 		char message [LOG_SIZE];
 		memset(message, '\0', LOG_SIZE);
-		snprintf(message, LOG_SIZE, "[X] Robot n°%d is dead.", get_robot_id(rob));
+		snprintf(message, LOG_SIZE, 
+			"[X] Robot n°%d is dead.", get_robot_id(rob));
 		add_log(message);
 		killRobotNb(get_robot_id(rob));
 		return;

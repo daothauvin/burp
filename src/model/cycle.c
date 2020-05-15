@@ -9,8 +9,10 @@ char* getNextCommand(int idRobot) {
 
 void init_next(arena* a,int line[4],Tree syntax_tree[4]) {
 	for(int i = 0; i < get_nb_robot_arena(a) ;i++) {
-		//printf("%d\n",get_robot_index(a,i) ->id);
-		next[get_robot_id(get_robot_index(a,i))] = getLine(syntax_tree[get_robot_id(get_robot_index(a,i))],line[get_robot_id(get_robot_index(a,i))]);
+		next[get_robot_id(get_robot_index(a,i))] = getLine(
+			syntax_tree[get_robot_id(get_robot_index(a,i))],
+			line[get_robot_id(get_robot_index(a,i))]
+		);
 	}
 }
 
@@ -31,12 +33,16 @@ short cycle(arena* a,int line[4],Tree syntax_tree[4]) {
 	//lire script pour action suivante
 	for(int i = 0; i < get_nb_robot_arena(a) ;i++) {
 		if(get_waiting_time_robot(get_robot_index(a,i)) == 0) {
-			//printf("%d\n",get_robot_index(a,i) ->id);
-			line[get_robot_id(get_robot_index(a,i))] = interprete(line[get_robot_id(get_robot_index(a,i))],syntax_tree[i],a,get_robot_index(a,i));
-			
+			line[get_robot_id(get_robot_index(a,i))] = interprete(
+				line[get_robot_id(get_robot_index(a,i))],
+				syntax_tree[i],a,get_robot_index(a,i)
+			);
 		}
 		if(get_waiting_time_robot(get_robot_index(a,i)) < 2) {
-			next[get_robot_id(get_robot_index(a,i))] = getLine(syntax_tree[get_robot_id(get_robot_index(a,i))],line[get_robot_id(get_robot_index(a,i))]);
+			next[get_robot_id(get_robot_index(a,i))] = getLine(
+				syntax_tree[get_robot_id(get_robot_index(a,i))],
+				line[get_robot_id(get_robot_index(a,i))]
+			);
 		}
 	}
 
@@ -55,36 +61,21 @@ short cycle(arena* a,int line[4],Tree syntax_tree[4]) {
 	//test collision
 	for(int i = 0; i < get_nb_robot_arena(a); i++) {
 		for(int j = i+1; j < get_nb_robot_arena(a); j++) {
-			if(check_collision_robots(get_robot_index(a,i),get_robot_index(a,j))) {
-				/*
-				printf("collision robots\n");
-				printf("les points : %f - %f %f - %f\n\n",
-					a ->list_robots[i]->pos->x ,
-					a ->list_robots[i]->pos->y,
-					a ->list_robots[j]->pos->x,
-					a ->list_robots[j]->pos->y);
-					*/
-				inflict_damage_from_collision(get_robot_index(a,i),get_robot_index(a,j));
-				/*
-				char message [LOG_SIZE];
-				memset(message, '\0', LOG_SIZE);
-				snprintf(message, LOG_SIZE, "[!] Robot n°%d crashed into Robot n°%d !", i, j);
-				add_log(message);
-				*/
+			if(check_collision_robots(
+				get_robot_index(a,i),get_robot_index(a,j))) {
+				inflict_damage_from_collision(
+					get_robot_index(a,i),get_robot_index(a,j)
+				);
 			}
 		}
 	}
 
 	for(int i = 0; i < get_nb_robot_arena(a); i++) {
 		for(int j = 0; j < get_nb_missiles_arena(a); j++) {
-			//printf("collision missiles\n");
-			collision_with_missiles(get_robot_index(a,i),get_missile_index(a,j));
-			/*
-			char message [LOG_SIZE];
-			memset(message, '\0', LOG_SIZE);
-			snprintf(message, LOG_SIZE, "[!] Robot n°%d got hit by a rocket !", i);
-			add_log(message);
-			*/
+			collision_with_missiles(
+				get_robot_index(a,i),
+				get_missile_index(a,j)
+			);
 		}
 	}
 

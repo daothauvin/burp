@@ -15,7 +15,8 @@ struct missile_impl
     robot *owner;
 };
 
-missile* create_missile(double pos_x, double pos_y, double angle, robot *rob, double explo_dist)
+missile* create_missile(double pos_x, double pos_y, double angle, 
+    robot *rob, double explo_dist)
 {
     assert((pos_x >= 0 && pos_x <= size_arena_x));
     assert((pos_y >= 0 && pos_y <= size_arena_y));

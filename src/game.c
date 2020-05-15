@@ -55,11 +55,11 @@ void game(Tree syntax_tree[4],char* robot_names[4])
 	robot* r1 = create_robot(6.0,     9995.0,  0.0,  0.0,  1, setupName(robot_names[1],1,name));
 	robot* r2 = create_robot(9995.0,  9995.0,  0.0,  0.0,  2, setupName(robot_names[2],2,name));
 	robot* r3 = create_robot(9995.0,  6.0,     0.0,  0.0,  3, setupName(robot_names[3],3,name));
+	robot* robots[number_of_robots] = {r0,r1,r2,r3};
+	for(int i = 0;i < number_of_robots;i++) {
+		add_robot(a,robots[i]);
+	}
 
-	add_robot(a,r0);
-	add_robot(a,r1);
-	add_robot(a,r2);
-	add_robot(a,r3);
 	
 	int line[4] = {0};
 	int previousline[4] = {0};
@@ -85,7 +85,9 @@ void game(Tree syntax_tree[4],char* robot_names[4])
 		
 		message = getWarnings();
 		while(message != NULL) {
-			snprintf(warning,100,"Robot %d - Line %d : %s",message->num_robot,previousline[message->num_robot],message->message);
+			snprintf(warning,100,"Robot %d - Line %d : %s",
+				message->num_robot,previousline[message->num_robot],
+				message->message);
 			add_log(warning);
 			message = message->next_message;
 		}
@@ -101,16 +103,20 @@ void game(Tree syntax_tree[4],char* robot_names[4])
 		
 		end_screen(get_robot_index(a,0));
 	}
-	if(get_robot_index(a,0) != r0)
-		destroy_robot(&r0);
-	if(get_robot_index(a,0) != r1)
-		destroy_robot(&r1);
-	if(get_robot_index(a,0) != r2)
-		destroy_robot(&r2);
-	if(get_robot_index(a,0) != r3)
-		destroy_robot(&r3);
+	for(int j = 0;j < number_of_robots;j++) {
+		for(int i = 0;i < get_nb_robot_arena(a); i++) {
+			if(get_robot_index(a,i) == robots[j]) {
+				robots[j] = NULL;
+				break;
+			}
+		}
+	}
+
 	freeArena(&a);
-	
+	for(int j = 0;j < number_of_robots;j++) {
+		if(NULL != robots[j])
+			destroy_robot(&robots[j]);
+	}
 	
 	quit();
 }

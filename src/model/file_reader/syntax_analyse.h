@@ -20,8 +20,8 @@
 
 /**
 *    Do the syntax analyse of the file [ pathname ] and return it 
-*    return NULL if an error occured, if message_error is also at NULL then the bug
-*    is a file opening error
+*    return NULL if an error occured, 
+*    if message_error is also at NULL then the bug is a file opening error
 */
 Tree init_file_tree(char* pathname);
 
