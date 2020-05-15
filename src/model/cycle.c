@@ -35,7 +35,7 @@ short cycle(arena* a,int line[4],Tree syntax_tree[4]) {
 		if(get_waiting_time_robot(get_robot_index(a,i)) == 0) {
 			line[get_robot_id(get_robot_index(a,i))] = interprete(
 				line[get_robot_id(get_robot_index(a,i))],
-				syntax_tree[i],a,get_robot_index(a,i)
+				syntax_tree[get_robot_id(get_robot_index(a,i))],a,get_robot_index(a,i)
 			);
 		}
 		if(get_waiting_time_robot(get_robot_index(a,i)) < 2) {
@@ -52,7 +52,6 @@ short cycle(arena* a,int line[4],Tree syntax_tree[4]) {
 		update_pos_robot(get_robot_index(a, i));
 	}
 
-	//fprintf(stderr,"missiles : %d\n",get_nb_missiles_arena(a));
 	for (int i = 0; i < get_nb_missiles_arena(a); i++)
 	{
 		update_pos_missile(get_missile_index(a, i));
